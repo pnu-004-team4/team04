@@ -10,6 +10,6 @@ public class HelloWorldController {
     
     @RequestMapping(value = "hello", method =  RequestMethod.POST)
     public String printHelloWorld(@RequestParam(value = "user") String user) {
-        return "Hello, " + user + "!";
+        return "samepl, " + user + "!";
     }
 }
