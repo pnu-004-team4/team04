@@ -8,8 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class JSPtest {
     
     @RequestMapping("/")
-    public ModelAndView main(){
-        ModelAndView view = new ModelAndView("index");
-        return view;
+    public ModelAndView main() {
+        return new ModelAndView("index");
     }
 }
