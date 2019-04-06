@@ -2,14 +2,14 @@ package com.team04.musiccloud.Audio;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Year;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public abstract class Audio implements Keyable {
     private String title;
     private String author;
     private String album;
-    private Year year;
+    private LocalDateTime releaseDate;
     private String directory;
     private String fileName;
     //-- extra
@@ -43,16 +43,12 @@ public abstract class Audio implements Keyable {
     }
     
     @Override
-    public Year getYear() {
-        return year;
+    public LocalDateTime getReleaseDate() {
+        return releaseDate;
     }
     
-    public void setYear(Year year) {
-        this.year = year;
-    }
-    
-    public void setYear(String string) {
-        setYear(Year.parse(string));
+    public void setReleaseDate(LocalDateTime releaseDate) {
+        this.releaseDate = releaseDate;
     }
     
     public String getDirectory() {

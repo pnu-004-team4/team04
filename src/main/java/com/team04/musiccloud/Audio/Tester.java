@@ -63,7 +63,7 @@ public class Tester {
         System.out.println("DB received: ");
         System.out.println("\tTitle: " + keyable.getTitle());
         System.out.println("\tAuthor: " + keyable.getAuthor());
-        System.out.println("\tYear: " + keyable.getYear());
+        System.out.println("\tReleaseDate: " + keyable.getReleaseDate());
         System.out.println("\tFileName: " + keyable.getFileName());
         System.out.println("\tUser: " + keyable.getUser());
         System.out.println("--------------------");
