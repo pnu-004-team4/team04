@@ -1,13 +1,13 @@
 package com.team04.musiccloud.Audio;
 
-import java.time.Year;
+import java.time.LocalDateTime;
 
 public interface Keyable {
     String getTitle();
     
     String getAuthor();
     
-    Year getYear();
+    LocalDateTime getReleaseDate();
     
     String getFileName();
     
