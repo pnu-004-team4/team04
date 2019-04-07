@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 
 
 public class Tester {
-    private static Path testDirectory = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "media", "audios");
+    private static Path testDirectory = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static", "media", "audios");
     
     private Tester() {
     }
@@ -48,7 +48,7 @@ public class Tester {
     }
     
     private static MultipartFile getMockMultipartFile() throws IOException {
-        final String fileName = "셈플 오디오.mp3";
+        final String fileName = "sample.mp3";
         final Path filePath = testDirectory.resolve("test").resolve(fileName).toAbsolutePath();
         
         return new MockMultipartFile(filePath.toString(), fileName, null, new FileInputStream(filePath.toFile()));
