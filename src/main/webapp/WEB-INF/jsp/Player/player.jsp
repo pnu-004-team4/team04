@@ -1485,14 +1485,14 @@
   <div class="current-track__actions">
   
     <a class="ion-ios-skipbackward"></a>
-    <a class="ion-ios-play play" onclick="play()"></a>
+    <a class="ion-ios-play play" id="play" onclick="play()"></a>
     <a class="ion-ios-skipforward"></a>
     
   </div>
   
   <div class="current-track__progress">
   
-    <div class="current-track__progress__start">0:01</div>
+    <div class="current-track__progress__start" id="music_playtime">START</div>
     
     <div class="current-track__progress__bar">
       
@@ -1500,7 +1500,7 @@
       
     </div>
     
-    <div class="current-track__progress__finish">3:07</div>
+    <div class="current-track__progress__finish" id="music_totaltime">END</div>
     
   </div>
   
