@@ -26,4 +26,9 @@ dependencies {
     compile('org.springframework:spring-test:5.1.5.RELEASE')
 }
 
-buildScan { termsOfServiceUrl = "https://gradle.com/terms-of-service"; termsOfServiceAgree = "yes" }
+if (hasProperty("buildScan")) {
+    buildScan {
+        licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+        licenseAgree = 'yes'
+    }
+}
