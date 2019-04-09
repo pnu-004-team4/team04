@@ -1,3 +1,7 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -10,7 +14,8 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
     <link rel='stylesheet prefetch' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
     <link rel='stylesheet prefetch' href='/css/nouislider.min.css'>
-	<link rel="stylesheet" href="/css/myPlayer.css">
+
+    <link rel="stylesheet" href="/css/myPlayer.css">
 </head>
 
 <body>
@@ -293,108 +298,103 @@
     </div>
     <div class="content__middle">
 
-    <div class="album__tracks">
+        <div class="album__tracks">
 
-        <div class="tracks">
+            <div class="tracks">
 
-            <div class="tracks__heading">
+                <div class="tracks__heading">
 
-                <div class="tracks__heading__number">#</div>
+                    <div class="tracks__heading__number">#</div>
 
-                <div class="tracks__heading__title">Song</div>
+                    <div class="tracks__heading__title">Song</div>
 
-                <div class="tracks__heading__artist">ARTIST</div>
+                    <div class="tracks__heading__artist">ARTIST</div>
 
-                <div class="tracks__heading__length">
+                    <div class="tracks__heading__length">
 
-                    <i class="ion-ios-stopwatch-outline"></i>
+                        <i class="ion-ios-stopwatch-outline"></i>
+
+                    </div>
+
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">1</div>
+
+
+                    <div class="track__title">Intro</div>
+
+                    <div class="track__artist">OGiJun</div>
+
+                    <div class="track__length">1:11</div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">2</div>
+
+
+                    <div class="track__title">Random</div>
+
+
+                    <div class="track__artist">GwangSoo</div>
+
+                    <div class="track__length">3:00</div>
+
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">3</div>
+
+
+                    <div class="track__title featured">
+
+                        <span class="title">Me, Myself & I</span>
+                        <span class="feature">feat. Bebe Rexha</span>
+
+                    </div>
+
+
+                    <div class="track__artist">YongJun</div>
+
+                    <div class="track__length">4:11</div>
+
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">4</div>
+
+
+                    <div class="track__title featured">
+
+                        <span class="title">One Of Them</span>
+                        <span class="feature">feat. Big Sean</span>
+
+                    </div>
+
+
+                    <div class="track__artist">OnSub</div>
+
+
+                    <div class="track__length">3:20</div>
+
 
                 </div>
 
 
-
             </div>
-
-            <div class="track">
-
-                <div class="track__number">1</div>
-
-
-                <div class="track__title">Intro</div>
-
-                <div class="track__artist">OGiJun</div>
-
-                <div class="track__length">1:11</div>
-
-            </div>
-
-            <div class="track">
-
-                <div class="track__number">2</div>
-
-
-                <div class="track__title">Random</div>
-
-
-                <div class="track__artist">GwangSoo</div>
-
-                <div class="track__length">3:00</div>
-
-
-
-            </div>
-
-            <div class="track">
-
-                <div class="track__number">3</div>
-
-
-                <div class="track__title featured">
-
-                    <span class="title">Me, Myself & I</span>
-                    <span class="feature">feat. Bebe Rexha</span>
-
-                </div>
-
-
-                <div class="track__artist">YongJun</div>
-
-                <div class="track__length">4:11</div>
-
-
-
-            </div>
-
-            <div class="track">
-
-                <div class="track__number">4</div>
-
-
-
-                <div class="track__title featured">
-
-                    <span class="title">One Of Them</span>
-                    <span class="feature">feat. Big Sean</span>
-
-                </div>
-
-
-                <div class="track__artist">OnSub</div>
-
-
-                <div class="track__length">3:20</div>
-
-
-            </div>
-
 
         </div>
-
-    </div>
     </div>
 
 </section>
-
 
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
