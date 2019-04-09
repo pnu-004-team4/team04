@@ -4,6 +4,9 @@ import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioExtractable;
 import com.team04.musiccloud.audio.ExtractorException;
 import com.team04.musiccloud.audio.Mp3Extractor;
+import com.team04.musiccloud.auth.Account;
+import com.team04.musiccloud.auth.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +19,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * 제작자       : 오기준
- * 최종 수정일  : 2019년 4월 6일
- * 내용         : UI 점검 및 스트리밍 테스트용 클래스
+ * 제작자       : 오기준, 이경찬
+ * 최종 수정일  : 2019년 4월 9일
+ * 내용         : UI 점검 및 스트리밍, 로그인 테스트용 클래스
  *
  * UI 점검은 아래와 같은 링크로 가능합니다.
  * 127.0.0.1/login    ==> login.jsp 파일 점검
@@ -34,24 +37,39 @@ import java.nio.file.Paths;
  * 5. 대상 JSP 설정(`setViewName`) 6. 해당 JSP 객체 반환
  *
  * 이렇게 하면 127.0.0.1/player 에서 재생 버튼을 누르면 음원을 재생할 수 있게 됩니다.
+ *
+ * >> 2019년 4월 9일 오후 9시 추가
+ *
+ * 로그인은 __회원 가입 창을 최초 1회__ 키면 이하 계정이 자동으로 등록됩니다.
+ * ID: smile@smile.com
+ * PW: 1234
+ * 해당 계정을 바탕으로 로그인을 실시하면 Player 창으로 이동을 하게 됩니다.
  */
 @Controller
 public class StreamingTest {
+
+  @Autowired
+  AccountService accountService;
 
   private static Path testDirectory = Paths
       .get(System.getProperty("user.dir"), "src", "main", "resources", "static/media", "audios");
 
   @RequestMapping("/login")
-  public ModelAndView login() throws IOException, ExtractorException {
+  public ModelAndView login() {
     return new ModelAndView("Login/login");
   }
 
   @RequestMapping("/register")
-  public ModelAndView registration() throws IOException, ExtractorException {
+  public ModelAndView registration() {
+    Account account = new Account();
+    account.setEmail("smile@smile.com");
+    account.setPassword("1234");
+    accountService.save(account);
+    System.out.println("Successfully created account!!");
     return new ModelAndView("Registration/register");
   }
 
-  @RequestMapping("/player")
+  @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
     ModelAndView base = new ModelAndView();
     String dir = StreamingTest.test();

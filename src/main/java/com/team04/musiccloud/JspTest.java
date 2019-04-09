@@ -10,8 +10,8 @@ import java.io.IOException;
 
 @Controller
 public class JspTest {
-    
-    @RequestMapping("/")
+
+    @RequestMapping("/test") // 변경됨: 2019년 4월 9일, 변경자: 이경찬
     public ModelAndView main() throws IOException, ExtractorException {
         Tester.test();
         return new ModelAndView("index");
