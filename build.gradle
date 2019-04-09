@@ -25,3 +25,10 @@ dependencies {
     compile('org.apache.tika:tika-parsers:1.20')
     compile('org.springframework:spring-test:5.1.5.RELEASE')
 }
+
+if (hasProperty("buildScan")) {
+    buildScan {
+        licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+        licenseAgree = 'yes'
+    }
+}
