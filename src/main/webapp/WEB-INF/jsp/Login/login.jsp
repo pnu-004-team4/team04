@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="kr">
 	<head>
 	<meta charset="UTF-8">
@@ -43,7 +42,7 @@ html {
         </div>
       </form>
       <div class="form-content">
-        <form action="register" method="post">
+        <form action="/register" method="post">
           <div class="form-group">
             <button type="submit">Sign Up</button>
           </div>
