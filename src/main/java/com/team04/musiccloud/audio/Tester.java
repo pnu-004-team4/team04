@@ -41,17 +41,17 @@ public class Tester {
         saveMetaToDB(audio);
     }
     
-    private static void saveAudioToStorage(Path filePath, Audio audio) throws IOException {
-        try ( FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile()) ) {
-            fileOutputStream.write(audio.getBytes());
-        }
-    }
-    
     private static MultipartFile getMockMultipartFile() throws IOException {
         final String fileName = "sample.mp3";
         final Path filePath = testDirectory.resolve("test").resolve(fileName).toAbsolutePath();
         
         return new MockMultipartFile(filePath.toString(), fileName, null, new FileInputStream(filePath.toFile()));
+    }
+    
+    private static void saveAudioToStorage(Path filePath, Audio audio) throws IOException {
+        try ( FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile()) ) {
+            fileOutputStream.write(audio.getBytes());
+        }
     }
     
     private static void saveMetaToDB(Keyable keyable) {
@@ -65,15 +65,15 @@ public class Tester {
         System.out.println("--------------------");
     }
     
-    private static void printMeta(InputStream streamInput) throws TikaException, IOException, SAXException {
-        BodyContentHandler contentHandler = new BodyContentHandler();
-        Metadata metadata = new Metadata();
-        ParseContext parseContext = new ParseContext();
-        
-        Mp3Parser mp3Parser = new Mp3Parser();
-        mp3Parser.parse(streamInput, contentHandler, metadata, parseContext);
-        
-        for ( String name : metadata.names() )
-            System.out.println(name + " [:] " + metadata.get(name));
-    }
+//    private static void printMeta(InputStream streamInput) throws TikaException, IOException, SAXException {
+//        BodyContentHandler contentHandler = new BodyContentHandler();
+//        Metadata metadata = new Metadata();
+//        ParseContext parseContext = new ParseContext();
+//
+//        Mp3Parser mp3Parser = new Mp3Parser();
+//        mp3Parser.parse(streamInput, contentHandler, metadata, parseContext);
+//
+//        for ( String name : metadata.names() )
+//            System.out.println(name + " [:] " + metadata.get(name));
+//    }
 }
