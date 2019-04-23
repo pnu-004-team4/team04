@@ -17,9 +17,4 @@ public class JspTest {
         return new ModelAndView("index");
     }
 
-    @RequestMapping("/logout")
-    public ModelAndView logout() throws IOException, ExtractorException {
-        Tester.test();
-        return new ModelAndView("/Login/logout");
-    }
 }

@@ -69,6 +69,11 @@ public class StreamingTest {
     return new ModelAndView("Registration/register");
   }
 
+  @RequestMapping("/logout")
+  public ModelAndView logout(){
+    return new ModelAndView("Login/logout");
+  }
+
   @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
     ModelAndView base = new ModelAndView();
