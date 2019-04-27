@@ -10,6 +10,10 @@ public class TempManager {
             StaticPaths.system.toString(), "temp"
     ).toAbsolutePath();
     
+    public Path getUserTemp(String user) {
+        return Paths.get(temp.toString(), user);
+    }
+    
     public boolean exists(Audio audio) {
         final Path userTemp = temp.resolve(audio.getUser());
         return Files.exists(userTemp.resolve(audio.getFileName()));
@@ -17,8 +21,9 @@ public class TempManager {
     
     public void loadFrom(Audio audio) throws IOException {
         createUserTemp(audio.getUser());
-        Files.copy(audio.getPath(), Paths.get(temp.toString(), audio.getUser()));
         
+        final Path userTemp = getUserTemp(audio.getUser());
+        Files.copy(audio.getPath(), userTemp);
     }
     
     public void createUserTemp(String user) throws UserTempAlreadyExists {
@@ -30,5 +35,4 @@ public class TempManager {
             throw new UserTempAlreadyExists("User's temp space already exists: " + userTemp.toString());
         }
     }
-    
 }

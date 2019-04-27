@@ -16,9 +16,30 @@ public class Tester {
     private Tester() {
     }
     
-    public static void test1() {
+    public static void testTempManager(String mongoId) {
+        Audio audio = getAudioFromDB(mongoId);
+        
+        TempManager tempManager = new TempManager();
     
+        if ( !tempManager.exists(audio) ) {
+            try {
+                tempManager.loadFrom(audio);
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        }
+    
+        audio.setPath(tempManager.getUserTemp(audio.getUser()));
+        sendToTranscoding(audio);
     }
+    
+    private static Audio getAudioFromDB(String mongoId) {
+        return new Audio() {};
+    }
+    
+    private static void sendToTranscoding(Audio audio) {
+    }
+    
     
     public static void test() throws IOException, ExtractorException {
         MultipartFile multipartFile = getMockMultipartFile();
@@ -61,7 +82,7 @@ public class Tester {
         System.out.println("\tUser: " + tuplable.getUser());
         System.out.println("--------------------");
     }
-    
+
 //    private static void printMeta(InputStream streamInput) throws TikaException, IOException, SAXException {
 //        BodyContentHandler contentHandler = new BodyContentHandler();
 //        Metadata metadata = new Metadata();

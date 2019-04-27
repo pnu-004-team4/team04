@@ -8,9 +8,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public abstract class Audio implements Tuplable {
-    @Id
-    private String _id;
-    
     private String title;
     private String author;
     private String album;
@@ -20,14 +17,6 @@ public abstract class Audio implements Tuplable {
     //-- extra
     private String user;
     private byte[] bytes;
-    
-    public String getId() {
-        return _id;
-    }
-    
-    public void setId(String _id) {
-        this._id = _id;
-    }
     
     @Override
     public String getTitle() {
