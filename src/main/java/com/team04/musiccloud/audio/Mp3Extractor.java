@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
-public class Mp3Extractor implements AudioExtractable {
+public class Mp3Extractor implements AudioExtractor {
     private static final String XMP_DM = "xmpDM:";
     private static final String TITLE = "title";
     private static final String AUTHOR = "Author";
@@ -23,37 +24,32 @@ public class Mp3Extractor implements AudioExtractable {
     
     @Override
     public Audio convertToAudio(MultipartFile multipartFile) throws ExtractorException {
-        Mp3Audio audio = new Mp3Audio();
-    
+        AudioMeta audioMeta;
+        
         try {
             Metadata metadata = getMetadata(multipartFile);
-        
-            audio.setTitle(metadata.get(TITLE));
-            audio.setAuthor(metadata.get(AUTHOR));
-            audio.setAlbum(metadata.get(ALBUM));
-            if ( isLocalDateTime(metadata.get(RELEASE_DATE)) )
-                audio.setReleaseDate(LocalDateTime.parse(metadata.get(RELEASE_DATE)));
-            audio.setFileName(multipartFile.getOriginalFilename());
-            audio.setBytes(multipartFile.getBytes());
-        
+    
+            final LocalDateTime localDateTime =
+                    DateTimeUtilities.getLocalDateTime(metadata.get(RELEASE_DATE)).orElse(null);
+            final String baseFilename =
+                    FileSystemUtilities.getBaseFilename(multipartFile).orElse(null);
+            final String extension =
+                    FileSystemUtilities.getExtension(multipartFile).orElse(null);
+            
+            audioMeta = AudioMetaBuilder.builder()
+                    .setTitle(metadata.get(TITLE))
+                    .setAuthor(metadata.get(AUTHOR))
+                    .setAlbum(metadata.get(ALBUM))
+                    .setReleaseDate(localDateTime)
+                    .setBaseFilename(baseFilename)
+                    .setExtension(extension)
+                    .build();
+            
         } catch ( IOException | TikaException | SAXException e ) {
             throw new ExtractorException(e);
         }
-    
-        return audio;
-    }
-    
-    
-    private boolean isLocalDateTime(String dateString) {
-        boolean isDateTime = true;
         
-        try {
-            LocalDateTime.parse(dateString);
-        } catch ( DateTimeParseException e ) {
-            isDateTime = false;
-        }
-        
-        return isDateTime;
+        return new Mp3Audio(audioMeta);
     }
     
     private Metadata getMetadata(MultipartFile multipartFile) throws TikaException, SAXException, IOException {

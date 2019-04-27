@@ -1,88 +1,107 @@
 package com.team04.musiccloud.audio;
 
-import org.springframework.data.annotation.Id;
-
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
-public abstract class Audio implements Tuplable {
-    private String title;
-    private String author;
-    private String album;
-    private LocalDateTime releaseDate;
-    private String directory;
-    private String fileName;
-    //-- extra
-    private String user;
+public abstract class Audio {
+    private AudioMeta audioMeta = new AudioMeta();
     private byte[] bytes;
+    private String user;
+    
+    public Audio() {
+    }
+    
+    public Audio(Audio other) {
+        setAudioMeta(other.audioMeta);
+        setBytes(other.bytes);
+        setUser(other.user);
+    }
+    
+    public Audio(AudioMeta audioMeta) {
+        setAudioMeta(audioMeta);
+    }
     
     @Override
-    public String getTitle() {
-        return title;
+    public boolean equals(Object obj) {
+        if ( this == obj ) return true;
+        if ( obj == null || getClass() != obj.getClass() ) return false;
+        
+        Audio audio = (Audio) obj;
+        
+        return Objects.equals(audioMeta, audio.audioMeta)
+                && Objects.equals(user, audio.user);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(audioMeta, user);
+    }
+    
+    public AudioMeta getAudioMeta() {
+        return new AudioMeta(audioMeta);
+    }
+    
+    protected void setAudioMeta(AudioMeta audioMeta) {
+        this.audioMeta = new AudioMeta(audioMeta);
+    }
+    
+    public Optional<String> getTitle() {
+        return audioMeta.getTitle();
     }
     
     public void setTitle(String title) {
-        this.title = title;
+        audioMeta.setTitle(title);
     }
     
-    @Override
-    public String getAuthor() {
-        return author;
+    public Optional<String> getAuthor() {
+        return audioMeta.getAuthor();
     }
     
     public void setAuthor(String author) {
-        this.author = author;
+        audioMeta.setAuthor(author);
     }
     
-    public String getAlbum() {
-        return album;
+    public Optional<String> getAlbum() {
+        return audioMeta.getAlbum();
     }
     
     public void setAlbum(String album) {
-        this.album = album;
+        audioMeta.setAlbum(album);
     }
     
-    @Override
-    public LocalDateTime getReleaseDate() {
-        return releaseDate;
+    public Optional<LocalDateTime> getReleaseDate() {
+        return audioMeta.getReleaseDate();
     }
     
     public void setReleaseDate(LocalDateTime releaseDate) {
-        this.releaseDate = releaseDate;
+        audioMeta.setReleaseDate(releaseDate);
     }
     
-    public String getDirectory() {
-        return directory;
+    public Optional<String> getDirectory() {
+        return audioMeta.getDirectory();
     }
     
     public void setDirectory(String directory) {
-        this.directory = directory;
+        audioMeta.setDirectory(directory);
     }
     
-    @Override
-    public String getFileName() {
-        return fileName;
+    public Optional<String> getFileName() {
+        return audioMeta.getBaseFilename();
     }
     
     public void setFileName(String fileName) {
-        this.fileName = fileName;
+        audioMeta.setBaseFilename(fileName);
     }
     
-    public Path getPath() {
-        return Paths.get(getDirectory(), getFileName());
+    public Optional<Path> getPath() {
+        return audioMeta.getPath();
     }
     
     public void setPath(Path path) {
-        path = path.toAbsolutePath();
-        setDirectory(path.getParent().toString());
-        setFileName(path.getFileName().toString());
-    }
-    
-    public void setPath(String directory, String fileName) {
-        Path path = Paths.get(directory, fileName);
-        setPath(path);
+        audioMeta.setPath(path);
     }
     
     public String getUser() {
@@ -98,6 +117,8 @@ public abstract class Audio implements Tuplable {
     }
     
     public void setBytes(byte[] bytes) {
-        this.bytes = Arrays.copyOf(bytes, bytes.length);
+        if ( bytes.length > 0 ) {
+            this.bytes = Arrays.copyOf(bytes, bytes.length);
+        }
     }
 }

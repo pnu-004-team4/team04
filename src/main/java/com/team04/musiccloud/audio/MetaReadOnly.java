@@ -1,11 +1,14 @@
 package com.team04.musiccloud.audio;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 
-public interface Tuplable {
+public interface MetaReadOnly {
     String getTitle();
     
     String getAuthor();
+    
+    String getAlbum();
     
     LocalDateTime getReleaseDate();
     
@@ -13,5 +16,5 @@ public interface Tuplable {
     
     String getFileName();
     
-    String getUser();
+    Path getPath();
 }

@@ -1,7 +1,7 @@
 package com.team04.musiccloud.stream;
 
 import com.team04.musiccloud.audio.Audio;
-import com.team04.musiccloud.audio.AudioExtractable;
+import com.team04.musiccloud.audio.AudioExtractor;
 import com.team04.musiccloud.audio.ExtractorException;
 import com.team04.musiccloud.audio.Mp3Extractor;
 import com.team04.musiccloud.auth.Account;
@@ -88,7 +88,7 @@ public class StreamingTest {
     MultipartFile multipartFile = getMockMultipartFile();
     final String originalName = multipartFile.getOriginalFilename();
     final Path userDirectory = testDirectory.resolve("test");
-      final AudioExtractable extractor = new Mp3Extractor();
+      final AudioExtractor extractor = new Mp3Extractor();
 
     Audio src = extractor.convertToAudio(multipartFile);
     src.setUser("test");

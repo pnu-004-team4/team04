@@ -40,21 +40,27 @@ public class Tester {
     private static void sendToTranscoding(Audio audio) {
     }
     
-    
-    public static void test() throws IOException, ExtractorException {
+    public static void test()
+            throws IOException, ExtractorException, InvalidFileFormat {
+        
         MultipartFile multipartFile = getMockMultipartFile();
         upload(multipartFile, "CSK");
     }
     
-    public static void upload(MultipartFile multipartFile, String userName) throws IOException, ExtractorException {
+    public static void upload(MultipartFile multipartFile, String userName)
+            throws IOException, ExtractorException, InvalidFileFormat {
+        
         final String originalName = multipartFile.getOriginalFilename();
         final Path userDirectory = testDirectory.resolve(userName);
         final Path filePath = userDirectory.resolve(originalName).toAbsolutePath();
-        final AudioExtractable extractor = new Mp3Extractor();
+        final AudioExtractor extractor = ExtractorFactory.getInstance(multipartFile);
         
         Audio audio = extractor.convertToAudio(multipartFile);
         audio.setPath(filePath);
         audio.setUser(userName);
+        
+        
+        
         saveAudioToStorage(filePath, audio);
         saveMetaToDB(audio);
     }
@@ -72,14 +78,14 @@ public class Tester {
         }
     }
     
-    private static void saveMetaToDB(Tuplable tuplable) {
+    private static void saveMetaToDB(Audio audio) {
         System.out.println("--------------------");
         System.out.println("DB received: ");
-        System.out.println("\tTitle: " + tuplable.getTitle());
-        System.out.println("\tAuthor: " + tuplable.getAuthor());
-        System.out.println("\tReleaseDate: " + tuplable.getReleaseDate());
-        System.out.println("\tFileName: " + tuplable.getFileName());
-        System.out.println("\tUser: " + tuplable.getUser());
+        System.out.println("\tTitle: " + audio.getTitle());
+        System.out.println("\tAuthor: " + audio.getAuthor());
+        System.out.println("\tReleaseDate: " + audio.getReleaseDate());
+        System.out.println("\tFileName: " + audio.getFileName());
+        System.out.println("\tUser: " + audio.getUser());
         System.out.println("--------------------");
     }
 
