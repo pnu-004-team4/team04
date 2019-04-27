@@ -1,4 +1,4 @@
-<%@ page import ="com.team04.musiccloud.User.UserInform" language= "java" contentType="text/html; charset=UTF-8"
+<%@ page import ="com.team04.musiccloud.auth.Account" language= "java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,12 +19,12 @@
 	// 세션 저장.
 	HttpSession sess = request.getSession();
 
-	UserInform VO = new UserInform();
+	Account VO = new Account();
 
 	//@TODO 데이터베이스에서 받아와서 세션에 저장할 것.
 
-	VO.setUserID(Username);
-	VO.setpw(Password);
+	VO.setId(Username);
+	VO.setPassword(Password);
 	VO.setEmail("mks487@pusan.ac.kr");
 	VO.setName("MunKS");
 	VO.setSessID(sess.getId());

@@ -1,12 +1,16 @@
 package com.team04.musiccloud.auth;
 
+/*
+* User Account inform
+* ID int -> string?
+ */
 public class Account {
 
     private Integer id;
-
     private String email;
-
     private String password;
+    private String name;
+    private  String sessID;
 
     public Integer getId() {
         return id;
@@ -30,5 +34,20 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSessID(){
+        return sessID;
+    }
+
+    public void setSessID(String sess){
+        this.sessID = sess;
+    }
+
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
     }
 }
