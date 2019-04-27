@@ -1,18 +1,11 @@
 package com.team04.musiccloud.audio;
 
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.mp3.Mp3Parser;
-import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import org.xml.sax.SAXException;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -21,6 +14,10 @@ public class Tester {
     private static Path testDirectory = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static", "media", "audios");
     
     private Tester() {
+    }
+    
+    public static void test1() {
+    
     }
     
     public static void test() throws IOException, ExtractorException {
@@ -54,14 +51,14 @@ public class Tester {
         }
     }
     
-    private static void saveMetaToDB(Keyable keyable) {
+    private static void saveMetaToDB(Tuplable tuplable) {
         System.out.println("--------------------");
         System.out.println("DB received: ");
-        System.out.println("\tTitle: " + keyable.getTitle());
-        System.out.println("\tAuthor: " + keyable.getAuthor());
-        System.out.println("\tReleaseDate: " + keyable.getReleaseDate());
-        System.out.println("\tFileName: " + keyable.getFileName());
-        System.out.println("\tUser: " + keyable.getUser());
+        System.out.println("\tTitle: " + tuplable.getTitle());
+        System.out.println("\tAuthor: " + tuplable.getAuthor());
+        System.out.println("\tReleaseDate: " + tuplable.getReleaseDate());
+        System.out.println("\tFileName: " + tuplable.getFileName());
+        System.out.println("\tUser: " + tuplable.getUser());
         System.out.println("--------------------");
     }
     
