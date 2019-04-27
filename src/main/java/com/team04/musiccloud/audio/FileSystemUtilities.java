@@ -6,12 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Optional;
 
 public class FileSystemUtilities {
-    public static Optional<String> getBaseFilename(String path) {
+    public static Optional<String> getName(String path) {
         return Optional.ofNullable(FilenameUtils.getBaseName(path));
     }
     
-    public static Optional<String> getBaseFilename(MultipartFile multipartFile) {
-        return getBaseFilename(multipartFile.getOriginalFilename());
+    public static Optional<String> getName(MultipartFile multipartFile) {
+        return getName(multipartFile.getOriginalFilename());
     }
     
     public static Optional<String> getExtension(String path) {

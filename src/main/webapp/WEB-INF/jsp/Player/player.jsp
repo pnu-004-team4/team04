@@ -48,7 +48,7 @@
 
     </div>
 
-    <div class="user">
+    <div class="owner">
 
         <div class="user__notifications">
 

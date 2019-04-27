@@ -1,27 +1,51 @@
 package com.team04.musiccloud.audio;
 
-import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Optional;
 
-public abstract class Audio {
-    private AudioMeta audioMeta = new AudioMeta();
+public class Audio {
+    private AudioMeta audioMeta;
+    private FileMeta fileMeta;
     private byte[] bytes;
-    private String user;
+    private String owner;
     
-    public Audio() {
-    }
-    
-    public Audio(Audio other) {
-        setAudioMeta(other.audioMeta);
-        setBytes(other.bytes);
-        setUser(other.user);
-    }
-    
-    public Audio(AudioMeta audioMeta) {
+    public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes, String owner) {
         setAudioMeta(audioMeta);
+        setFileMeta(fileMeta);
+        setBytes(bytes);
+        setOwner(owner);
+    }
+    
+    public AudioMeta getAudioMeta() {
+        return audioMeta;
+    }
+    
+    private void setAudioMeta(AudioMeta audioMeta) {
+        this.audioMeta = new AudioMeta(audioMeta);
+    }
+    
+    public FileMeta getFileMeta() {
+        return fileMeta;
+    }
+    
+    private void setFileMeta(FileMeta fileMeta) {
+        this.fileMeta = new FileMeta(fileMeta);
+    }
+    
+    public byte[] getBytes() {
+        return Arrays.copyOf(bytes, bytes.length);
+    }
+    
+    private void setBytes(byte[] bytes) {
+        this.bytes = Arrays.copyOf(bytes, bytes.length);
+    }
+    
+    public String getOwner() {
+        return owner;
+    }
+    
+    private void setOwner(String owner) {
+        this.owner = owner;
     }
     
     @Override
@@ -31,94 +55,14 @@ public abstract class Audio {
         
         Audio audio = (Audio) obj;
         
-        return Objects.equals(audioMeta, audio.audioMeta)
-                && Objects.equals(user, audio.user);
+        return Objects.equals(audioMeta, audio.audioMeta) &&
+                Objects.equals(fileMeta, audio.fileMeta) &&
+                Objects.equals(owner, audio.owner);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(audioMeta, user);
+        return Objects.hash(audioMeta, fileMeta, owner);
     }
     
-    public AudioMeta getAudioMeta() {
-        return new AudioMeta(audioMeta);
-    }
-    
-    protected void setAudioMeta(AudioMeta audioMeta) {
-        this.audioMeta = new AudioMeta(audioMeta);
-    }
-    
-    public Optional<String> getTitle() {
-        return audioMeta.getTitle();
-    }
-    
-    public void setTitle(String title) {
-        audioMeta.setTitle(title);
-    }
-    
-    public Optional<String> getAuthor() {
-        return audioMeta.getAuthor();
-    }
-    
-    public void setAuthor(String author) {
-        audioMeta.setAuthor(author);
-    }
-    
-    public Optional<String> getAlbum() {
-        return audioMeta.getAlbum();
-    }
-    
-    public void setAlbum(String album) {
-        audioMeta.setAlbum(album);
-    }
-    
-    public Optional<LocalDateTime> getReleaseDate() {
-        return audioMeta.getReleaseDate();
-    }
-    
-    public void setReleaseDate(LocalDateTime releaseDate) {
-        audioMeta.setReleaseDate(releaseDate);
-    }
-    
-    public Optional<String> getDirectory() {
-        return audioMeta.getDirectory();
-    }
-    
-    public void setDirectory(String directory) {
-        audioMeta.setDirectory(directory);
-    }
-    
-    public Optional<String> getFileName() {
-        return audioMeta.getBaseFilename();
-    }
-    
-    public void setFileName(String fileName) {
-        audioMeta.setBaseFilename(fileName);
-    }
-    
-    public Optional<Path> getPath() {
-        return audioMeta.getPath();
-    }
-    
-    public void setPath(Path path) {
-        audioMeta.setPath(path);
-    }
-    
-    public String getUser() {
-        return user;
-    }
-    
-    public void setUser(String user) {
-        this.user = user;
-    }
-    
-    public byte[] getBytes() {
-        return bytes;
-    }
-    
-    public void setBytes(byte[] bytes) {
-        if ( bytes.length > 0 ) {
-            this.bytes = Arrays.copyOf(bytes, bytes.length);
-        }
-    }
 }

@@ -90,8 +90,8 @@ public class StreamingTest {
     final Path userDirectory = testDirectory.resolve("test");
       final AudioExtractor extractor = new Mp3Extractor();
 
-    Audio src = extractor.convertToAudio(multipartFile);
-    src.setUser("test");
+    Audio src = extractor.getAudioMeta(multipartFile);
+    src.setOwner("test");
 
     // Backend에서 가져오는 과정...
     myStream.getAudioFromBack(src);

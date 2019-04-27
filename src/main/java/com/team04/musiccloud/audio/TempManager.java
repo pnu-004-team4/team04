@@ -15,15 +15,15 @@ public class TempManager {
     }
     
     public boolean exists(Audio audio) {
-        final Path userTemp = temp.resolve(audio.getUser());
-        return Files.exists(userTemp.resolve(audio.getFileName()));
+        final Path userTemp = temp.resolve(audio.getOwner());
+        return Files.exists(userTemp.resolve(audio.getFileMeta().getNameExtension()));
     }
     
     public void loadFrom(Audio audio) throws IOException {
-        createUserTemp(audio.getUser());
+        createUserTemp(audio.getOwner());
         
-        final Path userTemp = getUserTemp(audio.getUser());
-        Files.copy(audio.getPath(), userTemp);
+        final Path userTemp = getUserTemp(audio.getOwner());
+        Files.copy(audio.getFileMeta().getFullPath(), userTemp);
     }
     
     public void createUserTemp(String user) throws UserTempAlreadyExists {

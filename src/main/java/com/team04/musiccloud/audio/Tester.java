@@ -16,29 +16,29 @@ public class Tester {
     private Tester() {
     }
     
-    public static void testTempManager(String mongoId) {
-        Audio audio = getAudioFromDB(mongoId);
-        
-        TempManager tempManager = new TempManager();
-    
-        if ( !tempManager.exists(audio) ) {
-            try {
-                tempManager.loadFrom(audio);
-            } catch ( IOException e ) {
-                e.printStackTrace();
-            }
-        }
-    
-        audio.setPath(tempManager.getUserTemp(audio.getUser()));
-        sendToTranscoding(audio);
-    }
-    
-    private static Audio getAudioFromDB(String mongoId) {
-        return new Audio() {};
-    }
-    
-    private static void sendToTranscoding(Audio audio) {
-    }
+//    public static void testTempManager(String mongoId) {
+//        Audio audio = getAudioFromDB(mongoId);
+//
+//        TempManager tempManager = new TempManager();
+//
+//        if ( !tempManager.exists(audio) ) {
+//            try {
+//                tempManager.loadFrom(audio);
+//            } catch ( IOException e ) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        audio.setPath(tempManager.getUserTemp(audio.getOwner()));
+//        sendToTranscoding(audio);
+//    }
+//
+//    private static Audio getAudioFromDB(String mongoId) {
+//        return new Audio();
+//    }
+//
+//    private static void sendToTranscoding(Audio audio) {
+//    }
     
     public static void test()
             throws IOException, ExtractorException, InvalidFileFormat {
@@ -47,22 +47,26 @@ public class Tester {
         upload(multipartFile, "CSK");
     }
     
-    public static void upload(MultipartFile multipartFile, String userName)
+    public static void upload(MultipartFile multipartFile, String user)
             throws IOException, ExtractorException, InvalidFileFormat {
         
-        final String originalName = multipartFile.getOriginalFilename();
-        final Path userDirectory = testDirectory.resolve(userName);
-        final Path filePath = userDirectory.resolve(originalName).toAbsolutePath();
         final AudioExtractor extractor = ExtractorFactory.getInstance(multipartFile);
         
-        Audio audio = extractor.convertToAudio(multipartFile);
-        audio.setPath(filePath);
-        audio.setUser(userName);
+        Audio audio = extractor.getAudio(multipartFile, user);
         
+        saveAudioToStorage(audio);
+        saveMetaToDB(audio.getAudioMeta(), audio.getFileMeta());
+    }
+    
+    private static FileMeta getFileMeta(String filename, String userName) {
+        final String path =
+                Paths.get(testDirectory.toString(), userName).toString();
+        final String name =
+                FileSystemUtilities.getName(filename).orElse(null);
+        final String extension =
+                FileSystemUtilities.getExtension(filename).orElse(null);
         
-        
-        saveAudioToStorage(filePath, audio);
-        saveMetaToDB(audio);
+        return new FileMeta(path, name, extension);
     }
     
     private static MultipartFile getMockMultipartFile() throws IOException {
@@ -72,20 +76,21 @@ public class Tester {
         return new MockMultipartFile(filePath.toString(), fileName, null, new FileInputStream(filePath.toFile()));
     }
     
-    private static void saveAudioToStorage(Path filePath, Audio audio) throws IOException {
-        try ( FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile()) ) {
+    private static void saveAudioToStorage(Audio audio) throws IOException {
+        try ( FileOutputStream fileOutputStream = new FileOutputStream(audio.getFileMeta().getFullPathAsFile()) ) {
             fileOutputStream.write(audio.getBytes());
         }
     }
     
-    private static void saveMetaToDB(Audio audio) {
+    private static void saveMetaToDB(AudioMeta audioMeta, FileMeta fileMeta) {
         System.out.println("--------------------");
         System.out.println("DB received: ");
-        System.out.println("\tTitle: " + audio.getTitle());
-        System.out.println("\tAuthor: " + audio.getAuthor());
-        System.out.println("\tReleaseDate: " + audio.getReleaseDate());
-        System.out.println("\tFileName: " + audio.getFileName());
-        System.out.println("\tUser: " + audio.getUser());
+        System.out.println("\tTitle: " + audioMeta.getTitle());
+        System.out.println("\tAuthor: " + audioMeta.getAuthor());
+        System.out.println("\tReleaseDate: " + audioMeta.getReleaseDate());
+        System.out.println("\tDirectory: " + fileMeta.getDirectory());
+        System.out.println("\tName: " + fileMeta.getName());
+        System.out.println("\tExtension: " + fileMeta.getExtension());
         System.out.println("--------------------");
     }
 
