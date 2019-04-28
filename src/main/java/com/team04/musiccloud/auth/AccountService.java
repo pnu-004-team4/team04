@@ -1,5 +1,6 @@
 package com.team04.musiccloud.auth;
 
+import com.team04.musiccloud.db.AccounRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,25 +18,16 @@ import java.util.List;
 public class AccountService implements UserDetailsService {
 
     @Autowired
-    private AccountRepository accounts;
-
+    private AccounRepository accountRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accounts.findByEmail(username);
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        // 유저 권한을 주도록 합니다.
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-        return new User(account.getEmail(), account.getPassword(), authorities);
+        return null;
     }
 
     public Account save(Account account) {
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        return accounts.save(account);
+        return null;
     }
-
 }
