@@ -51,22 +51,10 @@ public class Tester {
             throws IOException, ExtractorException, InvalidFileFormat {
         
         final AudioExtractor extractor = ExtractorFactory.getInstance(multipartFile);
-        
         Audio audio = extractor.getAudio(multipartFile, user);
         
         saveAudioToStorage(audio);
         saveMetaToDB(audio.getAudioMeta(), audio.getFileMeta());
-    }
-    
-    private static FileMeta getFileMeta(String filename, String userName) {
-        final String path =
-                Paths.get(testDirectory.toString(), userName).toString();
-        final String name =
-                FileSystemUtilities.getName(filename).orElse(null);
-        final String extension =
-                FileSystemUtilities.getExtension(filename).orElse(null);
-        
-        return new FileMeta(path, name, extension);
     }
     
     private static MultipartFile getMockMultipartFile() throws IOException {

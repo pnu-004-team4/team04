@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class AudioMeta {
+    private String id;
     private String title;
     private String author;
     private String album;
@@ -16,15 +17,28 @@ public class AudioMeta {
         setReleaseDate(releaseDate);
     }
     
+    public AudioMeta(String id, String title, String author, String album, LocalDateTime releaseDate) {
+        this(title, author, album, releaseDate);
+        setId(id);
+    }
+    
     public AudioMeta(AudioMeta other) {
-        this(other.title, other.author, other.album, other.releaseDate);
+        this(other.id, other.title, other.author, other.album, other.releaseDate);
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    protected void setId(String id) {
+        this.id = id;
     }
     
     public String getTitle() {
         return title;
     }
     
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         this.title = title;
     }
     
@@ -32,7 +46,7 @@ public class AudioMeta {
         return author;
     }
     
-    public void setAuthor(String author) {
+    protected void setAuthor(String author) {
         this.author = author;
     }
     
@@ -40,7 +54,7 @@ public class AudioMeta {
         return album;
     }
     
-    public void setAlbum(String album) {
+    protected void setAlbum(String album) {
         this.album = album;
     }
     
@@ -48,7 +62,7 @@ public class AudioMeta {
         return releaseDate;
     }
     
-    public void setReleaseDate(LocalDateTime releaseDate) {
+    protected void setReleaseDate(LocalDateTime releaseDate) {
         this.releaseDate = releaseDate;
     }
     

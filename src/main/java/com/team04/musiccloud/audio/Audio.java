@@ -1,16 +1,22 @@
 package com.team04.musiccloud.audio;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Audio {
+    @Id
+    private String _id;
     private AudioMeta audioMeta;
     private FileMeta fileMeta;
     private byte[] bytes;
     private String owner;
     
     public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes, String owner) {
+        audioMeta.setId(_id);
         setAudioMeta(audioMeta);
+        fileMeta.setId(_id);
         setFileMeta(fileMeta);
         setBytes(bytes);
         setOwner(owner);

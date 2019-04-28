@@ -3,8 +3,10 @@ package com.team04.musiccloud.audio;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class FileMeta {
+    private String id;
     private String directory;
     private String name;
     private String extension;
@@ -15,15 +17,28 @@ public class FileMeta {
         setExtension(extension);
     }
     
+    public FileMeta(String id, String directory, String name, String extension) {
+        this(directory, name, extension);
+        setId(id);
+    }
+    
     public FileMeta(FileMeta other) {
-        this(other.directory, other.name, other.extension);
+        this(other.id, other.directory, other.name, other.extension);
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    protected void setId(String id) {
+        this.id = id;
     }
     
     public String getDirectory() {
         return directory;
     }
     
-    public void setDirectory(String directory) {
+    protected void setDirectory(String directory) {
         this.directory = directory;
     }
     
@@ -31,7 +46,7 @@ public class FileMeta {
         return name;
     }
     
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
     
@@ -39,7 +54,7 @@ public class FileMeta {
         return extension;
     }
     
-    public void setExtension(String extension) {
+    protected void setExtension(String extension) {
         this.extension = extension;
     }
     
@@ -57,5 +72,22 @@ public class FileMeta {
     
     public Path getNameExtension() {
         return Paths.get(getName(), getExtension());
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        
+        FileMeta fileMeta = (FileMeta) o;
+        
+        return Objects.equals(directory, fileMeta.directory) &&
+                Objects.equals(name, fileMeta.name) &&
+                Objects.equals(extension, fileMeta.extension);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(directory, name, extension);
     }
 }
