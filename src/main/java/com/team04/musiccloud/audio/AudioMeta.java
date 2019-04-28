@@ -14,6 +14,9 @@ public class AudioMeta {
     private String album;
     private LocalDateTime releaseDate;
     
+    public AudioMeta() {
+    }
+    
     public AudioMeta(String title, String author, String album, LocalDateTime releaseDate) {
         setTitle(title);
         setAuthor(author);
@@ -23,13 +26,14 @@ public class AudioMeta {
     
     public AudioMeta(AudioMeta other) {
         this(other.title, other.author, other.album, other.releaseDate);
+        setDbId(other.dbId);
     }
     
     public String getDbId() {
         return dbId;
     }
     
-    protected void setDbId(String dbId) {
+    public void setDbId(String dbId) {
         this.dbId = dbId;
     }
     

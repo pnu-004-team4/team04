@@ -1,7 +1,9 @@
 package com.team04.musiccloud.audio;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Optional;
 
 public class DateTimeUtilities {
@@ -26,4 +28,14 @@ public class DateTimeUtilities {
         
         return localDateTime;
     }
+    
+    public static Optional<LocalDateTime> getLocalDateTime(Date date) {
+        final LocalDateTime localDateTime = date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        
+        return Optional.ofNullable(localDateTime);
+    }
+    
+    
 }

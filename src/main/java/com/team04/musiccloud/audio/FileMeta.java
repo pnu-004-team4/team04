@@ -16,6 +16,9 @@ public class FileMeta {
     private String extension;
     private String user;
     
+    public FileMeta() {
+    }
+    
     public FileMeta(String directory, String name, String extension, String user) {
         setDirectory(directory);
         setName(name);
@@ -25,13 +28,14 @@ public class FileMeta {
     
     public FileMeta(FileMeta other) {
         this(other.directory, other.name, other.extension, other.user);
+        setDbId(other.dbId);
     }
     
     public String getDbId() {
         return dbId;
     }
     
-    protected void setDbId(String dbId) {
+    public void setDbId(String dbId) {
         this.dbId = dbId;
     }
     

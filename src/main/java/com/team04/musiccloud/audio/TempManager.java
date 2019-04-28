@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class TempManager {
     public static final Path TEMP_DIRECTORY = Paths.get(
-            StaticPaths.system.toString(), "TEMP_DIRECTORY"
+            StaticPaths.staticResources.toString(), "temp"
     ).toAbsolutePath();
     
     public Path getUserTemp(String user) {
