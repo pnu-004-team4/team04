@@ -64,7 +64,7 @@ public class FileMeta {
         if ( name == null ) throw new NullPointerException("File name cannot be null.");
         if ( extension == null ) throw new NullPointerException("File extension cannot be null.");
         
-        return Paths.get(directory, name, extension).toAbsolutePath();
+        return Paths.get(directory, name + "." + extension).toAbsolutePath();
     }
     
     public File getFullPathAsFile() {

@@ -84,14 +84,16 @@ public class StreamingTest {
   private static String test() throws IOException, ExtractorException {
     Streaming myStream = new Streaming();
 
+    String user = "test";
+    
     // Backend에서 준비되는 과정...
     MultipartFile multipartFile = getMockMultipartFile();
     final String originalName = multipartFile.getOriginalFilename();
-    final Path userDirectory = testDirectory.resolve("test");
-      final AudioExtractor extractor = new Mp3Extractor();
+    final Path userDirectory = testDirectory.resolve(user);
+    final AudioExtractor extractor = new Mp3Extractor();
 
-    Audio src = extractor.getAudioMeta(multipartFile);
-    src.setOwner("test");
+    Audio src = extractor.getAudio(multipartFile, user);//extractor.getAudioMeta(multipartFile);
+    //src.setOwner("test");
 
     // Backend에서 가져오는 과정...
     myStream.getAudioFromBack(src);

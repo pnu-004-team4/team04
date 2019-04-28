@@ -26,6 +26,6 @@ public class Streaming implements IBackStreaming, IFrontStreaming {
   public String sendAudioToFront() {
     // @TODO: 네트워크의 상태를 확인하고 가중치를 받는 함수가 필요함(ret: Integer)
     // @TODO: 가중치를 바탕으로 트랜스코드를 진행하는 함수가 필요함(ret: Audio 객체)
-    return "media/audios/" + audio.getOwner() + '/' + audio.getFileName();
+    return "media/audios/" + audio.getFileMeta().getUser() + '/' + audio.getFileMeta().getName();
   }
 }
