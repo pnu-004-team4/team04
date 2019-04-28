@@ -20,9 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * 제작자       : 오기준, 이경찬
- * 최종 수정일  : 2019년 4월 29일
- * 내용         : UI 점검 및 스트리밍, 로그인 테스트용 클래스
+ * UI 점검 및 스트리밍, 로그인 테스트용 클래스
  *
  * UI 점검은 아래와 같은 링크로 가능합니다.
  * 127.0.0.1/login    ==> login.jsp 파일 점검
@@ -54,6 +52,8 @@ import java.nio.file.Paths;
  * 사용하지 않는 변수 제거
  * 좀 더 Universal한 User로 제작함.
  *
+ * @author 오기준, 이경찬
+ * @version 2019년 4월 29일
  */
 @Controller
 public class SampleStreamingController {

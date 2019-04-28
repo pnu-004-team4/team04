@@ -1,6 +1,6 @@
 package com.team04.musiccloud.stream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioExtractor;
@@ -15,8 +15,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StreamingTest {
+
   private Streaming stream;
-  private Audio  testAudio;
+  private Audio testAudio;
 
   private static Path cacheDirectory = Paths
       .get(System.getProperty("user.dir"), "src", "main", "resources", "static/media", "audios");
@@ -43,6 +44,6 @@ public class StreamingTest {
   @Test
   public void test() {
     stream.getAudioFromBack(testAudio);
-    assertEquals("media/audios/CSK/sample.mp3",stream.sendAudioToFront());
+    assertEquals("media/audios/CSK/sample.mp3", stream.sendAudioToFront());
   }
 }

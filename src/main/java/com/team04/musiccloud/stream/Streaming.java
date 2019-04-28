@@ -3,9 +3,7 @@ package com.team04.musiccloud.stream;
 import com.team04.musiccloud.audio.Audio;
 
 /**
- * 제작자       : 오기준
- * 최종 수정일  : 2019년 4월 29일
- * 내용         : audio 파일의 디렉토리를 유지 관리한다.
+ * audio 파일의 디렉토리를 유지 관리합니다.
  *
  * `getAudioFromBack`은 Backend에서만 사용하는 코드입니다.
  * 이를 사용하면 Backend에서 조회된 audio를 객체의 멤버로 받을 수 있게 됩니다.
@@ -15,6 +13,9 @@ import com.team04.musiccloud.audio.Audio;
  *
  * >> 2019년 4월 29일 수정
  * extension이 붙을 수 있도록 제작하였습니다.
+ *
+ * @author 오기준
+ * @version 2019년 4월 29일
  */
 public class Streaming implements IBackStreaming, IFrontStreaming {
 
