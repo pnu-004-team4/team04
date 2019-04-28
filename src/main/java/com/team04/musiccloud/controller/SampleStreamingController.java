@@ -51,6 +51,9 @@ import java.nio.file.Paths;
  * 91 번째 줄에서 폴더가 가변적으로 변경이 되는 지를 확인을 해보도록 했습니다.
  * 80 번째 줄에서 mp3 파일인 경우 __확장자__를 기입해줘야 합니다.
  * SampleStreamingController로 이름이 변경됨.
+ * 사용하지 않는 변수 제거
+ * 좀 더 Universal한 User로 제작함.
+ *
  */
 @Controller
 public class SampleStreamingController {
@@ -79,7 +82,7 @@ public class SampleStreamingController {
   @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
     ModelAndView base = new ModelAndView();
-    String dir = SampleStreamingController.test() + ".mp3"; // 2019년 4월 29일 수정됨.
+    String dir = SampleStreamingController.test(); // 2019년 4월 29일 수정됨.
     String section =
         "<audio id=\"bgAudio\" controls style=\"visibility:hidden;\"><source src=\"" + dir
             + "\" type=\"audio/mpeg\"></audio>";
@@ -94,9 +97,7 @@ public class SampleStreamingController {
     String user = "CSK"; // 2019년 4월 29일 수정됨.
     
     // Backend에서 준비되는 과정...
-    MultipartFile multipartFile = getMockMultipartFile();
-    final String originalName = multipartFile.getOriginalFilename();
-    final Path userDirectory = testDirectory.resolve(user);
+    MultipartFile multipartFile = getMockMultipartFile(user);
     final AudioExtractor extractor = new Mp3Extractor();
 
     Audio src = extractor.getAudio(multipartFile, user);//extractor.getAudioMeta(multipartFile);
@@ -110,9 +111,9 @@ public class SampleStreamingController {
     return dir;
   }
 
-  private static MultipartFile getMockMultipartFile() throws IOException {
+  private static MultipartFile getMockMultipartFile(String user) throws IOException {
 
-    final Path filePath = testDirectory.resolve("test").resolve("sample.mp3").toAbsolutePath();
+    final Path filePath = testDirectory.resolve(user).resolve("sample.mp3").toAbsolutePath();
 
     return new MockMultipartFile(filePath.toString(), "sample.mp3", null,
         new FileInputStream(filePath.toFile()));
