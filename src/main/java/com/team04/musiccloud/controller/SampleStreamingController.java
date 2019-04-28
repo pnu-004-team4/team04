@@ -1,4 +1,4 @@
-package com.team04.musiccloud.stream;
+package com.team04.musiccloud.controller;
 
 import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioExtractor;
@@ -6,6 +6,7 @@ import com.team04.musiccloud.audio.ExtractorException;
 import com.team04.musiccloud.audio.Mp3Extractor;
 import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.auth.AccountService;
+import com.team04.musiccloud.stream.Streaming;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.nio.file.Paths;
 
 /**
  * 제작자       : 오기준, 이경찬
- * 최종 수정일  : 2019년 4월 9일
+ * 최종 수정일  : 2019년 4월 29일
  * 내용         : UI 점검 및 스트리밍, 로그인 테스트용 클래스
  *
  * UI 점검은 아래와 같은 링크로 가능합니다.
@@ -44,9 +45,15 @@ import java.nio.file.Paths;
  * ID: smile@smile.com
  * PW: 1234
  * 해당 계정을 바탕으로 로그인을 실시하면 Player 창으로 이동을 하게 됩니다.
+ *
+ * >> 2019년 4월 29일 오전 12시 추가
+ *
+ * 91 번째 줄에서 폴더가 가변적으로 변경이 되는 지를 확인을 해보도록 했습니다.
+ * 80 번째 줄에서 mp3 파일인 경우 __확장자__를 기입해줘야 합니다.
+ * SampleStreamingController로 이름이 변경됨.
  */
 @Controller
-public class StreamingTest {
+public class SampleStreamingController {
 
   @Autowired
   AccountService accountService;
@@ -72,7 +79,7 @@ public class StreamingTest {
   @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
     ModelAndView base = new ModelAndView();
-    String dir = StreamingTest.test();
+    String dir = SampleStreamingController.test() + ".mp3"; // 2019년 4월 29일 수정됨.
     String section =
         "<audio id=\"bgAudio\" controls style=\"visibility:hidden;\"><source src=\"" + dir
             + "\" type=\"audio/mpeg\"></audio>";
@@ -84,7 +91,7 @@ public class StreamingTest {
   private static String test() throws IOException, ExtractorException {
     Streaming myStream = new Streaming();
 
-    String user = "test";
+    String user = "CSK"; // 2019년 4월 29일 수정됨.
     
     // Backend에서 준비되는 과정...
     MultipartFile multipartFile = getMockMultipartFile();

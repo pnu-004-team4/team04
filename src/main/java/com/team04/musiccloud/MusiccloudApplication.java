@@ -4,7 +4,7 @@ import com.team04.musiccloud.audio.ExtractorException;
 import com.team04.musiccloud.audio.InvalidFileFormat;
 import com.team04.musiccloud.audio.TempGarbageCollector;
 import com.team04.musiccloud.audio.Tester;
-import com.team04.musiccloud.stream.StreamingTest;
+import com.team04.musiccloud.controller.SampleStreamingController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,6 +17,6 @@ public class MusiccloudApplication {
         SpringApplication.run(MusiccloudApplication.class, args);
         TempGarbageCollector.startGC();
         Tester.test();
-        new StreamingTest().player();
+        new SampleStreamingController().player();
     }
 }
