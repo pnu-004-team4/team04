@@ -7,20 +7,20 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 public abstract class AudioExtractor {
-    public Audio getAudio(MultipartFile multipartFile, String owner) throws IOException, ExtractorException {
+    public Audio getAudio(MultipartFile multipartFile, String user) throws IOException, ExtractorException {
         final byte[] fileBytes = multipartFile.getBytes();
         final AudioMeta audioMeta = getAudioMeta(fileBytes);
-        final FileMeta fileMeta = getFileMeta(multipartFile.getOriginalFilename(), owner);
+        final FileMeta fileMeta = getFileMeta(multipartFile.getOriginalFilename(), user);
         
-        return new Audio(audioMeta, fileMeta, fileBytes, owner);
+        return new Audio(audioMeta, fileMeta, fileBytes);
     }
     
-    private FileMeta getFileMeta(String filename, String owner) throws ExtractorException {
-        return new FileMeta(getFileDirectory(owner), getFileName(filename), getFileExtension(filename));
+    private FileMeta getFileMeta(String filename, String user) throws ExtractorException {
+        return new FileMeta(getFileDirectory(user), getFileName(filename), getFileExtension(filename), user);
     }
     
-    protected String getFileDirectory(String owner) {
-        return Paths.get(StaticPaths.storage.toString(), owner).toString();
+    protected String getFileDirectory(String user) {
+        return Paths.get(StaticPaths.storage.toString(), user).toString();
     }
     
     protected String getFileName(String fullFilename) throws ExtractorException {

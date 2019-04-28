@@ -6,20 +6,14 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Audio {
-    @Id
-    private String _id;
     private AudioMeta audioMeta;
     private FileMeta fileMeta;
     private byte[] bytes;
-    private String owner;
     
-    public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes, String owner) {
-        audioMeta.setId(_id);
+    public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes) {
         setAudioMeta(audioMeta);
-        fileMeta.setId(_id);
         setFileMeta(fileMeta);
         setBytes(bytes);
-        setOwner(owner);
     }
     
     public AudioMeta getAudioMeta() {
@@ -46,14 +40,6 @@ public class Audio {
         this.bytes = Arrays.copyOf(bytes, bytes.length);
     }
     
-    public String getOwner() {
-        return owner;
-    }
-    
-    private void setOwner(String owner) {
-        this.owner = owner;
-    }
-    
     @Override
     public boolean equals(Object obj) {
         if ( this == obj ) return true;
@@ -63,12 +49,12 @@ public class Audio {
         
         return Objects.equals(audioMeta, audio.audioMeta) &&
                 Objects.equals(fileMeta, audio.fileMeta) &&
-                Objects.equals(owner, audio.owner);
+                Arrays.equals(bytes, audio.bytes);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(audioMeta, fileMeta, owner);
+        return Objects.hash(audioMeta, fileMeta, bytes);
     }
     
 }

@@ -16,29 +16,30 @@ public class Tester {
     private Tester() {
     }
     
-//    public static void testTempManager(String mongoId) {
-//        Audio audio = getAudioFromDB(mongoId);
-//
-//        TempManager tempManager = new TempManager();
-//
-//        if ( !tempManager.exists(audio) ) {
-//            try {
-//                tempManager.loadFrom(audio);
-//            } catch ( IOException e ) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        audio.setPath(tempManager.getUserTemp(audio.getOwner()));
-//        sendToTranscoding(audio);
-//    }
-//
-//    private static Audio getAudioFromDB(String mongoId) {
-//        return new Audio();
-//    }
-//
-//    private static void sendToTranscoding(Audio audio) {
-//    }
+    public static void testTempManager(String mongoId) {
+        FileMeta fileMeta = getAudioFromDB(mongoId);
+
+        TempManager tempManager = new TempManager();
+
+        if ( !tempManager.exists(fileMeta) ) {
+            try {
+                tempManager.loadFrom(fileMeta);
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        }
+    
+        final String userTempDirectory = tempManager.getUserTemp(fileMeta.getUser()).toString();
+        fileMeta.setDirectory(userTempDirectory);
+        sendToTranscoding(fileMeta);
+    }
+
+    private static FileMeta getAudioFromDB(String mongoId) {
+        return new FileMeta("","","","");
+    }
+
+    private static void sendToTranscoding(FileMeta fileMeta) {
+    }
     
     public static void test()
             throws IOException, ExtractorException, InvalidFileFormat {
@@ -76,6 +77,7 @@ public class Tester {
         System.out.println("\tTitle: " + audioMeta.getTitle());
         System.out.println("\tAuthor: " + audioMeta.getAuthor());
         System.out.println("\tReleaseDate: " + audioMeta.getReleaseDate());
+        System.out.println("---");
         System.out.println("\tDirectory: " + fileMeta.getDirectory());
         System.out.println("\tName: " + fileMeta.getName());
         System.out.println("\tExtension: " + fileMeta.getExtension());

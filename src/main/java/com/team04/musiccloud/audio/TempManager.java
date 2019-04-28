@@ -6,33 +6,33 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TempManager {
-    public static final Path temp = Paths.get(
-            StaticPaths.system.toString(), "temp"
+    public static final Path TEMP_DIRECTORY = Paths.get(
+            StaticPaths.system.toString(), "TEMP_DIRECTORY"
     ).toAbsolutePath();
     
     public Path getUserTemp(String user) {
-        return Paths.get(temp.toString(), user);
+        return Paths.get(TEMP_DIRECTORY.toString(), user);
     }
     
-    public boolean exists(Audio audio) {
-        final Path userTemp = temp.resolve(audio.getOwner());
-        return Files.exists(userTemp.resolve(audio.getFileMeta().getNameExtension()));
+    public boolean exists(FileMeta fileMeta) {
+        final Path userTemp = TEMP_DIRECTORY.resolve(fileMeta.getUser());
+        return Files.exists(userTemp.resolve(fileMeta.getNameExtension()));
     }
     
-    public void loadFrom(Audio audio) throws IOException {
-        createUserTemp(audio.getOwner());
+    public void loadFrom(FileMeta fileAudio) throws IOException {
+        createUserTemp(fileAudio.getUser());
         
-        final Path userTemp = getUserTemp(audio.getOwner());
-        Files.copy(audio.getFileMeta().getFullPath(), userTemp);
+        final Path userTemp = getUserTemp(fileAudio.getUser());
+        Files.copy(fileAudio.getFullPath(), userTemp);
     }
     
     public void createUserTemp(String user) throws UserTempAlreadyExists {
-        final Path userTemp = temp.resolve(user);
+        final Path userTemp = TEMP_DIRECTORY.resolve(user);
         
         if ( Files.notExists(userTemp) ) {
             userTemp.toFile().mkdir();
         } else {
-            throw new UserTempAlreadyExists("User's temp space already exists: " + userTemp.toString());
+            throw new UserTempAlreadyExists("User's TEMP_DIRECTORY space already exists: " + userTemp.toString());
         }
     }
 }
