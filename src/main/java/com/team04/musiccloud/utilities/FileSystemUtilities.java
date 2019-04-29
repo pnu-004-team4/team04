@@ -1,9 +1,9 @@
-package com.team04.musiccloud.audio;
+package com.team04.musiccloud.utilities;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.Optional;
 
 public class FileSystemUtilities {
@@ -26,7 +26,7 @@ public class FileSystemUtilities {
         return getExtension(multipartFile.getOriginalFilename());
     }
     
-    public static boolean updateModifiedDate(File file) {
-        return file.setLastModified(System.currentTimeMillis());
+    public static boolean updateModifiedDate(Path path) {
+        return path.toFile().setLastModified(System.currentTimeMillis());
     }
 }
