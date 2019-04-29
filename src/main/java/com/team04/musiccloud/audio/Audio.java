@@ -1,101 +1,58 @@
 package com.team04.musiccloud.audio;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
 
-public abstract class Audio implements Keyable {
-    private String title;
-    private String author;
-    private String album;
-    private LocalDateTime releaseDate;
-    private String directory;
-    private String fileName;
-    //-- extra
-    private String user;
+public class Audio {
+    private AudioMeta audioMeta;
+    private FileMeta fileMeta;
     private byte[] bytes;
     
-    @Override
-    public String getTitle() {
-        return title;
+    public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes) {
+        setAudioMeta(audioMeta);
+        setFileMeta(fileMeta);
+        setBytes(bytes);
     }
     
-    public void setTitle(String title) {
-        this.title = title;
+    public AudioMeta getAudioMeta() {
+        return audioMeta;
     }
     
-    @Override
-    public String getAuthor() {
-        return author;
+    private void setAudioMeta(AudioMeta audioMeta) {
+        this.audioMeta = new AudioMeta(audioMeta);
     }
     
-    public void setAuthor(String author) {
-        this.author = author;
+    public FileMeta getFileMeta() {
+        return fileMeta;
     }
     
-    public String getAlbum() {
-        return album;
-    }
-    
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-    
-    @Override
-    public LocalDateTime getReleaseDate() {
-        return releaseDate;
-    }
-    
-    public void setReleaseDate(LocalDateTime releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-    
-    public String getDirectory() {
-        return directory;
-    }
-    
-    public void setDirectory(String directory) {
-        this.directory = directory;
-    }
-    
-    @Override
-    public String getFileName() {
-        return fileName;
-    }
-    
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-    
-    public Path getPath() {
-        return Paths.get(getDirectory(), getFileName());
-    }
-    
-    public void setPath(Path path) {
-        path = path.toAbsolutePath();
-        setDirectory(path.getParent().toString());
-        setFileName(path.getFileName().toString());
-    }
-    
-    public void setPath(String directory, String fileName) {
-        Path path = Paths.get(directory, fileName);
-        setPath(path);
-    }
-    
-    public String getUser() {
-        return user;
-    }
-    
-    public void setUser(String user) {
-        this.user = user;
+    private void setFileMeta(FileMeta fileMeta) {
+        this.fileMeta = new FileMeta(fileMeta);
     }
     
     public byte[] getBytes() {
-        return bytes;
+        return Arrays.copyOf(bytes, bytes.length);
     }
     
-    public void setBytes(byte[] bytes) {
+    private void setBytes(byte[] bytes) {
         this.bytes = Arrays.copyOf(bytes, bytes.length);
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if ( this == obj ) return true;
+        if ( obj == null || getClass() != obj.getClass() ) return false;
+        
+        Audio audio = (Audio) obj;
+        
+        return Objects.equals(audioMeta, audio.audioMeta) &&
+                Objects.equals(fileMeta, audio.fileMeta) &&
+                Arrays.equals(bytes, audio.bytes);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(audioMeta, fileMeta, bytes);
+    }
+    
 }
