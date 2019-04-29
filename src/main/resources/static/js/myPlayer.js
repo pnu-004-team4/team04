@@ -3,6 +3,8 @@
 var songProgressSlider = document.getElementById('song-progress');
 var volumeSlider = document.getElementById('song-volume');
 
+var SongProgressSliderUsable = true;
+
 noUiSlider.create(songProgressSlider, {
   start: [0],
   range: {
@@ -20,9 +22,17 @@ noUiSlider.create(volumeSlider, {
   }
 });
 
-songProgressSlider.noUiSlider.on('set',function(values,handle){
+songProgressSlider.noUiSlider.on('change',function(values,handle){
   var my_audio = document.getElementById('bgAudio');
   my_audio.currentTime = my_audio.duration * (values[handle]/100);
+});
+
+songProgressSlider.noUiSlider.on('start',function(){
+  SongProgressSliderUsable = false;
+})
+
+songProgressSlider.noUiSlider.on('end',function(){
+  SongProgressSliderUsable = true;
 });
 
 volumeSlider.noUiSlider.on('update',function(values,handle){
@@ -64,12 +74,19 @@ function playtimeUpdate(my_audio){
   var music_totaltime = parseInt(my_audio.duration / 60) + ":" + parseInt(my_audio.duration % 60);
   document.getElementById("music_totaltime").innerHTML = music_totaltime;
 
+  var music_progress_percent;
+
   // Set Music Play Time
   if (my_audio.paused == false) {
     showPlayTime = setInterval(function () {
       var music_playtime = parseInt(my_audio.currentTime / 60) + ":" + parseInt(my_audio.currentTime % 60);
       document.getElementById("music_playtime").innerHTML = music_playtime;
-    }, 500);
+      if(SongProgressSliderUsable){
+        progress_percent = my_audio.currentTime / my_audio.duration * 100;
+        music_progress_percent = songProgressSlider.noUiSlider.set(progress_percent);
+      }
+    }, 150);
+
   } else {
     clearInterval(showPlayTime);
   }
