@@ -1,16 +1,13 @@
 package com.team04.musiccloud.audio;
 
-import org.springframework.data.annotation.Id;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 public class FileMeta {
-    @Id
+
     private String dbId;
-    
     private String directory;
     private String name;
     private String extension;
@@ -42,24 +39,24 @@ public class FileMeta {
     public String getDirectory() {
         return directory;
     }
-    
-    protected void setDirectory(String directory) {
+
+    public void setDirectory(String directory) {
         this.directory = directory;
     }
     
     public String getName() {
         return name;
     }
-    
-    protected void setName(String name) {
+
+    public void setName(String name) {
         this.name = name;
     }
     
     public String getExtension() {
         return extension;
     }
-    
-    protected void setExtension(String extension) {
+
+    public void setExtension(String extension) {
         this.extension = extension;
     }
     
@@ -83,7 +80,7 @@ public class FileMeta {
         return user;
     }
     
-    private void setUser(String user) {
+    public void setUser(String user) {
         this.user = user;
     }
     
