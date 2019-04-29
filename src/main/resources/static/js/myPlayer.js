@@ -1,42 +1,78 @@
 // Sliders
 
-var slider = document.getElementById('song-progress');
+var songProgressSlider = document.getElementById('song-progress');
+var volumeSlider = document.getElementById('song-volume');
 
-noUiSlider.create(slider, {
-  start: [20],
+noUiSlider.create(songProgressSlider, {
+  start: [0],
   range: {
     'min': [0],
     'max': [100]
   }
 });
 
-var slider = document.getElementById('song-volume');
-
-noUiSlider.create(slider, {
-  start: [90],
+noUiSlider.create(volumeSlider, {
+  start: 0,
+  behaviour:'snap',
   range: {
-    'min': [0],
-    'max': [100]
+    'min': 0,
+    'max': 100
   }
+});
+
+songProgressSlider.noUiSlider.on('set',function(values,handle){
+  var my_audio = document.getElementById('bgAudio');
+  my_audio.currentTime = my_audio.duration * (values[handle]/100);
+});
+
+volumeSlider.noUiSlider.on('update',function(values,handle){
+  var my_audio = document.getElementById('bgAudio');
+  my_audio.volume = values[handle]/100;
 });
 
 function play() {
   var my_audio = document.getElementById('bgAudio');
-  var music_totaltime = parseInt(my_audio.duration / 60) + ":" + parseInt(my_audio.duration % 60)
-  document.getElementById("music_totaltime").innerHTML = music_totaltime;
-  if (my_audio.paused == true) {
+  if(my_audio.paused == true){
+    togglePlayPauseButton(my_audio);
     my_audio.play();
+    playtimeUpdate(my_audio);
+  }
+}
+
+function pause() {
+  var my_audio = document.getElementById('bgAudio');
+  if(my_audio.paused == false){
+    togglePlayPauseButton(my_audio);
+    my_audio.pause();
+    playtimeUpdate(my_audio);
+  }
+}
+
+function togglePlayPauseButton(my_audio){
+  // Changing attributes of button
+  if(my_audio.paused == true){
+    // Change 'pause button' to 'play button'
+    $("#play").replaceWith('<a class="ion-ios-pause play" id = "pause" onclick="pause()"></a>');
+  } else{
+    // Change 'play button' to 'pause button'
+    $("#pause").replaceWith('<a class="ion-ios-play play" id = "play" onclick="play()"></a>');
+  }
+}
+
+function playtimeUpdate(my_audio){
+  // Set Music Total Time
+  var music_totaltime = parseInt(my_audio.duration / 60) + ":" + parseInt(my_audio.duration % 60);
+  document.getElementById("music_totaltime").innerHTML = music_totaltime;
+
+  // Set Music Play Time
+  if (my_audio.paused == false) {
     showPlayTime = setInterval(function () {
       var music_playtime = parseInt(my_audio.currentTime / 60) + ":" + parseInt(my_audio.currentTime % 60);
       document.getElementById("music_playtime").innerHTML = music_playtime;
     }, 500);
-    $("#play").replaceWith('<a class="ion-ios-pause play" id = "pause" onclick="play()"></a>');
   } else {
-    $("#pause").replaceWith('<a class="ion-ios-play play" id = "play" onclick="play()"></a>');
-    my_audio.pause();
     clearInterval(showPlayTime);
   }
-
 }
 
 // Tooltips
