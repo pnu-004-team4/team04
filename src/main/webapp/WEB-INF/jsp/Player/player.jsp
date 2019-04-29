@@ -37,24 +37,12 @@
 
     </div>
 
-    <<<<<<< HEAD
+
     <div class="user">
-        =======
+
         <div class="owner">
 
-            <div class="user__notifications">
 
-                <i class="ion-android-notifications"></i>
-
-            </div>
-
-            <div class="user__inbox">
-
-                <i class="ion-archive"></i>
-
-            </div>
-
-            >>>>>>> cbc59c1a21c235a41929c8122dc5b71c4b9d3c9c
             <div class="user__info">
 
 
