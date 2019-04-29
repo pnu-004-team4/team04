@@ -4,34 +4,52 @@ import com.team04.musiccloud.data_structure.UpdateDeque;
 
 import java.util.Objects;
 import java.util.Queue;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 public class UserNetStatus {
     private static final int DEFAULT_CAPACITY = 20;
     
     private String user;
-    private Queue<Integer> netDelayRecords;
+    private Queue<Integer> netDelays;
     
     public UserNetStatus(int capacity) {
-        netDelayRecords = new UpdateDeque<>(capacity);
+        netDelays = new UpdateDeque<>(capacity);
     }
     
     public UserNetStatus() {
         this(DEFAULT_CAPACITY);
     }
     
-    public void addNetDelayRecord(Integer delayTime) {
-        netDelayRecords.add(delayTime);
+    public void addNetDelay(Integer delayTime) {
+        netDelays.add(delayTime);
     }
     
-    public void clearAllNetDelayRecord() {
-        if ( !netDelayRecords.isEmpty() ) {
-            netDelayRecords.clear();
+    public void clearAllNetDelays() {
+        if ( !netDelays.isEmpty() ) {
+            netDelays.clear();
         }
     }
     
-    public double getAverageNetDalay() {
-        return netDelayRecords.stream()
+    public double getAverageNetDelay() {
+        return netDelays.stream()
                 .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0);
+    }
+    
+    public double getAverageNetDelay(Predicate<Integer> predicate) {
+        return netDelays.stream()
+                .filter(predicate)
+                .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0);
+    }
+    
+    public double getAverageNetDelay(IntPredicate intPredicate) {
+        return netDelays.stream()
+                .mapToInt(Integer::intValue)
+                .filter(intPredicate)
                 .average()
                 .orElse(0);
     }
@@ -44,11 +62,11 @@ public class UserNetStatus {
         UserNetStatus that = (UserNetStatus) o;
         
         return Objects.equals(user, that.user) &&
-                Objects.equals(netDelayRecords, that.netDelayRecords);
+                Objects.equals(netDelays, that.netDelays);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(user, netDelayRecords);
+        return Objects.hash(user, netDelays);
     }
 }

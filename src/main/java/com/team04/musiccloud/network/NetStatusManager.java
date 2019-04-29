@@ -2,27 +2,34 @@ package com.team04.musiccloud.network;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 public class NetStatusManager {
-    public static final int DEFAULT_MAX_RECORDS_PER_USER = 50;
+    private static NetStatusManager netStatusManager;
     
-    private Map<String, UserNetStatus> userStatusMap;
-    private final int maxRecordsPerUser;
-    
-    public NetStatusManager() {
-        this(DEFAULT_MAX_RECORDS_PER_USER);
+    public static synchronized NetStatusManager getInstance() {
+        if ( netStatusManager == null ) {
+            netStatusManager = new NetStatusManager();
+        }
+        
+        return netStatusManager;
     }
     
-    public NetStatusManager(int maxRecordsPerUser) {
+    
+    private static final int MAX_STATUS_PER_USER = 50;
+    
+    private Map<String, UserNetStatus> userStatusMap;
+    
+    private NetStatusManager() {
         userStatusMap = new HashMap<>();
-        this.maxRecordsPerUser = maxRecordsPerUser;
     }
     
     public boolean exist(String user) {
         return userStatusMap.containsKey(user);
     }
     
-    public UserNetStatus getUserNetState(String user) {
+    public UserNetStatus findUserNetState(String user) {
         UserNetStatus found = null;
         
         if ( this.exist(user) ) {
@@ -32,9 +39,41 @@ public class NetStatusManager {
         return found;
     }
     
+    public UserNetStatus getUserNetState(String user) {
+        UserNetStatus userNetStatus;
+        
+        if ( this.exist(user) ) {
+            userNetStatus = findUserNetState(user);
+        } else {
+            userNetStatus = createUserNetState(user);
+        }
+        
+        return userNetStatus;
+    }
+    
     public UserNetStatus createUserNetState(String user) {
-        final UserNetStatus userNetStatus = new UserNetStatus(maxRecordsPerUser);
+        final UserNetStatus userNetStatus = new UserNetStatus(MAX_STATUS_PER_USER);
         userStatusMap.put(user, userNetStatus);
         return userNetStatus;
+    }
+    
+    public void addUserNetDelay(String user, int delay) {
+        UserNetStatus userNetStatus = getUserNetState(user);
+        userNetStatus.addNetDelay(delay);
+    }
+    
+    public double getUserNetDelayAverage(String user) {
+        UserNetStatus userNetStatus = getUserNetState(user);
+        return userNetStatus.getAverageNetDelay();
+    }
+    
+    public double getUserNetDelayAverage(String user, Predicate<Integer> predicate) {
+        UserNetStatus userNetStatus = getUserNetState(user);
+        return userNetStatus.getAverageNetDelay(predicate);
+    }
+    
+    public double getUserNetDelayAverage(String user, IntPredicate intPredicate) {
+        UserNetStatus userNetStatus = getUserNetState(user);
+        return userNetStatus.getAverageNetDelay(intPredicate);
     }
 }
