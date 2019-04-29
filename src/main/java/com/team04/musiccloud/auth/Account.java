@@ -3,10 +3,9 @@ package com.team04.musiccloud.auth;
 public class Account {
 
     private Integer id;
-
     private String email;
-
     private String password;
+    private String sessID;
 
     public Integer getId() {
         return id;
@@ -30,5 +29,13 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSessID() {
+        return sessID;
+    }
+
+    public void setSessID(String sessID) {
+        this.sessID = sessID;
     }
 }
