@@ -7,6 +7,7 @@ var SongProgressSliderUsable = true;
 
 noUiSlider.create(songProgressSlider, {
   start: [0],
+  connect : [false,true],
   range: {
     'min': [0],
     'max': [100]
@@ -16,6 +17,7 @@ noUiSlider.create(songProgressSlider, {
 noUiSlider.create(volumeSlider, {
   start: 0,
   behaviour:'snap',
+  connect : [false,true],
   range: {
     'min': 0,
     'max': 100

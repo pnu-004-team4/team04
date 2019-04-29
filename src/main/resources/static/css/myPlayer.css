@@ -317,6 +317,9 @@ body a:hover {
 .current-track__progress__bar .noUi-origin {
   background: #5e5e5e;
 }
+.current-track__progress__bar .noUi-connect {
+  background: #5e5e5e;
+}
 .current-track__progress__bar .noUi-handle {
   background: #c8c8c8;
   width: 15px;
@@ -382,10 +385,13 @@ body a:hover {
 .current-track__options .controls .volume #song-volume .noUi-origin {
   background: #5e5e5e;
 }
+.current-track__options .controls .volume #song-volume .noUi-connect {
+  background: #5e5e5e;
+}
 .current-track__options .controls .volume #song-volume .noUi-handle {
   background: #c8c8c8;
-  width: 15px;
-  height: 15px;
+  width: 0px;
+  height: 0px;
   border-radius: 50%;
   box-shadow: none;
   border: none;
