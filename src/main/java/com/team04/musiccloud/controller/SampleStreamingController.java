@@ -119,4 +119,12 @@ public class SampleStreamingController {
         new FileInputStream(filePath.toFile()));
   }
 
+  /**
+   * 2019년 4월 29일 추가됨. - 이경찬
+   */
+  @RequestMapping("/registerCheck")
+  public ModelAndView registerCheck() {
+    System.out.println("checking registration(controller)...");
+    return new ModelAndView("Registration/registerCheck");
+  }
 }
