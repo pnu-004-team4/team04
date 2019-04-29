@@ -1,31 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page import="com.team04.musiccloud.auth.Account" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomMethods" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<!doctype html>
+<html lang="kr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입 데이터</title>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <style rel="stylesheet">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
-<body>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+    System.out.println("Checking registration(jsp page)...");
+    Account account = new Account();
+    AccountCustomMethods accountRepository = new AccountCustomMethods();
 
-	String Name = request.getParameter("name");
-	String Email = request.getParameter("email");
-	String Username = request.getParameter("username");
-	String Password = request.getParameter("password");
-	String cPassword = request.getParameter("cpassword");
-	
+    boolean password_Identical = false;
+
+    String name = request.getParameter("name");
+    String username  = request.getParameter("username");
+    String password = request.getParameter("password");
+    String cpassword = request.getParameter("cpassword");
+    String email = request.getParameter("email");
+    if(password.equals(cpassword)) {
+        password_Identical = true;
+        account.setName(name);
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setEmail(email);
+        if(accountRepository.registerAccount(account)){
+            System.out.println("Successfullly registered!!");
+        }
+        System.out.println("email : "+ account.getEmail() + " name : " + account.getName());
+    }
+    else{
+        System.out.println("password not identical");
+        System.out.println("password : " + password + "confirm password : " + cpassword);
+    }
 
 %>
 
-	<h1>회원가입 정보</h1> <br/>
-	Name: <%=Name %> <br/><br/>
-	Email: <%=Email %> <br/><br/>
-	Username: <%=Username %> <br/><br/>
-	Password: <%=Password %> <br/><br/>
-	ConfirmPassword: <%=cPassword %> <br/><br/>
+<body>
+<!-- Form-->
+<div class="form">
+    <div class="form-toggle"></div>
+    <div class="form-panel one">
+        <div class="form-header">
+            <h1>Registration Complete!</h1>
+        </div>
+        <div class="form-content">
+            <form:form action="login" method="post">
+                <div class="form-group">
+                    <button type="submit">Go back to Login page</button>
+                </div>
+            </form:form>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

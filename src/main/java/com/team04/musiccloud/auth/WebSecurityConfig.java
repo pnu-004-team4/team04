@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // [[[[ 주의 ]]]] 아래 코드는 로그인 인증과 관련된 코드로 혹여 권한 오류 생길 시 확인바랍니다.
         http.authorizeRequests()
-                .antMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
+                .antMatchers("/login", "/register", "/css/**", "/js/**", "/registerCheck").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
