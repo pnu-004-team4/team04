@@ -3,19 +3,18 @@ package com.team04.musiccloud.audio;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ExtractorFactory {
-    private ExtractorFactory() {}
+    private ExtractorFactory() {
+    }
     
     public static AudioExtractor getInstance(MultipartFile multipartFile) throws InvalidFileFormat {
-        AudioExtractor audioExtractor = null;
+        AudioExtractor audioExtractor;
         final String extension =
                 FileSystemUtilities.getExtension(multipartFile).orElseThrow(InvalidFileFormat::new);
-        
-        switch ( extension ) {
-            case "mp3":
-                audioExtractor = new Mp3Extractor();
-                break;
-            default:
-                throw new InvalidFileFormat("No extractor for this extension: " + extension);
+    
+        if ( extension.equals("mp3") ) {
+            audioExtractor = new Mp3Extractor();
+        } else {
+            throw new InvalidFileFormat("No extractor for this extension: " + extension);
         }
         
         return audioExtractor;

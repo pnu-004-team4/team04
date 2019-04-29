@@ -76,7 +76,7 @@ public class FileMeta {
     }
     
     public Path getNameExtension() {
-        return Paths.get(getName(), getExtension());
+        return Paths.get(getName() + "." + getExtension());
     }
     
     public String getUser() {

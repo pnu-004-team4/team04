@@ -10,7 +10,6 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 public class Mp3Extractor extends AudioExtractor {
     private static final String XMP_DM = "xmpDM:";
@@ -40,7 +39,6 @@ public class Mp3Extractor extends AudioExtractor {
     }
     
     private Metadata getMetadata(byte[] bytes) throws ExtractorException {
-        //byte[] copiedBytes = Arrays.copyOf(bytes, bytes.length);
         InputStream inputStream = new ByteArrayInputStream(bytes);
         BodyContentHandler contentHandler = new BodyContentHandler();
         Metadata metadata = new Metadata();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class TempManager {
     public static final Path TEMP_DIRECTORY = Paths.get(
@@ -21,9 +22,10 @@ public class TempManager {
     
     public void loadFrom(FileMeta fileAudio) throws IOException {
         createUserTemp(fileAudio.getUser());
-        
-        final Path userTemp = getUserTemp(fileAudio.getUser());
-        Files.copy(fileAudio.getFullPath(), userTemp);
+    
+        final Path userTemp = getUserTemp(fileAudio.getUser()).resolve(fileAudio.getNameExtension());
+    
+        Files.copy(fileAudio.getFullPath(), userTemp, StandardCopyOption.REPLACE_EXISTING);
     }
     
     public void createUserTemp(String user) throws UserTempAlreadyExists {
@@ -31,8 +33,6 @@ public class TempManager {
         
         if ( Files.notExists(userTemp) ) {
             userTemp.toFile().mkdir();
-        } else {
-            throw new UserTempAlreadyExists("User's TEMP_DIRECTORY space already exists: " + userTemp.toString());
         }
     }
 }

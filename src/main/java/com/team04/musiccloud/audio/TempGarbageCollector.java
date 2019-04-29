@@ -1,6 +1,9 @@
 package com.team04.musiccloud.audio;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -25,20 +28,27 @@ public class TempGarbageCollector implements Runnable {
     public void run() {
         while ( true ) {
             File[] userDirectories = TempManager.TEMP_DIRECTORY.toFile().listFiles(File::isDirectory);
-        
-            if ( userDirectories == null ) {
-                System.out.println(Thread.currentThread().getName() + " is sleeping for " + DELAY_ON_EMPTY);
-                sleep(DELAY_ON_EMPTY);
-            } else {
-                for ( File userDirectory : userDirectories ) {
-                    System.out.println(Thread.currentThread().getName() + " working on user " + userDirectory.getName());
-                    gcOnUserDirectory(userDirectory);
+    
+            try {
+                if ( userDirectories == null ) {
+                    System.out.println(Thread.currentThread().getName() + " is sleeping for " + DELAY_ON_EMPTY);
+                    Thread.sleep(DELAY_ON_EMPTY);
+                } else {
+                    for ( File userDirectory : userDirectories ) {
+                        System.out.println(Thread.currentThread().getName() + " working on user " + userDirectory.getName());
+                        gcOnUserDirectory(userDirectory);
+                    }
                 }
+            } catch ( InterruptedException e ) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            } catch ( IOException e ) {
+                e.printStackTrace();
             }
         }
     }
     
-    private void gcOnUserDirectory(File directory) {
+    private void gcOnUserDirectory(File directory) throws InterruptedException, IOException {
         File[] files = directory.listFiles(File::isFile);
         if ( files == null ) return;
         
@@ -47,22 +57,15 @@ public class TempGarbageCollector implements Runnable {
         
         for ( int i = 0; i < files.length; i++ ) {
             System.out.println(Thread.currentThread().getName() + " working on file " + files[i].getName());
-            if ( isFilePassDue(files[i]) || i >= MAX_USER_TEMP_FILES ) {
+    
+            if ( i >= MAX_USER_TEMP_FILES || isFilePassDue(files[i]) ) {
                 System.out.println(" >> deleted");
-                files[i].delete();
+                deleteFile(files[i].toPath());
             }
         }
         
         System.out.println(Thread.currentThread().getName() + " is sleeping for " + DELAY_ON_EACH);
-        sleep(DELAY_ON_EACH);
-    }
-    
-    private void sleep(int time) {
-        try {
-            Thread.sleep(time);
-        } catch ( InterruptedException e ) {
-            e.printStackTrace();
-        }
+        Thread.sleep(DELAY_ON_EACH);
     }
     
     private boolean isFilePassDue(File file) {
@@ -71,5 +74,9 @@ public class TempGarbageCollector implements Runnable {
         
         Duration duration = Duration.between(localDateTime, LocalDateTime.now());
         return duration.toMinutes() > MIN_MINUTE_TO_STORE;
+    }
+    
+    private void deleteFile(Path path) throws IOException {
+        Files.delete(path);
     }
 }
