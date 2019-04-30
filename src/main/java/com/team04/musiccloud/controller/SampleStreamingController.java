@@ -79,6 +79,12 @@ public class SampleStreamingController {
     return new ModelAndView("Registration/register");
   }
 
+  @RequestMapping("/setting")
+  public ModelAndView setting() {
+    System.out.println("User setting");
+    return new ModelAndView("Setting/setting");
+  }
+
   @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
     ModelAndView base = new ModelAndView();
