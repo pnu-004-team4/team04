@@ -1,5 +1,6 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
+<%@ page import="com.mongodb.MongoWriteException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -19,7 +20,6 @@
 </head>
 
 <%
-    System.out.println("Checking registration(jsp page)...");
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
 
@@ -40,20 +40,18 @@
         System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
         System.out.println("email input : " + account.getEmail());
-        System.out.println("email dup? " + accountRepository.checkIfAccountExists(email));
+
         //중복 가입 방지
-        if(accountRepository.checkIfAccountExists(email)) {
-            System.out.println("inside if? " + accountRepository.checkIfAccountExists(email));
+        try{
+            accountRepository.registerAccount(account);
+        }catch(MongoWriteException e){
             out.println("<script>alert('This email is already registered');" +
                     "location.href=\"login\"</script>");
-            return;
         }
 
-        if(accountRepository.registerAccount(account)){
-            System.out.println("Successfullly registered!!");
-            out.println("<script>alert('Registration Complete!');</script>");
-        }
+        out.println("<script>alert('Registration Complete!');</script>");
         System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
+
     }
     else{
         out.println("<script>alert('Password does not match. Please check your password again');" +
