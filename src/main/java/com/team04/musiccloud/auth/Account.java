@@ -1,15 +1,15 @@
 package com.team04.musiccloud.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 public class Account {
 
     //bcrypt를 이용한 encoding
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Id
     private String email;
     private String password;
@@ -39,6 +39,7 @@ public class Account {
     }
 
     public void setPassword(String password) {
+        passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }
 

@@ -35,12 +35,17 @@
         password_Identical = true;
         account.setName(name);
         account.setUsername(username);
+        System.out.println("password input : " + password);
         account.setPassword(password);
+        System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
-        if(accountRepository.checkIfAccountExists(email)) {
+        System.out.println("email input : " + account.getEmail());
+
+        //중복 가입 방지
+        /*if(accountRepository.checkIfAccountExists(email)) {
             out.println("<script>alert('This email is already registered');" +
                     "location.href=\"login\"</script>");
-        }
+        }*/
 
         if(accountRepository.registerAccount(account)){
             System.out.println("Successfullly registered!!");
@@ -49,7 +54,7 @@
         System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
     }
     else{
-        out.println("<script>alert('Password does not match. Check your password again');" +
+        out.println("<script>alert('Password does not match. Please check your password again');" +
                 "location.href=\"register\"</script>");
         System.out.println("password not identical");
         System.out.println("password : " + password + ", confirm password : " + cpassword);
