@@ -40,12 +40,14 @@
         System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
         System.out.println("email input : " + account.getEmail());
-
+        System.out.println("email dup? " + accountRepository.checkIfAccountExists(email));
         //중복 가입 방지
-        /*if(accountRepository.checkIfAccountExists(email)) {
+        if(accountRepository.checkIfAccountExists(email)) {
+            System.out.println("inside if? " + accountRepository.checkIfAccountExists(email));
             out.println("<script>alert('This email is already registered');" +
                     "location.href=\"login\"</script>");
-        }*/
+            return;
+        }
 
         if(accountRepository.registerAccount(account)){
             System.out.println("Successfullly registered!!");

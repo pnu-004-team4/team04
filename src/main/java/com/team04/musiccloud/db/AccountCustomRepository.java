@@ -54,13 +54,7 @@ public class AccountCustomRepository {
     }
 
     public boolean checkIfAccountExists(String email) {
-        boolean exists = false;
-
-        if ( accountDao.getAccount(email) != null ) {
-            exists = true;
-        }
-
-        return exists;
+        return accountDao.exists(email);
     }
 
     /*

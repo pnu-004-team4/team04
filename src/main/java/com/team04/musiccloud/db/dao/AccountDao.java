@@ -47,8 +47,12 @@ public class AccountDao {
     }
 
     public boolean exists(String email) {
+        boolean exists = false;
+
         FindIterable<Document> document = this.mongoCollection.find(eq("_id", email)).limit(1);
-        boolean exists = document != null;
+        if ( document.iterator().hasNext() ) {
+            exists = true;
+        }
 
         return exists;
     }
