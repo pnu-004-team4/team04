@@ -24,13 +24,6 @@
 
 
 
-    /*
-     * search
-     * */
-    Search search = new Search();
-
-    ArrayList<Music> searchlist = search.Msearch("하늘");
-
 
 %>
 
@@ -62,29 +55,18 @@
     -->
 
 
-    <div class="search">
-
-        <input type="text" placeholder="Search" />
-        <form:form action="/sort">
-            <input type="text" name="index" value="1" size="1" readonly>
-            <input type="submit" id="tASC" value="titleASC">
-        </form:form>
-        <form:form action="/sort">
-            <input type="text" name="index" value="2" size="1" readonly>
-            <input type="submit" id="tDSC" value="titleDSC">
-        </form:form>
-        <form:form action="/sort">
-            <input type="text" name="index" value="3"size="1" readonly>
-            <input type="submit" id="aASC" value="artistASC">
-        </form:form>
-        <form:form action="/sort">
-            <input type="text" name="index" value="4" size="1"readonly>
-            <input type="submit" id="aDSC" value="artistDSC">
-        </form:form>
+    <form:form action="sort" method="post">
+        <div class="search">
+            <input type="text" name = "index" placeholder="Sort place" />
+        </div>
+        <div class="Button">
+            <button type="submit">Sort</button>
+        </div>
+    </form:form>
 
 
 
-    </div>
+<%--    </div>--%>
 
 </section>
 
