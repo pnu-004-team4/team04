@@ -66,7 +66,7 @@
 
                         <li><a href="#">Account</a></li>
                         <li><a href="#">Settings</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li><a href="/logout">Log Out</a></li>
                     </ul>
                 </div>
 
