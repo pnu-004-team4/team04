@@ -1,5 +1,6 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.utilities.FileSystemUtilities;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,16 +22,16 @@ public class Tester {
     
     public static void testLoader(String mongoId) throws IOException {
         FileMeta fileMeta = getAudioFromDB(mongoId);
-        TempManager tempManager = new TempManager();
-
-        if ( !tempManager.exists(fileMeta) ) {
-            tempManager.loadFrom(fileMeta);
+        CacheManager cacheManager = new CacheManager();
+        final Path userTempDirectory = cacheManager.getUserTemp(fileMeta.getUser());
+    
+        if ( !cacheManager.exists(fileMeta) ) {
+            cacheManager.loadFrom(fileMeta);
+        } else {
+            FileSystemUtilities.updateModifiedDate(userTempDirectory);
         }
-        
-        final String userTempDirectory = tempManager.getUserTemp(fileMeta.getUser()).toString();
-        fileMeta.setDirectory(userTempDirectory);
-        FileSystemUtilities.updateModifiedDate(fileMeta.getFullPathAsFile());
-        sendToTranscoding(fileMeta);
+    
+        sendToTranscoding(userTempDirectory);
     }
     
     /*
@@ -40,8 +41,8 @@ public class Tester {
         final Path path = Paths.get(StaticPaths.storage.toString(), "test");
         return new FileMeta(path.toString(), "sample", "mp3", "test");
     }
-
-    private static void sendToTranscoding(FileMeta fileMeta) {
+    
+    private static void sendToTranscoding(Path tempPath) {
         // just a test method
     }
     

@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class TempManager {
+public class CacheManager {
     public static final Path TEMP_DIRECTORY = Paths.get(
             StaticPaths.staticResources.toString(), "temp"
     ).toAbsolutePath();

@@ -1,5 +1,5 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
-<%@ page import="com.team04.musiccloud.db.AccountCustomMethods" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -21,7 +21,7 @@
 <%
     System.out.println("Checking registration(jsp page)...");
     Account account = new Account();
-    AccountCustomMethods accountRepository = new AccountCustomMethods();
+    AccountCustomRepository accountRepository = new AccountCustomRepository();
 
     boolean password_Identical = false;
 
@@ -30,20 +30,29 @@
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
+
     if(password.equals(cpassword)) {
         password_Identical = true;
         account.setName(name);
         account.setUsername(username);
         account.setPassword(password);
         account.setEmail(email);
+        if(accountRepository.checkIfAccountExists(email)) {
+            out.println("<script>alert('This email is already registered');" +
+                    "location.href=\"login\"</script>");
+        }
+
         if(accountRepository.registerAccount(account)){
             System.out.println("Successfullly registered!!");
+            out.println("<script>alert('Registration Complete!');</script>");
         }
-        System.out.println("email : "+ account.getEmail() + " name : " + account.getName());
+        System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
     }
     else{
+        out.println("<script>alert('Password does not match. Check your password again');" +
+                "location.href=\"register\"</script>");
         System.out.println("password not identical");
-        System.out.println("password : " + password + "confirm password : " + cpassword);
+        System.out.println("password : " + password + ", confirm password : " + cpassword);
     }
 
 %>

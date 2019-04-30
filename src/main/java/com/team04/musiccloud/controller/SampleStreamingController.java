@@ -70,14 +70,7 @@ public class SampleStreamingController {
   }
 
   @RequestMapping("/register")
-  public ModelAndView registration() {
-    Account account = new Account();
-    account.setEmail("smile@smile.com");
-    account.setPassword("1234");
-    accountService.save(account);
-    System.out.println("Successfully created account!!");
-    return new ModelAndView("Registration/register");
-  }
+  public ModelAndView registration() { return new ModelAndView("Registration/register"); }
 
   @RequestMapping("/")
   public ModelAndView player() throws IOException, ExtractorException {
