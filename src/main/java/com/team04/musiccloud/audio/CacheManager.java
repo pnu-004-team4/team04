@@ -30,9 +30,9 @@ public class CacheManager {
     
     public void createUserTemp(String user) throws UserTempAlreadyExists {
         final Path userTemp = TEMP_DIRECTORY.resolve(user);
-        
+    
         if ( Files.notExists(userTemp) ) {
-            userTemp.toFile().mkdir();
+            userTemp.toFile().mkdirs();
         }
     }
 }
