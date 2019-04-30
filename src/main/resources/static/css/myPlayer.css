@@ -615,11 +615,14 @@ body a:hover {
 button {
   border-radius: 20px;
   border: none;
-  padding: 5px 15px;
-  text-transform: uppercase;
+  padding: 5px 10px;
+  /*text-transform: uppercase;*/
   letter-spacing: 1px;
   font-size: 11px;
   outline: none;
+  margin-left: 5px;
+  background: #3a3d4a;
+  color: white;
 }
 button:hover {
   cursor: pointer;

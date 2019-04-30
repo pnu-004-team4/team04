@@ -1,12 +1,9 @@
 package com.team04.musiccloud.audio;
 
-import org.springframework.data.annotation.Id;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class AudioMeta {
-    @Id
     private String dbId;
     
     private String title;
@@ -14,7 +11,9 @@ public class AudioMeta {
     private String album;
     private LocalDateTime releaseDate;
     
-    public AudioMeta() {
+    public AudioMeta(String dbId, String title, String author, String album, LocalDateTime releaseDate) {
+        this(title, author, album, releaseDate);
+        setDbId(dbId);
     }
     
     public AudioMeta(String title, String author, String album, LocalDateTime releaseDate) {
@@ -49,7 +48,7 @@ public class AudioMeta {
         return author;
     }
     
-    protected void setAuthor(String author) {
+    private void setAuthor(String author) {
         this.author = author;
     }
     
@@ -57,7 +56,7 @@ public class AudioMeta {
         return album;
     }
     
-    protected void setAlbum(String album) {
+    private void setAlbum(String album) {
         this.album = album;
     }
     
@@ -65,7 +64,7 @@ public class AudioMeta {
         return releaseDate;
     }
     
-    protected void setReleaseDate(LocalDateTime releaseDate) {
+    private void setReleaseDate(LocalDateTime releaseDate) {
         this.releaseDate = releaseDate;
     }
     
