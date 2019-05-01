@@ -16,7 +16,6 @@
      * @TODO null pointer exeption 처리
      * */
     Search search = new Search();
-
     String index = request.getParameter("index");
 
     ArrayList<Music> searchlist = search.Msearch(index);
