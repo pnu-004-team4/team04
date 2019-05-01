@@ -56,6 +56,15 @@
         </div>
     </form:form>
 
+    <form:form action="sort" method="post">
+        <div class="search">
+            <input type="text" name = "index" placeholder="Sort place" />
+        </div>
+        <div class="Button">
+            <button type="submit">Sort</button>
+        </div>
+    </form:form>
+
 
 <%--    <div class="content__right">--%>
 <%--        <form:form action="sort">--%>

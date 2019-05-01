@@ -69,7 +69,7 @@
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
 
                         <li><a href="setting">Settings</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li><a href="logout">Log Out</a></li>
                     </ul>
                 </div>
 
