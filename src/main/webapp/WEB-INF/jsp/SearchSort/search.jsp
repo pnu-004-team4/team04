@@ -18,8 +18,6 @@
     Search search = new Search();
     String index = request.getParameter("index");
 
-    System.out.println("index = " + index);
-
     ArrayList<Music> searchlist = search.Msearch(index);
 
 
