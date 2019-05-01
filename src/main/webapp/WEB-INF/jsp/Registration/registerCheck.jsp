@@ -37,6 +37,7 @@
         account.setUsername(username);
         System.out.println("password input : " + password);
         account.setPassword(password);
+        account.encodePassword();
         System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
         System.out.println("email input : " + account.getEmail());

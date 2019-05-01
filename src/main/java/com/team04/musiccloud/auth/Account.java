@@ -39,6 +39,10 @@ public class Account {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void encodePassword(){
         passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }

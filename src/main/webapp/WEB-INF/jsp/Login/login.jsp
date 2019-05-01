@@ -27,7 +27,7 @@ html {
       <h1>Account Login</h1>
     </div>
     <div class="form-content">
-      <form:form action="login" method="post">
+      <form:form action="login" method="POST">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" required="required"/>
