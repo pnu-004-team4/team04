@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language = "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html >
@@ -30,16 +31,14 @@
     </div>
     -->
 
-
-    <div class="search">
-
-        <input type="text" placeholder="" />
-
-    </div>
-
-    <div class="Button">
-        <button type="submit">Search</button>
-    </div>
+    <form:form action="search" method="get">
+        <div class="search">
+            <input type="text" name = "index" placeholder="Search" />
+        </div>
+        <div class="Button">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form:form>
 
 
     <div class="user">
