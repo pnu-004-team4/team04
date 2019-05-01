@@ -16,4 +16,33 @@ public class SampleTestController {
     public ModelAndView logout() {
         return new ModelAndView("/Login/logout");
     }
+
+
+    //문광수
+
+    @RequestMapping("/set")
+    public ModelAndView UserSetting() {
+        return new ModelAndView("/UserSettings/usersetting");
+    }
+
+    @RequestMapping("/setcheck")
+    public ModelAndView UserSetCheck() {
+        return new ModelAndView("/UserSettings/usersetcheck");
+    }
+
+    @RequestMapping("/search")
+    public ModelAndView sorttest() {
+        return new ModelAndView("/SearchSort/search");
+    }
+
+    @RequestMapping("/sorttest")
+    public ModelAndView search() {
+        return new ModelAndView("/SearchSort/testpage");
+    }
+
+    @RequestMapping("/sort")
+    public ModelAndView testpage() {
+        return new ModelAndView("/SearchSort/sortpage");
+    }
+
 }
