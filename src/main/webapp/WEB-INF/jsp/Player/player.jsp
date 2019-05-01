@@ -38,7 +38,9 @@
     </div>
 
     <div class="Button">
-        <button type="submit">Search</button>
+        <button  type="button">
+            <i class="fa fa-search"></i>
+        </button>
     </div>
 
 
