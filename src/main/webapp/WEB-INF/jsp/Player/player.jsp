@@ -30,7 +30,6 @@
       <i class="ion-record green"></i>
     </div>
     -->
-
     <form:form action="search" method="get">
         <div class="search">
             <input type="text" name = "index" placeholder="Search" />
