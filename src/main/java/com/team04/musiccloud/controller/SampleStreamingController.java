@@ -4,7 +4,6 @@ import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioExtractor;
 import com.team04.musiccloud.audio.ExtractorException;
 import com.team04.musiccloud.audio.Mp3Extractor;
-import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.auth.AccountService;
 import com.team04.musiccloud.stream.Streaming;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +69,7 @@ public class SampleStreamingController {
   }
 
   @RequestMapping("/register")
-  public ModelAndView registration() {
-    Account account = new Account();
-    account.setEmail("smile@smile.com");
-    account.setPassword("1234");
-    accountService.save(account);
-    System.out.println("Successfully created account!!");
-    return new ModelAndView("Registration/register");
-  }
+  public ModelAndView registration() { return new ModelAndView("Registration/register"); }
 
   @RequestMapping("/setting")
   public ModelAndView setting() {
@@ -125,4 +117,9 @@ public class SampleStreamingController {
         new FileInputStream(filePath.toFile()));
   }
 
+  /**
+   * 2019년 4월 29일 추가됨. - 이경찬
+   */
+  @RequestMapping("/registerCheck")
+  public ModelAndView registerCheck() { return new ModelAndView("Registration/registerCheck"); }
 }
