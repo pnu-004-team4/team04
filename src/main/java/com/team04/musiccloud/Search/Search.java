@@ -31,8 +31,8 @@ public class Search {
             if(foundMatch) result.add(comp.get(i));
         }
 
-        //확인차 프린트
-        for(int i = 0; i < result.size(); i++) System.out.println(result.get(i).getArtist());
+//        //확인차 프린트
+//        for(int i = 0; i < result.size(); i++) System.out.println(result.get(i).getArtist());
 
         return result;
     }
