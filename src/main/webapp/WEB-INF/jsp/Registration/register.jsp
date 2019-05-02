@@ -29,7 +29,7 @@ html {
             <h1>Register</h1>
         </div>
         <div class="form-content">
-            <form:form action="/login" method="post">
+            <form:form action="registerCheck" method="POST">
                 <div class="form-group">
                     <label for="name">name</label>
                     <input type="text" id="name" name="name" required="required"/>
