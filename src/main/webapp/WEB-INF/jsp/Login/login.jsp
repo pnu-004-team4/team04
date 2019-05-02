@@ -29,8 +29,8 @@ html {
     <div class="form-content">
       <form:form action="login" method="POST">
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" required="required"/>
+          <label for="username">Email</label>
+          <input type="email" id="username" name="username" required="required"/>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
