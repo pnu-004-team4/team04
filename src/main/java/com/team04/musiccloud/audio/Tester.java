@@ -1,5 +1,6 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.network.NetStatusManager;
 import com.team04.musiccloud.utilities.FileSystemUtilities;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,19 @@ public class Tester {
     private static Path testDirectory = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static", "media", "audios");
     
     private Tester() {
+    }
+    
+    
+    // ------------ network status tester
+    
+    public static void testNetStatusStore(String user, int time) {
+        NetStatusManager netStatusManager = NetStatusManager.getInstance();
+        netStatusManager.addUserNetDelay(user, time);
+    }
+    
+    public static void testNetStatusPrint(String user) {
+        NetStatusManager netStatusManager = NetStatusManager.getInstance();
+        System.out.println("User '" + user + "' average delay time: " + netStatusManager.getUserNetDelayAverage(user));
     }
     
     
@@ -85,7 +99,7 @@ public class Tester {
         System.out.println("\tTitle: " + audioMeta.getTitle());
         System.out.println("\tAuthor: " + audioMeta.getAuthor());
         System.out.println("\tReleaseDate: " + audioMeta.getReleaseDate());
-        System.out.println("---");
+        System.out.println("\t---");
         System.out.println("\tDirectory: " + fileMeta.getDirectory());
         System.out.println("\tName: " + fileMeta.getName());
         System.out.println("\tExtension: " + fileMeta.getExtension());

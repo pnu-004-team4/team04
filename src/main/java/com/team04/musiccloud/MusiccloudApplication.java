@@ -16,7 +16,7 @@ public class MusiccloudApplication {
     
     public static void main(String[] args) throws IOException, ExtractorException, InvalidFileFormat {
         SpringApplication.run(MusiccloudApplication.class, args);
-
+    
         // 2019년 4월 19일 추가 ==> 5분 단위로 GC를 수행하도록 합니다.
         AudioCaching audioCaching = new AudioCaching();
         audioCaching.setPeriod(5); // 비기능적 요구사항 수행
@@ -25,6 +25,13 @@ public class MusiccloudApplication {
     
         Tester.testUploader();
         Tester.testLoader("123");
+    
+        Tester.testNetStatusStore("test", 10);
+        Tester.testNetStatusStore("test", 20);
+        Tester.testNetStatusStore("test", 30);
+        Tester.testNetStatusStore("test", 40);
+        Tester.testNetStatusPrint("test");
+        
         new SampleStreamingController().player();
     }
 }
