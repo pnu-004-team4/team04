@@ -298,6 +298,9 @@ body a:hover {
 .current-track__progress__bar .noUi-origin {
   background: #5e5e5e;
 }
+.current-track__progress__bar .noUi-connect {
+  background: #5e5e5e;
+}
 .current-track__progress__bar .noUi-handle {
   background: #c8c8c8;
   width: 15px;
@@ -353,10 +356,13 @@ body a:hover {
 .current-track__options .controls .volume #song-volume .noUi-origin {
   background: #5e5e5e;
 }
+.current-track__options .controls .volume #song-volume .noUi-connect {
+  background: #5e5e5e;
+}
 .current-track__options .controls .volume #song-volume .noUi-handle {
   background: #c8c8c8;
-  width: 15px;
-  height: 15px;
+  width: 0px;
+  height: 0px;
   border-radius: 50%;
   box-shadow: none;
   border: none;
@@ -609,11 +615,14 @@ body a:hover {
 button {
   border-radius: 20px;
   border: none;
-  padding: 5px 15px;
-  text-transform: uppercase;
+  padding: 5px 10px;
+  /*text-transform: uppercase;*/
   letter-spacing: 1px;
   font-size: 11px;
   outline: none;
+  margin-left: 5px;
+  background: #3a3d4a;
+  color: white;
 }
 button:hover {
   cursor: pointer;
