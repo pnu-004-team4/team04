@@ -18,20 +18,11 @@ body a:hover {
   flex-flow: row wrap;
   align-items: center;
 }
-.header .page-flows .flow {
-  font-size: 20px;
-  color: #aaaaaa;
-  margin: 0 10px;
-}
-.header .page-flows .flow:hover {
-  color: white;
-}
-.header .page-flows .flow .disabled {
-  color: #5e5e5e;
-}
+
 .header .search {
   margin-left: 1%;
 }
+
 .header .search input {
   border-radius: 15px;
   border: none;
@@ -43,6 +34,7 @@ body a:hover {
   background-size: 10%;
   background-position: 5px;
 }
+
 .header .user {
   width: 200px;
   margin-left: auto;
@@ -108,17 +100,15 @@ body a:hover {
   width: 15%;
 }
 .content__middle {
-  width: 70%;
+  width: 85%;
 }
-.content__right {
-  width: 15%;
-}
+
 @media (max-width: 1400px) {
   .content__left {
-    width: 20%;
+    display: none;
   }
   .content__middle {
-    width: 80%;
+    width: 100%;
   }
   .content__right {
     display: none;
@@ -126,7 +116,7 @@ body a:hover {
 }
 @media (max-width: 768px) {
   .content__left {
-    width: 100%;
+    display: none;
   }
   .content__middle {
     width: 100%;
@@ -232,6 +222,28 @@ body a:hover {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+}
+.playing__art img {
+  width: 50px;
+  height: 50px;
+}
+.playing__song {
+  color: #aaaaaa;
+  padding-left: 15px;
+  display: flex;
+  flex-flow: column wrap;
+}
+.playing__song a {
+  color: #aaaaaa;
+}
+.playing__song a:hover {
+  color: white;
+  cursor: pointer;
+}
+.playing__add {
+  margin-left: auto;
+  padding-right: 15px;
+  color: #aaaaaa;
 }
 
 
@@ -399,13 +411,17 @@ body a:hover {
 }
 @media (max-width: 768px) {
   .current-track__actions {
-    width: 25%;
+    width: 100%;
+    justify-content: space-around;
+    padding: 5px 0;
   }
   .current-track__progress {
-    width: 75%;
+    width: 100%;
+    padding: 5px 0;
   }
   .current-track__options {
     width: 100%;
+    padding: 5px 0;
   }
 }
 @media (max-width: 480px) {
