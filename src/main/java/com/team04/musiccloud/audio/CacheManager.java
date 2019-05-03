@@ -32,7 +32,7 @@ public class CacheManager {
         final Path userTemp = TEMP_DIRECTORY.resolve(user);
         
         if ( Files.notExists(userTemp) ) {
-            userTemp.toFile().mkdir();
+            userTemp.toFile().mkdirs();
         }
     }
 }
