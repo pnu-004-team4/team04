@@ -25,6 +25,13 @@ public class MusiccloudApplication {
     
         Tester.testUploader();
         Tester.testLoader("123");
+/*
+        Tester.testNetStatus("test", 10);
+        Tester.testNetStatus("test", 20);
+        Tester.testNetStatus("test", 30);
+        Tester.testNetStatus("test", 40);
+        Tester.testNetStatusPrint("test");
+*/
         new SampleStreamingController().player();
     }
 }
