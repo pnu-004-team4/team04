@@ -1,6 +1,6 @@
 package com.team04.musiccloud.network;
 
-import com.team04.musiccloud.data_structure.UpdateDeque;
+import com.team04.musiccloud.utilities.UpdateDeque;
 
 import java.util.Objects;
 import java.util.Queue;

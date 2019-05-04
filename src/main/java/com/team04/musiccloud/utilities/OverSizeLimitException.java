@@ -1,4 +1,4 @@
-package com.team04.musiccloud.data_structure;
+package com.team04.musiccloud.utilities;
 
 public class OverSizeLimitException extends RuntimeException {
     public OverSizeLimitException() {

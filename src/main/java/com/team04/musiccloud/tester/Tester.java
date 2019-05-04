@@ -1,6 +1,15 @@
-package com.team04.musiccloud.audio;
+package com.team04.musiccloud.tester;
 
+import com.team04.musiccloud.audio.Audio;
+import com.team04.musiccloud.audio.AudioMeta;
+import com.team04.musiccloud.audio.FileMeta;
+import com.team04.musiccloud.audio.extractor.AudioExtractor;
+import com.team04.musiccloud.audio.extractor.ExtractorException;
+import com.team04.musiccloud.audio.extractor.ExtractorFactory;
+import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
+import com.team04.musiccloud.caching.manager.CacheManager;
 import com.team04.musiccloud.utilities.FileSystemUtilities;
+import com.team04.musiccloud.utilities.StaticPaths;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
