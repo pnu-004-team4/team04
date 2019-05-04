@@ -43,6 +43,6 @@ public class AudioMetaBuilder {
     }
     
     public AudioMeta build() {
-        return new AudioMeta(title, author, album, releaseDate);
+        return new AudioMeta(dbId, title, author, album, releaseDate);
     }
 }
