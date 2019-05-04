@@ -1,4 +1,7 @@
-package com.team04.musiccloud.audio;
+package com.team04.musiccloud.caching.manager;
+
+import com.team04.musiccloud.audio.FileMeta;
+import com.team04.musiccloud.utilities.StaticPaths;
 
 import java.io.IOException;
 import java.nio.file.Files;

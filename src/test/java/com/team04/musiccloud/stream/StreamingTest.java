@@ -1,18 +1,19 @@
 package com.team04.musiccloud.stream;
 
-import static org.junit.Assert.assertEquals;
-
 import com.team04.musiccloud.audio.Audio;
-import com.team04.musiccloud.audio.AudioExtractor;
-import com.team04.musiccloud.audio.Mp3Extractor;
-import java.io.FileInputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import com.team04.musiccloud.audio.extractor.AudioExtractor;
+import com.team04.musiccloud.audio.extractor.Mp3Extractor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.junit.Assert.assertEquals;
 
 public class StreamingTest {
 

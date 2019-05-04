@@ -1,4 +1,4 @@
-package com.team04.musiccloud.audio;
+package com.team04.musiccloud.audio.extractor;
 
 import com.team04.musiccloud.utilities.FileSystemUtilities;
 import org.springframework.web.multipart.MultipartFile;

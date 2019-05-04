@@ -1,4 +1,4 @@
-package com.team04.musiccloud.audio;
+package com.team04.musiccloud.audio.extractor;
 
 public class ExtractorException extends Exception {
     public ExtractorException() {

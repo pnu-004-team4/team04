@@ -1,4 +1,4 @@
-package com.team04.musiccloud.data_structure;
+package com.team04.musiccloud.utilities;
 
 import java.util.ArrayDeque;
 import java.util.Objects;

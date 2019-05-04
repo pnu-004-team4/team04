@@ -1,9 +1,9 @@
 package com.team04.musiccloud.controller;
 
 import com.team04.musiccloud.audio.Audio;
-import com.team04.musiccloud.audio.AudioExtractor;
-import com.team04.musiccloud.audio.ExtractorException;
-import com.team04.musiccloud.audio.Mp3Extractor;
+import com.team04.musiccloud.audio.extractor.AudioExtractor;
+import com.team04.musiccloud.audio.extractor.ExtractorException;
+import com.team04.musiccloud.audio.extractor.Mp3Extractor;
 import com.team04.musiccloud.auth.AccountService;
 import com.team04.musiccloud.stream.Streaming;
 import org.springframework.beans.factory.annotation.Autowired;
