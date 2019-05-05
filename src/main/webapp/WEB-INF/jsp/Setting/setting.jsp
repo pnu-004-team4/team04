@@ -44,9 +44,9 @@
                     <p>jongjin</p>
                     <h2>Resolution use</h2>
                     <p>
-                        <input type="radio" name="radio-btn"/>Use<input type="radio" name="radio-btn"/>No
+                        <input type="radio" id="radio1" name="radio-btn"/>Use
+                        <input type="radio" id="radio2" name="radio-btn"/>No
                     </p>
-                    <p></p>
                     <p></p>
                     <p></p>
                     <div class="button">
