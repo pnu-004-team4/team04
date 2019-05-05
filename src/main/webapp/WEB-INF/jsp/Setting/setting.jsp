@@ -1,6 +1,11 @@
+<%@ page import="com.team04.musiccloud.auth.Account" %>
+<%@ page import="com.team04.musiccloud.auth.FaceAccount" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
+<%--광수꺼--%>
 
 <!doctype html>
 <html lang="kr">
@@ -16,6 +21,15 @@
         }
     </style>
 </head>
+
+<%
+    FaceAccount fake = new FaceAccount();
+    Account acc = fake.fakeaccount();
+    String username = acc.getName();
+    String getemail = acc.getEmail();
+
+%>
+
 <body>
 
 <!-- flexbox container -->
