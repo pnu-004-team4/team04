@@ -1,6 +1,14 @@
+<%@ page import="com.team04.musiccloud.auth.Account" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
+<%--광수꺼--%>
 
 <!doctype html>
 <html lang="kr">
@@ -16,12 +24,44 @@
         }
     </style>
 </head>
+
+<%
+    String email;
+    String username;
+    String name;
+
+    AccountCustomRepository repository = new AccountCustomRepository();
+    Account SavedAccount;
+
+
+    //session에 등록된 account 정보.
+    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    if(account instanceof UserDetails){
+        email = ((UserDetails)account).getUsername();
+    }
+    else{
+        email = account.toString();
+    }
+
+    SavedAccount = repository.findAccountByEmail(email);
+
+    username = SavedAccount.getUsername();
+    name = SavedAccount.getName();
+
+    System.out.println("username : " + username);
+    System.out.println("name : " + name);
+
+%>
+
+
+
 <body>
 
 <!-- flexbox container -->
 <div class="container">
     <div class="settings dark">
-        <form:form action="#" method="POST">
+        <form:form action="/setcheck" method="POST" >
             <div class="row">
                 <header>
                     <h1>settings</h1>
@@ -31,23 +71,23 @@
             <div class="row">
                 <section class="user">
                     <h2>User Account</h2>
-                    <input type="email" name="email" value="moods@moodmuzik.com">
-                    <input type="password" name="password" value="settings1">
+                    <input type="email" name="email" readonly value=<%= email%>  >
+                    <h2>Password</h2>
+                    <input type="password" name="password">
+                    <h2>Username</h2>
+                    <input type="text" name="username" value=<%= username%>  >
+                    <h2>Name</h2>
+                    <input type="text" name="name" value=<%= name%>  >
                 </section>
             </div>
 
             <div class="row">
                 <section class="music">
-                    <h2>Username</h2>
-                    <p>abc</p>
-                    <h2>Name</h2>
-                    <p>jongjin</p>
                     <h2>Resolution use</h2>
                     <p>
                         <input type="radio" id="radio1" name="radio-btn"/>Use
                         <input type="radio" id="radio2" name="radio-btn"/>No
                     </p>
-                    <p></p>
                     <p></p>
                     <div class="button">
                         <button type="submit">SAVE</button>
