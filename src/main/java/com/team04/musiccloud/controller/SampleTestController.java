@@ -27,7 +27,7 @@ public class SampleTestController {
 
     @RequestMapping("/setcheck")
     public ModelAndView UserSetCheck() {
-        return new ModelAndView("/UserSettings/usersetcheck");
+        return new ModelAndView("/Setting/usersetcheck");
     }
 
     @RequestMapping("/search")
