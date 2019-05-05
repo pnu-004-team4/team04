@@ -26,6 +26,7 @@ dependencies {
     compile('org.springframework:spring-test:5.1.5.RELEASE')
     testCompile("org.springframework.security:spring-security-test")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile fileTree(dir: 'library', include: ['*.jar'])
 }
 
 if (hasProperty("buildScan")) {
