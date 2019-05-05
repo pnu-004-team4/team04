@@ -108,14 +108,11 @@ body a:hover {
   width: 15%;
 }
 .content__middle {
-  width: 70%;
-}
-.content__right {
-  width: 15%;
+  width: 85%;
 }
 @media (max-width: 1400px) {
   .content__left {
-    width: 20%;
+    display: none;
   }
   .content__middle {
     width: 80%;
@@ -126,7 +123,7 @@ body a:hover {
 }
 @media (max-width: 768px) {
   .content__left {
-    width: 100%;
+    display: none;
   }
   .content__middle {
     width: 100%;

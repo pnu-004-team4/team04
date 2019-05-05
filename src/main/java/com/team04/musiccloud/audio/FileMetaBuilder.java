@@ -41,6 +41,6 @@ public class FileMetaBuilder {
     }
     
     public FileMeta build() {
-        return new FileMeta(directory, name, extension, user);
+        return new FileMeta(dbId, directory, name, extension, user);
     }
 }

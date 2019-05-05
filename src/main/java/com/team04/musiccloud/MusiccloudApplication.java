@@ -1,10 +1,10 @@
 package com.team04.musiccloud;
 
-import com.team04.musiccloud.audio.ExtractorException;
-import com.team04.musiccloud.audio.InvalidFileFormat;
-import com.team04.musiccloud.audio.Tester;
+import com.team04.musiccloud.audio.extractor.ExtractorException;
+import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.caching.AudioCaching;
 import com.team04.musiccloud.controller.SampleStreamingController;
+import com.team04.musiccloud.tester.Tester;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -25,6 +25,13 @@ public class MusiccloudApplication {
     
         Tester.testUploader();
         Tester.testLoader("123");
+/*
+        Tester.testNetStatus("test", 10);
+        Tester.testNetStatus("test", 20);
+        Tester.testNetStatus("test", 30);
+        Tester.testNetStatus("test", 40);
+        Tester.testNetStatusPrint("test");
+*/
         new SampleStreamingController().player();
     }
 }
