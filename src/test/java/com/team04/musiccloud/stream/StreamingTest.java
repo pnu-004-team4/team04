@@ -5,10 +5,10 @@ import static org.junit.Assert.assertEquals;
 import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.extractor.AudioExtractor;
 import com.team04.musiccloud.audio.extractor.Mp3Extractor;
+import com.team04.musiccloud.utilities.StaticPaths;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StreamingTest {
 
+  private static Path cacheDirectory = StaticPaths.tempStorage;
   private Streaming stream;
   private Audio testAudio;
-
-  private static Path cacheDirectory = Paths
-      .get(System.getProperty("user.dir"), "src", "main", "resources", "static/media", "audios");
 
   @Before
   public void setUp() throws Exception {
@@ -33,7 +31,11 @@ public class StreamingTest {
 
     MultipartFile myFile = new MockMultipartFile(currentLocation.toString(),
         "sample.mp3", null, new FileInputStream(currentLocation.toFile()));
+    extractor.setBaseDirectory(cacheDirectory);
     testAudio = extractor.getAudio(myFile, user);
+    System.out.println(testAudio.getFileMeta().getDirectory());
+    System.out.println(testAudio.getFileMeta().getFullPath());
+    assertEquals(currentLocation.toString(), testAudio.getFileMeta().getFullPath().toString());
   }
 
   @After
@@ -45,10 +47,10 @@ public class StreamingTest {
   @Test
   public void audioTransportTest() throws IOException {
     stream.getAudioFromBack(testAudio);
-    assertEquals("media/audios/CSK/sample.mp3", stream.sendAudioToFront());
+    assertEquals("server/temp/CSK/sample.mp3", stream.sendAudioToFront());
     stream.getAudioFromBack(testAudio);
     stream.setUseTranscode(true);
-    assertEquals("media/audios/CSK/sample.mp3", stream.sendAudioToFront());
+    assertEquals("server/temp/CSK/sample.mp3", stream.sendAudioToFront());
 
   }
 }

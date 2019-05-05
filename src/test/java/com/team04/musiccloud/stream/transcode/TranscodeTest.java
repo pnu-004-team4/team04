@@ -7,10 +7,10 @@ import be.hogent.tarsos.transcoder.DefaultAttributes;
 import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.extractor.AudioExtractor;
 import com.team04.musiccloud.audio.extractor.Mp3Extractor;
+import com.team04.musiccloud.utilities.StaticPaths;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TranscodeTest {
 
+  private static Path cacheDirectory = StaticPaths.tempStorage;
   private Transcode transcode;
-
-  private static Path cacheDirectory = Paths
-      .get(System.getProperty("user.dir"), "src", "main", "resources", "static/media", "audios");
 
   @Before
   public void setUp() throws Exception {
@@ -33,7 +31,9 @@ public class TranscodeTest {
 
     MultipartFile myFile = new MockMultipartFile(currentLocation.toString(),
         "sample.mp3", null, new FileInputStream(currentLocation.toFile()));
-    transcode = new Transcode(extractor.getAudio(myFile, user));
+    extractor.setBaseDirectory(cacheDirectory);
+    Audio audio = extractor.getAudio(myFile, user);
+    transcode = new Transcode(audio);
   }
 
   @After
