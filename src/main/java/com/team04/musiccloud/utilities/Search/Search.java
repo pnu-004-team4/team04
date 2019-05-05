@@ -1,8 +1,8 @@
-package com.team04.musiccloud.Search;
+package com.team04.musiccloud.utilities.Search;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import com.team04.musiccloud.sort.Music;
+import com.team04.musiccloud.utilities.sort.Music;
 import java.util.ArrayList;
 
 

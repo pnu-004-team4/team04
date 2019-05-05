@@ -1,4 +1,4 @@
-package com.team04.musiccloud.caching.manager;
+package com.team04.musiccloud.stream.caching.manager;
 
 import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.utilities.StaticPaths;

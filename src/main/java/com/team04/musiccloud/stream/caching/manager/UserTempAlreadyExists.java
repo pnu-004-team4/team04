@@ -1,4 +1,4 @@
-package com.team04.musiccloud.caching.manager;
+package com.team04.musiccloud.stream.caching.manager;
 
 public class UserTempAlreadyExists extends RuntimeException {
     public UserTempAlreadyExists() {

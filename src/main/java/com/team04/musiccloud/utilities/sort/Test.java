@@ -1,7 +1,4 @@
-package com.team04.musiccloud.sort;
-
-import java.util.Arrays;
-import java.util.List;
+package com.team04.musiccloud.utilities.sort;
 
 // binarySearch로 특정값을 찾아준다.
 
