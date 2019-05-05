@@ -2,7 +2,7 @@ package com.team04.musiccloud;
 
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
-import com.team04.musiccloud.caching.AudioCaching;
+import com.team04.musiccloud.stream.caching.AudioCaching;
 import com.team04.musiccloud.controller.SampleStreamingController;
 import com.team04.musiccloud.tester.Tester;
 import org.springframework.boot.SpringApplication;

@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ page import ="com.team04.musiccloud.sort.Music"
-         import ="com.team04.musiccloud.sort.ListSort"
-         import ="com.team04.musiccloud.Search.Search"
+<%@ page import ="com.team04.musiccloud.utilities.sort.Music"
+         import ="com.team04.musiccloud.utilities.sort.ListSort"
+         import ="com.team04.musiccloud.utilities.Search.Search"
          import="java.util.ArrayList"
          language= "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 

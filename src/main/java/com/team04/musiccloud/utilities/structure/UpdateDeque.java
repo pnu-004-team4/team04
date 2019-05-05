@@ -1,4 +1,4 @@
-package com.team04.musiccloud.utilities;
+package com.team04.musiccloud.utilities.structure;
 
 public class UpdateDeque<T> extends FixedDeque<T> {
     public UpdateDeque(int capacity) {

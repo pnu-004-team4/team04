@@ -1,5 +1,6 @@
-package com.team04.musiccloud.utilities;
+package com.team04.musiccloud.utilities.structure;
 
+import com.team04.musiccloud.utilities.OverSizeLimitException;
 import java.util.ArrayDeque;
 import java.util.Objects;
 

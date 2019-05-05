@@ -1,9 +1,12 @@
-package com.team04.musiccloud.caching;
+package com.team04.musiccloud.stream.caching;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 캐시 내부에 있는 파일 중에 시간이 만료된 것을 회수합니다.
@@ -28,8 +31,10 @@ public class AudioCollector implements Runnable {
   private TimeUnit timeUnit;
   // 혹여 caching이 갑자기 동작하여 시스템을 부스는 것을 방지
   private boolean deleteEnable;
+  private final static Logger logger = Logger.getGlobal();
 
   AudioCollector() {
+    logger.setLevel(Level.INFO);
     baseDirectory = DEFAULT;
     period = 1000;
     timeUnit = TimeUnit.MILLISECONDS;
@@ -134,7 +139,7 @@ public class AudioCollector implements Runnable {
     try {
       traverseDirectory(baseDirectory);
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.severe(e.toString());
     }
   }
 }

@@ -1,8 +1,6 @@
-package com.team04.musiccloud.sort;
+package com.team04.musiccloud.utilities.sort;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Music implements Comparable<Music> {
 

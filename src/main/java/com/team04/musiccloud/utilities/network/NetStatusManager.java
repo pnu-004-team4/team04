@@ -1,4 +1,4 @@
-package com.team04.musiccloud.network;
+package com.team04.musiccloud.utilities.network;
 
 import java.util.HashMap;
 import java.util.Map;

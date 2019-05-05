@@ -1,4 +1,4 @@
-package com.team04.musiccloud.caching;
+package com.team04.musiccloud.stream.caching;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
