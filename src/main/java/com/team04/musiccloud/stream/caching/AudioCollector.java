@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 캐시 내부에 있는 파일 중에 시간이 만료된 것을 회수합니다.

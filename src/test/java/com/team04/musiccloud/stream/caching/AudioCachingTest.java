@@ -1,6 +1,7 @@
 package com.team04.musiccloud.stream.caching;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
@@ -9,11 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AudioCachingTest {
+
   private AudioCaching audioCaching = null;
 
   @Before
-  public void setUp(){
-    final String currentDirectory= Paths.get(System.getProperty("user.dir"),
+  public void setUp() {
+    final String currentDirectory = Paths.get(System.getProperty("user.dir"),
         "src", "main", "resources", "static/media", "audios").toString();
     audioCaching = new AudioCaching(currentDirectory);
     assertEquals(currentDirectory, audioCaching.getBaseDirectory());
@@ -21,6 +23,7 @@ public class AudioCachingTest {
     assertEquals(currentDirectory, audioCaching.getBaseDirectory());
     audioCaching.setTimeUnit(TimeUnit.SECONDS);
     audioCaching.setPeriod(30);
+    assertNotNull(audioCaching);
   }
 
   @After

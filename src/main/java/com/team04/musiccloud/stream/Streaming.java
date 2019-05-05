@@ -1,6 +1,9 @@
 package com.team04.musiccloud.stream;
 
 import com.team04.musiccloud.audio.Audio;
+import com.team04.musiccloud.stream.transcode.Transcode;
+import com.team04.musiccloud.utilities.network.NetStatusManager;
+import java.io.IOException;
 
 /**
  * audio 파일의 디렉토리를 유지 관리합니다.
@@ -20,16 +23,40 @@ import com.team04.musiccloud.audio.Audio;
 public class Streaming implements IBackStreaming, IFrontStreaming {
 
   private Audio audio;
+  private boolean isRequireTranscode;
 
   @Override
   public void getAudioFromBack(Audio audio) {
     this.audio = audio;
+    this.isRequireTranscode = false;
   }
 
   @Override
-  public String sendAudioToFront() {
-    // @TODO: 네트워크의 상태를 확인하고 가중치를 받는 함수가 필요함(ret: Integer)
-    // @TODO: 가중치를 바탕으로 트랜스코드를 진행하는 함수가 필요함(ret: Audio 객체)
+  public String sendAudioToFront() throws IOException {
+      return serveAudio();
+  }
+
+  @Override
+  public void setUseTranscode(boolean isRequireTranscode) {
+    this.isRequireTranscode = isRequireTranscode;
+  }
+
+  private String serveAudio() throws IOException {
+    // Network의 지연 시간을 파악하는 부분에 해당합니다.
+    if (isRequireTranscode) {
+      if (audio == null) {
+        throw new IOException();
+      }
+      NetStatusManager networkMangager = NetStatusManager.getInstance();
+      String userName = audio.getFileMeta().getUser();
+      double userDelayAverage = networkMangager.getUserNetDelayAverage(userName);
+
+      // Transcode를 진행하는 부분에 해당합니다.
+      Transcode transcode = new Transcode(audio);
+      transcode.setWeight(userDelayAverage);
+      audio = transcode.getAudio();
+    }
+
     return "media/audios/" + audio.getFileMeta().getUser() + '/' + audio.getFileMeta().getName() + '.'+audio.getFileMeta().getExtension();
   }
 }
