@@ -19,16 +19,14 @@
 <html lang="kr">
 <head>
     <meta charset="UTF-8">
-    <title>UserSetCheck</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/css/setting.css">
 
     <style rel="stylesheet">
         html {
             width: 100%;
             height: 100%;
         }
-
-
     </style>
 </head>
 <body>
@@ -94,24 +92,36 @@
 
 %>
 <!-- Form-->
-<div class="form">
-    <div class="form-toggle"></div>
-    <div class="form-panel one">
-        <div class="form-header">
-            <h1>결과창</h1>
+<div class="container">
+    <div class="settings dark">
+        <div class="row">
+            <header>
+                <h1>Setting Result</h1>
+            </header>
         </div>
 
-        <div class="form-content">
-            <form:form action="/login" method="post">
-
-                Username : <%= CheckUsername %> <br>
-                Name    : <%= CheckName %> <br>
-                Password : <%= Password %> <br>
-                Email    : <%= CheckEmail %> <br>
-                <div class="form-group">
-                    <button type="submit">확인했습니다.</button>
+        <div class="row">
+            <section class="user">
+                <form:form action="/login" method="post">
+                    <h2>Username</h2>
+                    <p><%= CheckUsername %></p>
+                    <h2>Name</h2>
+                    <p><%= CheckName %></p>
+                    <h2>Password</h2>
+                    <p><%= Password %></p>
+                    <h2>Email</h2>
+                    <p><%= CheckEmail %></p>
+                    <p></p>
+            </section>
+            <section class="music">
+                <p></p>
+                <p></p>
+                <p></p>
+                <div class="button">
+                    <button type="submit">Confirm</button>
                 </div>
-            </form:form>
+            </section>
+                </form:form>
         </div>
     </div>
 </div>
