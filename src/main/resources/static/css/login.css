@@ -30,6 +30,18 @@ body {
   margin: 100px auto 10px;
   overflow: hidden;
 }
+
+@media (max-width: 1400px) {
+  .form {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .form {
+    width: 100%;
+  }
+}
+
 .form-toggle {
   z-index: 10;
   position: absolute;
@@ -103,7 +115,7 @@ body {
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: .2em;
 }
 .two .form-group label {
@@ -129,6 +141,17 @@ body {
 .form-group input:focus {
   color: rgba(0, 0, 0, 0.8);
 }
+
+/*Only on valid*/
+.form-group input:valid{box-shadow: 0 0 2px rgba(0,255,0,0.4);}
+/*Only on focus and valid*/
+.form-group input:valid:focus{ background: #80BE93; box-shadow: none;  }
+/*Only on invalid*/
+.form-group input:invalid{box-shadow: 0 0 2px rgba(255,0,0,0.4);}
+/*Only on focus and invalid*/
+.form-group input:invalid:focus{ background: #CB9089; box-shadow: none;}
+
+
 .two .form-group input {
   color: #FFFFFF;
 }

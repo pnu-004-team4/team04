@@ -24,6 +24,18 @@ h1, h2, h3 {
     margin: 100px auto 10px;
 }
 
+@media (max-width: 1400px) {
+    .container {
+        width: 80%;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        margin: 50px auto 10px;
+        width: 100%;
+    }
+}
+
 .settings {
     width: 450px;
     height: 600px;
@@ -106,6 +118,15 @@ section span  {
     margin-top: 7px;
     padding-left: 8px;
 }
+
+/*Only on valid*/
+.user input:valid{box-shadow: 0 0 2px rgba(0,255,0,0.4);}
+/*Only on focus and valid*/
+.user input:valid:focus{ background: #80BE93; box-shadow: none;  }
+/*Only on invalid*/
+.user input:invalid{box-shadow: 0 0 2px rgba(255,0,0,0.4);}
+/*Only on focus and invalid*/
+.user input:invalid:focus{ background: #CB9089; box-shadow: none;}
 
 .music {
     justify-content: space-between;

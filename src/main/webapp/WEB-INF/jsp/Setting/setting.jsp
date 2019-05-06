@@ -14,6 +14,7 @@
 <html lang="kr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <link rel="stylesheet" href="/css/setting.css">
 
@@ -71,13 +72,13 @@
             <div class="row">
                 <section class="user">
                     <h2>User Account</h2>
-                    <input type="email" name="email" readonly value=<%= email%>  >
+                    <input type="email" name="email" readonly value=<%= email%>  required="required">
                     <h2>Password</h2>
-                    <input type="password" name="password">
-                    <h2>Username</h2>
-                    <input type="text" name="username" value=<%= username%>  >
-                    <h2>Name</h2>
-                    <input type="text" name="name" value=<%= name%>  >
+                    <input type="password" name="password" required="required">
+                    <h2>Username - alphabet only</h2>
+                    <input type="text" pattern="^[a-zA-Z]*$" name="username" value=<%= username%>  required="required">
+                    <h2>Name - alphabet only</h2>
+                    <input type="text" pattern="^[a-zA-Z]*$" name="name" value=<%= name%> required="required">
                 </section>
             </div>
 
