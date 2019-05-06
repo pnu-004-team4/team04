@@ -1,6 +1,7 @@
 package com.team04.musiccloud.stream.caching;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
@@ -12,15 +13,16 @@ public class AudioCollectorTest {
   private AudioCollector audioCollector = null;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     audioCollector = new AudioCollector("sample/dir");
     assertEquals("sample/dir", audioCollector.getBaseDirectory());
     audioCollector = new AudioCollector();
     assertEquals(audioCollector.DEFAULT, audioCollector.getBaseDirectory());
+    assertNotNull(audioCollector);
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     audioCollector = null;
   }
 
