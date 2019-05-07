@@ -6,6 +6,7 @@
 <html lang="kr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
     <link rel="stylesheet" href="/css/login.css">
 
@@ -31,12 +32,12 @@ html {
         <div class="form-content">
             <form:form action="registerCheck" method="POST">
                 <div class="form-group">
-                    <label for="name">name</label>
-                    <input type="text" id="name" name="name" required="required"/>
+                    <label for="name">Name - alphabet only</label>
+                    <input type="text" pattern="^[a-zA-Z]*$" id="name" name="name" required="required"/>
                 </div>
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required="required"/>
+                    <label for="username">Username - alphabet only</label>
+                    <input type="text" pattern="^[a-zA-Z]*$" id="username" name="username" required="required"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
