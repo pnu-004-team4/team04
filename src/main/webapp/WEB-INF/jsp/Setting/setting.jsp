@@ -37,6 +37,8 @@
     //session에 등록된 account 정보.
     Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+    //여기서 세션에 저장된 username, 로그인에 쓰인 username을 받는다.
+    //따라서 email을 받는 것임.
     if(account instanceof UserDetails){
         email = ((UserDetails)account).getUsername();
     }
