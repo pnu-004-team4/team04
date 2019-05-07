@@ -3,7 +3,7 @@
 var songProgressSlider = document.getElementById('song-progress');
 var volumeSlider = document.getElementById('song-volume');
 
-var SongProgressSliderUsable = true;
+var isSongProgressSliderUsable = true;
 
 noUiSlider.create(songProgressSlider, {
   start: [0],
@@ -30,11 +30,11 @@ songProgressSlider.noUiSlider.on('change',function(values,handle){
 });
 
 songProgressSlider.noUiSlider.on('start',function(){
-  SongProgressSliderUsable = false;
+  isSongProgressSliderUsable = false;
 })
 
 songProgressSlider.noUiSlider.on('end',function(){
-  SongProgressSliderUsable = true;
+  isSongProgressSliderUsable = true;
 });
 
 volumeSlider.noUiSlider.on('update',function(values,handle){
