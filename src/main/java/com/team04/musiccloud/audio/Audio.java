@@ -46,13 +46,12 @@ public class Audio {
         Audio audio = (Audio) obj;
         
         return Objects.equals(audioMeta, audio.audioMeta) &&
-                Objects.equals(fileMeta, audio.fileMeta) &&
-                Arrays.equals(bytes, audio.bytes);
+                Objects.equals(fileMeta, audio.fileMeta);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(audioMeta, fileMeta, bytes);
+        return Objects.hash(audioMeta, fileMeta);
     }
     
 }
