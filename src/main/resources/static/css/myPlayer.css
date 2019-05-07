@@ -305,8 +305,10 @@ body a:hover {
   border-radius: 50%;
   box-shadow: none;
   border: none;
-  left: 0;
+  opacity: 1.0;
   display: none;
+  top: -2.5px;
+  margin-inline-end: 10px;
 }
 .current-track__progress__bar .noUi-handle:before, .current-track__progress__bar .noUi-handle:after {
   background: none;
@@ -360,11 +362,12 @@ body a:hover {
   background: #c8c8c8;
   width: 0px;
   height: 0px;
-  border-radius: 50%;
+  border-radius: 0%;
   box-shadow: none;
   border: none;
-  left: 0;
   display: none;
+  top:0px;
+  margin-inline-end: 10px;
 }
 .current-track__options .controls .volume #song-volume .noUi-handle:before, .current-track__options .controls .volume #song-volume .noUi-handle:after {
   background: none;

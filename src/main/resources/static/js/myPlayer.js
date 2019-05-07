@@ -15,7 +15,7 @@ noUiSlider.create(songProgressSlider, {
 });
 
 noUiSlider.create(volumeSlider, {
-  start: 0,
+  start: 100,
   behaviour:'snap',
   connect : [false,true],
   range: {
@@ -71,19 +71,32 @@ function togglePlayPauseButton(my_audio){
   }
 }
 
+function secondToText(duration){
+  var minuteText = parseInt(duration / 60);
+  var second = parseInt(duration % 60);
+  var secondText = (second>=10)? second : "0"+second;
+  var music_playtime = minuteText + ":" + secondText;
+
+  return music_playtime;
+}
+
 function playtimeUpdate(my_audio){
+
   // Set Music Total Time
-  var music_totaltime = parseInt(my_audio.duration / 60) + ":" + parseInt(my_audio.duration % 60);
-  document.getElementById("music_totaltime").innerHTML = music_totaltime;
+  var musicTotalTime = secondToText(my_audio.duration);
+  document.getElementById("music_totaltime").innerHTML = musicTotalTime;
 
   var music_progress_percent;
 
   // Set Music Play Time
   if (my_audio.paused == false) {
     showPlayTime = setInterval(function () {
-      var music_playtime = parseInt(my_audio.currentTime / 60) + ":" + parseInt(my_audio.currentTime % 60);
-      document.getElementById("music_playtime").innerHTML = music_playtime;
-      if(SongProgressSliderUsable){
+
+      var musicPlayTime = secondToText(my_audio.currentTime);
+
+      document.getElementById("music_playtime").innerHTML = musicPlayTime;
+
+      if(isSongProgressSliderUsable){
         progress_percent = my_audio.currentTime / my_audio.duration * 100;
         music_progress_percent = songProgressSlider.noUiSlider.set(progress_percent);
       }
@@ -93,7 +106,6 @@ function playtimeUpdate(my_audio){
     clearInterval(showPlayTime);
   }
 }
-
 // Tooltips
 
 $(function () {
