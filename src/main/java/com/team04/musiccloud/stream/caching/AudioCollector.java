@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class AudioCollector implements Runnable {
 
   private final static Logger logger = Logger.getGlobal();
-  final String DEFAULT = StaticPaths.tempStorage.toString();
+  public final String DEFAULT = StaticPaths.tempStorage.toString();
   private String baseDirectory = null;
   private int period;
   private TimeUnit timeUnit;
@@ -40,27 +40,27 @@ public class AudioCollector implements Runnable {
     deleteEnable = false;
   }
 
-  String getBaseDirectory() {
+  public String getBaseDirectory() {
     return baseDirectory;
   }
 
-  int getPeriod() {
+  public int getPeriod() {
     return period;
   }
 
-  void setPeriod(int period) {
+  public void setPeriod(int period) {
     this.period = period;
   }
 
-  TimeUnit getTimeUnit() {
+  public TimeUnit getTimeUnit() {
     return timeUnit;
   }
 
-  void setTimeUnit(TimeUnit timeUnit) {
+  public void setTimeUnit(TimeUnit timeUnit) {
     this.timeUnit = timeUnit;
   }
 
-  void setDeleteEnable(boolean deleteEnable) {
+  public void setDeleteEnable(boolean deleteEnable) {
     this.deleteEnable = deleteEnable;
   }
 
@@ -96,11 +96,11 @@ public class AudioCollector implements Runnable {
    *
    * 그렇지 않고 디렉토리인 경우에는 traverse를 하도록 합니다.
    */
-  private void traverseDirectory(String path) throws NullPointerException, IOException {
+  private void traverseDirectory(String path) throws IOException {
     File directory = new File(path);
     File[] fileList = directory.listFiles();
     if (fileList == null) {
-      throw new NullPointerException();
+      throw new IOException();
     }
     for (File file : fileList) {
       if (file.isFile()) {
