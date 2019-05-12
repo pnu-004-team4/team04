@@ -3,10 +3,12 @@ package com.team04.musiccloud.utilities.network;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntPredicate;
-import java.util.function.Predicate;
 
 public class NetStatusManager {
     private static NetStatusManager netStatusManager;
+    
+    private static final int MAX_STATUS_PER_USER = 50;
+    private Map<String, UserNetStatus> userStatusMap;
     
     public static synchronized NetStatusManager getInstance() {
         if ( netStatusManager == null ) {
@@ -15,11 +17,6 @@ public class NetStatusManager {
         
         return netStatusManager;
     }
-    
-    
-    private static final int MAX_STATUS_PER_USER = 50;
-    
-    private Map<String, UserNetStatus> userStatusMap;
     
     private NetStatusManager() {
         userStatusMap = new HashMap<>();
@@ -65,11 +62,6 @@ public class NetStatusManager {
     public double getUserNetDelayAverage(String user) {
         UserNetStatus userNetStatus = getUserNetState(user);
         return userNetStatus.getAverageNetDelay();
-    }
-    
-    public double getUserNetDelayAverage(String user, Predicate<Integer> predicate) {
-        UserNetStatus userNetStatus = getUserNetState(user);
-        return userNetStatus.getAverageNetDelay(predicate);
     }
     
     public double getUserNetDelayAverage(String user, IntPredicate intPredicate) {

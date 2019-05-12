@@ -8,18 +8,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AudioTest {
-    private final String id = "id";
-    private final String tit = "tit";
-    private final String auth = "auth";
-    private final String alb = "alb";
-    private final LocalDateTime date = LocalDateTime.of(2019, 5, 7, 1, 0);
-    private final String dir = "dir";
-    private final String name = "name";
-    private final String ext = "ext";
-    private final String usr = "usr";
+    private final static String ID = "id";
+    private final static String TITLE = "tit";
+    private final static String AUTHOR = "auth";
+    private final static String ALBUM = "alb";
+    private final static LocalDateTime DATE_TIME = LocalDateTime.of(2019, 5, 7, 1, 0);
+    private final static String DIRECTORY = "dir";
+    private final static String NAME = "name";
+    private final static String EXTENSION = "ext";
+    private final static String USER = "usr";
     
-    private AudioMeta audioMeta = new AudioMeta(id, tit, auth, alb, date);
-    private FileMeta fileMeta = new FileMeta(id, dir, name, ext, usr);
+    private AudioMeta audioMeta = new AudioMeta(ID, TITLE, AUTHOR, ALBUM, DATE_TIME);
+    private FileMeta fileMeta = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);
     private byte[] byteData = new byte[]{1, 0, 0, 0, 1, 1};
     
     @Test

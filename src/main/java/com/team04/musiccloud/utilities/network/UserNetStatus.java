@@ -5,7 +5,6 @@ import com.team04.musiccloud.utilities.structure.UpdateDeque;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.function.IntPredicate;
-import java.util.function.Predicate;
 
 public class UserNetStatus {
     private static final int DEFAULT_CAPACITY = 20;
@@ -33,14 +32,6 @@ public class UserNetStatus {
     
     public double getAverageNetDelay() {
         return netDelays.stream()
-                .mapToInt(Integer::intValue)
-                .average()
-                .orElse(0);
-    }
-    
-    public double getAverageNetDelay(Predicate<Integer> predicate) {
-        return netDelays.stream()
-                .filter(predicate)
                 .mapToInt(Integer::intValue)
                 .average()
                 .orElse(0);

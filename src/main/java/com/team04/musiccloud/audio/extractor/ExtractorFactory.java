@@ -12,7 +12,7 @@ public class ExtractorFactory {
         final String extension =
                 FileSystemUtilities.getExtension(multipartFile).orElseThrow(InvalidFileFormat::new);
     
-        if ( extension.equals("mp3") ) {
+        if ( "mp3".equals(extension) ) {
             audioExtractor = new Mp3Extractor();
         } else {
             throw new InvalidFileFormat("No extractor for this extension: " + extension);

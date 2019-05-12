@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class FileMetaTest {
-    private final String id = "id";
-    private final String dir = "dir";
-    private final String name = "name";
-    private final String ext = "ext";
-    private final String usr = "usr";
+    private final static String ID = "id";
+    private final static String DIRECTORY = "dir";
+    private final static String NAME = "name";
+    private final static String EXTENSION = "ext";
+    private final static String USER = "usr";
     
     @Test
     public void objectConstructorTest() {
@@ -29,8 +29,8 @@ public class FileMetaTest {
     
     @Test
     public void objectEqualityTest() {
-        FileMeta fileMeta1 = new FileMeta(id, dir, name, ext, usr);
-        FileMeta fileMeta2 = new FileMeta(id, dir, name, ext, usr);
+        FileMeta fileMeta1 = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);
+        FileMeta fileMeta2 = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);
         
         assertEquals(fileMeta1, fileMeta2);
         assertEquals(fileMeta1.hashCode(), fileMeta2.hashCode());
@@ -38,24 +38,24 @@ public class FileMetaTest {
     
     @Test
     public void getterTest() {
-        FileMeta fileMeta = new FileMeta(id, dir, name, ext, usr);
-        
-        assertEquals(id, fileMeta.getDbId());
-        assertEquals(dir, fileMeta.getDirectory());
-        assertEquals(name, fileMeta.getName());
-        assertEquals(ext, fileMeta.getExtension());
-        assertEquals(usr, fileMeta.getUser());
+        FileMeta fileMeta = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);
+    
+        assertEquals(ID, fileMeta.getDbId());
+        assertEquals(DIRECTORY, fileMeta.getDirectory());
+        assertEquals(NAME, fileMeta.getName());
+        assertEquals(EXTENSION, fileMeta.getExtension());
+        assertEquals(USER, fileMeta.getUser());
     }
     
     @Test
     public void additionalGetterTest() {
-        FileMeta fileMeta = new FileMeta(id, dir, name, ext, usr);
-        
-        final Path expectedFullPath = Paths.get(dir, name + '.' + ext).toAbsolutePath();
+        FileMeta fileMeta = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);
+    
+        final Path expectedFullPath = Paths.get(DIRECTORY, NAME + '.' + EXTENSION).toAbsolutePath();
         assertEquals(expectedFullPath, fileMeta.getFullPath());
         assertEquals(expectedFullPath.toFile(), fileMeta.getFullPathAsFile());
-        
-        final Path expectedNameExtension = Paths.get(name + '.' + ext);
+    
+        final Path expectedNameExtension = Paths.get(NAME + '.' + EXTENSION);
         assertEquals(expectedNameExtension, fileMeta.getNameExtension());
     }
 }

@@ -39,7 +39,7 @@ public class InvalidFileFormatTest {
     }
     
     @Test
-    public void CauseParameter() {
+    public void causeParameter() {
         try {
             throw new InvalidFileFormat(new TestException());
         } catch ( InvalidFileFormat e ) {

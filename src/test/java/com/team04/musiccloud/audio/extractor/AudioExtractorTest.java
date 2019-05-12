@@ -1,6 +1,7 @@
 package com.team04.musiccloud.audio.extractor;
 
 import com.team04.musiccloud.audio.Audio;
+import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.utilities.StaticPaths;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AudioExtractorTest {
@@ -26,12 +28,17 @@ public class AudioExtractorTest {
     }
     
     @Test
-    public void setBaseDirectory() throws IOException, InvalidFileFormat {
-        final Path path = Paths.get("test", "directory");
+    public void setBaseDirectory() throws IOException, InvalidFileFormat, ExtractorException {
         MultipartFile multipartFile = getMockMultipartFile();
         AudioExtractor audioExtractor = ExtractorFactory.getInstance(multipartFile);
         
+        final Path path = Paths.get("test", "directory");
         audioExtractor.setBaseDirectory(path);
+    
+        final String userName = "s";
+        final Audio audio = audioExtractor.getAudio(multipartFile, userName);
+        final FileMeta fileMeta = audio.getFileMeta();
+        assertEquals(path.resolve(userName).toString(), fileMeta.getDirectory());
     }
     
     private static MultipartFile getMockMultipartFile() throws IOException {
