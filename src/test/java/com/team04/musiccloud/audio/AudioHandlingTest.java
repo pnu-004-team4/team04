@@ -16,10 +16,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import java.util.logging.Logger;
 
 public class AudioHandlingTest {
+    private final Logger logger = Logger.getGlobal();
     
     @Test
     public void testUploader()
@@ -85,7 +85,7 @@ public class AudioHandlingTest {
     }
     
     private void saveMetaToDB(AudioMeta audioMeta, FileMeta fileMeta) {
-        LOGGER.info("" +
+        logger.info("" +
                 "--------------------\n" +
                 "DB received: \n" +
                 "\tTitle: " + audioMeta.getTitle() + "\n" +
