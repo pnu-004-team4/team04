@@ -1,7 +1,3 @@
-<%@ page import="com.team04.musiccloud.auth.Account" %>
-<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
-<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -26,30 +22,6 @@
 
     <link rel="stylesheet" href="/css/myPlayer.css">
 </head>
-
-<%
-    //@TODO(오기준 작성): 이 부분에서 Overhead가 엄청 큽니다. 확인해주시길 바랍니다.
-    String email;
-    Account SavedAccount;
-    String name;
-
-    AccountCustomRepository repository = new AccountCustomRepository();
-
-    //session에 등록된 account 정보.
-    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-    //여기서 세션에 저장된 username, 로그인에 쓰인 username을 받는다.
-    //따라서 email을 받는 것임.
-    if (account instanceof UserDetails) {
-        email = ((UserDetails) account).getUsername();
-    } else {
-        email = account.toString();
-    }
-
-    SavedAccount = repository.findAccountByEmail(email);
-
-    name = SavedAccount.getName();
-%>
 
 <body>
 
@@ -90,7 +62,7 @@
  
             <span class="user__info__name">
                <span class="first">Welcome!</span>
-               <span class="last"><%= name%></span>
+               <span class="last">${username}</span>
              </span>
 
             </div>
