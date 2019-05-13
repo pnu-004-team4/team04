@@ -5,6 +5,8 @@ import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.audio.extractor.AudioExtractor;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.Mp3Extractor;
+import com.team04.musiccloud.auth.Account;
+import com.team04.musiccloud.db.AccountCustomRepository;
 import com.team04.musiccloud.stream.Streaming;
 import com.team04.musiccloud.utilities.StaticPaths;
 import java.io.FileInputStream;
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,6 +74,14 @@ public class PlayerController {
         + "\" type=\"audio/mpeg\"></audio>";
   }
 
+  private String getUserName() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String currentPrincipalName = authentication.getName();
+    AccountCustomRepository repository = new AccountCustomRepository();
+    Account SavedAccount = repository.findAccountByEmail(currentPrincipalName);
+    return SavedAccount.getName();
+  }
+
   /**
    * 최초 상태의 JSP를 반환 및 GET에 의한 호출을 담당합니다.
    *
@@ -92,8 +104,8 @@ public class PlayerController {
     stream.setUseTranscode(true);
 
     String dir = stream.sendAudioToFront();
-    String section = audioTagGenerator(dir);
-    base.addObject("streamingTest", section);
+    base.addObject("streamingTest", audioTagGenerator(dir));
+    base.addObject("username", getUserName());
     base.setViewName("Player/player");
     return base;
   }
