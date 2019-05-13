@@ -20,7 +20,7 @@ public class AccountDao {
 
     public AccountDao() {
         MongoClientURI mongoClientURI = new MongoClientURI(
-                "mongodb+srv://deeopark:wFdAKPThZgZb3pTv@cluster0-p10yd.mongodb.net/test?retryWrites=true");
+                "mongodb://pnu-team04:hbTKaHZRlmBWQeUdgDZXPmo8LviCG7v4KVJYuJ8rtMUGDK7oFAhJ1h5STtAU5YIoQy36v9xalodvVTJxv0b3xg==@pnu-team04.documents.azure.com:10255/?ssl=true&replicaSet=globaldb");
         MongoClient mongoClient = new MongoClient(mongoClientURI);
         this.mongoCollection = mongoClient.getDatabase("MusicCloud")
                 .getCollection("account");
