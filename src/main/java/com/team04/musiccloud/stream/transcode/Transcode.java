@@ -33,8 +33,7 @@ public class Transcode {
    */
   private double preProcessWeight(double weight) {
     //@TODO: weight에 대한 전처리를 해주도록 합니다. 이 부분은 담당자와 협의가 요구됩니다.
-    // calculator를 활용해주시길 바랍니다.
-    return weight;
+    return calculator.value(weight/10000);
   }
 
   public void setWeight(double weight) {
