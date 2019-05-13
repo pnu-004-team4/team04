@@ -42,15 +42,15 @@ public class TranscodeTest {
   public void setWeightTest() {
     double weight;
 
-    transcode.setWeight(81);
+    transcode.setWeight(14000); // 14s
     weight = transcode.getWeight();
     assertEquals(DefaultAttributes.MP3_128KBS_STEREO_44KHZ, transcode.getAudioSetting(weight));
 
-    transcode.setWeight(66);
+    transcode.setWeight(7000); // 7s
     weight = transcode.getWeight();
     assertEquals(DefaultAttributes.MP3_192KBS_STEREO_44KHZ, transcode.getAudioSetting(weight));
 
-    transcode.setWeight(23);
+    transcode.setWeight(1000); // 1s
     weight = transcode.getWeight();
     assertEquals(DefaultAttributes.MP3_320KBS_STEREO_44KHZ, transcode.getAudioSetting(weight));
   }
