@@ -19,7 +19,7 @@ public class MetadataCustomRepository {
 
     public MetadataCustomRepository(String email) {
         MongoClientURI mongoClientURI = new MongoClientURI(
-                "mongodb+srv://deeopark:wFdAKPThZgZb3pTv@cluster0-p10yd.mongodb.net/test?retryWrites=true");
+                "mongodb://pnu-team04:hbTKaHZRlmBWQeUdgDZXPmo8LviCG7v4KVJYuJ8rtMUGDK7oFAhJ1h5STtAU5YIoQy36v9xalodvVTJxv0b3xg==@pnu-team04.documents.azure.com:10255/?ssl=true&replicaSet=globaldb");
         MongoClient mongoClient = new MongoClient(mongoClientURI);
         MongoCollection<Document> audioMetaCollection = mongoClient.getDatabase("MusicCloud")
                 .getCollection("audiometa." + email);
