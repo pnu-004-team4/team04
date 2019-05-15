@@ -4,7 +4,6 @@ import com.beust.jcommander.ParameterException;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.stream.caching.AudioCaching;
-import com.team04.musiccloud.tester.Tester;
 import com.team04.musiccloud.utilities.StaticKeys;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -28,9 +27,5 @@ public class MusiccloudApplication {
       throw new ParameterException("You must have the Mongo DB API Keys");
     }
     StaticKeys.setKeys(args[0]);
-
-    // @TODO: 삭제하도록 할 것
-    Tester.testUploader();
-    Tester.testLoader("123");
   }
 }

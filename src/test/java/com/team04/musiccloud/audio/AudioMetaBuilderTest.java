@@ -8,6 +8,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AudioMetaBuilderTest {
+    private static final String DB_ID = "123";
+    private static final String TITLE = "tit";
+    private static final String AUTHOR = "auth";
+    private static final String ALBUM = "alb";
+    private static final LocalDateTime DATE_TIME = LocalDateTime.of(2019, 5, 7, 1, 0);
+    
     @Test
     public void builderConstructorTest() {
         AudioMetaBuilder audioMetaBuilder = AudioMetaBuilder.builder();
@@ -17,24 +23,30 @@ public class AudioMetaBuilderTest {
     
     @Test
     public void builderContentsTest() {
-        final String dbId = "123";
-        final String tit = "tit";
-        final String auth = "auth";
-        final String alb = "alb";
-        final LocalDateTime date = LocalDateTime.of(2019, 5, 7, 1, 0);
-        
-        AudioMeta fileMeta = AudioMetaBuilder.builder()
-                .setDbId(dbId)
-                .setTitle(tit)
-                .setAuthor(auth)
-                .setAlbum(alb)
-                .setReleaseDate(date)
+        AudioMeta audioMeta = AudioMetaBuilder.builder()
+                .setDbId(DB_ID)
+                .setTitle(TITLE)
+                .setAuthor(AUTHOR)
+                .setAlbum(ALBUM)
+                .setReleaseDate(DATE_TIME)
                 .build();
         
-        assertEquals(dbId, fileMeta.getDbId());
-        assertEquals(tit, fileMeta.getTitle());
-        assertEquals(auth, fileMeta.getAuthor());
-        assertEquals(alb, fileMeta.getAlbum());
-        assertEquals(date, fileMeta.getReleaseDate());
+        assertEquals(DB_ID, audioMeta.getDbId());
+        assertEquals(TITLE, audioMeta.getTitle());
+        assertEquals(AUTHOR, audioMeta.getAuthor());
+        assertEquals(ALBUM, audioMeta.getAlbum());
+        assertEquals(DATE_TIME, audioMeta.getReleaseDate());
+    }
+    
+    @Test
+    public void builderFromAudioMeta() {
+        final AudioMeta source = new AudioMeta(DB_ID, TITLE, AUTHOR, ALBUM, DATE_TIME);
+        AudioMeta audioMeta = AudioMetaBuilder.builder(source).build();
+        
+        assertEquals(DB_ID, audioMeta.getDbId());
+        assertEquals(TITLE, audioMeta.getTitle());
+        assertEquals(AUTHOR, audioMeta.getAuthor());
+        assertEquals(ALBUM, audioMeta.getAlbum());
+        assertEquals(DATE_TIME, audioMeta.getReleaseDate());
     }
 }

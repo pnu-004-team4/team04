@@ -39,13 +39,22 @@ public class MetadataCustomRepository {
 
     return true;
   }
-
+  
+  /*
+    DB에 저장된 AudioMeta와 FileMeta를 삭제하는 함수.
+    여기서 전달된 dbId는 AudioMeta와 FileMeta의 _id값.
+    */
+  public void deleteMetadata(String dbId) {
+    audioMetaDao.delete(dbId);
+    fileMetaDao.delete(dbId);
+  }
+  
   /*
   특정 AudioMeta를 찾고자 할 때 사용하는 함수.
   여기서 AudioMeta를 찾기 위해선 dbId 값을 전달해야 함.
   찾으면 그에 대응되는 AudioMeta를, 찾지 못한다면 null을 반환.
   */
-  public AudioMeta getAudioMeta(ObjectId dbId) {
+  public AudioMeta getAudioMeta(String dbId) {
     return audioMetaDao.getAudioMeta(dbId);
   }
 
@@ -54,7 +63,7 @@ public class MetadataCustomRepository {
   여기서 FileMeta를 찾기 위해선 dbId 값을 전달해야 함.
   찾으면 그에 대응되는 FileMeta를, 찾지 못한다면 null을 반환.
   */
-  public FileMeta getFileMeta(ObjectId dbId) {
+  public FileMeta getFileMeta(String dbId) {
     return fileMetaDao.getFileMeta(dbId);
   }
 
@@ -63,7 +72,7 @@ public class MetadataCustomRepository {
   여기서 FileMeta를 찾기 위해선 dbId 값을 전달해야 함.
   찾으면 그에 대응되는 FileMeta의 directory를, 찾지 못한다면 null을 반환.
   */
-  public String getFileDirectory(ObjectId dbId) {
+  public String getFileDirectory(String dbId) {
     String directory = null;
 
     FileMeta found = fileMetaDao.getFileMeta(dbId);

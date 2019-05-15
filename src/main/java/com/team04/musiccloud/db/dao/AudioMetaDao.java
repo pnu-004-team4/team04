@@ -65,7 +65,7 @@ public class AudioMetaDao {
         return audioMetaList;
     }
 
-    public AudioMeta getAudioMeta(ObjectId dbId) {
+    public AudioMeta getAudioMeta(String dbId) {
         Document document = this.mongoCollection.find(eq("_id", dbId)).first();
 
         return AudioMetaConverter.toAudioMeta(document);

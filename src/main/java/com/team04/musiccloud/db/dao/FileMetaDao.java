@@ -65,7 +65,7 @@ public class FileMetaDao {
         return fileMetaList;
     }
 
-    public FileMeta getFileMeta(ObjectId dbId) {
+    public FileMeta getFileMeta(String dbId) {
         Document document = this.mongoCollection.find(eq("_id", dbId)).first();
 
         return FileMetaConverter.toFileMeta(document);

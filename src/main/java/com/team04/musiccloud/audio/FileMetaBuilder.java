@@ -11,8 +11,32 @@ public class FileMetaBuilder {
     private FileMetaBuilder() {
     }
     
+    private FileMetaBuilder(FileMeta fileMeta) {
+        if ( fileMeta.isEmpty() ) return;
+        
+        if ( fileMeta.hasDbId() ) {
+            dbId = fileMeta.getDbId();
+        }
+        if ( fileMeta.hasDirectory() ) {
+            directory = fileMeta.getDirectory();
+        }
+        if ( fileMeta.hasName() ) {
+            name = fileMeta.getName();
+        }
+        if ( fileMeta.hasExtension() ) {
+            extension = fileMeta.getExtension();
+        }
+        if ( fileMeta.hasName() ) {
+            user = fileMeta.getUser();
+        }
+    }
+    
     public static FileMetaBuilder builder() {
         return new FileMetaBuilder();
+    }
+    
+    public static FileMetaBuilder builder(FileMeta fileMeta) {
+        return new FileMetaBuilder(fileMeta);
     }
     
     public FileMetaBuilder setDbId(String dbId) {
