@@ -1,5 +1,7 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.utilities.StringUtilities;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -26,6 +28,30 @@ public class AudioMeta {
     public AudioMeta(AudioMeta other) {
         this(other.title, other.author, other.album, other.releaseDate);
         setDbId(other.dbId);
+    }
+    
+    public boolean isEmpty() {
+        return !(hasDbId() || hasTitle() || hasAuthor() || hasAlbum() || hasReleaseDate());
+    }
+    
+    public boolean hasDbId() {
+        return StringUtilities.hasContentAfterTrim(dbId);
+    }
+    
+    public boolean hasAuthor() {
+        return StringUtilities.hasContentAfterTrim(author);
+    }
+    
+    public boolean hasTitle() {
+        return StringUtilities.hasContentAfterTrim(title);
+    }
+    
+    public boolean hasAlbum() {
+        return StringUtilities.hasContentAfterTrim(album);
+    }
+    
+    public boolean hasReleaseDate() {
+        return releaseDate != null && !releaseDate.isEqual(LocalDateTime.MIN);
     }
     
     public String getDbId() {

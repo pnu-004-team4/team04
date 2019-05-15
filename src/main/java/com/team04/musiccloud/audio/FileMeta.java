@@ -1,5 +1,7 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.utilities.StringUtilities;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +32,30 @@ public class FileMeta {
         setDbId(other.dbId);
     }
     
+    public boolean isEmpty() {
+        return !(hasDbId() || hasDirectory() || hasName() || hasExtension() || hasUser());
+    }
+    
+    public boolean hasDbId() {
+        return StringUtilities.hasContentAfterTrim(dbId);
+    }
+    
+    public boolean hasDirectory() {
+        return StringUtilities.hasContentAfterTrim(directory);
+    }
+    
+    public boolean hasName() {
+        return StringUtilities.hasContentAfterTrim(name);
+    }
+    
+    public boolean hasExtension() {
+        return StringUtilities.hasContentAfterTrim(extension);
+    }
+    
+    public boolean hasUser() {
+        return StringUtilities.hasContentAfterTrim(user);
+    }
+    
     public String getDbId() {
         return dbId;
     }
@@ -40,6 +66,10 @@ public class FileMeta {
     
     public String getDirectory() {
         return directory;
+    }
+    
+    public Path getDirectoryAsPath() {
+        return Paths.get(this.getDirectory());
     }
     
     private void setDirectory(String directory) {
@@ -63,19 +93,19 @@ public class FileMeta {
     }
     
     public Path getFullPath() {
-        if ( directory == null ) throw new NullPointerException("Directory cannot be null.");
-        if ( name == null ) throw new NullPointerException("File name cannot be null.");
-        if ( extension == null ) throw new NullPointerException("File extension cannot be null.");
-        
-        return Paths.get(directory, name + "." + extension).toAbsolutePath();
+        if ( directory == null ) throw new IllegalStateException("Directory cannot be null.");
+        if ( name == null ) throw new IllegalStateException("File name cannot be null.");
+        if ( extension == null ) throw new IllegalStateException("File extension cannot be null.");
+    
+        return Paths.get(directory, this.getNameExtension()).toAbsolutePath();
     }
     
     public File getFullPathAsFile() {
         return getFullPath().toFile();
     }
     
-    public Path getNameExtension() {
-        return Paths.get(getName() + "." + getExtension());
+    public String getNameExtension() {
+        return getName() + "." + getExtension();
     }
     
     public String getUser() {

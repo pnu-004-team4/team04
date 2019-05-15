@@ -6,7 +6,6 @@ import com.mongodb.client.MongoCursor;
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.db.converter.AudioMetaConverter;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,7 @@ public class AudioMetaDao {
         return audioMetaList;
     }
 
-    public AudioMeta getAudioMeta(ObjectId dbId) {
+    public AudioMeta getAudioMeta(String dbId) {
         Document document = this.mongoCollection.find(eq("_id", dbId)).first();
 
         return AudioMetaConverter.toAudioMeta(document);
