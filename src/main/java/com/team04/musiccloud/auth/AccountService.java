@@ -35,7 +35,7 @@ public class AccountService implements UserDetailsService {
             System.out.println("FindAccountbyEmail() has been called" + " email : " + account.getEmail() + " password : " + account.getPassword());
             List<GrantedAuthority> authorities = new ArrayList<>();
             // 유저 권한을 주도록 합니다.
-            if(account.getEmail().equals("admin@admin@com")){
+            if(account.getEmail().equals("admin@admin.com")){
                 // 관리자에게는 ADMIN 권한 부여
                 authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             }

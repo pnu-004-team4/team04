@@ -15,7 +15,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         Account account = new Account();
         http.authorizeRequests()
                 .antMatchers("/login", "/register", "/css/**", "/js/**", "/registerCheck").permitAll()
-                .antMatchers("server.storage/"+ account.getEmail()).hasRole("" + account.getEmail())
+                //.antMatchers("/server/storage/" + account.getEmail() + "/**").hasRole("" + account.getEmail())
+                //.antMatchers("/server/temp/" + account.getEmail() + "/**").hasRole("" + account.getEmail())
+                // @TODO 조만간 위의 코드로 바뀔 코드입니다 현재 ADMIN 권한을 가진 유저만 해당 폴더의 파일에 접근할 수 있습니다
+                .antMatchers("/server/storage/CSK/**").hasRole("ADMIN")
+                .antMatchers("/server/temp/CSK/**").hasRole("ADMIN")
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

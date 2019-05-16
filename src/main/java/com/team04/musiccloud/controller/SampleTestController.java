@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class SampleTestController {
     
@@ -13,9 +15,7 @@ public class SampleTestController {
     }
     
     @RequestMapping("/logout")
-    public ModelAndView logout() {
-        return new ModelAndView("/Login/logout");
-    }
+    public ModelAndView logout() { return new ModelAndView("/Login/logout"); }
 
 
     //문광수

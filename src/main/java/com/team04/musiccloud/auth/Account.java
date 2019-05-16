@@ -53,10 +53,7 @@ public class Account {
         return sessId;
     }
 
-    public void setSessId(String sess){
-        this.sessId = sess;
-
-    }
+    public void setSessId(String sess){ this.sessId = sess; }
 
     public String getName(){
         return name;
