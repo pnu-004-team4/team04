@@ -13,8 +13,32 @@ public class AudioMetaBuilder {
     private AudioMetaBuilder() {
     }
     
+    private AudioMetaBuilder(AudioMeta audioMeta) {
+        if ( audioMeta.isEmpty() ) return;
+        
+        if ( audioMeta.hasDbId() ) {
+            dbId = audioMeta.getDbId();
+        }
+        if ( audioMeta.hasTitle() ) {
+            title = audioMeta.getTitle();
+        }
+        if ( audioMeta.hasAuthor() ) {
+            author = audioMeta.getAuthor();
+        }
+        if ( audioMeta.hasAlbum() ) {
+            album = audioMeta.getAlbum();
+        }
+        if ( audioMeta.hasReleaseDate() ) {
+            releaseDate = audioMeta.getReleaseDate();
+        }
+    }
+    
     public static AudioMetaBuilder builder() {
         return new AudioMetaBuilder();
+    }
+    
+    public static AudioMetaBuilder builder(AudioMeta audioMeta) {
+        return new AudioMetaBuilder(audioMeta);
     }
     
     public AudioMetaBuilder setDbId(String dbId) {
