@@ -5,15 +5,12 @@ import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.ExtractorFactory;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.db.MetadataCustomRepository;
-import com.team04.musiccloud.stream.caching.manager.CacheManager;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class AudioHandler {
     private String user;
@@ -37,7 +34,7 @@ public class AudioHandler {
 //        final FileMeta fileMeta = customRepository.getFileMeta(dbId);
 //
 //        // @TODO Remove this log when done with the project
-//        LOGGER.info("\n" +
+//        Logger.getGlobal().info("\n" +
 //                "------ fileMeta ------\n" +
 //                "\tDB ID: " + fileMeta.getDbId() + "\n" +
 //                "\tPath: " + fileMeta.getDirectory() + "\n" +
@@ -54,15 +51,16 @@ public class AudioHandler {
         //new Streaming().getAudioFromBack(audio);
     }
     
-    private FileMeta getCacheFileMeta(String user, FileMeta fileMeta) throws IOException {
-        final CacheManager cacheManager = new CacheManager(user);
-        cacheManager.updateOrLoad(fileMeta.getDirectoryAsPath(), fileMeta.getNameExtension());
-        
-        final String cacheDirectory = cacheManager.getUserCachePath().toString();
-        return FileMetaBuilder.builder(fileMeta)
-                .setDirectory(cacheDirectory)
-                .build();
-    }
+    // @TODO Needed if requestLoad() is reused
+//    private FileMeta getCacheFileMeta(String user, FileMeta fileMeta) throws IOException {
+//        final CacheManager cacheManager = new CacheManager(user);
+//        cacheManager.updateOrLoad(fileMeta.getDirectoryAsPath(), fileMeta.getNameExtension());
+//
+//        final String cacheDirectory = cacheManager.getUserCachePath().toString();
+//        return FileMetaBuilder.builder(fileMeta)
+//                .setDirectory(cacheDirectory)
+//                .build();
+//    }
     
     public void requestDelete(String dbId) throws IOException {
         deleteAudioFromStorage(dbId);

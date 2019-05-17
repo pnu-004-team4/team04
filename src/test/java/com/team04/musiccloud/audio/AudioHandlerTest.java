@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-
-import static org.apache.sis.internal.jaxb.Context.LOGGER;
+import java.util.logging.Logger;
 
 public class AudioHandlerTest {
+    public static final Logger LOGGER = Logger.getGlobal();
     public static final String USER_NAME = "CSK";
     
     @Ignore
