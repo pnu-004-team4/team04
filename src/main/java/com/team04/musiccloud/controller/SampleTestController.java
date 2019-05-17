@@ -13,9 +13,7 @@ public class SampleTestController {
     }
     
     @RequestMapping("/logout")
-    public ModelAndView logout() {
-        return new ModelAndView("/Login/logout");
-    }
+    public ModelAndView logout() { return new ModelAndView("/Login/logout"); }
 
 
     //문광수
