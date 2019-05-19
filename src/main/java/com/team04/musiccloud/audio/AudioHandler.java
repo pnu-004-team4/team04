@@ -61,7 +61,7 @@ public class AudioHandler {
     final CacheManager cacheManager = new CacheManager(user);
     FileMeta fileMeta = customRepository.getFileMeta(dbId);
 
-    final FileMeta cacheFileMeta = getCacheFileMeta(cacheManager, user, fileMeta);
+    final FileMeta cacheFileMeta = getCacheFileMeta(cacheManager, fileMeta);
     Audio audio = new Audio(audioMeta, cacheFileMeta, null);
 
     if (cacheManager.isDoCreated()) {
@@ -81,7 +81,7 @@ public class AudioHandler {
     return audio;
   }
 
-  private FileMeta getCacheFileMeta(CacheManager cacheManager, String user, FileMeta fileMeta)
+  private FileMeta getCacheFileMeta(CacheManager cacheManager, FileMeta fileMeta)
       throws IOException {
     cacheManager.updateOrLoad(fileMeta.getDirectoryAsPath(), fileMeta.getNameExtension());
 

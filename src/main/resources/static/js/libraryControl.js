@@ -13,17 +13,17 @@ $(document).ready(function () {
   var initialTrackName = firstTrack.find(".track__title")[0].innerText;
   var initialTrackArtist = firstTrack.find(".track__artist")[0].innerText;
 
-  var current_track_song = $(".current-track__song").first();
-  var current_track_name = current_track_song.find(".current-track__name")[0];
-  var current_track_artist = current_track_song.find(".current-track__name")[1];
+  var currentTrackSong = $(".current-track__song").first();
+  var currentTrackName = currentTrackSong.find(".current-track__name")[0];
+  var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
 
   var MAX_TRACK_NAME_SIZE = 10;
   var MAX_TRACK_ARTIST_SIZE = 10;
 
   var audioTag = $("#bgAudio");
 
-  current_track_name.innerText = initialTrackName.slice(0, MAX_TRACK_NAME_SIZE);
-  current_track_artist.innerText = initialTrackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
+  currentTrackName.innerText = initialTrackName.slice(0, MAX_TRACK_NAME_SIZE);
+  currentTrackArtist.innerText = initialTrackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
 
   /**
    * @description callback 함수로 library의 list를 selection을 할 수 있습니다.
@@ -47,12 +47,15 @@ $(document).ready(function () {
 
       var musicPath = "download?username="+userName+"&id="+trackId;
 
-      current_track_name.innerText = trackName.slice(0, MAX_TRACK_NAME_SIZE);
-      current_track_artist.innerText = trackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
+      currentTrackName.innerText = trackName.slice(0, MAX_TRACK_NAME_SIZE);
+      currentTrackArtist.innerText = trackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
       $("#nowPlaying").attr("src", musicPath);
       audioTag[0].load();
+
+      /*global play*/
+      /*eslint no-undef: "error"*/
       play();
-    })
+    });
   });
 }); // end of main
 

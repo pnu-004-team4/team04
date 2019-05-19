@@ -4,7 +4,6 @@ import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.utilities.MusicFileUtilities;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class SenderController {
-
-  private final static Logger logger = Logger.getGlobal();
 
   @RequestMapping(value = "/download"
       , method = RequestMethod.GET

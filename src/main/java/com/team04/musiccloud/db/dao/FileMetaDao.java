@@ -6,7 +6,6 @@ import com.beust.jcommander.ParameterException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
 import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.db.converter.FileMetaConverter;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class FileMetaDao {
   }
 
   public FileMeta getFileMeta(String dbId) throws ParameterException {
-    Document document = this.mongoCollection.find(Filters.eq("_id", new ObjectId(dbId))).first();
+    Document document = this.mongoCollection.find(eq("_id", new ObjectId(dbId))).first();
 
     if (document == null) {
       throw new ParameterException("Incorrect dbId ==>" + dbId);

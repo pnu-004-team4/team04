@@ -40,13 +40,13 @@ public class AudioHandlerTest {
   }
 
   @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
-  public void request_A_Upload() throws IOException, InvalidFileFormat, ExtractorException {
+  public void requestAUpload() throws IOException, InvalidFileFormat, ExtractorException {
     final MultipartFile mockMultipartFile = getMockMultipartFile();
     new AudioHandler(USER_NAME).requestUpload(mockMultipartFile);
   }
 
   @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
-  public void request_B_Load() throws IOException {
+  public void requestBLoad() throws IOException {
     new AudioHandler(USER_NAME).requestLoad(USER_NAME, getFirstDbId());
   }
 
