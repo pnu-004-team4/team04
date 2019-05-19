@@ -45,6 +45,7 @@
     String Password = request.getParameter("password");
     String Email = request.getParameter("email");
     String Name = request.getParameter("name");
+    String Resolution = request.getParameter("resolution");
 
     String CurUsername, CurPass, CurName;
     String CheckUsername, CheckPass, CheckEmail, CheckName;
@@ -112,10 +113,10 @@
                     <p><%= Password %></p>
                     <h2>Email</h2>
                     <p><%= CheckEmail %></p>
-                    <p></p>
+                    <h2>Resolution Use</h2>
+                    <p><%= Resolution%></p>
             </section>
             <section class="music">
-                <p></p>
                 <p></p>
                 <p></p>
                 <div class="button">

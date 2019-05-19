@@ -88,8 +88,8 @@
                 <section class="music">
                     <h2>Resolution use</h2>
                     <p>
-                        <input type="radio" id="radio1" name="radio-btn"/>Use
-                        <input type="radio" id="radio2" name="radio-btn"/>No
+                        <input type="radio" id="radio1" name="resolution" value="Use"/>Use
+                        <input type="radio" id="radio2" name="resolution" value="No" checked = "checked"/>No
                     </p>
                     <p></p>
                     <div class="button">
