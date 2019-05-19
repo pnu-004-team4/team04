@@ -30,20 +30,21 @@
       <i class="ion-record green"></i>
     </div>
     -->
+
     <form:form action="search" method="get">
         <div class="search">
             <input type="text" name = "index" placeholder="Search" />
-        </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
+
         </div>
     </form:form>
 
+    <div class="Button">
+        <button type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
 
     <div class="user">
-
-        <div class="owner">
-
 
             <div class="user__info">
 
@@ -74,7 +75,6 @@
             </div>
         </div>
 
-    </div>
 </section>
 
 
@@ -115,8 +115,6 @@
     </div>
 
     <div class="current-track__options">
-
-        <a href="#" class="lyrics">Lyrics</a>
 
         <span class="controls">
 

@@ -18,20 +18,11 @@ body a:hover {
   flex-flow: row wrap;
   align-items: center;
 }
-.header .page-flows .flow {
-  font-size: 20px;
-  color: #aaaaaa;
-  margin: 0 10px;
-}
-.header .page-flows .flow:hover {
-  color: white;
-}
-.header .page-flows .flow .disabled {
-  color: #5e5e5e;
-}
+
 .header .search {
   margin-left: 1%;
 }
+
 .header .search input {
   border-radius: 15px;
   border: none;
@@ -43,8 +34,15 @@ body a:hover {
   background-size: 10%;
   background-position: 5px;
 }
+.header .Button {
+  margin-left: 1%;
+}
+.header .Button {
+  color: #aaaaaa;
+  margin: 0 10px;
+}
 .header .user {
-  width: 200px;
+  width: 150px;
   margin-left: auto;
   display: flex;
   flex-flow: row wrap;
@@ -320,12 +318,6 @@ body a:hover {
   flex-flow: row wrap;
   align-items: center;
 }
-.current-track__options .lyrics {
-  font-size: 11px;
-  text-transform: uppercase;
-  width: 15%;
-  padding: 0 15px 0 0;
-}
 .current-track__options .controls {
   width: 45%;
   display: flex;
@@ -558,10 +550,6 @@ body a:hover {
 @media (max-width: 650px) {
   .header .window__actions {
     width: 15%;
-  }
-  .header .page-flows {
-    width: 20%;
-    margin: 0;
   }
   .header .search {
     width: 65%;
