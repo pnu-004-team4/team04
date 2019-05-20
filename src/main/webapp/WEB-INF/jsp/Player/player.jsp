@@ -50,7 +50,6 @@
 
     <div class="user">
 
-=======
     <form:form action="search">
         <div class="search">
             <input type="text" name="index" placeholder="Search"/>
@@ -89,7 +88,6 @@
             </div>
         </div>
 
-=======
     </div>
 </section>
 
@@ -117,7 +115,6 @@
 
     <div class="current-track__options">
 
-=======
         <a href="#" class="lyrics">Lyrics</a>
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
