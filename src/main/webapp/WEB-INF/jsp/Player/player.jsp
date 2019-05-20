@@ -35,6 +35,21 @@
     </div>
     -->
 
+    <form:form action="search" method="get">
+        <div class="search">
+            <input type="text" name = "index" placeholder="Search" />
+
+        </div>
+    </form:form>
+
+    <div class="Button">
+        <button type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+
+    <div class="user">
+
     <form:form action="search">
         <div class="search">
             <input type="text" name="index" placeholder="Search"/>
@@ -72,6 +87,7 @@
 
             </div>
         </div>
+
     </div>
 </section>
 
@@ -98,6 +114,7 @@
     </div>
 
     <div class="current-track__options">
+
         <a href="#" class="lyrics">Lyrics</a>
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
