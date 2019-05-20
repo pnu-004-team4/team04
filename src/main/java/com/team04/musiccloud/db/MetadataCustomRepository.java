@@ -1,5 +1,6 @@
 package com.team04.musiccloud.db;
 
+import com.beust.jcommander.ParameterException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -38,7 +39,7 @@ public class MetadataCustomRepository {
 
     return true;
   }
-  
+
   /*
     DB에 저장된 AudioMeta와 FileMeta를 삭제하는 함수.
     여기서 전달된 dbId는 AudioMeta와 FileMeta의 _id값.
@@ -47,7 +48,7 @@ public class MetadataCustomRepository {
     audioMetaDao.delete(dbId);
     fileMetaDao.delete(dbId);
   }
-  
+
   /*
   특정 AudioMeta를 찾고자 할 때 사용하는 함수.
   여기서 AudioMeta를 찾기 위해선 dbId 값을 전달해야 함.
@@ -62,7 +63,7 @@ public class MetadataCustomRepository {
   여기서 FileMeta를 찾기 위해선 dbId 값을 전달해야 함.
   찾으면 그에 대응되는 FileMeta를, 찾지 못한다면 null을 반환.
   */
-  public FileMeta getFileMeta(String dbId) {
+  public FileMeta getFileMeta(String dbId) throws ParameterException {
     return fileMetaDao.getFileMeta(dbId);
   }
 

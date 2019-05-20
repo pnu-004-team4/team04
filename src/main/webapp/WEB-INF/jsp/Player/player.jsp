@@ -201,7 +201,7 @@
 <script src="/js/myPlayer.js"></script>
 <script src="/js/libraryControl.js"></script>
 
-${streamingTest}
+${streaming}
 
 
 </body>
