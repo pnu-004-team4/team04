@@ -29,14 +29,14 @@ public class FileMetaConverter {
     }
 
     public static FileMeta toFileMeta(Document document) {
-        String userName = document.get("name").toString();
+        String userName = document.get("user").toString();
         Path filePath = StaticPaths.storage.resolve(userName).toAbsolutePath();
 
         return FileMetaBuilder.builder()
                 .setDbId(document.get("_id").toString())
                 .setDirectory(filePath.toString())
-                .setName(userName)
+                .setName((String) document.get("name"))
                 .setExtension((String) document.get("extension"))
-                .setUser((String) document.get("user")).build();
+                .setUser(userName).build();
     }
 }
