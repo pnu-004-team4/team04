@@ -3,6 +3,7 @@
 }
 
 body {
+    background-image: linear-gradient(#2D5376, #ADC5BE);
     font-family: 'Rubik', Arial, sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
@@ -15,17 +16,29 @@ h1, h2, h3 {
 .container {
     display: flex;
 <!-- justify-content: center; -->
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    margin: 10% 5%;
+    margin: 100px auto 10px;
+}
+
+@media (max-width: 1400px) {
+    .container {
+        width: 80%;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        margin: 50px auto 10px;
+        width: 100%;
+    }
 }
 
 .settings {
-    width: 320px;
-    height: 480px;
+    width: 450px;
+    height: 600px;
     margin: 0 auto;
     padding: 5px 15px;
 
@@ -47,7 +60,8 @@ header {
 
 
 header h1 {
-    font-size: 1.35rem;
+    font-size: 34px;
+    font-weight: 700;
     font-variant: small-caps;
     margin: 0;
 
@@ -72,16 +86,18 @@ section {
 }
 
 section h2 {
-    font-size: .95rem;
+    font-size: 24px;
+    font-weight: 500;
     margin-bottom: 0px;
     width: 100%;
 }
 
 section p {
-    font-size: .85rem;
+    font-size: 20px;
     width: 60%;
     margin-top: 10px;
     letter-spacing: 0.05rem;
+    padding-left: 8px;
 
 
 }
@@ -96,11 +112,21 @@ section span  {
 
 .user input{
     border: none;
-    height: 30px;
+    font-size: 20px;
+    height: 40px;
     width: 100%;
     margin-top: 7px;
     padding-left: 8px;
 }
+
+/*Only on valid*/
+.user input:valid{box-shadow: 0 0 2px rgba(0,255,0,0.4);}
+/*Only on focus and valid*/
+.user input:valid:focus{ background: #80BE93; box-shadow: none;  }
+/*Only on invalid*/
+.user input:invalid{box-shadow: 0 0 2px rgba(255,0,0,0.4);}
+/*Only on focus and invalid*/
+.user input:invalid:focus{ background: #CB9089; box-shadow: none;}
 
 .music {
     justify-content: space-between;
@@ -113,6 +139,8 @@ section span  {
     width: 100%;
     margin-top: -10px;
 }
+
+
 input[type=range] {
     -webkit-appearance: none;
     margin: 10px 0;
@@ -375,7 +403,7 @@ button {
     padding: 5px 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 25px;
     cursor: pointer;
     background-color: #666886;
     color: #FFF;

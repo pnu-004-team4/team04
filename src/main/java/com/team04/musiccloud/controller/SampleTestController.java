@@ -13,9 +13,7 @@ public class SampleTestController {
     }
     
     @RequestMapping("/logout")
-    public ModelAndView logout() {
-        return new ModelAndView("/Login/logout");
-    }
+    public ModelAndView logout() { return new ModelAndView("/Login/logout"); }
 
 
     //문광수
@@ -27,7 +25,7 @@ public class SampleTestController {
 
     @RequestMapping("/setcheck")
     public ModelAndView UserSetCheck() {
-        return new ModelAndView("/UserSettings/usersetcheck");
+        return new ModelAndView("/Setting/usersetcheck");
     }
 
     @RequestMapping("/search")

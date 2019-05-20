@@ -8,10 +8,27 @@ public class Audio {
     private FileMeta fileMeta;
     private byte[] bytes;
     
+    public Audio(AudioMeta audioMeta, FileMeta fileMeta) {
+        setAudioMeta(audioMeta);
+        setFileMeta(fileMeta);
+    }
+    
     public Audio(AudioMeta audioMeta, FileMeta fileMeta, byte[] bytes) {
         setAudioMeta(audioMeta);
         setFileMeta(fileMeta);
         setBytes(bytes);
+    }
+    
+    public boolean hasAudioMeta() {
+        return audioMeta != null && !audioMeta.isEmpty();
+    }
+    
+    public boolean hasFileMeta() {
+        return fileMeta != null && !fileMeta.isEmpty();
+    }
+    
+    public boolean hasBytes() {
+        return bytes != null && bytes.length != 0;
     }
     
     public AudioMeta getAudioMeta() {
@@ -46,13 +63,12 @@ public class Audio {
         Audio audio = (Audio) obj;
         
         return Objects.equals(audioMeta, audio.audioMeta) &&
-                Objects.equals(fileMeta, audio.fileMeta) &&
-                Arrays.equals(bytes, audio.bytes);
+                Objects.equals(fileMeta, audio.fileMeta);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(audioMeta, fileMeta, bytes);
+        return Objects.hash(audioMeta, fileMeta);
     }
     
 }
