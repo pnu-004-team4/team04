@@ -14,10 +14,9 @@ public class Account {
     private String email;
     private String password;
     private String name;
-    private String username;
+    private Boolean resolution;
     private Integer id;
     private String sessId;
-
 
     public Integer getId() {
         return id;
@@ -63,8 +62,11 @@ public class Account {
         this.name = name;
     }
 
-    public String getUsername() { return username; }
+    public Boolean getResolution() {
+        return resolution;
+    }
 
-    public void setUsername(String username) { this.username = username; }
-
+    public void setResolution(Boolean resolution) {
+        this.resolution = resolution;
+    }
 }

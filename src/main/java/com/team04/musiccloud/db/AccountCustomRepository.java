@@ -1,14 +1,23 @@
 package com.team04.musiccloud.db;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
 import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.db.dao.AccountDao;
+import com.team04.musiccloud.utilities.StaticKeys;
+import org.bson.Document;
 
 public class AccountCustomRepository {
 
     private AccountDao accountDao;
 
     public AccountCustomRepository() {
-        this.accountDao = new AccountDao();
+        MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
+        MongoClient mongoClient = new MongoClient(mongoClientURI);
+        MongoCollection<Document> mongoCollection = mongoClient.getDatabase("MusicCloud")
+                .getCollection("account");
+        this.accountDao = new AccountDao(mongoCollection);
     }
 
     /*
@@ -29,7 +38,7 @@ public class AccountCustomRepository {
     test@test.com을 아이디로 사용하는 유저의 정보를 주어진 매개 변수 내용들로 바꿈.
     이 예시에선 password는 1234로 바꾸고, name은 바꾸지 않고, username은 Kim으로 바꿈, .
     */
-    public boolean updateAccount(String email, String password, String name, String username) {
+    public boolean updateAccount(String email, String password, String name, Boolean resolution) {
         Account found = accountDao.getAccount(email);
         if ( password != null ) {
             found.setPassword(password);
@@ -37,8 +46,8 @@ public class AccountCustomRepository {
         if ( name != null ) {
             found.setName(name);
         }
-        if ( username != null ) {
-            found.setUsername(username);
+        if ( resolution != null ) {
+            found.setResolution(resolution);
         }
 
         return accountDao.update(found);
