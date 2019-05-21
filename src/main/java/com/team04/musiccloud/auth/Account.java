@@ -1,22 +1,20 @@
 package com.team04.musiccloud.auth;
 
-//import com.team04.musiccloud.db.AccounRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Optional;
 
 public class Account {
 
-    @Autowired
+    //bcrypt를 이용한 encoding
     private PasswordEncoder passwordEncoder;
 
     @Id
     private String email;
     private String password;
     private String name;
-    private String username;
+    private Boolean resolution;
     private Integer id;
     private String sessId;
 
@@ -45,13 +43,16 @@ public class Account {
         this.password = password;
     }
 
+    public void encodePassword(){
+        passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
+    }
+
     public String getSessId(){
         return sessId;
     }
 
-    public void setSessId(String sess){
-        this.sessId = sess;
-    }
+    public void setSessId(String sess){ this.sessId = sess; }
 
     public String getName(){
         return name;
@@ -61,8 +62,11 @@ public class Account {
         this.name = name;
     }
 
-    public String getUsername() { return username; }
+    public Boolean getResolution() {
+        return resolution;
+    }
 
-    public void setUsername(String username) { this.username = username; }
-
+    public void setResolution(Boolean resolution) {
+        this.resolution = resolution;
+    }
 }

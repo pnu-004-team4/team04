@@ -18,20 +18,11 @@ body a:hover {
   flex-flow: row wrap;
   align-items: center;
 }
-.header .page-flows .flow {
-  font-size: 20px;
-  color: #aaaaaa;
-  margin: 0 10px;
-}
-.header .page-flows .flow:hover {
-  color: white;
-}
-.header .page-flows .flow .disabled {
-  color: #5e5e5e;
-}
+
 .header .search {
   margin-left: 1%;
 }
+
 .header .search input {
   border-radius: 15px;
   border: none;
@@ -43,8 +34,15 @@ body a:hover {
   background-size: 10%;
   background-position: 5px;
 }
+.header .Button {
+  margin-left: 1%;
+}
+.header .Button {
+  color: #aaaaaa;
+  margin: 0 10px;
+}
 .header .user {
-  width: 200px;
+  width: 150px;
   margin-left: auto;
   display: flex;
   flex-flow: row wrap;
@@ -108,14 +106,11 @@ body a:hover {
   width: 15%;
 }
 .content__middle {
-  width: 70%;
-}
-.content__right {
-  width: 15%;
+  width: 85%;
 }
 @media (max-width: 1400px) {
   .content__left {
-    width: 20%;
+    display: none;
   }
   .content__middle {
     width: 80%;
@@ -126,7 +121,7 @@ body a:hover {
 }
 @media (max-width: 768px) {
   .content__left {
-    width: 100%;
+    display: none;
   }
   .content__middle {
     width: 100%;
@@ -308,8 +303,10 @@ body a:hover {
   border-radius: 50%;
   box-shadow: none;
   border: none;
-  left: 0;
+  opacity: 1.0;
   display: none;
+  top: -2.5px;
+  margin-inline-end: 10px;
 }
 .current-track__progress__bar .noUi-handle:before, .current-track__progress__bar .noUi-handle:after {
   background: none;
@@ -322,12 +319,6 @@ body a:hover {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-}
-.current-track__options .lyrics {
-  font-size: 11px;
-  text-transform: uppercase;
-  width: 15%;
-  padding: 0 15px 0 0;
 }
 .current-track__options .controls {
   width: 45%;
@@ -363,11 +354,12 @@ body a:hover {
   background: #c8c8c8;
   width: 0px;
   height: 0px;
-  border-radius: 50%;
+  border-radius: 0%;
   box-shadow: none;
   border: none;
-  left: 0;
   display: none;
+  top:0px;
+  margin-inline-end: 10px;
 }
 .current-track__options .controls .volume #song-volume .noUi-handle:before, .current-track__options .controls .volume #song-volume .noUi-handle:after {
   background: none;
@@ -561,10 +553,6 @@ body a:hover {
 @media (max-width: 650px) {
   .header .window__actions {
     width: 15%;
-  }
-  .header .page-flows {
-    width: 20%;
-    margin: 0;
   }
   .header .search {
     width: 65%;
