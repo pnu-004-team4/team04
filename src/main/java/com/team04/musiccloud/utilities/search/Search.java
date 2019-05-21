@@ -1,4 +1,4 @@
-package com.team04.musiccloud.utilities.Search;
+package com.team04.musiccloud.utilities.search;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class Search {
 
 
-   public ArrayList<Music> Msearch(String search){
+   public ArrayList<Music> msearch(String search){
         Music m = new Music();
         ArrayList<Music> comp;
 
-        comp = m.Musiclist();
+        comp = m.musiclist();
 
         ArrayList<Music> result = new ArrayList<>();
 

@@ -42,10 +42,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SampleStreamingController {
 
-  private static Path testDirectory = Paths
-      .get(System.getProperty("user.dir"), "src", "main", "resources", "static/media", "audios");
   @Autowired
-  AccountService accountService;
+  public AccountService accountService;
 
   @RequestMapping("/login")
   public ModelAndView login() {

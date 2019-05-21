@@ -13,18 +13,6 @@ public class AudioCachingTest {
 
   private AudioCaching audioCaching = null;
 
-  @Before
-  public void setUp() {
-    final String currentDirectory = StaticPaths.tempStorage.toString();
-    audioCaching = new AudioCaching(currentDirectory);
-    assertEquals(currentDirectory, audioCaching.getBaseDirectory());
-    audioCaching = new AudioCaching();
-    assertEquals(currentDirectory, audioCaching.getBaseDirectory());
-    audioCaching.setTimeUnit(TimeUnit.SECONDS);
-    audioCaching.setPeriod(30);
-    assertNotNull(audioCaching);
-  }
-
   @After
   public void tearDown() {
     audioCaching = null;
@@ -32,6 +20,17 @@ public class AudioCachingTest {
 
   @Test
   public void start() {
+    final String currentDirectory = StaticPaths.tempStorage.toString();
+    audioCaching = new AudioCaching(currentDirectory);
+    assertEquals(currentDirectory, audioCaching.getBaseDirectory());
+
+    audioCaching = new AudioCaching();
+    assertEquals(currentDirectory, audioCaching.getBaseDirectory());
+
+    audioCaching.setTimeUnit(TimeUnit.SECONDS);
+    audioCaching.setPeriod(30);
+    assertNotNull(audioCaching);
+
     audioCaching.start();
   }
 }

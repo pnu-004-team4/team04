@@ -1,18 +1,17 @@
 package com.team04.musiccloud.auth;
 
-public class invalidEmailException extends RuntimeException{
-    public invalidEmailException() {
-    }
+public class InvalidEmailException extends RuntimeException{
+    public InvalidEmailException() { }
 
-    public invalidEmailException(String message) {
+    public InvalidEmailException(String message) {
         super(message);
     }
 
-    public invalidEmailException(String message, Throwable cause) {
+    public InvalidEmailException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public invalidEmailException(Throwable cause) {
+    public InvalidEmailException(Throwable cause) {
         super(cause);
     }
 }
