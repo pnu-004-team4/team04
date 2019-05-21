@@ -16,7 +16,6 @@ public class Account {
     private String name;
     private Boolean resolution;
     private Integer id;
-    private String sessId;
 
     public Integer getId() {
         return id;
@@ -47,12 +46,6 @@ public class Account {
         passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }
-
-    public String getSessId(){
-        return sessId;
-    }
-
-    public void setSessId(String sess){ this.sessId = sess; }
 
     public String getName(){
         return name;
