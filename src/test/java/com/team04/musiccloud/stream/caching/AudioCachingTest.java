@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import com.team04.musiccloud.utilities.StaticPaths;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class AudioCachingTest {
