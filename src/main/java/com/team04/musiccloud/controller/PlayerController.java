@@ -122,6 +122,8 @@ public class PlayerController {
   private String trackTagGenerator(String userName, List<AudioMeta> metaArray) {
     StringBuilder trackTagContents = new StringBuilder();
     int counter = 1;
+    if(metaArray.isEmpty())
+      return "";
     for (AudioMeta meta : metaArray) {
       trackTagContents.append("<div class=\"track\">")
           .append("<div class=\"track__number\">")
