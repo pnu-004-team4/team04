@@ -55,8 +55,11 @@ public class Account {
         this.name = name;
     }
 
-    public Boolean getResolution() { return resolution; }
+    public Boolean getResolution() {
+        return resolution;
+    }
 
-    public void setResolution(Boolean resolution) { this.resolution = resolution; }
-
+    public void setResolution(Boolean resolution) {
+        this.resolution = resolution;
+    }
 }

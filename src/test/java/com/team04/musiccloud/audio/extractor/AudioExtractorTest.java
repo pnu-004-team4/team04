@@ -34,7 +34,7 @@ public class AudioExtractorTest {
         
         final Path path = Paths.get("test", "directory");
         audioExtractor.setBaseDirectory(path);
-    
+        
         final String userName = "s";
         final Audio audio = audioExtractor.getAudio(multipartFile, userName);
         final FileMeta fileMeta = audio.getFileMeta();

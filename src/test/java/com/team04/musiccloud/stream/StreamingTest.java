@@ -47,10 +47,10 @@ public class StreamingTest {
   @Test
   public void audioTransportTest() throws IOException {
     stream.getAudioFromBack(testAudio);
-    assertEquals("server/temp/CSK/sample.mp3", stream.sendAudioToFront());
+    assertEquals("download?username=CSK&id=null", stream.sendAudioToFront());
     stream.getAudioFromBack(testAudio);
     stream.setUseTranscode(true);
-    assertEquals("server/temp/CSK/sample.mp3", stream.sendAudioToFront());
+    assertEquals("download?username=CSK&id=null", stream.sendAudioToFront());
 
   }
 }

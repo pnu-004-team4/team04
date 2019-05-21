@@ -1,8 +1,8 @@
 package com.team04.musiccloud.stream.caching.manager;
 
-import com.team04.musiccloud.audio.FileMeta;
+import com.team04.musiccloud.utilities.FileSystemUtilities;
 import com.team04.musiccloud.utilities.StaticPaths;
-
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,32 +10,53 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class CacheManager {
-    public static final Path TEMP_DIRECTORY = Paths.get(
-            StaticPaths.staticResources.toString(), "temp"
-    ).toAbsolutePath();
-    
-    public Path getUserTemp(String user) {
-        return Paths.get(TEMP_DIRECTORY.toString(), user);
+
+  private String user;
+  private boolean created;
+
+
+  public CacheManager(String user) {
+    this.user = user;
+    this.created = false;
+  }
+
+  public Path getUserCachePath() {
+    return Paths.get(StaticPaths.tempStorage.toString(), user);
+  }
+
+
+  public boolean exists(String fileFullName) {
+    final Path fileInCache = this.getUserCachePath().resolve(fileFullName);
+    return Files.exists(fileInCache);
+  }
+
+  public void createCacheOf(Path source, String fileFullName) throws IOException {
+    createUserTemp();
+    Files.copy(source, this.getUserCachePath().resolve(fileFullName),
+        StandardCopyOption.REPLACE_EXISTING);
+  }
+
+  public void createUserTemp() throws UserTempAlreadyExists {
+    created = false;
+    File directory = new File(this.getUserCachePath().toString());
+
+    if (directory.mkdirs()) {
+      created = true;
     }
-    
-    public boolean exists(FileMeta fileMeta) {
-        final Path userTemp = TEMP_DIRECTORY.resolve(fileMeta.getUser());
-        return Files.exists(userTemp.resolve(fileMeta.getNameExtension()));
+  }
+
+  public void updateOrLoad(Path sourceDirectory, String fileFullName) throws IOException {
+    if (this.exists(fileFullName)) {
+      final Path userTemp = getUserCachePath();
+      FileSystemUtilities.updateModifiedDate(userTemp);
+      created = false;
+    } else {
+      createCacheOf(sourceDirectory.resolve(fileFullName), fileFullName);
+      created = true;
     }
-    
-    public void loadFrom(FileMeta fileAudio) throws IOException {
-        createUserTemp(fileAudio.getUser());
-    
-        final Path userTemp = getUserTemp(fileAudio.getUser()).resolve(fileAudio.getNameExtension());
-    
-        Files.copy(fileAudio.getFullPath(), userTemp, StandardCopyOption.REPLACE_EXISTING);
-    }
-    
-    public void createUserTemp(String user) throws UserTempAlreadyExists {
-        final Path userTemp = TEMP_DIRECTORY.resolve(user);
-    
-        if ( Files.notExists(userTemp) ) {
-            userTemp.toFile().mkdirs();
-        }
-    }
+  }
+
+  public boolean isDoCreated() {
+    return created;
+  }
 }
