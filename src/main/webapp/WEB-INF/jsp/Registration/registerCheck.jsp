@@ -23,18 +23,13 @@
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
 
-    boolean password_Identical = false;
-
     String name = request.getParameter("name");
-    String username  = request.getParameter("username");
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
 
     if(password.equals(cpassword)) {
-        password_Identical = true;
         account.setName(name);
-        account.setUsername(username);
         System.out.println("password input : " + password);
         account.setPassword(password);
         account.encodePassword();

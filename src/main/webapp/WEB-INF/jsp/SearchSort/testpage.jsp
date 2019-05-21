@@ -4,7 +4,7 @@
 
 <%@ page import ="com.team04.musiccloud.utilities.sort.Music"
          import ="com.team04.musiccloud.utilities.sort.ListSort"
-         import ="com.team04.musiccloud.utilities.Search.Search"
+         import ="com.team04.musiccloud.utilities.search.Search"
          import="java.util.ArrayList"
          language= "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 

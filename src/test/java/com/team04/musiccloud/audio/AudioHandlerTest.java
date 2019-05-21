@@ -47,7 +47,7 @@ public class AudioHandlerTest {
 
   @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
   public void requestBLoad() throws IOException {
-    new AudioHandler(USER_NAME).requestLoad(USER_NAME, getFirstDbId());
+    new AudioHandler(USER_NAME).requestLoad(true, USER_NAME, getFirstDbId());
   }
 
   @Ignore

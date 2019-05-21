@@ -7,15 +7,12 @@ import java.util.Comparator;
 
 public class ListSort {
 
-    public ListSort() {
-    }
-
     //전달요소: 배열
     public ArrayList<Music> Sort(int SelSort){
 
         //Music List를 받습니다.
         Music m = new Music();
-        ArrayList<Music> Mlist = m.Musiclist();
+        ArrayList<Music> Mlist = m.musiclist();
 
 
 

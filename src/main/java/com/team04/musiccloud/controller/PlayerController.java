@@ -4,17 +4,14 @@ import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.auth.Account;
-import com.team04.musiccloud.db.AccountCustomRepository;
 import com.team04.musiccloud.db.MetadataCustomRepository;
 import com.team04.musiccloud.stream.Streaming;
+import com.team04.musiccloud.utilities.AccountRepositoryUtil;
 import com.team04.musiccloud.utilities.MusicFileUtilities;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,18 +32,19 @@ public class PlayerController {
   private final static Logger logger = Logger.getGlobal();
   private Streaming stream;
   private ModelAndView base;
+  private AccountRepositoryUtil accountRepositoryUtil;
 
-  // @TODO: 나중에는 지우도록 합니다. 유의사항 ==> TranscodeTest.class가 이 함수를 호출중 입니다.
-  public static Audio getTestAudio() throws Exception {
-    AudioHandler audioHandler = new AudioHandler("CSK");
-    return audioHandler.requestLoad("CSK", "5ce13896138cd82a342b2fd3");
-  }
 
   private void setUp() {
     stream = new Streaming();
     base = new ModelAndView();
+    accountRepositoryUtil = AccountRepositoryUtil.getInstance();
   }
 
+  private List<AudioMeta> getAudioMetaList(String userName) {
+    final MetadataCustomRepository customRepository = new MetadataCustomRepository(userName);
+    return customRepository.getPlaylist();
+  }
 
   /**
    * HTML5에서 지원하는 오디오 태그를 생성하는 역할을 합니다.
@@ -59,14 +57,6 @@ public class PlayerController {
         + audioLocation
         + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
         + "\" id=\"nowPlaying\"></audio>";
-  }
-
-  private String getUserName() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String currentPrincipalName = authentication.getName();
-    AccountCustomRepository repository = new AccountCustomRepository();
-    Account SavedAccount = repository.findAccountByEmail(currentPrincipalName);
-    return SavedAccount.getName();
   }
 
   /**
@@ -84,27 +74,41 @@ public class PlayerController {
       }
     }
 
-    // @TODO: 혹시 모를 POST 이후 GET이 오는 상황을 방지하기 위한 방지책이 요구됨.
+    Account account = accountRepositoryUtil.getCurrentAccount();
+    String userName = account.getEmail();
 
-    String userName = "CSK"; // @TODO: 나중에는 username을 받아서 진행하도록 할 것.
-
-    final MetadataCustomRepository customRepository = new MetadataCustomRepository(userName);
-    List<AudioMeta> audioMetaArrayList = customRepository.getPlaylist();
+    List<AudioMeta> audioMetaArrayList = getAudioMetaList(userName);
 
     AudioHandler audioHandler = new AudioHandler(userName);
 
-    final String firstFileId = audioMetaArrayList.get(0).getDbId();
-    Audio firstAudio = audioHandler.requestLoad(userName, firstFileId);
+    String firstFileId = "";
+    try {
+      firstFileId = audioMetaArrayList.get(0).getDbId();
+    } catch (IndexOutOfBoundsException e) {
+      logger.info(e.toString());
+    }
+
     String trackList = trackTagGenerator(userName, audioMetaArrayList);
+
+    if (firstFileId.isEmpty()) {
+      base.addObject("streaming", audioTagGenerator("", ""));
+      base.addObject("username", account.getName());
+      base.addObject("getLibrary", trackList);
+      base.setViewName("Player/player");
+      return base;
+    }
+
+    final Boolean isDoTranscode = account.getResolution();
+
+    Audio firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
 
     stream.getAudioFromBack(firstAudio);
 
-    String dir = stream.sendAudioToFront();
-    String fileExtension = firstAudio.getFileMeta().getExtension();
+    String url = stream.sendAudioToFront();
+    String mimeType = firstAudio.getFileMeta().getExtension();
 
-    base.addObject("streaming", audioTagGenerator(dir, fileExtension));
-    ///// 위에 부분 나중에 변경해야 함 /////
-    base.addObject("username", getUserName());
+    base.addObject("streaming", audioTagGenerator(url, mimeType));
+    base.addObject("username", account.getName());
     base.addObject("getLibrary", trackList);
     base.setViewName("Player/player");
     return base;
@@ -118,6 +122,8 @@ public class PlayerController {
   private String trackTagGenerator(String userName, List<AudioMeta> metaArray) {
     StringBuilder trackTagContents = new StringBuilder();
     int counter = 1;
+    if(metaArray.isEmpty())
+      return "";
     for (AudioMeta meta : metaArray) {
       trackTagContents.append("<div class=\"track\">")
           .append("<div class=\"track__number\">")
@@ -159,24 +165,14 @@ public class PlayerController {
     //@TODO: 양식 다시 보내기가 실행되는 것을 방지하도록 합니다.
     //@TODO: 백 스페이스를 하게 되면 약간의 문제가 있다...
 
+    //@TODO: 나중에 사용하도록 할 것, 이것을 통해서 library를 다룰 수 있습니다.
     String item = httpServletRequest.getParameter("songs");
-    List<AudioMeta> audioMetaArrayList = new ArrayList<>();
+    System.out.println("Currently clicked value => " + item);
 
-    //@TODO: 반드시 지워야 합니다.
-    String userName = "CSK"; //@TODO getusername() 함수로 변경할 것
-    final MetadataCustomRepository customRepository = new MetadataCustomRepository("CSK");
-    int numberOfPrints = 0;
+    Account account = accountRepositoryUtil.getCurrentAccount();
+    String userName = account.getEmail();
 
-    if ("all songs".equalsIgnoreCase(item)) {
-      numberOfPrints = 10;
-    } else if ("some songs".equalsIgnoreCase(item)) {
-      numberOfPrints = 5;
-    }
-    ///// 위 내용은 지워야함 /////
-
-    audioMetaArrayList = customRepository.getPlaylist();
-
-    String trackList = trackTagGenerator(userName, audioMetaArrayList);
+    String trackList = trackTagGenerator(userName, getAudioMetaList(userName));
     base.addObject("getLibrary", trackList);
     return base;
   }
