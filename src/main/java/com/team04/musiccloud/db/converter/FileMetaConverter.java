@@ -32,6 +32,7 @@ public class FileMetaConverter {
                 .setDbId(document.get("_id").toString())
                 .setName((String) document.get("name"))
                 .setExtension((String) document.get("extension"))
+                .setDirectory(filePath.toString())
                 .setUser(userName).build();
     }
 }
