@@ -6,6 +6,7 @@ import com.team04.musiccloud.audio.AudioMetaBuilder;
 import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.utilities.DateTimeUtilities;
 import com.team04.musiccloud.utilities.FileSystemUtilities;
+import com.team04.musiccloud.utilities.NumberUtilities;
 import com.team04.musiccloud.utilities.StaticPaths;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,12 +52,15 @@ public abstract class AudioExtractor {
     private AudioMeta getAudioMeta(byte[] bytes) throws ExtractorException {
         final LocalDateTime localDateTime =
                 DateTimeUtilities.getLocalDateTime(getAudioReleaseDate(bytes)).orElse(null);
+        final int durationMs =
+                (int) NumberUtilities.parseDoubleOrZero(getAudioDurationMs(bytes));
         
         return AudioMetaBuilder.builder()
                 .setTitle(getAudioTitle(bytes))
                 .setAuthor(getAudioAuthor(bytes))
                 .setAlbum(getAudioAlbum(bytes))
                 .setReleaseDate(localDateTime)
+                .setDurationMs(durationMs)
                 .build();
     }
     
@@ -67,5 +71,7 @@ public abstract class AudioExtractor {
     protected abstract String getAudioTitle(byte[] bytes) throws ExtractorException;
     
     protected abstract String getAudioReleaseDate(byte[] bytes) throws ExtractorException;
-
+    
+    protected abstract String getAudioDurationMs(byte[] bytes) throws ExtractorException;
+    
 }
