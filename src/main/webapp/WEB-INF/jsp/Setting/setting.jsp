@@ -28,7 +28,6 @@
 
 <%
     String email;
-    String username;
     String name;
 
     AccountCustomRepository repository = new AccountCustomRepository();

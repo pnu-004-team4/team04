@@ -24,7 +24,6 @@
     AccountCustomRepository accountRepository = new AccountCustomRepository();
 
     String name = request.getParameter("name");
-    String username  = request.getParameter("username");
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
