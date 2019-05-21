@@ -23,7 +23,8 @@ $(document).ready(function () {
   var audioTag = $("#bgAudio");
 
   currentTrackName.innerText = initialTrackName.slice(0, MAX_TRACK_NAME_SIZE);
-  currentTrackArtist.innerText = initialTrackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
+  currentTrackArtist.innerText = initialTrackArtist.slice(0,
+      MAX_TRACK_ARTIST_SIZE);
 
   /**
    * @description callback 함수로 library의 list를 selection을 할 수 있습니다.
@@ -39,16 +40,16 @@ $(document).ready(function () {
    * @description track을 누르면 해당 track으로 갱신되도록 합니다.
    */
   trackList.each(function () {
-    $(this).click(function() {
-      var userName = $(this).find(".track__owner")[0].innerText;
+    $(this).click(function () {
       var trackId = $(this).find(".track__id")[0].innerText;
       var trackName = $(this).find(".track__title")[0].innerText;
       var trackArtist = $(this).find(".track__artist")[0].innerText;
 
-      var musicPath = "download?username="+userName+"&id="+trackId;
+      var musicPath = "download?id=" + trackId;
 
       currentTrackName.innerText = trackName.slice(0, MAX_TRACK_NAME_SIZE);
-      currentTrackArtist.innerText = trackArtist.slice(0, MAX_TRACK_ARTIST_SIZE);
+      currentTrackArtist.innerText = trackArtist.slice(0,
+          MAX_TRACK_ARTIST_SIZE);
       $("#nowPlaying").attr("src", musicPath);
       audioTag[0].load();
 

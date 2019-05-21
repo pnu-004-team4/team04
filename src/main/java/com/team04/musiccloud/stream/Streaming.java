@@ -39,8 +39,7 @@ public class Streaming implements IBackStreaming, IFrontStreaming {
   }
 
   private String formedServerStyle(Audio audio) {
-    return "download?" + "username=" + audio.getFileMeta().getUser() + "&"
-        + "id=" + audio.getFileMeta().getDbId();
+    return "download?id=" + audio.getFileMeta().getDbId();
   }
 
   private String serveAudio() throws IOException {

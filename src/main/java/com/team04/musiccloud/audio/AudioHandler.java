@@ -55,7 +55,7 @@ public class AudioHandler {
     ).getBytes();
   }
 
-  public Audio requestLoad(String user, String dbId) throws IOException, ParameterException {
+  public Audio requestLoad(Boolean isDoTranscode, String user, String dbId) throws IOException, ParameterException {
     final MetadataCustomRepository customRepository = new MetadataCustomRepository(this.user);
     final AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
     final CacheManager cacheManager = new CacheManager(user);
@@ -64,7 +64,7 @@ public class AudioHandler {
     final FileMeta cacheFileMeta = getCacheFileMeta(cacheManager, fileMeta);
     Audio audio = new Audio(audioMeta, cacheFileMeta, null);
 
-    if (cacheManager.isDoCreated()) {
+    if (cacheManager.isDoCreated() && isDoTranscode) {
       audio = doTranscodeAudio(user, audio);
     }
 
