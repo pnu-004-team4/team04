@@ -41,17 +41,18 @@
     AccountCustomRepository repository = new AccountCustomRepository();
 
     //입력값
+    String Username = request.getParameter("username");
     String Password = request.getParameter("password");
     String Email = request.getParameter("email");
     String Name = request.getParameter("name");
 
-    String CurPass, CurName;
+    String CurUsername, CurPass, CurName;
     String CheckUsername, CheckPass, CheckEmail, CheckName;
 
     //기존의 내용 불러오기.
     acc = repository.findAccountByEmail(Email);
 
-
+    CurUsername = acc.getUsername();
     CurPass = acc.getPassword();
     CurName = acc.getName();
 
@@ -60,7 +61,7 @@
 
 
     //빈칸인지 아닌지 확인한 후 빈칸이 아니면 업데이트.
-
+    if(!Username.equals("")) CurUsername = Username;
     if(!Name.equals("")) CurName = Name;
     if(!Password.equals("")) CurPass = Password;
 
@@ -74,13 +75,14 @@
     System.out.println("인코딩 후 password : " + CurPass);
 
     //updateAccount
-    repository.updateAccount(Email, CurPass, CurName);
+    repository.updateAccount(Email, CurPass, CurName, CurUsername);
 
 //    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     //update된 내용 불러오기.
     acc = repository.findAccountByEmail(Email);
 
+    CheckUsername = acc.getUsername();
     CheckName = acc.getName();
     CheckPass = acc.getPassword();
     CheckEmail = acc.getEmail();
@@ -102,6 +104,8 @@
         <div class="row">
             <section class="user">
                 <form:form action="/login" method="post">
+                    <h2>Username</h2>
+                    <p><%= CheckUsername %></p>
                     <h2>Name</h2>
                     <p><%= CheckName %></p>
                     <h2>Password</h2>

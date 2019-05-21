@@ -17,7 +17,6 @@ public class Account {
     private String name;
     private Boolean resolution;
     private Integer id;
-    private String username;
 
     public Integer getId() {
         return id;
@@ -61,11 +60,4 @@ public class Account {
 
     public void setResolution(Boolean resolution) { this.resolution = resolution; }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
