@@ -2,14 +2,11 @@ package com.team04.musiccloud.db.dao;
 
 import static com.mongodb.client.model.Filters.eq;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.db.converter.AccountConverter;
-import com.team04.musiccloud.utilities.StaticKeys;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -18,11 +15,8 @@ public class AccountDao {
 
   private MongoCollection<Document> mongoCollection;
 
-  public AccountDao() {
-    MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
-    MongoClient mongoClient = new MongoClient(mongoClientURI);
-    this.mongoCollection = mongoClient.getDatabase("MusicCloud")
-        .getCollection("account");
+  public AccountDao(MongoCollection<Document> mongoCollection) {
+    this.mongoCollection = mongoCollection;
   }
 
   public boolean create(Account account) {

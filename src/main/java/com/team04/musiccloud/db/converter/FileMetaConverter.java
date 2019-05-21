@@ -11,18 +11,14 @@ import java.nio.file.Path;
 public class FileMetaConverter {
 
     public static Document toDocument(FileMeta fileMeta) {
-
         return new Document("_id", fileMeta.getDbId())
-                .append("directory", fileMeta.getDirectory())
                 .append("name", fileMeta.getName())
                 .append("extension", fileMeta.getExtension())
                 .append("user", fileMeta.getUser());
     }
 
     public static Document toDocument(FileMeta fileMeta, String dbId) {
-
         return new Document("_id", new ObjectId(dbId))
-                .append("directory", fileMeta.getDirectory())
                 .append("name", fileMeta.getName())
                 .append("extension", fileMeta.getExtension())
                 .append("user", fileMeta.getUser());
@@ -34,7 +30,6 @@ public class FileMetaConverter {
 
         return FileMetaBuilder.builder()
                 .setDbId(document.get("_id").toString())
-                .setDirectory(filePath.toString())
                 .setName((String) document.get("name"))
                 .setExtension((String) document.get("extension"))
                 .setUser(userName).build();
