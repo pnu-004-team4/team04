@@ -30,7 +30,6 @@
 
     if(password.equals(cpassword)) {
         account.setName(name);
-        account.setResolution(true);
         System.out.println("password input : " + password);
         account.setPassword(password);
         account.encodePassword();
