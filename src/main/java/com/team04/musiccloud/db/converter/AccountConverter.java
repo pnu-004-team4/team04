@@ -6,12 +6,10 @@ import org.bson.Document;
 public class AccountConverter {
 
     public static Document toDocument(Account account) {
-        Document document = new Document("_id", account.getEmail())
+        return new Document("_id", account.getEmail())
                 .append("password", account.getPassword())
                 .append("name", account.getName())
-                .append("username", account.getUsername());
-
-        return document;
+                .append("resolution", account.getResolution());
     }
 
     public static Account toAccount(Document document) {
@@ -19,7 +17,7 @@ public class AccountConverter {
         account.setEmail((String) document.get("_id"));
         account.setPassword((String) document.get("password"));
         account.setName((String) document.get("name"));
-        account.setUsername((String) document.get("username"));
+        account.setResolution((Boolean) document.get("resolution"));
 
         return account;
     }

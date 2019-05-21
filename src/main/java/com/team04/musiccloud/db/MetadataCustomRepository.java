@@ -68,22 +68,6 @@ public class MetadataCustomRepository {
   }
 
   /*
-  특정 FileMeta의 directory를 찾고자 할 때 사용하는 함수.
-  여기서 FileMeta를 찾기 위해선 dbId 값을 전달해야 함.
-  찾으면 그에 대응되는 FileMeta의 directory를, 찾지 못한다면 null을 반환.
-  */
-  public String getFileDirectory(String dbId) {
-    String directory = null;
-
-    FileMeta found = fileMetaDao.getFileMeta(dbId);
-    if (found != null) {
-      directory = found.getDirectory();
-    }
-
-    return directory;
-  }
-
-  /*
   사용자의 재생 목록을 보여주기 위해 사용하는 함수.
   사용자가 업로드한 모든 음원의 AudioMeta를 반환하므로 사용자의 아이디(이메일 주소)만을 전달하면 된다.
   하나 이상의 AudioMeta 존재 시 List<AudioMeta>를, 하나도 없을 시 List는 empty할 것이다.
