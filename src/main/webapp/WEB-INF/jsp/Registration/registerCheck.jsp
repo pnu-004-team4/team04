@@ -34,7 +34,6 @@
     if(password.equals(cpassword)) {
         password_Identical = true;
         account.setName(name);
-        account.setUsername(username);
         System.out.println("password input : " + password);
         account.setPassword(password);
         account.encodePassword();
