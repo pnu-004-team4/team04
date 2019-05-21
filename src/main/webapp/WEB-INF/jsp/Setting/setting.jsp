@@ -49,10 +49,8 @@
 
     SavedAccount = repository.findAccountByEmail(email);
 
-    username = SavedAccount.getUsername();
     name = SavedAccount.getName();
 
-    System.out.println("username : " + username);
     System.out.println("name : " + name);
 
 %>
@@ -77,8 +75,6 @@
                     <input type="email" name="email" readonly value=<%= email%>  required="required">
                     <h2>Password</h2>
                     <input type="password" name="password" required="required">
-                    <h2>Username - alphabet only</h2>
-                    <input type="text" pattern="^[a-zA-Z]*$" name="username" value=<%= username%>  required="required">
                     <h2>Name - alphabet only</h2>
                     <input type="text" pattern="^[a-zA-Z]*$" name="name" value=<%= name%> required="required">
                 </section>

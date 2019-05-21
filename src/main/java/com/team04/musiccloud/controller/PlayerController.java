@@ -74,7 +74,7 @@ public class PlayerController {
         + "\" type=\"audio/mpeg\"></audio>";
   }
 
-  private String getUserName() {
+  private String getName() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentPrincipalName = authentication.getName();
     AccountCustomRepository repository = new AccountCustomRepository();
@@ -105,7 +105,7 @@ public class PlayerController {
 
     String dir = stream.sendAudioToFront();
     base.addObject("streamingTest", audioTagGenerator(dir));
-    base.addObject("username", getUserName());
+    base.addObject("username", getName());
     base.setViewName("Player/player");
     return base;
   }
