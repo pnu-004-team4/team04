@@ -33,7 +33,10 @@ public class Audio {
     return bytes != null && bytes.length != 0;
   }
 
-  public AudioMeta getAudioMeta() {
+  public AudioMeta getAudioMeta() throws ParameterException {
+    if (audioMeta == null) {
+      throw new ParameterException("Audio meta doesn't exist!!");
+    }
     return audioMeta;
   }
 

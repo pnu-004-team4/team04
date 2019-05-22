@@ -1,6 +1,7 @@
 package com.team04.musiccloud.audio;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class AudioMetaBuilder {
 
@@ -10,6 +11,7 @@ public class AudioMetaBuilder {
   private String author;
   private String album;
   private LocalDateTime releaseDate;
+  private int durationMs;
 
   private AudioMetaBuilder() {
   }
@@ -33,6 +35,9 @@ public class AudioMetaBuilder {
     }
     if (audioMeta.hasReleaseDate()) {
       releaseDate = audioMeta.getReleaseDate();
+    }
+    if (audioMeta.hasDurationMs()) {
+      durationMs = audioMeta.getDurationMs();
     }
   }
 
@@ -65,15 +70,16 @@ public class AudioMetaBuilder {
   }
 
   public AudioMetaBuilder setReleaseDate(LocalDateTime releaseDate) {
-    if (releaseDate != null) {
-      this.releaseDate = releaseDate;
-    } else {
-      this.releaseDate = LocalDateTime.MIN;
-    }
+    this.releaseDate = Optional.ofNullable(releaseDate).orElse(LocalDateTime.MIN);
+    return this;
+  }
+
+  public AudioMetaBuilder setDurationMs(int durationMs) {
+    this.durationMs = durationMs;
     return this;
   }
 
   public AudioMeta build() {
-    return new AudioMeta(dbId, title, author, album, releaseDate);
+    return new AudioMeta(dbId, title, author, album, releaseDate, durationMs);
   }
 }

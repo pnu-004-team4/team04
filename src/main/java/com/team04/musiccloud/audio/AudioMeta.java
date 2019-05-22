@@ -3,6 +3,7 @@ package com.team04.musiccloud.audio;
 import com.team04.musiccloud.utilities.StringUtilities;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 public class AudioMeta {
 
@@ -12,27 +13,30 @@ public class AudioMeta {
   private String author;
   private String album;
   private LocalDateTime releaseDate;
+  private int durationMs;
 
   public AudioMeta(String dbId, String title, String author, String album,
-      LocalDateTime releaseDate) {
-    this(title, author, album, releaseDate);
+      LocalDateTime releaseDate, int durationMs) {
+    this(title, author, album, releaseDate, durationMs);
     setDbId(dbId);
   }
 
-  public AudioMeta(String title, String author, String album, LocalDateTime releaseDate) {
+  public AudioMeta(String title, String author, String album, LocalDateTime releaseDate,
+      int durationMs) {
     setTitle(title);
     setAuthor(author);
     setAlbum(album);
     setReleaseDate(releaseDate);
+    setDurationMs(durationMs);
   }
 
   public AudioMeta(AudioMeta other) {
-    this(other.title, other.author, other.album, other.releaseDate);
-    setDbId(other.dbId);
+    this(other.dbId, other.title, other.author, other.album, other.releaseDate, other.durationMs);
   }
 
   public boolean isEmpty() {
-    return !(hasDbId() || hasTitle() || hasAuthor() || hasAlbum() || hasReleaseDate());
+    return !(hasDbId() || hasTitle() || hasAuthor() || hasAlbum() || hasReleaseDate()
+        || hasDurationMs());
   }
 
   public boolean hasDbId() {
@@ -53,6 +57,10 @@ public class AudioMeta {
 
   public boolean hasReleaseDate() {
     return releaseDate != null && !releaseDate.isEqual(LocalDateTime.MIN);
+  }
+
+  public boolean hasDurationMs() {
+    return durationMs != 0;
   }
 
   public String getDbId() {
@@ -88,11 +96,19 @@ public class AudioMeta {
   }
 
   public LocalDateTime getReleaseDate() {
-    return releaseDate == null ? LocalDateTime.MIN : releaseDate;
+    return Optional.ofNullable(releaseDate).orElse(LocalDateTime.MIN);
   }
 
   private void setReleaseDate(LocalDateTime releaseDate) {
     this.releaseDate = releaseDate;
+  }
+
+  public int getDurationMs() {
+    return durationMs;
+  }
+
+  private void setDurationMs(int durationMs) {
+    this.durationMs = durationMs;
   }
 
   @Override
