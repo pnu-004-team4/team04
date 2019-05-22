@@ -18,7 +18,6 @@ public class AudioCollectorTest {
     assertEquals("sample/dir", audioCollector.getBaseDirectory());
     audioCollector = new AudioCollector();
     assertEquals(audioCollector.DEFAULT, audioCollector.getBaseDirectory());
-    assertNotNull(audioCollector);
   }
 
   @After
@@ -35,5 +34,7 @@ public class AudioCollectorTest {
     audioCollector.setPeriod(100);
     audioCollector.setTimeUnit(TimeUnit.MINUTES);
     audioCollector.run();
+
+    assertNotNull(audioCollector);
   }
 }

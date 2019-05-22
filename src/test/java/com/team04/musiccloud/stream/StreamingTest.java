@@ -17,21 +17,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StreamingTest {
 
-  private static Path cacheDirectory = StaticPaths.tempStorage;
+  private static Path storageDirectory = StaticPaths.storage;
   private Streaming stream;
   private Audio testAudio;
 
   @Before
   public void setUp() throws Exception {
     stream = new Streaming();
-    final String user = "CSK";
-    final Path currentLocation = cacheDirectory.resolve(user)
+    final String user = "admin@admin.com";
+    final Path currentLocation = storageDirectory.resolve(user)
         .resolve("sample.mp3").toAbsolutePath();
     final AudioExtractor extractor = new Mp3Extractor();
 
     MultipartFile myFile = new MockMultipartFile(currentLocation.toString(),
         "sample.mp3", null, new FileInputStream(currentLocation.toFile()));
-    extractor.setBaseDirectory(cacheDirectory);
+    extractor.setBaseDirectory(storageDirectory);
     testAudio = extractor.getAudio(myFile, user);
     System.out.println(testAudio.getFileMeta().getDirectory());
     System.out.println(testAudio.getFileMeta().getFullPath());
@@ -39,7 +39,7 @@ public class StreamingTest {
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     stream = null;
     testAudio = null;
   }
@@ -47,10 +47,6 @@ public class StreamingTest {
   @Test
   public void audioTransportTest() throws IOException {
     stream.getAudioFromBack(testAudio);
-    assertEquals("download?username=CSK&id=null", stream.sendAudioToFront());
-    stream.getAudioFromBack(testAudio);
-    stream.setUseTranscode(true);
-    assertEquals("download?username=CSK&id=null", stream.sendAudioToFront());
-
+    assertEquals("download?id=null", stream.sendAudioToFront());
   }
 }

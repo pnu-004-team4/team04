@@ -1,8 +1,8 @@
 package com.team04.musiccloud.audio;
 
+import com.beust.jcommander.ParameterException;
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
 public class Audio {
 
@@ -33,7 +33,10 @@ public class Audio {
     return bytes != null && bytes.length != 0;
   }
 
-  public AudioMeta getAudioMeta() {
+  public AudioMeta getAudioMeta() throws ParameterException {
+    if (audioMeta == null) {
+      throw new ParameterException("Audio meta doesn't exist!!");
+    }
     return audioMeta;
   }
 
@@ -41,9 +44,9 @@ public class Audio {
     this.audioMeta = new AudioMeta(audioMeta);
   }
 
-  public FileMeta getFileMeta() throws ValueException {
+  public FileMeta getFileMeta() throws ParameterException {
     if (fileMeta == null) {
-      throw new ValueException("File meta doesn't exist!!");
+      throw new ParameterException("File meta doesn't exist!!");
     }
     return fileMeta;
   }

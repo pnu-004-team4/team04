@@ -41,9 +41,11 @@ public class Music implements Comparable<Music> {
 
         Music music = (Music) o;
 
-        if (title != null ? !title.equals(music.title) : music.title != null) return false;
-
-        return true;
+        if (title != null) {
+            return title.equals(music.title);
+        } else {
+            return music.title == null;
+        }
     }
 
     @Override
@@ -52,7 +54,7 @@ public class Music implements Comparable<Music> {
     }
 
 
-    public ArrayList<Music> Musiclist(){
+    public ArrayList<Music> musiclist(){
         //test title & artist
         //@TODO 실전에서는 이 배열을 제외하고 저장소에서 데이터를 불러온다.
         String[] title = {"abc", "하늘보리", "change", "dark", "zero", "who", "you", "monday", "너뭐하늘", "target",

@@ -14,7 +14,8 @@ public class AudioMetaConverter {
     Document document = new Document("title", audioMeta.getTitle())
         .append("author", audioMeta.getAuthor())
         .append("album", audioMeta.getAlbum())
-        .append("releaseDate", audioMeta.getReleaseDate().toString());
+        .append("releaseDate", audioMeta.getReleaseDate().toString())
+        .append("durationMs", audioMeta.getDurationMs());
     if (audioMeta.getDbId() == null) {
       document.append("_id", new ObjectId());
     } else {
@@ -39,6 +40,7 @@ public class AudioMetaConverter {
         .setTitle((String) document.get("title"))
         .setAuthor((String) document.get("author"))
         .setAlbum((String) document.get("album"))
-        .setReleaseDate(dateTime).build();
+        .setReleaseDate(dateTime)
+        .setDurationMs((int) document.get("durationMs")).build();
   }
 }
