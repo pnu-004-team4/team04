@@ -30,6 +30,7 @@ public class AudioMetaBuilderTest {
         .setAuthor(AUTHOR)
         .setAlbum(ALBUM)
         .setReleaseDate(DATE_TIME)
+        .setDurationMs(DURATION)
         .build();
 
     assertEquals(DB_ID, audioMeta.getDbId());
