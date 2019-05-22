@@ -1,6 +1,8 @@
 package com.team04.musiccloud;
 
 import com.beust.jcommander.ParameterException;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.stream.caching.AudioCaching;
@@ -27,5 +29,8 @@ public class MusiccloudApplication {
       throw new ParameterException("You must have the Mongo DB API Keys");
     }
     StaticKeys.setKeys(args[0]);
+
+    MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
+    MongoClient mongoClient = new MongoClient(mongoClientURI);
   }
 }

@@ -33,7 +33,6 @@ public class AccountCustomRepository {
     Account.java에 @Id로 인해 email이 primary key 역할을 하므로,
     전달된 email로 DB상에서 수정할 사용자를 찾아냄.
     각 매개 변수들이 null로 전달되면 변경 사항이 없는 것으로 간주.
-
     예시) updateAccount("test@test.com", "1234", null, "Kim");
     test@test.com을 아이디로 사용하는 유저의 정보를 주어진 매개 변수 내용들로 바꿈.
     이 예시에선 password는 1234로 바꾸고, name은 바꾸지 않고, username은 Kim으로 바꿈, .

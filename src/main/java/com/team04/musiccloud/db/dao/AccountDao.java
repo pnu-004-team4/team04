@@ -13,63 +13,63 @@ import org.bson.Document;
 
 public class AccountDao {
 
-  private MongoCollection<Document> mongoCollection;
+    private MongoCollection<Document> mongoCollection;
 
-  public AccountDao(MongoCollection<Document> mongoCollection) {
-    this.mongoCollection = mongoCollection;
-  }
-
-  public boolean create(Account account) {
-    Document document = AccountConverter.toDocument(account);
-    this.mongoCollection.insertOne(document);
-
-    return true;
-  }
-
-  public boolean update(Account account) {
-    this.mongoCollection.updateOne(eq("_id", account.getEmail()),
-        new Document("$set", AccountConverter.toDocument(account)));
-
-    return true;
-  }
-
-  public boolean delete(String email) {
-    this.mongoCollection.deleteOne(eq("_id", email));
-
-    return true;
-  }
-
-  public boolean exists(String email) {
-    boolean exists = false;
-
-    FindIterable<Document> document = this.mongoCollection.find(eq("_id", email)).limit(1);
-    if (document.iterator().hasNext()) {
-      exists = true;
+    public AccountDao(MongoCollection<Document> mongoCollection) {
+        this.mongoCollection = mongoCollection;
     }
 
-    return exists;
-  }
+    public boolean create(Account account) {
+        Document document = AccountConverter.toDocument(account);
+        this.mongoCollection.insertOne(document);
 
-  public List<Account> getList() {
-    List<Account> accountList = new ArrayList<Account>();
-    MongoCursor<Document> mongoCursor = this.mongoCollection.find().iterator();
-
-    try {
-      while (mongoCursor.hasNext()) {
-        Document document = mongoCursor.next();
-        Account account = AccountConverter.toAccount(document);
-        accountList.add(account);
-      }
-    } finally {
-      mongoCursor.close();
+        return true;
     }
 
-    return accountList;
-  }
+    public boolean update(Account account) {
+        this.mongoCollection.updateOne(eq("_id", account.getEmail()),
+                new Document("$set", AccountConverter.toDocument(account)));
 
-  public Account getAccount(String email) {
-    Document document = this.mongoCollection.find(eq("_id", email)).first();
+        return true;
+    }
 
-    return AccountConverter.toAccount(document);
-  }
+    public boolean delete(String email) {
+        this.mongoCollection.deleteOne(eq("_id", email));
+
+        return true;
+    }
+
+    public boolean exists(String email) {
+        boolean exists = false;
+
+        FindIterable<Document> document = this.mongoCollection.find(eq("_id", email)).limit(1);
+        if (document.iterator().hasNext()) {
+            exists = true;
+        }
+
+        return exists;
+    }
+
+    public List<Account> getList() {
+        List<Account> accountList = new ArrayList<Account>();
+        MongoCursor<Document> mongoCursor = this.mongoCollection.find().iterator();
+
+        try {
+            while (mongoCursor.hasNext()) {
+                Document document = mongoCursor.next();
+                Account account = AccountConverter.toAccount(document);
+                accountList.add(account);
+            }
+        } finally {
+            mongoCursor.close();
+        }
+
+        return accountList;
+    }
+
+    public Account getAccount(String email) {
+        Document document = this.mongoCollection.find(eq("_id", email)).first();
+
+        return AccountConverter.toAccount(document);
+    }
 }
