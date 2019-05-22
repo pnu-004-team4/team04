@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import ="com.team04.musiccloud.auth.Account" import ="com.team04.musiccloud.auth.FaceAccount" language= "java" contentType="text/html; charset=UTF-8"
+<%@ page import ="com.team04.musiccloud.auth.Account" language= "java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -23,11 +23,8 @@
 <body>
 
 <%
-    FaceAccount fake = new FaceAccount();
-    Account acc = fake.fakeaccount();
-    String username = acc.getName();
-    String getemail = acc.getEmail();
-
+    String username = null;
+    String getemail = null;
 %>
 
 <%--광수꺼--%>
