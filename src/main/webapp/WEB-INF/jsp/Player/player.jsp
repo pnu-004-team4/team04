@@ -157,7 +157,7 @@
 
                             <a href="#" class="navigation__list__item">
                                 <i class="ion-headphone"></i>
-                                <span>Some Songs</span>
+                                <span>Favorite Songs</span>
                             </a>
 
                             <!-- 아래 내용이 실제 POST의 parameter로 들어가는 부분입니다. -->
