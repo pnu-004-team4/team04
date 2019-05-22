@@ -110,7 +110,7 @@ body a:hover {
 }
 @media (max-width: 1400px) {
   .content__left {
-    display: none;
+    width: 20%;
   }
   .content__middle {
     width: 80%;
@@ -121,7 +121,7 @@ body a:hover {
 }
 @media (max-width: 768px) {
   .content__left {
-    display: none;
+    width: 100%;
   }
   .content__middle {
     width: 100%;
@@ -236,10 +236,10 @@ body a:hover {
   }
 }
 .current-track {
-  background: #282828;
+  background: #26273a;
   padding: 5px 15px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: nowrap;
   align-items: center;
 }
 
@@ -288,7 +288,7 @@ body a:hover {
   height: 10px;
 }
 .current-track__progress__bar .noUi-base {
-  background: #1ed760;
+  background: #6bac86;
 }
 .current-track__progress__bar .noUi-origin {
   background: #5e5e5e;
@@ -321,23 +321,23 @@ body a:hover {
   align-items: center;
 }
 .current-track__options .controls {
-  width: 45%;
+  width: 80%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 .current-track__options .controls .volume {
-  width: 55%;
+  width: 80%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
 }
 .current-track__options .controls .volume i {
-  width: 40px;
+  width: 20px;
   color: #aaaaaa;
 }
 .current-track__options .controls .volume #song-volume {
-  width: calc( 80% - 40px );
+  width: calc( 80% - 20px );
   border: none;
   height: 10px;
 }
@@ -426,6 +426,10 @@ body a:hover {
   flex-flow: column wrap;
   margin-bottom: 15px;
 }
+.content__middle {
+  height: 617px;
+  overflow-y: scroll;
+}
 .tracks__heading {
   color: #aaaaaa;
   height: 42px;
@@ -445,10 +449,12 @@ body a:hover {
 }
 
 .tracks__heading__artist {
+  margin-right: 20px;
   margin-left: auto;
   font-size: 15px;
 }
 .tracks__heading__length {
+  margin-right: 110px;
   margin-left: auto;
   font-size: 20px;
 }
@@ -456,7 +462,7 @@ body a:hover {
   border-top: 1px solid #282828;
   height: 42px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
 }
 .tracks .track:hover {
@@ -521,12 +527,13 @@ body a:hover {
   color: #aaaaaa;
 }
 .tracks .track__length {
+  margin-right: 80px;
   margin-left: auto;
   color: #aaaaaa;
 }
 
 .tracks .track__delete {
-  margin-left: 10px;
+  margin-right: 10px;
   color: #aaaaaa;
   width: 12px;
 }
@@ -543,6 +550,7 @@ body a:hover {
 }
 ::-webkit-scrollbar {
   width: 8px;
+  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -641,4 +649,15 @@ button:hover {
   letter-spacing: 1.25px;
   font-size: 13.2px;
   margin-bottom: 10px;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
+  background: #282828;
+  padding: 10px;
+  color: #aaaaaa;
+  border-bottom: 1px solid #181818;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 }

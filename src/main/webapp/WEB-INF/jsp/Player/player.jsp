@@ -96,7 +96,13 @@
 
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
+<<<<<<< HEAD
+
+        <a class="current-track__artist">Charlie Puth</a>
+
+=======
         <a class="current-track__name">Charlie Puth</a>
+>>>>>>> 07057ed916e39b1fd2073bae10bc82c56e4f7016
     </div>
 
     <div class="current-track__actions">
@@ -182,12 +188,404 @@
                     <div class="tracks__heading__artist">ARTIST</div>
                     <div class="tracks__heading__length">
                         <i class="ion-ios-stopwatch-outline"></i>
+<<<<<<< HEAD
+
+                    </div>
+
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">1</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+                    <div class="track__title">Intro</div>
+
+                    <div class="track__artist">OGiJun</div>
+
+                    <div class="track__length">1:11</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">2</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">Random</div>
+
+
+                    <div class="track__artist">GwangSoo</div>
+
+                    <div class="track__length">3:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">3</div>
+
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+                    <div class="track__title featured">
+
+                        <span class="title">Me, Myself & I</span>
+                        <span class="feature">feat. Bebe Rexha</span>
+
+                    </div>
+
+
+                    <div class="track__artist">YongJun</div>
+
+                    <div class="track__length">4:11</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">4</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title featured">
+
+                        <span class="title">One Of Them</span>
+                        <span class="feature">feat. Big Sean</span>
+
+                    </div>
+
+
+                    <div class="track__artist">OnSub</div>
+
+                    <div class="track__length">3:20</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">5</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">Rom</div>
+
+
+                    <div class="track__artist">GgSoo</div>
+
+                    <div class="track__length">3:50</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+
+                <div class="track">
+
+                    <div class="track__number">6</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">dom</div>
+
+
+                    <div class="track__artist">ngSoo</div>
+
+                    <div class="track__length">6:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">7</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">m</div>
+
+
+                    <div class="track__artist">oo</div>
+
+                    <div class="track__length">7:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">8</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">asdom</div>
+
+
+                    <div class="track__artist">광수</div>
+
+                    <div class="track__length">8:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">9</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">123m</div>
+
+
+                    <div class="track__artist">123Soo</div>
+
+                    <div class="track__length">9:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">10</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">uium</div>
+
+
+                    <div class="track__artist">휘성</div>
+
+                    <div class="track__length">10:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">11</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">ooom</div>
+
+
+                    <div class="track__artist">&&gSoo</div>
+
+                    <div class="track__length">11:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">12</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">12andom</div>
+
+
+                    <div class="track__artist">거미ngSoo</div>
+
+                    <div class="track__length">12:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">13</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">89*dom</div>
+
+
+                    <div class="track__artist">)(*&*Soo</div>
+
+                    <div class="track__length">13:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">14</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">ㅜㅡㅜㅡㅜㅡㅜdom</div>
+
+
+                    <div class="track__artist">ㅗㅓㅗ</div>
+
+                    <div class="track__length">14:00</div>
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+=======
+>>>>>>> 07057ed916e39b1fd2073bae10bc82c56e4f7016
+                    </div>
+
+                </div>
+
+<<<<<<< HEAD
+
+                    <div class="track__title">아쉬워</div>
+
+
+                    <div class="track__artist">Go</div>
+
+                    <div class="track__length">15:00</div>
+
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+                </div>
+                <div class="track">
+
+                    <div class="track__number">16</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">Rando874m</div>
+
+
+                    <div class="track__artist">Gwa765ngS234oo</div>
+
+                    <div class="track__length">16:00</div>
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
+                    </div>
+
+                </div>
+                <div class="track">
+
+                    <div class="track__number">17</div>
+
+                    <div class="track__play">
+
+                        <i class="ion-ios-play"></i>
+                    </div>
+
+
+                    <div class="track__title">jklkjandom</div>
+
+
+                    <div class="track__artist">ioipoiangSoo</div>
+
+                    <div class="track__length">17:00</div>
+                    <div class="track__delete">
+
+                        <i class="ion-android-delete"></i>
                     </div>
 
                 </div>
 
                 <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
                 ${getLibrary}
+
             </div>
 
         </div>
@@ -201,8 +599,8 @@
 <script src="/js/myPlayer.js"></script>
 <script src="/js/libraryControl.js"></script>
 
-${streaming}
+${streamingTest}
 
-
+<footer class="footer">...</footer>
 </body>
 </html>
