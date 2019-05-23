@@ -110,6 +110,79 @@ function playtimeUpdate(my_audio){
   }
 }
 
+// Dropdown upload
+
+$(document).ready(function (){
+  fileDropDown();
+});
+
+function fileDropDown(){
+  var dropZone = $("#dropZone");
+  dropZone.on('dragenter',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#E3F2FC');
+  });
+  dropZone.on('dragleave',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#FFFFFF');
+  });
+  dropZone.on('dragover',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#E3F2FC');
+  });
+  dropZone.on('drop',function(e){
+    console.log("drop event called");
+    e.preventDefault();
+    dropZone.css('background-color','#FFFFFF');
+
+    var files = e.originalEvent.dataTransfer.files;
+
+    if(files != null){
+      if(files.length < 1){
+        alert("Cannot Upload Folder");
+        return;
+      }
+      uploadFile(files)
+    }else{
+      alert("ERROR");
+    }
+  });
+}
+
+function uploadFile(files) {
+
+  for (var i = 0; i < files.length; i++) {
+    // Type Checking part, @TODO - Extract Methods
+    var musicMiddle = files[i].lastIndexOf(".");
+    var musicFileType = files[i].substring(musicMiddle+1,files[i].length);
+    var lowerCaseMusicFileType = musicFileType.toLowerCase();
+
+    if(lowerCaseMusicFileType != "mp3"){
+      alert("Wrong File Format : " + lowerCaseMusicFileType);
+    }
+    else{
+      var formData = new FormData();
+      formData.append('file', files[i]);
+
+      $.ajax({
+        url: "/upload",
+        data: formData,
+        type: 'POST',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: [function (result) {
+          console.log("uploadFile Success");
+          console.log(result);
+        }]
+      });
+    }
+  }
+}
 
 // Tooltips
 
