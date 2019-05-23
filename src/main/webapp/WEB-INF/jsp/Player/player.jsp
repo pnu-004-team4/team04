@@ -173,7 +173,7 @@
 
 
     </div>
-    <div class="content__middle">
+    <div class="content__middle" id = "dropZone">
         <div class="album__tracks">
             <div class="tracks">
                 <div class="tracks__heading">
@@ -196,12 +196,12 @@
 
 </section>
 
+<div type="hidden" id="usernameDiv" value="${username}"></div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
-<script src="/js/myPlayer.js"></script>
 <script src="/js/libraryControl.js"></script>
-
+<script src="/js/myPlayer.js"></script>
 ${streaming}
 
 
