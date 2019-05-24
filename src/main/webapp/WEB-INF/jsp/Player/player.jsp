@@ -59,15 +59,6 @@
         </div>
     </form:form>
 
-    <div>
-        <form id="sort-form">
-            <button type= "submit" id="title-asc">제목</button>
-<%--            <button type= "submit" id="title-dsc">제목역순</button>--%>
-<%--            <button type= "submit" id="artist-asc">아티스트</button>--%>
-<%--            <button type= "submit" id="artist-dsc">아티스트 역순</button>--%>
-        </form>
-    </div>
-
 
     <div class="user">
 
