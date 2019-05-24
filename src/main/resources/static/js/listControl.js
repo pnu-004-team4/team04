@@ -1,5 +1,27 @@
 // Sliders
+/*
+* librarycontrol.js
+* /**
+ * @description main에 해당하는 부분입니다. 이 부분에서 global한 작업이 정의됩니다.
 
+$(document).ready(function () {
+    var librarySelectionList = $("#yourMusic").children(); //라이브러리 선택 리스트
+    var libraryForm = $("#libraryForm");  // 왼쪽 큰 라이브러리 폼
+    var selectedLibrary = $("#selectedLibrary"); //뭔가 파라미터로 들어가는 부분.
+
+
+      @description callback 함수로 library의 list를 selection을 할 수 있습니다.
+
+    // DOM 쓴 예제. 오... js로만 해보기.
+    $.each(librarySelectionList, function (index, item) { // librarySelectionList 각각에 대해서 실행한다.
+        $(item).click(function () { // 각각의 아이템이 클릭되면,
+            selectedLibrary.val(($(item).children("span")[0]).innerHTML); // item의 자식요소중 span이라는 놈의 첫번째 놈을 바꾼다.
+            libraryForm.submit();
+        }); // end of item click
+    }); // end of for each
+}); // end of main
+
+* */
 
 //텍스트부터 서치 버튼 까지.
 $(document).ready(function () { //화면에 html을 뿌려준 후에

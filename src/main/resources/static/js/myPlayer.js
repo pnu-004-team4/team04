@@ -31,7 +31,7 @@ songProgressSlider.noUiSlider.on('change',function(values,handle){
 
 songProgressSlider.noUiSlider.on('start',function(){
   isSongProgressSliderUsable = false;
-})
+});
 
 songProgressSlider.noUiSlider.on('end',function(){
   isSongProgressSliderUsable = true;
