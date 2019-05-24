@@ -19,9 +19,6 @@ import java.io.IOException;
  */
 public class Streaming implements IBackStreaming, IFrontStreaming {
 
-  private final static String baseDirectory = "server/temp/";
-  private final static String directoryDelimiter = "/";
-  private final static String extensionDelimiter = ".";
   private Audio audio;
   private boolean isRequireTranscode;
 
@@ -42,9 +39,7 @@ public class Streaming implements IBackStreaming, IFrontStreaming {
   }
 
   private String formedServerStyle(Audio audio) {
-    return baseDirectory + audio.getFileMeta().getUser() + directoryDelimiter
-        + audio.getFileMeta().getName() + extensionDelimiter
-        + audio.getFileMeta().getExtension();
+    return "download?id=" + audio.getFileMeta().getDbId();
   }
 
   private String serveAudio() throws IOException {

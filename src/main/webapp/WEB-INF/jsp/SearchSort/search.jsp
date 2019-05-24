@@ -18,7 +18,7 @@
     Search search = new Search();
     String index = request.getParameter("index");
 
-    ArrayList<Music> searchlist = search.Msearch(index);
+    ArrayList<Music> searchlist = search.msearch(index);
 
 
 %>

@@ -10,7 +10,4 @@ public class StaticPaths {
       .get(system.toString(), "src", "main", "resources", "static", "server");
   public static final Path storage = Paths.get(staticResources.toString(), "storage");
   public static final Path tempStorage = Paths.get(staticResources.toString(), "temp");
-
-  private StaticPaths() {
-  }
 }

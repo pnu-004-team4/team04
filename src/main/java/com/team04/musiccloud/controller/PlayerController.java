@@ -1,28 +1,20 @@
 package com.team04.musiccloud.controller;
 
 import com.team04.musiccloud.audio.Audio;
+import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.audio.AudioMeta;
-import com.team04.musiccloud.audio.extractor.AudioExtractor;
-import com.team04.musiccloud.audio.extractor.ExtractorException;
-import com.team04.musiccloud.audio.extractor.Mp3Extractor;
 import com.team04.musiccloud.auth.Account;
-import com.team04.musiccloud.db.AccountCustomRepository;
+import com.team04.musiccloud.db.MetadataCustomRepository;
 import com.team04.musiccloud.stream.Streaming;
-import com.team04.musiccloud.utilities.StaticPaths;
-import java.io.FileInputStream;
+import com.team04.musiccloud.utilities.AccountRepositoryUtil;
+import com.team04.musiccloud.utilities.MusicFileUtilities;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -32,35 +24,26 @@ import org.springframework.web.servlet.ModelAndView;
  * 만들었습니다.
  *
  * @author 오기준
- * @version 2019년 5월 13일
+ * @version 2019년 5월 20일
  */
 @Controller
 public class PlayerController {
 
   private final static Logger logger = Logger.getGlobal();
-  private static Path cacheDirectory = StaticPaths.tempStorage;
   private Streaming stream;
-  private Audio testAudio;
   private ModelAndView base;
+  private AccountRepositoryUtil accountRepositoryUtil;
 
-  // @TODO: 나중에는 지우도록 합니다. 유의사항 ==> TranscodeTest.class가 이 함수를 호출중 입니다.
-  public static Audio getTestAudio() throws Exception {
-    final String user = "CSK";
-    final Path currentLocation = cacheDirectory.resolve(user)
-        .resolve("sample.mp3").toAbsolutePath();
-    final AudioExtractor extractor = new Mp3Extractor();
 
-    MultipartFile myFile = new MockMultipartFile(currentLocation.toString(),
-        "sample.mp3", null, new FileInputStream(currentLocation.toFile()));
-    extractor.setBaseDirectory(cacheDirectory);
-    return extractor.getAudio(myFile, user);
-  }
-
-  // @TODO: 나중에 이 내용은 반드시 변경을 해야 합니다. 테스트를 위해서 임시로 설정한 것입니다.
-  private void setUp() throws Exception {
+  private void setUp() {
     stream = new Streaming();
     base = new ModelAndView();
-    testAudio = getTestAudio();
+    accountRepositoryUtil = AccountRepositoryUtil.getInstance();
+  }
+
+  private List<AudioMeta> getAudioMetaList(String userName) {
+    final MetadataCustomRepository customRepository = new MetadataCustomRepository(userName);
+    return customRepository.getPlaylist();
   }
 
   /**
@@ -68,18 +51,12 @@ public class PlayerController {
    *
    * @return HTML's audio Tag
    */
-  private String audioTagGenerator(String audioLocation) {
+  // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
+  private String audioTagGenerator(String audioLocation, String fileExtension) {
     return "<audio id=\"bgAudio\" controls style=\"visibility:hidden;\"><source src=\""
         + audioLocation
-        + "\" type=\"audio/mpeg\"></audio>";
-  }
-
-  private String getUserName() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String currentPrincipalName = authentication.getName();
-    AccountCustomRepository repository = new AccountCustomRepository();
-    Account SavedAccount = repository.findAccountByEmail(currentPrincipalName);
-    return SavedAccount.getName();
+        + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
+        + "\" id=\"nowPlaying\"></audio>";
   }
 
   /**
@@ -88,8 +65,7 @@ public class PlayerController {
    * @return Initial Player JSP file
    */
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public ModelAndView responseInitializedPlayer() throws IOException, ExtractorException {
-
+  public ModelAndView responseInitializedPlayer() throws IOException {
     if (stream == null) {
       try {
         setUp();
@@ -98,14 +74,42 @@ public class PlayerController {
       }
     }
 
-    // @TODO: 혹시 모를 POST 이후 GET이 오는 상황을 방지하기 위한 방지책이 요구됨.
+    Account account = accountRepositoryUtil.getCurrentAccount();
+    String userName = account.getEmail();
 
-    stream.getAudioFromBack(testAudio);
-    stream.setUseTranscode(true);
+    List<AudioMeta> audioMetaArrayList = getAudioMetaList(userName);
 
-    String dir = stream.sendAudioToFront();
-    base.addObject("streamingTest", audioTagGenerator(dir));
-    base.addObject("username", getUserName());
+    AudioHandler audioHandler = new AudioHandler(userName);
+
+    String firstFileId = "";
+    try {
+      firstFileId = audioMetaArrayList.get(0).getDbId();
+    } catch (IndexOutOfBoundsException e) {
+      logger.info(e.toString());
+    }
+
+    String trackList = trackTagGenerator(userName, audioMetaArrayList);
+
+    if (firstFileId.isEmpty()) {
+      base.addObject("streaming", audioTagGenerator("", ""));
+      base.addObject("username", account.getName());
+      base.addObject("getLibrary", trackList);
+      base.setViewName("Player/player");
+      return base;
+    }
+
+    final Boolean isDoTranscode = account.getResolution();
+
+    Audio firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+
+    stream.getAudioFromBack(firstAudio);
+
+    String url = stream.sendAudioToFront();
+    String mimeType = firstAudio.getFileMeta().getExtension();
+
+    base.addObject("streaming", audioTagGenerator(url, mimeType));
+    base.addObject("username", account.getName());
+    base.addObject("getLibrary", trackList);
     base.setViewName("Player/player");
     return base;
   }
@@ -115,9 +119,11 @@ public class PlayerController {
    *
    * @return HTML track list codes
    */
-  private String trackTagGenerator(List<AudioMeta> metaArray) {
+  private String trackTagGenerator(String userName, List<AudioMeta> metaArray) {
     StringBuilder trackTagContents = new StringBuilder();
     int counter = 1;
+    if(metaArray.isEmpty())
+      return "";
     for (AudioMeta meta : metaArray) {
       trackTagContents.append("<div class=\"track\">")
           .append("<div class=\"track__number\">")
@@ -136,7 +142,13 @@ public class PlayerController {
           .append(meta.getAuthor())
           .append("</div>")
           .append("<div class=\"track__length\">")
-          .append("@TODO: TIME)")
+          .append("@TODO: TIME") //@TODO: 몇 분 남았는 지를 보여주도록 한다.
+          .append("</div>")
+          .append("<div class=\"track__owner\" hidden>")
+          .append(userName)
+          .append("</div>")
+          .append("<div class=\"track__id\" hidden>")
+          .append(meta.getDbId())
           .append("</div>")
           .append("</div>");
     }
@@ -153,24 +165,14 @@ public class PlayerController {
     //@TODO: 양식 다시 보내기가 실행되는 것을 방지하도록 합니다.
     //@TODO: 백 스페이스를 하게 되면 약간의 문제가 있다...
 
+    //@TODO: 나중에 사용하도록 할 것, 이것을 통해서 library를 다룰 수 있습니다.
     String item = httpServletRequest.getParameter("songs");
-    List<AudioMeta> audioMetaArrayList = new ArrayList<>();
+    System.out.println("Currently clicked value => " + item);
 
-    //@TODO: 반드시 지워야 합니다.
-    int numberOfPrints = 0;
+    Account account = accountRepositoryUtil.getCurrentAccount();
+    String userName = account.getEmail();
 
-    if (item.equalsIgnoreCase("all songs")) {
-      numberOfPrints = 10;
-    } else if (item.equalsIgnoreCase("some songs")) {
-      numberOfPrints = 5;
-    }
-
-    System.out.println("POST value ==>" + item);
-    for (int i = 0; i < numberOfPrints; i++) {
-      audioMetaArrayList.add(testAudio.getAudioMeta());
-    }
-    ///// 위 내용은 지워야함 /////
-    String trackList = trackTagGenerator(audioMetaArrayList);
+    String trackList = trackTagGenerator(userName, getAudioMetaList(userName));
     base.addObject("getLibrary", trackList);
     return base;
   }

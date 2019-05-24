@@ -5,67 +5,68 @@ import java.util.Map;
 import java.util.function.IntPredicate;
 
 public class NetStatusManager {
-    private static NetStatusManager netStatusManager;
-    
-    private static final int MAX_STATUS_PER_USER = 50;
-    private Map<String, UserNetStatus> userStatusMap;
-    
-    public static synchronized NetStatusManager getInstance() {
-        if ( netStatusManager == null ) {
-            netStatusManager = new NetStatusManager();
-        }
-        
-        return netStatusManager;
+
+  private static NetStatusManager netStatusManager;
+
+  private static final int MAX_STATUS_PER_USER = 50;
+  private Map<String, UserNetStatus> userStatusMap;
+
+  public static synchronized NetStatusManager getInstance() {
+    if (netStatusManager == null) {
+      netStatusManager = new NetStatusManager();
     }
-    
-    private NetStatusManager() {
-        userStatusMap = new HashMap<>();
+
+    return netStatusManager;
+  }
+
+  private NetStatusManager() {
+    userStatusMap = new HashMap<>();
+  }
+
+  public boolean exist(String user) {
+    return userStatusMap.containsKey(user);
+  }
+
+  public UserNetStatus findUserNetState(String user) {
+    UserNetStatus found = null;
+
+    if (this.exist(user)) {
+      found = userStatusMap.get(user);
     }
-    
-    public boolean exist(String user) {
-        return userStatusMap.containsKey(user);
+
+    return found;
+  }
+
+  public UserNetStatus getUserNetState(String user) {
+    UserNetStatus userNetStatus;
+
+    if (this.exist(user)) {
+      userNetStatus = findUserNetState(user);
+    } else {
+      userNetStatus = createUserNetState(user);
     }
-    
-    public UserNetStatus findUserNetState(String user) {
-        UserNetStatus found = null;
-        
-        if ( this.exist(user) ) {
-            found = userStatusMap.get(user);
-        }
-        
-        return found;
-    }
-    
-    public UserNetStatus getUserNetState(String user) {
-        UserNetStatus userNetStatus;
-        
-        if ( this.exist(user) ) {
-            userNetStatus = findUserNetState(user);
-        } else {
-            userNetStatus = createUserNetState(user);
-        }
-        
-        return userNetStatus;
-    }
-    
-    public UserNetStatus createUserNetState(String user) {
-        final UserNetStatus userNetStatus = new UserNetStatus(MAX_STATUS_PER_USER);
-        userStatusMap.put(user, userNetStatus);
-        return userNetStatus;
-    }
-    
-    public void addUserNetDelay(String user, int delay) {
-        UserNetStatus userNetStatus = getUserNetState(user);
-        userNetStatus.addNetDelay(delay);
-    }
-    
-    public double getUserNetDelayAverage(String user) {
-        UserNetStatus userNetStatus = getUserNetState(user);
-        return userNetStatus.getAverageNetDelay();
-    }
-    
-    public double getUserNetDelayAverage(String user, IntPredicate intPredicate) {
-        UserNetStatus userNetStatus = getUserNetState(user);
-        return userNetStatus.getAverageNetDelay(intPredicate);
-    }
+
+    return userNetStatus;
+  }
+
+  public UserNetStatus createUserNetState(String user) {
+    final UserNetStatus userNetStatus = new UserNetStatus(MAX_STATUS_PER_USER);
+    userStatusMap.put(user, userNetStatus);
+    return userNetStatus;
+  }
+
+  public void addUserNetDelay(String user, int delay) {
+    UserNetStatus userNetStatus = getUserNetState(user);
+    userNetStatus.addNetDelay(delay);
+  }
+
+  public double getUserNetDelayAverage(String user) {
+    UserNetStatus userNetStatus = getUserNetState(user);
+    return userNetStatus.getAverageNetDelay();
+  }
+
+  public double getUserNetDelayAverage(String user, IntPredicate intPredicate) {
+    UserNetStatus userNetStatus = getUserNetState(user);
+    return userNetStatus.getAverageNetDelay(intPredicate);
+  }
 }

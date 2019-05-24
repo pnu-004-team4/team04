@@ -16,6 +16,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AudioExtractorTest {
+    final static private String USER_NAME = "admin@admin.com";
+
     @Test
     public void extractorTest() throws IOException, InvalidFileFormat, ExtractorException {
         MultipartFile multipartFile = getMockMultipartFile();
@@ -32,9 +34,9 @@ public class AudioExtractorTest {
         MultipartFile multipartFile = getMockMultipartFile();
         AudioExtractor audioExtractor = ExtractorFactory.getInstance(multipartFile);
         
-        final Path path = Paths.get("test", "directory");
+        final Path path = Paths.get(USER_NAME, "directory");
         audioExtractor.setBaseDirectory(path);
-    
+        
         final String userName = "s";
         final Audio audio = audioExtractor.getAudio(multipartFile, userName);
         final FileMeta fileMeta = audio.getFileMeta();
@@ -43,9 +45,8 @@ public class AudioExtractorTest {
     
     private static MultipartFile getMockMultipartFile() throws IOException {
         final String fileName = "sample.mp3";
-        final String userName = "test";
         final Path filePath = StaticPaths.storage
-                .resolve(userName)
+                .resolve(USER_NAME)
                 .resolve(fileName)
                 .toAbsolutePath();
         
