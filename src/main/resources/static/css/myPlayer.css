@@ -105,6 +105,7 @@ html{
 .content {
   display: flex;
   flex-flow: row wrap;
+  height: 80%;
 }
 .content__left {
   width: 15%;
@@ -650,4 +651,8 @@ button:hover {
 .dropZone{
   height:100%;
   width: 85%;
+}
+
+#username{
+  display : none;
 }
