@@ -173,24 +173,25 @@
 
 
     </div>
-    <div class="content__middle" id = "dropZone">
-        <div class="album__tracks">
-            <div class="tracks">
-                <div class="tracks__heading">
+    <div class = "dropZone" id = "dropZone">
+        <div class="content__middle">
+            <div class="album__tracks">
+                <div class="tracks">
+                    <div class="tracks__heading">
 
-                    <div class="tracks__heading__number">#</div>
-                    <div class="tracks__heading__title">Song</div>
-                    <div class="tracks__heading__artist">ARTIST</div>
-                    <div class="tracks__heading__length">
-                        <i class="ion-ios-stopwatch-outline"></i>
+                        <div class="tracks__heading__number">#</div>
+                        <div class="tracks__heading__title">Song</div>
+                        <div class="tracks__heading__artist">ARTIST</div>
+                        <div class="tracks__heading__length">
+                            <i class="ion-ios-stopwatch-outline"></i>
+                        </div>
+
                     </div>
 
+                    <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
+                    ${getLibrary}
                 </div>
-
-                <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
-                ${getLibrary}
             </div>
-
         </div>
     </div>
 

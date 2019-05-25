@@ -154,6 +154,8 @@ function fileDropDown(){
 
 function uploadFile(files) {
 
+  var username = document.getElementById("usernameDiv").getAttribute("value");
+
   for (var i = 0; i < files.length; i++) {
     // Type Checking part, @TODO - Extract Methods
     var musicMiddle = files[i].lastIndexOf(".");
@@ -166,9 +168,10 @@ function uploadFile(files) {
     else{
       var formData = new FormData();
       formData.append('file', files[i]);
+      //formData.append('username',username);
 
       $.ajax({
-        url: "/upload",
+        url: "/upload" + username,
         data: formData,
         type: 'POST',
         enctype: 'multipart/form-data',
