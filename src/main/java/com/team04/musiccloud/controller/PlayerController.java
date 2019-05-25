@@ -53,7 +53,7 @@ public class PlayerController {
    */
   // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
   private String audioTagGenerator(String audioLocation, String fileExtension) {
-    return "<audio id=\"bgAudio\" controls style=\"visibility:hidden;\"><source src=\""
+    return "<audio id=\"bgAudio\" controls style=\"display:none;\"><source src=\""
         + audioLocation
         + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
         + "\" id=\"nowPlaying\"></audio>";
