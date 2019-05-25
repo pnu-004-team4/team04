@@ -1,4 +1,4 @@
-package com.team04.musiccloud.utilities.Search;
+package com.team04.musiccloud.utilities.search;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

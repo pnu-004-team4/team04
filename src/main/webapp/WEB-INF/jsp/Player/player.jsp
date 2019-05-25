@@ -37,7 +37,7 @@
 
     <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" />
+            <input type="text" name = "index" placeholder="Search" required />
 
         </div>
     </form:form>
