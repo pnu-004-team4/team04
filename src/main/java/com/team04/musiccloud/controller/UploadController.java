@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,18 +21,17 @@ import java.io.IOException;
 public class UploadController {
     private final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/{username}")
     @ResponseBody
     public ResponseEntity<?> uploadFile(
-            @RequestParam("file") MultipartFile uploadFile) throws ExtractorException, IOException, InvalidFileFormat {
+            @RequestParam("file") MultipartFile uploadFile, @PathVariable String username) throws ExtractorException, IOException, InvalidFileFormat {
 
         if (uploadFile.isEmpty()) {
             return new ResponseEntity("Please select a File!", HttpStatus.OK);
         }
 
         try {
-            //AudioHandler audioHandler = new AudioHandler(username);
-            AudioHandler audioHandler = new AudioHandler("CSK");
+            AudioHandler audioHandler = new AudioHandler(username);
             audioHandler.requestUpload(uploadFile);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
