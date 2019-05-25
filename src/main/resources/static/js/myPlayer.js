@@ -5,43 +5,46 @@ var volumeSlider = document.getElementById('song-volume');
 
 var isSongProgressSliderUsable = true;
 
-noUiSlider.create(songProgressSlider, {
-  start: [0],
-  connect : [false,true],
-  range: {
-    'min': [0],
-    'max': [100]
-  }
+$(document).ready(function(){
+  noUiSlider.create(songProgressSlider, {
+    start: [0],
+    connect : [false,true],
+    range: {
+      'min': [0],
+      'max': [100]
+    }
+  });
+
+  noUiSlider.create(volumeSlider, {
+    start: 100,
+    behaviour:'snap',
+    connect : [false,true],
+    range: {
+      'min': 0,
+      'max': 100
+    }
+  });
+
+  songProgressSlider.noUiSlider.on('change',function(values,handle){
+    var my_audio = document.getElementById('bgAudio');
+    my_audio.currentTime = my_audio.duration * (values[handle]/100);
+  });
+
+  songProgressSlider.noUiSlider.on('start',function(){
+    isSongProgressSliderUsable = false;
+  })
+
+  songProgressSlider.noUiSlider.on('end',function(){
+    isSongProgressSliderUsable = true;
+  });
+
+  volumeSlider.noUiSlider.on('update',function(values,handle){
+    var my_audio = document.getElementById('bgAudio');
+    my_audio.volume = values[handle]/100;
+  });
 });
 
-noUiSlider.create(volumeSlider, {
-  start: 100,
-  behaviour:'snap',
-  connect : [false,true],
-  range: {
-    'min': 0,
-    'max': 100
-  }
-});
-
-songProgressSlider.noUiSlider.on('change',function(values,handle){
-  var my_audio = document.getElementById('bgAudio');
-  my_audio.currentTime = my_audio.duration * (values[handle]/100);
-});
-
-songProgressSlider.noUiSlider.on('start',function(){
-  isSongProgressSliderUsable = false;
-})
-
-songProgressSlider.noUiSlider.on('end',function(){
-  isSongProgressSliderUsable = true;
-});
-
-volumeSlider.noUiSlider.on('update',function(values,handle){
-  var my_audio = document.getElementById('bgAudio');
-  my_audio.volume = values[handle]/100;
-});
-
+// Player Control
 function play() {
   var my_audio = document.getElementById('bgAudio');
   if(my_audio.paused == true){
@@ -106,6 +109,85 @@ function playtimeUpdate(my_audio){
     clearInterval(showPlayTime);
   }
 }
+
+// Dropdown upload
+
+$(document).ready(function (){
+  fileDropDown();
+});
+
+function fileDropDown(){
+  var dropZone = $("#dropZone");
+  dropZone.on('dragenter',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#282828');
+  });
+  dropZone.on('dragleave',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#181818');
+  });
+  dropZone.on('dragover',function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    dropZone.css('background-color','#282828');
+  });
+  dropZone.on('drop',function(e){
+    console.log("drop event called");
+    e.preventDefault();
+    dropZone.css('background-color','#181818');
+
+    var files = e.originalEvent.dataTransfer.files;
+
+    if(files != null){
+      if(files.length < 1){
+        alert("Cannot Upload Folder");
+        return;
+      }
+      uploadFile(files)
+    }else{
+      alert("ERROR");
+    }
+  });
+}
+
+function uploadFile(files) {
+
+  var userEmail = document.getElementById("userEmailDiv").getAttribute("value");
+
+  for (var i = 0; i < files.length; i++) {
+
+    // Type Checking part, @TODO - Extract Methods
+    var fileName = files[i].name;
+    var musicMiddle = fileName.lastIndexOf(".");
+    var musicFileType = fileName.substring(musicMiddle+1,fileName.length);
+    var lowerCaseMusicFileType = musicFileType.toLowerCase();
+
+    if(lowerCaseMusicFileType != "mp3"){
+      alert("Wrong File Format : " + lowerCaseMusicFileType);
+    }
+    else{
+      var formData = new FormData();
+      formData.append('file', files[i]);
+
+      $.ajax({
+        url: "/upload/" + userEmail,
+        data: formData,
+        type: 'POST',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: [function (result) {
+          console.log("uploadFile Success");
+          console.log(result);
+        }]
+      });
+    }
+  }
+}
+
 // Tooltips
 
 $(function () {
@@ -126,7 +208,7 @@ $(window).on("resize load", function () {
   var navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
   var artistHeight = totalHeight - (headerHeight + footerHeight);
 
-  console.log(totalHeight);
+  // console.log(totalHeight);
 
   $(".navigation").css("height", navHeight);
   $(".artist").css("height", artistHeight);
@@ -149,9 +231,7 @@ $(window).on("resize load", function () {
   if ($(window).width() <= 768) {
 
     $(".collapse").removeClass("in");
-
     $(".navigation").css("height", "auto");
-
     $(".artist").css("height", "auto");
 
   }

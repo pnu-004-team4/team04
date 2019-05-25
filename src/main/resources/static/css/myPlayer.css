@@ -1,12 +1,16 @@
 body {
   background: #181818;
   font-family: 'Roboto', sans-serif;
+  height:100%;
 }
 body a {
   color: #aaaaaa;
 }
 body a:hover {
   color: #c8c8c8;
+}
+html{
+  height: 100%;
 }
 
 .header {
@@ -101,12 +105,13 @@ body a:hover {
 .content {
   display: flex;
   flex-flow: row wrap;
+  height: 80%;
 }
 .content__left {
   width: 15%;
 }
 .content__middle {
-  width: 85%;
+  width: 95%;
 }
 @media (max-width: 1400px) {
   .content__left {
@@ -641,4 +646,13 @@ button:hover {
   letter-spacing: 1.25px;
   font-size: 13.2px;
   margin-bottom: 10px;
+}
+
+.dropZone{
+  height:100%;
+  width: 85%;
+}
+
+#username{
+  display : none;
 }
