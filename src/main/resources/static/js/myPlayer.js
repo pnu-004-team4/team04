@@ -207,7 +207,7 @@ $(window).on("resize load", function () {
   var navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
   var artistHeight = totalHeight - (headerHeight + footerHeight);
 
-  console.log(totalHeight);
+  // console.log(totalHeight);
 
   $(".navigation").css("height", navHeight);
   $(".artist").css("height", artistHeight);
