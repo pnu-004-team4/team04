@@ -3,8 +3,6 @@ package com.team04.musiccloud.controller;
 import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,23 +13,23 @@ import java.io.IOException;
 
 @RestController
 public class UploadController {
-    private final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
-    @PostMapping("/upload/{username}")
+    @PostMapping("/upload/{useremail:.+}")
     @ResponseBody
     public ResponseEntity<?> uploadFile(
-            @RequestParam("file") MultipartFile uploadFile, @PathVariable String username) throws ExtractorException, InvalidFileFormat {
+            @RequestParam("file") MultipartFile uploadFile, @PathVariable String useremail) throws ExtractorException, InvalidFileFormat {
 
-//        if (uploadFile.isEmpty()) {
-//            return new ResponseEntity("Please select a File!", HttpStatus.OK);
-//        }
-//
-//        try {
-//            AudioHandler audioHandler = new AudioHandler(username);
-//            audioHandler.requestUpload(uploadFile);
-//        } catch (IOException e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
+        System.out.println(useremail + "is successfully called!");
+        if (uploadFile.isEmpty()) {
+            return new ResponseEntity("Please select a File!", HttpStatus.OK);
+        }
+
+        try {
+            AudioHandler audioHandler = new AudioHandler(useremail);
+            audioHandler.requestUpload(uploadFile);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity("Successfully uploaded - " +
                 uploadFile.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);

@@ -154,7 +154,7 @@ function fileDropDown(){
 
 function uploadFile(files) {
 
-  var username = document.getElementById("usernameDiv").getAttribute("value");
+  var userEmail = document.getElementById("userEmailDiv").getAttribute("value");
 
   for (var i = 0; i < files.length; i++) {
 
@@ -168,12 +168,11 @@ function uploadFile(files) {
       alert("Wrong File Format : " + lowerCaseMusicFileType);
     }
     else{
-      var formData = new FormData(files[i]);
-      // formData.append('file', files[i]);
-      // formData.append('username',username);
+      var formData = new FormData();
+      formData.append('file', files[i]);
 
       $.ajax({
-        url: "/upload/" + username,
+        url: "/upload/" + userEmail,
         data: formData,
         type: 'POST',
         enctype: 'multipart/form-data',
@@ -232,9 +231,7 @@ $(window).on("resize load", function () {
   if ($(window).width() <= 768) {
 
     $(".collapse").removeClass("in");
-
     $(".navigation").css("height", "auto");
-
     $(".artist").css("height", "auto");
 
   }

@@ -109,6 +109,7 @@ public class PlayerController {
 
     base.addObject("streaming", audioTagGenerator(url, mimeType));
     base.addObject("username", account.getName());
+    base.addObject("useremail", account.getEmail());
     base.addObject("getLibrary", trackList);
     base.setViewName("Player/player");
     return base;
