@@ -121,22 +121,22 @@ function fileDropDown(){
   dropZone.on('dragenter',function(e){
     e.stopPropagation();
     e.preventDefault();
-    dropZone.css('background-color','#E3F2FC');
+    dropZone.css('background-color','#282828');
   });
   dropZone.on('dragleave',function(e){
     e.stopPropagation();
     e.preventDefault();
-    dropZone.css('background-color','#FFFFFF');
+    dropZone.css('background-color','#181818');
   });
   dropZone.on('dragover',function(e){
     e.stopPropagation();
     e.preventDefault();
-    dropZone.css('background-color','#E3F2FC');
+    dropZone.css('background-color','#282828');
   });
   dropZone.on('drop',function(e){
     console.log("drop event called");
     e.preventDefault();
-    dropZone.css('background-color','#FFFFFF');
+    dropZone.css('background-color','#181818');
 
     var files = e.originalEvent.dataTransfer.files;
 
@@ -157,21 +157,23 @@ function uploadFile(files) {
   var username = document.getElementById("usernameDiv").getAttribute("value");
 
   for (var i = 0; i < files.length; i++) {
+
     // Type Checking part, @TODO - Extract Methods
-    var musicMiddle = files[i].lastIndexOf(".");
-    var musicFileType = files[i].substring(musicMiddle+1,files[i].length);
+    var fileName = files[i].name;
+    var musicMiddle = fileName.lastIndexOf(".");
+    var musicFileType = fileName.substring(musicMiddle+1,fileName.length);
     var lowerCaseMusicFileType = musicFileType.toLowerCase();
 
     if(lowerCaseMusicFileType != "mp3"){
       alert("Wrong File Format : " + lowerCaseMusicFileType);
     }
     else{
-      var formData = new FormData();
-      formData.append('file', files[i]);
-      //formData.append('username',username);
+      var formData = new FormData(files[i]);
+      // formData.append('file', files[i]);
+      // formData.append('username',username);
 
       $.ajax({
-        url: "/upload" + username,
+        url: "/upload/" + username,
         data: formData,
         type: 'POST',
         enctype: 'multipart/form-data',
