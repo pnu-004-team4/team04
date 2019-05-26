@@ -48,7 +48,7 @@ public class SenderController {
     try {
       audioHandler = new AudioHandler(userName);
       audio = audioHandler.requestLoad(account.getResolution(), userName, id);
-    } catch (ParameterException e) {
+    } catch (Exception e) {
       logger.warning("Unexpected request detected ==> "+e.toString());
       return null;
     }
