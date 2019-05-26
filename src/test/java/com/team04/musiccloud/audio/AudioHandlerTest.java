@@ -25,11 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class AudioHandlerTest {
 
   private final Logger LOGGER = Logger.getGlobal();
-  private final String USER_NAME = "CSK";
+  private final String USER_NAME = "admin@admin.com";
 
-  @Ignore// @Before 설정
+  @Ignore // @Before 설정
   public void networkAnalysis() {
-    //StaticKeys.setKeys(dbId);
     NetStatusManager netStatusManager = NetStatusManager.getInstance();
     netStatusManager.addUserNetDelay(USER_NAME, 10);
     netStatusManager.addUserNetDelay(USER_NAME, 13);
@@ -56,10 +55,9 @@ public class AudioHandlerTest {
   }
 
   private MultipartFile getMockMultipartFile() throws IOException {
-    final String fileName = "sample2.mp3";
-    final String userName = "test";
+    final String fileName = "sample3.mp3";
     final Path filePath = StaticPaths.storage
-        .resolve(userName)
+        .resolve(USER_NAME)
         .resolve(fileName)
         .toAbsolutePath();
 

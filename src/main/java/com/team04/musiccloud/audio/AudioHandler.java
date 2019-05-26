@@ -59,14 +59,14 @@ public class AudioHandler {
   public Audio requestLoad(Boolean isDoTranscode, String user, String dbId)
       throws IOException, ParameterException, InterruptedException {
     final MetadataCustomRepository customRepository = new MetadataCustomRepository(this.user);
-    final AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
+    AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
     final CacheManager cacheManager = new CacheManager(user);
     FileMeta fileMeta = customRepository.getFileMeta(dbId);
 
     final FileMeta cacheFileMeta = getCacheFileMeta(cacheManager, fileMeta);
     Audio audio = new Audio(audioMeta, cacheFileMeta, null);
 
-    for(int counter = 0; counter < 5; counter++) {
+    for (int counter = 0; counter < 5; counter++) {
       boolean isMakeTheFile = false;
 
       try {
@@ -74,7 +74,7 @@ public class AudioHandler {
           audio = doTranscodeAudio(user, audio);
           isMakeTheFile = true;
         }
-      } catch(Exception e) {
+      } catch (Exception e) {
         logger.warning("file doesn't exist");
         isMakeTheFile = false;
       }
@@ -86,13 +86,9 @@ public class AudioHandler {
 
     audio.setBytes(getAudioFromStorage(audio));
 
-    logger.info("[GET FROM DATABASE]\n"
-        + audio.getAudioMeta().getDbId() + "\n"
-        + audio.getAudioMeta().getAuthor() + "\n"
-        + audio.getAudioMeta().getTitle() + "\n"
-        + audio.getAudioMeta().getAlbum() + "\n"
-        + audio.getAudioMeta().getReleaseDate() + "\n"
-        + audio.getFileMeta().getFullPath() + "\n");
+    audioMeta.setPlayCount(audioMeta.getPlayCount() + 1);
+    System.out.println(audioMeta.getPlayCount());
+    customRepository.updateMetadata(audioMeta, audio.getFileMeta());
 
     return audio;
   }
@@ -118,7 +114,7 @@ public class AudioHandler {
 
     File directory = new File(directoryPath.toString());
 
-    if (directory.mkdirs()){
+    if (directory.mkdirs()) {
       logger.info("directory");
     }
     try (FileOutputStream fileOutputStream = new FileOutputStream(fullPath)) {
