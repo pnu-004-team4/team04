@@ -180,8 +180,12 @@ function uploadFile(files) {
         contentType: false,
         cache: false,
         success: [function (result) {
-          console.log("uploadFile Success");
-          console.log(result);
+          $('#dropZone').load(document.URL +  ' #dropZone', function(){
+            alert(result);
+            /*global trackListClickerUpdate*/
+            /*eslint no-undef: "error"*/
+            trackListClickerUpdate();
+          });
         }]
       });
     }

@@ -90,17 +90,21 @@ public class PlayerController {
 
     String trackList = trackTagGenerator(userName, audioMetaArrayList);
 
+    String sampleMusic = "https://www.bensound.org/bensound-music/bensound-summer.mp3";
     if (firstFileId.isEmpty()) {
-      base.addObject("streaming", audioTagGenerator("", ""));
-      base.addObject("username", account.getName());
-      base.addObject("getLibrary", trackList);
-      base.setViewName("Player/player");
+      base.addObject("streaming", audioTagGenerator(sampleMusic, "mp3"));
+      jspDefaultContentsGenerator(account, trackList);
       return base;
     }
 
     final Boolean isDoTranscode = account.getResolution();
 
-    Audio firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+    Audio firstAudio = null;
+    try {
+      firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+    } catch (Exception e) {
+      logger.warning(e.toString());
+    }
 
     stream.getAudioFromBack(firstAudio);
 
@@ -108,11 +112,15 @@ public class PlayerController {
     String mimeType = firstAudio.getFileMeta().getExtension();
 
     base.addObject("streaming", audioTagGenerator(url, mimeType));
+    jspDefaultContentsGenerator(account, trackList);
+    return base;
+  }
+
+  private void jspDefaultContentsGenerator(Account account, String trackList) {
     base.addObject("username", account.getName());
     base.addObject("useremail", account.getEmail());
     base.addObject("getLibrary", trackList);
     base.setViewName("Player/player");
-    return base;
   }
 
   /**
