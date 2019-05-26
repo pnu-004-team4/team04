@@ -12,6 +12,7 @@ public class AudioMetaBuilder {
   private String album;
   private LocalDateTime releaseDate;
   private int durationMs;
+  private int playCount;
 
   private AudioMetaBuilder() {
   }
@@ -38,6 +39,9 @@ public class AudioMetaBuilder {
     }
     if (audioMeta.hasDurationMs()) {
       durationMs = audioMeta.getDurationMs();
+    }
+    if (audioMeta.hasPlayCount()) {
+      playCount = audioMeta.getPlayCount();
     }
   }
 
@@ -79,7 +83,12 @@ public class AudioMetaBuilder {
     return this;
   }
 
+  public AudioMetaBuilder setPlayCount(int playCount) {
+    this.playCount = playCount;
+    return this;
+  }
+
   public AudioMeta build() {
-    return new AudioMeta(dbId, title, author, album, releaseDate, durationMs);
+    return new AudioMeta(dbId, title, author, album, releaseDate, durationMs, playCount);
   }
 }

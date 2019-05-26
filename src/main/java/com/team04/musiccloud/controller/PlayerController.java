@@ -9,7 +9,11 @@ import com.team04.musiccloud.stream.Streaming;
 import com.team04.musiccloud.utilities.AccountRepositoryUtil;
 import com.team04.musiccloud.utilities.MusicFileUtilities;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -19,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Player의 GET, POST가 정의된 controller 입니다.
- *
+ * <p>
  * 기존의 SampleStreamingController에서 PlayerController로 이동하였습니다. 라이브러리 리스트의 항목을 클릭해서 적절한 데이터를 가져올 수 있도록
  * 만들었습니다.
  *
@@ -41,9 +45,13 @@ public class PlayerController {
     accountRepositoryUtil = AccountRepositoryUtil.getInstance();
   }
 
+  // @TODO: Singleton으로 변경하도록 할 것
+  private MetadataCustomRepository getMetadataCustomRepository(String userName) {
+    return new MetadataCustomRepository(userName);
+  }
+
   private List<AudioMeta> getAudioMetaList(String userName) {
-    final MetadataCustomRepository customRepository = new MetadataCustomRepository(userName);
-    return customRepository.getPlaylist();
+    return getMetadataCustomRepository(userName).getPlaylist();
   }
 
   /**
@@ -53,7 +61,7 @@ public class PlayerController {
    */
   // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
   private String audioTagGenerator(String audioLocation, String fileExtension) {
-    return "<audio id=\"bgAudio\" controls style=\"visibility:hidden;\"><source src=\""
+    return "<audio id=\"bgAudio\" controls style=\"display:none;\"><source src=\""
         + audioLocation
         + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
         + "\" id=\"nowPlaying\"></audio>";
@@ -88,30 +96,51 @@ public class PlayerController {
       logger.info(e.toString());
     }
 
-    String trackList = trackTagGenerator(userName, audioMetaArrayList);
+    String trackList = trackTagGenerator(false, userName, audioMetaArrayList);
 
+    String sampleMusic = "https://www.bensound.org/bensound-music/bensound-summer.mp3";
     if (firstFileId.isEmpty()) {
-      base.addObject("streaming", audioTagGenerator("", ""));
-      base.addObject("username", account.getName());
-      base.addObject("getLibrary", trackList);
-      base.setViewName("Player/player");
+      base.addObject("streaming", audioTagGenerator(sampleMusic, "mp3"));
+      jspDefaultContentsGenerator(account, trackList);
       return base;
     }
 
     final Boolean isDoTranscode = account.getResolution();
 
-    Audio firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+    Audio firstAudio = null;
+    try {
+      firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+    } catch (Exception e) {
+      logger.warning(e.toString());
+    }
 
     stream.getAudioFromBack(firstAudio);
 
     String url = stream.sendAudioToFront();
-    String mimeType = firstAudio.getFileMeta().getExtension();
+    String mimeType = null;
+    if (firstAudio != null) {
+      mimeType = firstAudio.getFileMeta().getExtension();
+    } else {
+      mimeType = "mp3";
+    }
 
     base.addObject("streaming", audioTagGenerator(url, mimeType));
+    jspDefaultContentsGenerator(account, trackList);
+    return base;
+  }
+
+  private void jspDefaultContentsGenerator(Account account, String trackList) {
     base.addObject("username", account.getName());
+    base.addObject("useremail", account.getEmail());
     base.addObject("getLibrary", trackList);
     base.setViewName("Player/player");
-    return base;
+  }
+
+  private String formatTime(int time) {
+    Date date = new Date(time);
+    DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+    formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+    return formatter.format(date);
   }
 
   /**
@@ -119,12 +148,28 @@ public class PlayerController {
    *
    * @return HTML track list codes
    */
-  private String trackTagGenerator(String userName, List<AudioMeta> metaArray) {
+  private String trackTagGenerator(boolean isFavorite, String userName, List<AudioMeta> metaArray) {
     StringBuilder trackTagContents = new StringBuilder();
     int counter = 1;
-    if(metaArray.isEmpty())
+    if (metaArray.isEmpty()) {
       return "";
+    }
+    // @TODO 나중에 Strategy pattern을 통해서 함수를 개선하도록 할 것
+    MetadataCustomRepository metadataCustomRepository = getMetadataCustomRepository(userName);
+    int average = metadataCustomRepository.getAveragePlayCount();
     for (AudioMeta meta : metaArray) {
+      logger.info(meta.getDbId() + " count: " + meta.getPlayCount() + " avg: " + average);
+      if (isFavorite && (meta.getPlayCount() < average)) {
+        continue;
+      }
+
+      String fileName;
+      fileName = meta.getTitle();
+
+      if (fileName == null) {
+        fileName = metadataCustomRepository.getFileMeta(meta.getDbId()).getName();
+      }
+
       trackTagContents.append("<div class=\"track\">")
           .append("<div class=\"track__number\">")
           .append(counter++)
@@ -136,13 +181,13 @@ public class PlayerController {
           .append("<i class=\"ion-android-delete\"></i>")
           .append("</div>")
           .append("<div class=\"track__title\">")
-          .append(meta.getTitle())
+          .append(fileName)
           .append("</div>")
           .append("<div class=\"track__artist\">")
           .append(meta.getAuthor())
           .append("</div>")
           .append("<div class=\"track__length\">")
-          .append("@TODO: TIME") //@TODO: 몇 분 남았는 지를 보여주도록 한다.
+          .append(formatTime(meta.getDurationMs()))
           .append("</div>")
           .append("<div class=\"track__owner\" hidden>")
           .append(userName)
@@ -165,14 +210,20 @@ public class PlayerController {
     //@TODO: 양식 다시 보내기가 실행되는 것을 방지하도록 합니다.
     //@TODO: 백 스페이스를 하게 되면 약간의 문제가 있다...
 
-    //@TODO: 나중에 사용하도록 할 것, 이것을 통해서 library를 다룰 수 있습니다.
     String item = httpServletRequest.getParameter("songs");
     System.out.println("Currently clicked value => " + item);
 
     Account account = accountRepositoryUtil.getCurrentAccount();
     String userName = account.getEmail();
 
-    String trackList = trackTagGenerator(userName, getAudioMetaList(userName));
+    String trackList = "";
+
+    if ("All Songs".equalsIgnoreCase(item)) {
+      trackList = trackTagGenerator(false, userName, getAudioMetaList(userName));
+    } else if ("Favorite Songs".equalsIgnoreCase(item)) {
+      trackList = trackTagGenerator(true, userName, getAudioMetaList(userName));
+    }
+
     base.addObject("getLibrary", trackList);
     return base;
   }

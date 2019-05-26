@@ -113,9 +113,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     border: 1px solid #D3D3D3;
     box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;
 }
-.noUi-connects {
-    border-radius: 3px;
-}
 .noUi-connect {
     background: #3FB8AF;
 }

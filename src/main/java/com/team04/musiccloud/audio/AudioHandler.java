@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Logger;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,28 +56,39 @@ public class AudioHandler {
     ).getBytes();
   }
 
-  public Audio requestLoad(Boolean isDoTranscode, String user, String dbId) throws IOException, ParameterException {
+  public Audio requestLoad(Boolean isDoTranscode, String user, String dbId)
+      throws IOException, ParameterException, InterruptedException {
     final MetadataCustomRepository customRepository = new MetadataCustomRepository(this.user);
-    final AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
+    AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
     final CacheManager cacheManager = new CacheManager(user);
     FileMeta fileMeta = customRepository.getFileMeta(dbId);
 
     final FileMeta cacheFileMeta = getCacheFileMeta(cacheManager, fileMeta);
     Audio audio = new Audio(audioMeta, cacheFileMeta, null);
 
-    if (cacheManager.isDoCreated() && isDoTranscode) {
-      audio = doTranscodeAudio(user, audio);
+    for (int counter = 0; counter < 5; counter++) {
+      boolean isMakeTheFile = false;
+
+      try {
+        if (cacheManager.isDoCreated() && isDoTranscode) {
+          audio = doTranscodeAudio(user, audio);
+          isMakeTheFile = true;
+        }
+      } catch (Exception e) {
+        logger.warning("file doesn't exist");
+        isMakeTheFile = false;
+      }
+
+      if (isMakeTheFile)
+        break;
+      Thread.sleep(1000);
     }
 
     audio.setBytes(getAudioFromStorage(audio));
 
-    logger.info("[GET FROM DATABASE]\n"
-        + audio.getAudioMeta().getDbId() + "\n"
-        + audio.getAudioMeta().getAuthor() + "\n"
-        + audio.getAudioMeta().getTitle() + "\n"
-        + audio.getAudioMeta().getAlbum() + "\n"
-        + audio.getAudioMeta().getReleaseDate() + "\n"
-        + audio.getFileMeta().getFullPath() + "\n");
+    audioMeta.setPlayCount(audioMeta.getPlayCount() + 1);
+    System.out.println(audioMeta.getPlayCount());
+    customRepository.updateMetadata(audioMeta, audio.getFileMeta());
 
     return audio;
   }
@@ -98,6 +110,13 @@ public class AudioHandler {
 
   private void saveAudioToStorage(Audio audio) throws IOException {
     final File fullPath = audio.getFileMeta().getFullPathAsFile();
+    final Path directoryPath = audio.getFileMeta().getDirectoryAsPath();
+
+    File directory = new File(directoryPath.toString());
+
+    if (directory.mkdirs()) {
+      logger.info("directory");
+    }
     try (FileOutputStream fileOutputStream = new FileOutputStream(fullPath)) {
       fileOutputStream.write(audio.getBytes());
     }

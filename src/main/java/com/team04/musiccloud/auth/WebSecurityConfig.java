@@ -14,13 +14,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // [[[[ 주의 ]]]] 아래 코드는 로그인 인증과 관련된 코드로 혹여 권한 오류 생길 시 확인바랍니다.
         http.authorizeRequests()
                 .antMatchers("/login", "/register", "/css/**", "/js/**", "/registerCheck").permitAll()
-
-                // @TODO 조만간 아래의 코드로 바뀔 코드입니다 현재 ADMIN 권한을 가진 유저만 해당 폴더의 파일에 접근할 수 있습니다
-                .antMatchers("/server/storage/CSK/**").hasRole("ADMIN")
-                .antMatchers("/server/temp/CSK/**").hasRole("ADMIN")
-                //.antMatchers("/server/storage/" + account.getEmail() + "/**").hasRole("" + account.getEmail())
-                //.antMatchers("/server/temp/" + account.getEmail() + "/**").hasRole("" + account.getEmail())
-
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -30,5 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login")
                 .permitAll();
+        http.csrf().disable();
     }
 }

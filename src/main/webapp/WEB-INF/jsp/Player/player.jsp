@@ -37,7 +37,7 @@
 
     <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" />
+            <input type="text" name = "index" placeholder="Search" required />
 
         </div>
     </form:form>
@@ -58,6 +58,7 @@
             <button type="submit"><i class="fa fa-search"></i></button>
         </div>
     </form:form>
+
 
     <div class="user">
 
@@ -157,7 +158,7 @@
 
                             <a href="#" class="navigation__list__item">
                                 <i class="ion-headphone"></i>
-                                <span>Some Songs</span>
+                                <span>Favorite Songs</span>
                             </a>
 
                             <!-- 아래 내용이 실제 POST의 parameter로 들어가는 부분입니다. -->
@@ -172,35 +173,36 @@
 
 
     </div>
-    <div class="content__middle">
-        <div class="album__tracks">
-            <div class="tracks">
-                <div class="tracks__heading">
+    <div class = "dropZone" id = "dropZone">
+        <div class="content__middle">
+            <div class="album__tracks">
+                <div class="tracks">
+                    <div class="tracks__heading">
 
-                    <div class="tracks__heading__number">#</div>
-                    <div class="tracks__heading__title">Song</div>
-                    <div class="tracks__heading__artist">ARTIST</div>
-                    <div class="tracks__heading__length">
-                        <i class="ion-ios-stopwatch-outline"></i>
+                        <div class="tracks__heading__number">#</div>
+                        <div class="tracks__heading__title">Song</div>
+                        <div class="tracks__heading__artist">ARTIST</div>
+                        <div class="tracks__heading__length">
+                            <i class="ion-ios-stopwatch-outline"></i>
+                        </div>
+
                     </div>
 
+                    <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
+                    ${getLibrary}
                 </div>
-
-                <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
-                ${getLibrary}
             </div>
-
         </div>
     </div>
 
 </section>
 
+<div type="hidden" id="userEmailDiv" value="${useremail}"></div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
-<script src="/js/myPlayer.js"></script>
 <script src="/js/libraryControl.js"></script>
-
+<script src="/js/myPlayer.js"></script>
 ${streaming}
 
 

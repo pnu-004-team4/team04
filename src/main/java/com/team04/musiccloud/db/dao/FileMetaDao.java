@@ -3,6 +3,7 @@ package com.team04.musiccloud.db.dao;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.beust.jcommander.ParameterException;
+import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -11,6 +12,7 @@ import com.team04.musiccloud.db.converter.FileMetaConverter;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 public class FileMetaDao {
@@ -29,23 +31,32 @@ public class FileMetaDao {
   }
 
   public boolean update(FileMeta fileMeta) {
-    this.mongoCollection.updateOne(eq("_id", fileMeta.getDbId()),
-        new Document("$set", FileMetaConverter.toDocument(fileMeta)));
+    Bson filter;
+    Document update;
+    Bson query;
+    try {
+      filter = new Document("_id", new ObjectId(fileMeta.getDbId()));
+      update = FileMetaConverter.toDocument(fileMeta);
+      update.remove("_id");
+      query = new Document("$set", update);
+      this.mongoCollection.updateOne(filter, query);
+    } catch (MongoException e) {
+      return false;
+    }
 
     return true;
   }
 
   public boolean delete(String dbId) {
-    this.mongoCollection.deleteOne(eq("_id", dbId));
+    this.mongoCollection.deleteOne(new Document("_id", new ObjectId(dbId)));
 
     return true;
   }
 
   public boolean exists(String dbId) {
     FindIterable<Document> document = this.mongoCollection.find(eq("_id", dbId)).limit(1);
-    boolean exists = document != null;
 
-    return exists;
+    return document != null;
   }
 
   public List<FileMeta> getList() {

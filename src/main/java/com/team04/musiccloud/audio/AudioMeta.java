@@ -14,24 +14,27 @@ public class AudioMeta {
   private String album;
   private LocalDateTime releaseDate;
   private int durationMs;
+  private int playCount;
 
   public AudioMeta(String dbId, String title, String author, String album,
-      LocalDateTime releaseDate, int durationMs) {
-    this(title, author, album, releaseDate, durationMs);
+      LocalDateTime releaseDate, int durationMs, int playCount) {
+    this(title, author, album, releaseDate, durationMs, playCount);
     setDbId(dbId);
   }
 
   public AudioMeta(String title, String author, String album, LocalDateTime releaseDate,
-      int durationMs) {
+      int durationMs, int playCount) {
     setTitle(title);
     setAuthor(author);
     setAlbum(album);
     setReleaseDate(releaseDate);
     setDurationMs(durationMs);
+    setPlayCount(playCount);
   }
 
   public AudioMeta(AudioMeta other) {
-    this(other.dbId, other.title, other.author, other.album, other.releaseDate, other.durationMs);
+    this(other.dbId, other.title, other.author, other.album, other.releaseDate, other.durationMs,
+        other.playCount);
   }
 
   public boolean isEmpty() {
@@ -61,6 +64,10 @@ public class AudioMeta {
 
   public boolean hasDurationMs() {
     return durationMs != 0;
+  }
+
+  public boolean hasPlayCount() {
+    return playCount >= 0;
   }
 
   public String getDbId() {
@@ -109,6 +116,14 @@ public class AudioMeta {
 
   private void setDurationMs(int durationMs) {
     this.durationMs = durationMs;
+  }
+
+  public int getPlayCount() {
+    return playCount;
+  }
+
+  public void setPlayCount(int playCount) {
+    this.playCount = playCount;
   }
 
   @Override
