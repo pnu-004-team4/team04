@@ -97,7 +97,7 @@ public class AudioMetaDao {
     BsonField averageField = new BsonField("averagePlayCount", averageDocument);
     List<Bson> averageCollection = Collections.singletonList(Aggregates.group("_id", averageField));
 
-    AggregateIterable<org.bson.Document> aggregateIterable = this.mongoCollection
+    AggregateIterable<Document> aggregateIterable = this.mongoCollection
         .aggregate(averageCollection);
     Document averageResult = aggregateIterable.first();
 
