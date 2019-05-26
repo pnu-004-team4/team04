@@ -37,7 +37,7 @@
 
     <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" />
+            <input type="text" name = "index" placeholder="Search" required />
 
         </div>
     </form:form>
@@ -58,6 +58,7 @@
             <button type="submit"><i class="fa fa-search"></i></button>
         </div>
     </form:form>
+
 
     <div class="user">
 
