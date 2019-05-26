@@ -79,9 +79,8 @@ public class AudioHandler {
         isMakeTheFile = false;
       }
 
-      if (isMakeTheFile) {
+      if (isMakeTheFile)
         break;
-      }
       Thread.sleep(1000);
     }
 
