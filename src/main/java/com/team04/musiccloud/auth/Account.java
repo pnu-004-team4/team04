@@ -15,6 +15,7 @@ public class Account {
     private String password;
     private String name;
     private Boolean resolution;
+    private Boolean apporoval;
     private Integer id;
 
     public Integer getId() {
@@ -47,9 +48,7 @@ public class Account {
         this.password = passwordEncoder.encode(password);
     }
 
-    public String getName(){
-        return name;
-    }
+    public String getName(){ return name; }
 
     public void setName(String name){
         this.name = name;
@@ -62,4 +61,8 @@ public class Account {
     public void setResolution(Boolean resolution) {
         this.resolution = resolution;
     }
+
+    public Boolean getApporoval() { return apporoval; }
+
+    public void setApporoval(Boolean apporoval) { this.apporoval = apporoval; }
 }
