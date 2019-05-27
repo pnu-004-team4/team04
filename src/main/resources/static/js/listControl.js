@@ -7,40 +7,40 @@
 
 function sortTitleASC(trackArray){
     trackArray.sort(function(a, b){
-        return a.querySelector('.track__title').textContent.toLowerCase()
-        < b.querySelector('.track__title').textContent.toLowerCase() ? -1
-            : a.querySelector('.track__title').textContent.toLowerCase()
-            > b.querySelector('.track__title').textContent.toLowerCase() ? 1 : 0;
+        return a.querySelector(".track__title").textContent.toLowerCase()
+        < b.querySelector(".track__title").textContent.toLowerCase() ? -1
+            : a.querySelector(".track__title").textContent.toLowerCase()
+            > b.querySelector(".track__title").textContent.toLowerCase() ? 1 : 0;
     });
     return trackArray;
 }
 
 function sortTitleDSC(trackArray){
     trackArray.sort(function(a, b){
-        return a.querySelector('.track__title').textContent.toLowerCase()
-        < b.querySelector('.track__title').textContent.toLowerCase() ? 1
-            : a.querySelector('.track__title').textContent.toLowerCase()
-            > b.querySelector('.track__title').textContent.toLowerCase() ? -1 : 0;
+        return a.querySelector(".track__title").textContent.toLowerCase()
+        < b.querySelector(".track__title").textContent.toLowerCase() ? 1
+            : a.querySelector(".track__title").textContent.toLowerCase()
+            > b.querySelector(".track__title").textContent.toLowerCase() ? -1 : 0;
     });
     return trackArray;
 }
 
 function sortArtistASC(trackArray){
     trackArray.sort(function(a, b){
-        return a.querySelector('.track__artist').textContent.toLowerCase()
-        < b.querySelector('.track__artist').textContent.toLowerCase() ? -1
-            : a.querySelector('.track__artist').textContent.toLowerCase()
-            > b.querySelector('.track__artist').textContent.toLowerCase() ? 1 : 0;
+        return a.querySelector(".track__artist").textContent.toLowerCase()
+        < b.querySelector(".track__artist").textContent.toLowerCase() ? -1
+            : a.querySelector(".track__artist").textContent.toLowerCase()
+            > b.querySelector(".track__artist").textContent.toLowerCase() ? 1 : 0;
     });
     return trackArray;
 }
 
 function sortArtistDSC(trackArray){
     trackArray.sort(function(a, b){
-        return a.querySelector('.track__artist').textContent.toLowerCase()
-        < b.querySelector('.track__artist').textContent.toLowerCase() ? 1
-            : a.querySelector('.track__artist').textContent.toLowerCase()
-            > b.querySelector('.track__artist').textContent.toLowerCase() ? -1 : 0;
+        return a.querySelector(".track__artist").textContent.toLowerCase()
+        < b.querySelector(".track__artist").textContent.toLowerCase() ? 1
+            : a.querySelector(".track__artist").textContent.toLowerCase()
+            > b.querySelector(".track__artist").textContent.toLowerCase() ? -1 : 0;
     });
     return trackArray;
 }
@@ -58,18 +58,18 @@ $(document).ready(function () {
     });
 
     //overriding contains method
-    jQuery.expr[':'].contains = function(a, i, m) {
+    jQuery.expr[":"].contains = function(a, i, m) {
         return jQuery(a).text().toUpperCase()
             .indexOf(m[3].toUpperCase()) >= 0;
     };
 
     //정렬 기능
-        var tracks = document.querySelectorAll('.track'); // tracks nodelist
+        var tracks = document.querySelectorAll(".track"); // tracks nodelist
         var trackArray = Array.prototype.slice.call(tracks, 0); // node list to array
         var result;
 
 
-    $("#titleASC").on('click', function(){
+    $("#titleASC").on("click", function(){
         result = sortTitleASC(trackArray);
         console.log("==========sortTitleASC==========");
         for(var i =0; i < trackArray.length; i++){
@@ -77,7 +77,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#titleDSC").on('click', function(){
+    $("#titleDSC").on("click", function(){
         result = sortTitleDSC(trackArray);
         console.log("==========sortTitleDSC==========");
         for(var i =0; i < trackArray.length; i++){
@@ -85,7 +85,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#artistASC").on('click', function(){
+    $("#artistASC").on("click", function(){
         result = sortArtistASC(trackArray);
         console.log("==========sortArtistASC==========");
         for(var i =0; i < trackArray.length; i++){
@@ -93,7 +93,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#artistDSC").on('click', function(){
+    $("#artistDSC").on("click", function(){
         console.log("==========sortArtistDSC==========");
         result = sortArtistDSC(trackArray);
         for(var i =0; i < trackArray.length; i++){
