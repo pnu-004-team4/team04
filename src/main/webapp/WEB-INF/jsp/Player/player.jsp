@@ -35,29 +35,27 @@
     </div>
     -->
 
-    <form:form action="search" method="get">
-        <div class="search">
-            <input type="text" name = "index" placeholder="Search" required />
 
-        </div>
-    </form:form>
-
-    <div class="Button">
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
-
-    <div class="user">
 
     <form:form action="search">
         <div class="search">
-            <input type="text" name="index" placeholder="Search"/>
+            <input type="text" id="search_key" placeholder="검색창"/>
         </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
+<%--        <div class="Button">--%>
+<%--            <button type="submit"><i class="fa fa-search"></i></button>--%>
+<%--        </div>--%>
     </form:form>
+
+        <button id="titleASC">타이틀오름차순</button>
+        <button id="titleDSC">타이틀내림차순</button>
+        <button id="artistASC">가수오름차순</button>
+        <button id="artistDSC">가수내림차순</button>
+
+
+    </div>
+
+
+
 
 
     <div class="user">
@@ -90,6 +88,8 @@
         </div>
 
     </div>
+
+        <!--여긴어디-->
 </section>
 
 <%--Currenct Track & Control Section--%>
@@ -190,6 +190,158 @@
 
                     <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
                     ${getLibrary}
+                    <div class="track">
+                        <div class="track__number">1</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">7th Floor Tango</div>
+                        <div class="track__artist">Silent Partner</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4154b138cd8314491cc10</div>
+                    </div>
+                    <div class="track">
+                        <div class="track__number">2</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">Estampe Galactus# Barbare Epaulé Giraffe# Ennui</div>
+                        <div class="track__artist">Monplaisir</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4159c138cd83ec8892211</div>
+                    </div>
+                    <div class="track" >
+                        <div class="track__number">3</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">zero</div>
+                        <div class="track__artist">null</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">나만, 봄</div>
+                        <div class="track__artist">볼방탄 사춘기</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">그때가 좋았어</div>
+                        <div class="track__artist">케이시(kassy)</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">옥탑방</div>
+                        <div class="track__artist">엔플라잉</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">사계</div>
+                        <div class="track__artist">방시혁</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">김윤수</div>
+                        <div class="track__artist">박다온</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">welcome, 방탄</div>
+                        <div class="track__artist">various artist</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">방탄조끼야</div>
+                        <div class="track__artist">아저씨</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">작은 것들을 위한 시</div>
+                        <div class="track__artist">방탄소년단</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">사랑에 연습이 있었다면</div>
+                        <div class="track__artist">임재현</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">Ouverture</div>
+                        <div class="track__artist">Evil needle</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+
+                    <div class="track">
+                        <div class="track__number">4</div>
+                        <div class="track__play"><i class="ion-ios-play"></i></div>
+                        <div class="track__delete"><i class="ion-android-delete"></i></div>
+                        <div class="track__title">anywhere</div>
+                        <div class="track__artist">Anderson.paak</div>
+                        <div class="track__length">@TODO: TIME</div>
+                        <div class="track__owner" hidden>admin@admin.com</div>
+                        <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -197,13 +349,18 @@
 
 </section>
 
+
+
 <div type="hidden" id="userEmailDiv" value="${useremail}"></div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
 <script src="/js/libraryControl.js"></script>
 <script src="/js/myPlayer.js"></script>
+<script src="/js/listControl.js"></script>
+
 ${streaming}
+
 
 
 </body>
