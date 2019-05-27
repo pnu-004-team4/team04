@@ -1,5 +1,7 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.utilities.FunctionUtilities;
+
 public class FileMetaBuilder {
 
   private String dbId;
@@ -17,21 +19,13 @@ public class FileMetaBuilder {
       return;
     }
 
-    if (fileMeta.hasDbId()) {
-      dbId = fileMeta.getDbId();
-    }
-    if (fileMeta.hasDirectory()) {
-      directory = fileMeta.getDirectory();
-    }
-    if (fileMeta.hasName()) {
-      name = fileMeta.getName();
-    }
-    if (fileMeta.hasExtension()) {
-      extension = fileMeta.getExtension();
-    }
-    if (fileMeta.hasName()) {
-      user = fileMeta.getUser();
-    }
+    FunctionUtilities.setOnCondition(fileMeta, FileMeta::hasDbId, FileMeta::getDbId, this::setDbId);
+    FunctionUtilities.setOnCondition(fileMeta, FileMeta::hasDirectory, FileMeta::getDirectory,
+        this::setDirectory);
+    FunctionUtilities.setOnCondition(fileMeta, FileMeta::hasName, FileMeta::getName, this::setName);
+    FunctionUtilities.setOnCondition(fileMeta, FileMeta::hasExtension, FileMeta::getExtension,
+        this::setExtension);
+    FunctionUtilities.setOnCondition(fileMeta, FileMeta::hasUser, FileMeta::getUser, this::setUser);
   }
 
   public static FileMetaBuilder builder() {
