@@ -27,6 +27,8 @@ dependencies {
     testCompile("org.springframework.security:spring-security-test")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile fileTree(dir: 'library', include: ['*.jar'])
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'commons-io:commons-io:2.6'
 }
 
 if (hasProperty("buildScan")) {

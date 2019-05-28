@@ -25,11 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class AudioHandlerTest {
 
   private final Logger LOGGER = Logger.getGlobal();
-  private final String USER_NAME = "CSK";
+  private final String USER_NAME = "admin@admin.com";
 
-  @Ignore// @Before 설정
+  @Ignore // @Before 설정
   public void networkAnalysis() {
-    //StaticKeys.setKeys(dbId);
     NetStatusManager netStatusManager = NetStatusManager.getInstance();
     netStatusManager.addUserNetDelay(USER_NAME, 10);
     netStatusManager.addUserNetDelay(USER_NAME, 13);
@@ -46,7 +45,7 @@ public class AudioHandlerTest {
   }
 
   @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
-  public void requestBLoad() throws IOException {
+  public void requestBLoad() throws IOException, InterruptedException {
     new AudioHandler(USER_NAME).requestLoad(true, USER_NAME, getFirstDbId());
   }
 
@@ -56,10 +55,9 @@ public class AudioHandlerTest {
   }
 
   private MultipartFile getMockMultipartFile() throws IOException {
-    final String fileName = "sample2.mp3";
-    final String userName = "test";
+    final String fileName = "sample3.mp3";
     final Path filePath = StaticPaths.storage
-        .resolve(userName)
+        .resolve(USER_NAME)
         .resolve(fileName)
         .toAbsolutePath();
 

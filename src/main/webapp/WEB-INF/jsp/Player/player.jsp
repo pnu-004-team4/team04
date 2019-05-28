@@ -37,56 +37,44 @@
 
     <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" />
+            <input type="text" name = "index" placeholder="Search" required />
 
         </div>
     </form:form>
 
-    <div class="Button">
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
+
+    <button type="submit">
+        <i class="fa fa-search"></i>
+    </button>
+
 
     <div class="user">
 
-    <form:form action="search">
-        <div class="search">
-            <input type="text" name="index" placeholder="Search"/>
-        </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form:form>
 
-    <div class="user">
+        <div class="user__info">
 
-        <div class="owner">
-
-            <div class="user__info">
- 
             <span class="user__info__name">
                <span class="first">Welcome!</span>
                <span class="last">${username}</span>
              </span>
 
-            </div>
-
-            <div class="user__actions">
-
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="ion-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                        <li><a href="setting">Settings</a></li>
-                        <li><a href="logout">Log Out</a></li>
-                    </ul>
-                </div>
-
-            </div>
         </div>
+
+        <div class="user__actions">
+
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="ion-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li><a href="setting">Settings</a></li>
+                    <li><a href="logout">Log Out</a></li>
+                </ul>
+            </div>
+
+        </div>
+
 
     </div>
 </section>
@@ -96,7 +84,10 @@
 
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
-        <a class="current-track__name">Charlie Puth</a>
+
+
+        <a class="current-track__artist">Charlie Puth</a>
+
     </div>
 
     <div class="current-track__actions">
@@ -115,7 +106,7 @@
 
     <div class="current-track__options">
 
-        <a href="#" class="lyrics">Lyrics</a>
+
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
             <a href="#" class="control volume">
@@ -157,7 +148,7 @@
 
                             <a href="#" class="navigation__list__item">
                                 <i class="ion-headphone"></i>
-                                <span>Some Songs</span>
+                                <span>Favorite Songs</span>
                             </a>
 
                             <!-- 아래 내용이 실제 POST의 parameter로 들어가는 부분입니다. -->
@@ -172,35 +163,36 @@
 
 
     </div>
-    <div class="content__middle">
-        <div class="album__tracks">
-            <div class="tracks">
-                <div class="tracks__heading">
+    <div class = "dropZone" id = "dropZone">
+        <div class="content__middle">
+            <div class="album__tracks">
+                <div class="tracks">
+                    <div class="tracks__heading">
 
-                    <div class="tracks__heading__number">#</div>
-                    <div class="tracks__heading__title">Song</div>
-                    <div class="tracks__heading__artist">ARTIST</div>
-                    <div class="tracks__heading__length">
-                        <i class="ion-ios-stopwatch-outline"></i>
+                        <div class="tracks__heading__number">#</div>
+                        <div class="tracks__heading__title">Song</div>
+                        <div class="tracks__heading__artist">ARTIST</div>
+                        <div class="tracks__heading__length">
+                            <i class="ion-ios-stopwatch-outline"></i>
+                        </div>
+
                     </div>
 
+                    <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
+                    ${getLibrary}
                 </div>
-
-                <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
-                ${getLibrary}
             </div>
-
         </div>
     </div>
 
 </section>
 
+<div type="hidden" id="userEmailDiv" value="${useremail}"></div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
-<script src="/js/myPlayer.js"></script>
 <script src="/js/libraryControl.js"></script>
-
+<script src="/js/myPlayer.js"></script>
 ${streaming}
 
 

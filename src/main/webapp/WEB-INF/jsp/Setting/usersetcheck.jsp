@@ -10,11 +10,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import ="com.team04.musiccloud.auth.Account" language= "java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page import="com.team04.musiccloud.db.iAccountRepository" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="org.springframework.security.core.userdetails.User" %>
 <%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
-<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 
 <!doctype html>
 <html lang="kr">
@@ -42,13 +41,12 @@
     AccountCustomRepository repository = new AccountCustomRepository();
 
     //입력값
-    String Username = request.getParameter("username");
     String Password = request.getParameter("password");
     String Email = request.getParameter("email");
     String Name = request.getParameter("name");
 
-    String CurUsername, CurPass, CurName;
-    String CheckUsername, CheckPass, CheckEmail, CheckName;
+    String  CurPass, CurName;
+    String  CheckPass, CheckEmail, CheckName;
 
     //기존의 내용 불러오기.
     acc = repository.findAccountByEmail(Email);
@@ -74,7 +72,8 @@
     System.out.println("인코딩 후 password : " + CurPass);
 
     //updateAccount
-    repository.updateAccount(Email, CurPass, CurName, null);
+    //@TODO update resolution
+    repository.updateAccount(Email, CurPass, CurName, false);
 
 //    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

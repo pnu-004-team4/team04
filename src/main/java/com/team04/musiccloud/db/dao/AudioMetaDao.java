@@ -3,14 +3,22 @@ package com.team04.musiccloud.db.dao;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.beust.jcommander.ParameterException;
+import com.mongodb.MongoException;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.BsonField;
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.db.converter.AudioMetaConverter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 public class AudioMetaDao {
@@ -29,23 +37,31 @@ public class AudioMetaDao {
   }
 
   public boolean update(AudioMeta audioMeta) {
-    this.mongoCollection.updateOne(eq("_id", audioMeta.getDbId()),
-        new Document("$set", AudioMetaConverter.toDocument(audioMeta)));
+    Bson filter;
+    Document update;
+    Bson query;
+    try {
+      filter = new Document("_id", new ObjectId(audioMeta.getDbId()));
+      update = AudioMetaConverter.toDocument(audioMeta);
+      update.remove("_id");
+      query = new Document("$set", update);
+      this.mongoCollection.updateOne(filter, query);
+    } catch (MongoException e) {
+      return false;
+    }
 
     return true;
   }
 
   public boolean delete(String dbId) {
-    this.mongoCollection.deleteOne(eq("_id", dbId));
-
+    this.mongoCollection.deleteOne(new Document("_id", new ObjectId(dbId)));
     return true;
   }
 
   public boolean exists(String dbId) {
     FindIterable<Document> document = this.mongoCollection.find(eq("_id", dbId)).limit(1);
-    boolean exists = document != null;
 
-    return exists;
+    return document != null;
   }
 
   public List<AudioMeta> getList() {
@@ -73,5 +89,22 @@ public class AudioMetaDao {
     }
 
     return AudioMetaConverter.toAudioMeta(document);
+  }
+
+  public int getAveragePlayCount() {
+    BsonString playCountString = new BsonString("$count");
+    BsonDocument averageDocument = new BsonDocument("$avg", playCountString);
+    BsonField averageField = new BsonField("averagePlayCount", averageDocument);
+    List<Bson> averageCollection = Collections.singletonList(Aggregates.group("_id", averageField));
+
+    AggregateIterable<Document> aggregateIterable = this.mongoCollection
+        .aggregate(averageCollection);
+    Document averageResult = aggregateIterable.first();
+
+    if (averageResult != null) {
+      return averageResult.getDouble("averagePlayCount").intValue();
+    } else {
+      return 0;
+    }
   }
 }

@@ -1,5 +1,6 @@
 package com.team04.musiccloud.audio;
 
+import com.team04.musiccloud.utilities.FunctionUtilities;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ public class AudioMetaBuilder {
   private String album;
   private LocalDateTime releaseDate;
   private int durationMs;
+  private int playCount;
 
   private AudioMetaBuilder() {
   }
@@ -21,24 +23,22 @@ public class AudioMetaBuilder {
       return;
     }
 
-    if (audioMeta.hasDbId()) {
-      dbId = audioMeta.getDbId();
-    }
-    if (audioMeta.hasTitle()) {
-      title = audioMeta.getTitle();
-    }
-    if (audioMeta.hasAuthor()) {
-      author = audioMeta.getAuthor();
-    }
-    if (audioMeta.hasAlbum()) {
-      album = audioMeta.getAlbum();
-    }
-    if (audioMeta.hasReleaseDate()) {
-      releaseDate = audioMeta.getReleaseDate();
-    }
-    if (audioMeta.hasDurationMs()) {
-      durationMs = audioMeta.getDurationMs();
-    }
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasDbId, AudioMeta::getDbId, this::setDbId);
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasTitle, AudioMeta::getTitle, this::setTitle);
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasAuthor, AudioMeta::getAuthor, this::setAuthor);
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasAlbum, AudioMeta::getAlbum, this::setAlbum);
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasReleaseDate, AudioMeta::getReleaseDate,
+            this::setReleaseDate);
+    FunctionUtilities.setOnCondition(audioMeta, AudioMeta::hasDurationMs, AudioMeta::getDurationMs,
+        this::setDurationMs);
+    FunctionUtilities
+        .setOnCondition(audioMeta, AudioMeta::hasPlayCount, AudioMeta::getPlayCount,
+            this::setPlayCount);
   }
 
   public static AudioMetaBuilder builder() {
@@ -79,7 +79,12 @@ public class AudioMetaBuilder {
     return this;
   }
 
+  public AudioMetaBuilder setPlayCount(int playCount) {
+    this.playCount = playCount;
+    return this;
+  }
+
   public AudioMeta build() {
-    return new AudioMeta(dbId, title, author, album, releaseDate, durationMs);
+    return new AudioMeta(dbId, title, author, album, releaseDate, durationMs, playCount);
   }
 }

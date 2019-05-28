@@ -35,9 +35,13 @@ public class MetadataCustomRepository {
   */
   public boolean storeMetadata(AudioMeta audioMeta, FileMeta fileMeta) {
     String dbId = audioMetaDao.create(audioMeta);
-    fileMetaDao.create(fileMeta, dbId);
+    return fileMetaDao.create(fileMeta, dbId);
+  }
 
-    return true;
+  public boolean updateMetadata(AudioMeta audioMeta, FileMeta fileMeta) {
+    boolean isAudioMetaUpdated = audioMetaDao.update(audioMeta);
+    boolean isFileMetaUpdated = fileMetaDao.update(fileMeta);
+    return isAudioMetaUpdated && isFileMetaUpdated;
   }
 
   /*
@@ -74,5 +78,9 @@ public class MetadataCustomRepository {
   */
   public List<AudioMeta> getPlaylist() {
     return audioMetaDao.getList();
+  }
+
+  public int getAveragePlayCount() {
+    return audioMetaDao.getAveragePlayCount();
   }
 }
