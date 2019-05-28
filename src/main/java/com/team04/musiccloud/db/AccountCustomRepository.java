@@ -7,9 +7,11 @@ import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.db.dao.AccountDao;
 import com.team04.musiccloud.utilities.StaticKeys;
 import org.bson.Document;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AccountCustomRepository {
 
+    private AccountCustomRepository instance;
     private AccountDao accountDao;
 
     public AccountCustomRepository() {
@@ -18,6 +20,13 @@ public class AccountCustomRepository {
         MongoCollection<Document> mongoCollection = mongoClient.getDatabase("MusicCloud")
                 .getCollection("account");
         this.accountDao = new AccountDao(mongoCollection);
+    }
+
+    public AccountCustomRepository getInstance() {
+        if (instance == null) {
+            instance = new AccountCustomRepository();
+        }
+        return instance;
     }
 
     /*
@@ -62,8 +71,8 @@ public class AccountCustomRepository {
         return accountDao.getAccount(email);
     }
 
-    public boolean checkIfAccountExists(String email) {
-        return accountDao.exists(email);
+    public Account getCurrentAccount() {
+        return findAccountByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     /*

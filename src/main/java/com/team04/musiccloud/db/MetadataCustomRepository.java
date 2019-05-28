@@ -14,6 +14,7 @@ import org.bson.Document;
 
 public class MetadataCustomRepository {
 
+  private MetadataCustomRepository instance;
   private AudioMetaDao audioMetaDao;
   private FileMetaDao fileMetaDao;
 
@@ -26,6 +27,14 @@ public class MetadataCustomRepository {
         .getCollection("filemeta." + email);
     this.audioMetaDao = new AudioMetaDao(audioMetaCollection);
     this.fileMetaDao = new FileMetaDao(fileMetaCollection);
+  }
+
+  //@TODO DB 구성에 맞게 HashMap을 만들거나 DB 구성을 바꾸도록 해야함.
+  public MetadataCustomRepository getInstance(String email) {
+    if (instance == null) {
+      instance = new MetadataCustomRepository(email);
+    }
+    return instance;
   }
 
   /*
