@@ -111,22 +111,20 @@ html{
   width: 15%;
 }
 .content__middle {
-  width: 95%;
+  width: 85%;
 }
 @media (max-width: 1400px) {
   .content__left {
-    display: none;
+    width: 20%;
   }
   .content__middle {
     width: 80%;
   }
-  .content__right {
-    display: none;
-  }
+
 }
 @media (max-width: 768px) {
   .content__left {
-    display: none;
+    width: 100%;
   }
   .content__middle {
     width: 100%;
@@ -149,8 +147,8 @@ html{
   content: "\f123";
 }
 .navigation__list .active:after {
-  font-family: "Ionicons";
-  content: "\f126";
+    font-family: "Ionicons";
+    content: "\f126";
 }
 .navigation__list__item {
   color: #aaaaaa;
@@ -241,10 +239,10 @@ html{
   }
 }
 .current-track {
-  background: #282828;
+  background: #26273a;
   padding: 5px 15px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
 }
 
@@ -280,7 +278,7 @@ html{
   color: #aaaaaa;
   font-size: 11px;
   display: flex;
-  flex-flow: row;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -293,7 +291,7 @@ html{
   height: 10px;
 }
 .current-track__progress__bar .noUi-base {
-  background: #1ed760;
+  background: #6bac86;
 }
 .current-track__progress__bar .noUi-origin {
   background: #5e5e5e;
@@ -322,27 +320,27 @@ html{
 .current-track__options {
   width: 20%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
 }
 .current-track__options .controls {
-  width: 45%;
+  width: 80%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
 }
 .current-track__options .controls .volume {
-  width: 55%;
+  width: 80%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
 }
 .current-track__options .controls .volume i {
-  width: 40px;
+  width: 20px;
   color: #aaaaaa;
 }
 .current-track__options .controls .volume #song-volume {
-  width: calc( 80% - 40px );
+  width: calc( 80% - 20px );
   border: none;
   height: 10px;
 }
@@ -429,7 +427,10 @@ html{
 .tracks {
   display: flex;
   flex-flow: column wrap;
-  margin-bottom: 15px;
+  margin-bottom: 15px;}
+.content__middle {
+  height: 617px;
+  overflow-y: scroll;
 }
 .tracks__heading {
   color: #aaaaaa;
@@ -450,10 +451,12 @@ html{
 }
 
 .tracks__heading__artist {
+  margin-right: 20px;
   margin-left: auto;
   font-size: 15px;
 }
 .tracks__heading__length {
+  margin-right: 110px;
   margin-left: auto;
   font-size: 20px;
 }
@@ -461,7 +464,7 @@ html{
   border-top: 1px solid #282828;
   height: 42px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
 }
 .tracks .track:hover {
@@ -526,12 +529,13 @@ html{
   color: #aaaaaa;
 }
 .tracks .track__length {
+  margin-right: 80px;
   margin-left: auto;
   color: #aaaaaa;
 }
 
 .tracks .track__delete {
-  margin-left: 10px;
+  margin-right: 10px;
   color: #aaaaaa;
   width: 12px;
 }
@@ -548,6 +552,7 @@ html{
 }
 ::-webkit-scrollbar {
   width: 8px;
+  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -648,6 +653,7 @@ button:hover {
   margin-bottom: 10px;
 }
 
+
 .dropZone{
   height:100%;
   width: 85%;
@@ -655,4 +661,5 @@ button:hover {
 
 #username{
   display : none;
+
 }
