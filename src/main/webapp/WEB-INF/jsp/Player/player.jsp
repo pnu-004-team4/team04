@@ -42,52 +42,39 @@
         </div>
     </form:form>
 
-    <div class="Button">
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
 
-    <div class="user">
-
-    <form:form action="search">
-        <div class="search">
-            <input type="text" name="index" placeholder="Search"/>
-        </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form:form>
+    <button type="submit">
+        <i class="fa fa-search"></i>
+    </button>
 
 
     <div class="user">
 
-        <div class="owner">
 
-            <div class="user__info">
- 
+        <div class="user__info">
+
             <span class="user__info__name">
                <span class="first">Welcome!</span>
                <span class="last">${username}</span>
              </span>
 
-            </div>
-
-            <div class="user__actions">
-
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="ion-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                        <li><a href="setting">Settings</a></li>
-                        <li><a href="logout">Log Out</a></li>
-                    </ul>
-                </div>
-
-            </div>
         </div>
+
+        <div class="user__actions">
+
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="ion-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li><a href="setting">Settings</a></li>
+                    <li><a href="logout">Log Out</a></li>
+                </ul>
+            </div>
+
+        </div>
+
 
     </div>
 </section>
@@ -97,7 +84,10 @@
 
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
-        <a class="current-track__name">Charlie Puth</a>
+
+
+        <a class="current-track__artist">Charlie Puth</a>
+
     </div>
 
     <div class="current-track__actions">
@@ -116,7 +106,7 @@
 
     <div class="current-track__options">
 
-        <a href="#" class="lyrics">Lyrics</a>
+
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
             <a href="#" class="control volume">
