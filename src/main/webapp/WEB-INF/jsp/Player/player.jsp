@@ -34,7 +34,6 @@
       <i class="ion-record green"></i>
     </div>
     -->
-
     <form:form action="search" method="get">
         <div class="search">
             <input type="text" name = "index" placeholder="Search" required />
@@ -42,23 +41,10 @@
         </div>
     </form:form>
 
-    <div class="Button">
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
 
-    <div class="user">
-
-    <form:form action="search">
-        <div class="search">
-            <input type="text" name="index" placeholder="Search"/>
-        </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form:form>
-
+    <button type="submit">
+        <i class="fa fa-search"></i>
+    </button>
 
     <div class="user">
 
