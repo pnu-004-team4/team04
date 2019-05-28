@@ -87,6 +87,8 @@
                         <input type="radio" id="radio2" name="resolution" value="No" checked = "checked"/>No
                     </p>
                     <p></p>
+                    <p></p>
+                    <p></p>
                     <div class="button">
                         <button type="submit">SAVE</button>
                     </div>

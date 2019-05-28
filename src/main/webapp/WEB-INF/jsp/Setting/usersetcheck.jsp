@@ -49,6 +49,8 @@
     String  CurPass, CurName;
     String  CheckPass, CheckEmail, CheckName;
 
+    Boolean ResolutionUse, CheckResolution;
+
     //기존의 내용 불러오기.
     acc = repository.findAccountByEmail(Email);
 
@@ -72,9 +74,12 @@
 
     System.out.println("인코딩 후 password : " + CurPass);
 
+    //resolution 업데이트.
+    if(Resolution.equals("Use")) ResolutionUse = true;
+    else ResolutionUse = false;
+
     //updateAccount
-    //@TODO update resolution
-    repository.updateAccount(Email, CurPass, CurName, false);
+    repository.updateAccount(Email, CurPass, CurName, ResolutionUse);
 
 //    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -84,9 +89,11 @@
     CheckName = acc.getName();
     CheckPass = acc.getPassword();
     CheckEmail = acc.getEmail();
+    CheckResolution = acc.getResolution();
 
     System.out.println("업데이트된 password : " + CheckPass);
     System.out.println("업데이트된 name : " + CheckName);
+    System.out.println("업데이트된 resolution: " + CheckResolution);
 
 
 %>
@@ -112,6 +119,8 @@
                     <p><%= Resolution%></p>
             </section>
             <section class="music">
+                <p></p>
+                <p></p>
                 <p></p>
                 <p></p>
                 <div class="button">
