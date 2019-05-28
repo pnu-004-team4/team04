@@ -39,7 +39,7 @@ public class AudioMeta {
 
   public boolean isEmpty() {
     return !(hasDbId() || hasTitle() || hasAuthor() || hasAlbum() || hasReleaseDate()
-        || hasDurationMs());
+        || hasDurationMs() || hasPlayCount());
   }
 
   public boolean hasDbId() {
@@ -63,7 +63,7 @@ public class AudioMeta {
   }
 
   public boolean hasDurationMs() {
-    return durationMs != 0;
+    return durationMs > 0;
   }
 
   public boolean hasPlayCount() {
