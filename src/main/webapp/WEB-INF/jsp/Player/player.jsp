@@ -165,10 +165,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div class="tracks__heading__number">#</div>
-                        <div class="tracks__heading__title">Song</div>
-                        <div class="tracks__heading__artist">ARTIST</div>
-                        <div class="tracks__heading__length">
+                        <div class="tracks__heading__number" id="trackNumSort">#</div>
+                        <div class="tracks__heading__title" id="titleSort">Song</div>
+                        <div class="tracks__heading__artist" id="artistSort">ARTIST</div>
+                        <div class="tracks__heading__length" id="lengthSort">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
