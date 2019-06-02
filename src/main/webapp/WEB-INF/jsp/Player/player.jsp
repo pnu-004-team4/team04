@@ -82,9 +82,7 @@
 
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
-
-
-        <a class="current-track__artist">Charlie Puth</a>
+        <a class="current-track__name">Charlie Puth</a>
 
     </div>
 
