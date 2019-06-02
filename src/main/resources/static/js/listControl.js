@@ -5,6 +5,26 @@
  * 값과 일치하는지를 확인한 후 일치하는 element(?)의 parent만 나타내는 것으로 구현했습니다.
  * */
 
+function sortTrackNumASC(trackArray){
+    trackArray.sort(function(a, b){
+        return a.querySelector(".track__number").textContent.toLowerCase()
+        < b.querySelector(".track__number").textContent.toLowerCase() ? -1
+            : a.querySelector(".track__number").textContent.toLowerCase()
+            > b.querySelector(".track__number").textContent.toLowerCase() ? 1 : 0;
+    });
+    return trackArray;
+}
+
+function sortTrackNumDSC(trackArray){
+    trackArray.sort(function(a, b){
+        return a.querySelector(".track__number").textContent.toLowerCase()
+        < b.querySelector(".track__number").textContent.toLowerCase() ? 1
+            : a.querySelector(".track__number").textContent.toLowerCase()
+            > b.querySelector(".track__number").textContent.toLowerCase() ? -1 : 0;
+    });
+    return trackArray;
+}
+
 function sortTitleASC(trackArray){
     trackArray.sort(function(a, b){
         return a.querySelector(".track__title").textContent.toLowerCase()
@@ -45,6 +65,26 @@ function sortArtistDSC(trackArray){
     return trackArray;
 }
 
+function sortLengthASC(trackArray){
+    trackArray.sort(function(a, b){
+        return a.querySelector(".track__length").textContent.toLowerCase()
+        < b.querySelector(".track__length").textContent.toLowerCase() ? -1
+            : a.querySelector(".track__length").textContent.toLowerCase()
+            > b.querySelector(".track__length").textContent.toLowerCase() ? 1 : 0;
+    });
+    return trackArray;
+}
+
+function sortLengthDSC(trackArray){
+    trackArray.sort(function(a, b){
+        return a.querySelector(".track__length").textContent.toLowerCase()
+        < b.querySelector(".track__length").textContent.toLowerCase() ? 1
+            : a.querySelector(".track__length").textContent.toLowerCase()
+            > b.querySelector(".track__length").textContent.toLowerCase() ? -1 : 0;
+    });
+    return trackArray;
+}
+
 $(document).ready(function () {
     //검색 기능
     $("#search_key").keyup(function(){
@@ -69,6 +109,11 @@ $(document).ready(function () {
     var result;
     var sortMode = {"targ": "", "isAsc": true};
 
+    $("#trackNumSort").on("click", function () {
+        updateSortMode("trackNum");
+        updateList(sortTrackNumASC, sortTrackNumDSC);
+    });
+
     $("#titleSort").on("click", function () {
         updateSortMode("title");
         updateList(sortTitleASC, sortTitleDSC);
@@ -77,6 +122,11 @@ $(document).ready(function () {
     $("#artistSort").on("click", function () {
         updateSortMode("artist");
         updateList(sortArtistASC, sortArtistDSC);
+    });
+
+    $("#lengthSort").on("click", function () {
+        updateSortMode("artist");
+        updateList(sortLengthASC, sortLengthDSC);
     });
 
     // decided the sort mode according to current state
