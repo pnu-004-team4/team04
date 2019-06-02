@@ -48,7 +48,6 @@
 
     <div class="user">
 
-        <div class="owner">
 
             <div class="user__info">
  
@@ -72,8 +71,8 @@
                     </ul>
                 </div>
 
-            </div>
         </div>
+
 
     </div>
 </section>
@@ -84,6 +83,7 @@
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
         <a class="current-track__name">Charlie Puth</a>
+
     </div>
 
     <div class="current-track__actions">
@@ -102,7 +102,7 @@
 
     <div class="current-track__options">
 
-        <a href="#" class="lyrics">Lyrics</a>
+
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
             <a href="#" class="control volume">
