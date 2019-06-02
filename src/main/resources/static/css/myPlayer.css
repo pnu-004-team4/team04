@@ -552,7 +552,6 @@ html{
 }
 ::-webkit-scrollbar {
   width: 8px;
-  display: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
