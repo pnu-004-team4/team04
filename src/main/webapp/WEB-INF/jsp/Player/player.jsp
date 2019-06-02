@@ -165,10 +165,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div class="tracks__heading__number" id="trackNumSort">#</div>
-                        <div class="tracks__heading__title" id="titleSort">Song</div>
-                        <div class="tracks__heading__artist" id="artistSort">ARTIST</div>
-                        <div class="tracks__heading__length" id="lengthSort">
+                        <div id="trackNumSort" class="tracks__heading__number">#</div>
+                        <div id="titleSort" class="tracks__heading__title">Song</div>
+                        <div id="artistSort" class="tracks__heading__artist">ARTIST</div>
+                        <div id="lengthSort" class="tracks__heading__length">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
@@ -188,6 +188,7 @@
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
 <script src="/js/libraryControl.js"></script>
+<script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
 ${streaming}
 
