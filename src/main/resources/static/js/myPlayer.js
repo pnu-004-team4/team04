@@ -114,6 +114,35 @@ function playtimeUpdate(my_audio){
   }
 }
 
+// Deletion
+
+$(document).ready(function(){
+    $(".track__delete").on("click",function(e){
+      e.preventDefault();
+      e.stopPropagation();
+    });
+});
+
+function deleteMusic(dbId){
+  console.log("delete Music called");
+
+  $.ajax({
+    url: "/delete/" + dbId,
+    type: 'POST',
+    enctype: 'multipart/form-data',
+    processData: false,
+    contentType: false,
+    cache: false,
+    success: [function (result) {
+      $('#dropZone').load(document.URL +  ' #dropZone', function(){
+        alert(result);
+        trackListClickerUpdate();
+      });
+    }]
+  });
+
+}
+
 // Dropdown upload
 
 $(document).ready(function (){

@@ -169,7 +169,7 @@ public class PlayerController {
       if (fileName == null) {
         fileName = metadataCustomRepository.getFileMeta(meta.getDbId()).getName();
       }
-
+ 
       trackTagContents.append("<div class=\"track\">")
           .append("<div class=\"track__number\">")
           .append(counter++)
@@ -177,7 +177,9 @@ public class PlayerController {
           .append("<div class=\"track__play\">")
           .append("<i class=\"ion-ios-play\"></i>")
           .append("</div>")
-          .append("<div class=\"track__delete\">")
+          .append("<div class=\"track__delete\" onclick=\"deleteMusic('")
+          .append(meta.getDbId())
+          .append("')\">")
           .append("<i class=\"ion-android-delete\"></i>")
           .append("</div>")
           .append("<div class=\"track__title\">")
