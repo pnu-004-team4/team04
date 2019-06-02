@@ -194,7 +194,9 @@ public class PlayerController {
           .append("<div class=\"track__owner\" hidden>")
           .append(userName)
           .append("</div>")
-          .append("<div class=\"track__id\" hidden>")
+          .append("<div class=\"track__id\" value ='")
+          .append(meta.getDbId())
+          .append("' hidden>")
           .append(meta.getDbId())
           .append("</div>")
           .append("</div>");

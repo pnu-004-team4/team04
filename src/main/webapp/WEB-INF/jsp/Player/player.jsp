@@ -101,9 +101,9 @@
     </div>
 
     <div class="current-track__actions">
-        <a class="ion-ios-skipbackward"></a>
+        <a class="ion-ios-skipbackward" onclick="prevMusic()"></a>
         <a class="ion-ios-play play" id="play" onclick="play()"></a>
-        <a class="ion-ios-skipforward"></a>
+        <a class="ion-ios-skipforward" onclick="nextMusic()"></a>
     </div>
 
     <div class="current-track__progress">

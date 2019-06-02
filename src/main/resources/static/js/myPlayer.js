@@ -104,11 +104,15 @@ function playtimeUpdate(my_audio){
       document.getElementById("music_totaltime").innerHTML = musicTotalTime;
 
       if(isSongProgressSliderUsable){
-        progress_percent = my_audio.currentTime / my_audio.duration * 100;
+        var progress_percent = my_audio.currentTime / my_audio.duration * 100;
         music_progress_percent = songProgressSlider.noUiSlider.set(progress_percent);
       }
-    }, 150);
 
+      if(my_audio.currentTime === my_audio.duration){
+        nextMusic();
+      }
+
+    }, 150);
   } else {
     clearInterval(showPlayTime);
   }
@@ -223,6 +227,35 @@ function uploadFile(files) {
       });
     }
   }
+}
+
+
+// Request Next, Prev
+
+function getPlayingNode(){
+  var my_audio = document.getElementById("nowPlaying");
+  var current_audio_src = my_audio.getAttribute("src");
+
+  var middle = current_audio_src.lastIndexOf('=');
+  var dbID = current_audio_src.substring(middle+1,current_audio_src.length);
+
+  var children = $('.track').find(".track__id[value=" + dbID +"]")[0];
+
+  return children.parentNode;
+}
+
+function nextMusic(){
+  var playingNode = getPlayingNode();
+
+  var nextSibling = $(playingNode.nextSibling);
+  nextSibling.click();
+}
+
+function prevMusic(){
+  var playingNode = getPlayingNode();
+
+  var prevSibling = $(playingNode.previousSibling);
+  prevSibling.click();
 }
 
 // Tooltips
