@@ -13,8 +13,8 @@ public class AudioMetaBuilderTest {
   private static final String AUTHOR = "auth";
   private static final String ALBUM = "alb";
   private static final LocalDateTime DATE_TIME = LocalDateTime.of(2019, 5, 7, 1, 0);
-  private final static int DURATION = 123;
-  private final static int COUNTER = 0;
+  private static final int DURATION = 123;
+  private static final int COUNTER = 0;
 
   @Test
   public void builderConstructorTest() {

@@ -34,17 +34,17 @@
       <i class="ion-record green"></i>
     </div>
     -->
-
-
-    <form:form action="search">
+    <form:form action="search" method="get">
         <div class="search">
-            <input type="text" id="search_key" placeholder="검색창"/>
+            <input type="text" name = "index" placeholder="Search" required />
+
         </div>
-        <%--        <div class="Button">--%>
-        <%--            <button type="submit"><i class="fa fa-search"></i></button>--%>
-        <%--        </div>--%>
     </form:form>
 
+
+    <button type="submit">
+        <i class="fa fa-search"></i>
+    </button>
 
     <div class="user">
 
@@ -76,8 +76,6 @@
         </div>
 
     </div>
-
-    <!--여긴어디-->
 </section>
 
 <%--Currenct Track & Control Section--%>
@@ -161,7 +159,7 @@
 
 
     </div>
-    <div class="dropZone" id="dropZone">
+    <div class = "dropZone" id = "dropZone">
         <div class="content__middle">
             <div class="album__tracks">
                 <div class="tracks">
@@ -182,10 +180,8 @@
             </div>
         </div>
     </div>
-    </div>
 
 </section>
-
 
 <div type="hidden" id="userEmailDiv" value="${useremail}"></div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -193,8 +189,6 @@
 <script src='/js/nouislider.min.js'></script>
 <script src="/js/libraryControl.js"></script>
 <script src="/js/myPlayer.js"></script>
-<script src="/js/listControl.js"></script>
-
 ${streaming}
 
 
