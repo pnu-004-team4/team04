@@ -44,6 +44,33 @@ $(document).ready(function () {
   var result;
   var sortMode = {"target": "", "isAsc": true};
 
+  // decided the sort mode according to current state
+  function updateSortMode(target) {
+    sortMode["isAsc"] = (sortMode["target"] === target) ? !sortMode["isAsc"]
+        : true;
+    sortMode["target"] = target;
+  }
+
+  // sorts the list (in the back)
+  function sortList(target) {
+    result = (sortMode["isAsc"]) ? sortAsc(trackArray, target) : sortDesc(
+        trackArray, target);
+  }
+
+  // update the list in the front according to one in the back
+  function applyList() {
+    for (var i = 0; i < trackArray.length; i++) {
+      var iTrack = result[i];
+      $(".tracks").append(iTrack);
+    }
+  }
+
+  // sort the list (both in the back and front)
+  function updateList(target) {
+    sortList(target);
+    applyList();
+  }
+
   $("#trackNumSort").on("click", function () {
     updateSortMode("trackNum");
     updateList(".track__number");
@@ -64,29 +91,4 @@ $(document).ready(function () {
     updateList(".track__length");
   });
 
-  // decided the sort mode according to current state
-  function updateSortMode(target) {
-    sortMode["isAsc"] = (sortMode["target"] === target) ? !sortMode["isAsc"]
-        : true;
-    sortMode["target"] = target;
-  }
-
-  // sort the list (both in the back and front)
-  function updateList(target) {
-    sortList(target);
-    applyList();
-  }
-
-  // sorts the list (in the back)
-  function sortList(target) {
-    result = (sortMode["isAsc"]) ? sortAsc(trackArray, target) : sortDesc(
-        trackArray, target);
-  }
-
-  // update the list in the front according to one in the back
-  function applyList() {
-    for (var i = 0; i < trackArray.length; i++) {
-      $(".tracks").append(result[i]);
-    }
-  }
 });
