@@ -104,7 +104,7 @@ html{
 
 .content {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   height: 80%;
 }
 .content__left {
@@ -115,10 +115,10 @@ html{
 }
 @media (max-width: 1400px) {
   .content__left {
-    width: 20%;
+    width: 15%;
   }
   .content__middle {
-    width: 80%;
+    width: 85%;
   }
 
 }
@@ -135,7 +135,7 @@ html{
   padding: 15px;
   background: #282828;
   color: #aaaaaa;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 .navigation__list {
   display: flex;
@@ -386,21 +386,21 @@ html{
     width: 10%;
   }
   .current-track__progress {
-    width: 40%;
+    width: 50%;
   }
   .current-track__options {
-    width: 50%;
+    width: 40%;
   }
 }
 @media (max-width: 768px) {
   .current-track__actions {
-    width: 25%;
+    width: 10%;
   }
   .current-track__progress {
-    width: 75%;
+    width: 50%;
   }
   .current-track__options {
-    width: 100%;
+    width: 40%;
   }
 }
 @media (max-width: 480px) {
