@@ -9,14 +9,17 @@ import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.db.dao.AudioMetaDao;
 import com.team04.musiccloud.db.dao.FileMetaDao;
 import com.team04.musiccloud.utilities.StaticKeys;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.bson.Document;
 
 public class MetadataCustomRepository {
-
-  private MetadataCustomRepository instance;
   private AudioMetaDao audioMetaDao;
   private FileMetaDao fileMetaDao;
+  private Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();;
 
   public MetadataCustomRepository(String email) {
     MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
@@ -29,10 +32,14 @@ public class MetadataCustomRepository {
     this.fileMetaDao = new FileMetaDao(fileMetaCollection);
   }
 
-  //@TODO DB 구성에 맞게 HashMap을 만들거나 DB 구성을 바꾸도록 해야함.
   public MetadataCustomRepository getInstance(String email) {
-    if (instance == null) {
+    MetadataCustomRepository instance;
+
+    if (repositoryMap.containsKey(email)) {
+      instance = repositoryMap.get(email);
+    } else {
       instance = new MetadataCustomRepository(email);
+      repositoryMap.put(email, instance);
     }
     return instance;
   }
