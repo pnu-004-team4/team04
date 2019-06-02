@@ -34,15 +34,12 @@
       <i class="ion-record green"></i>
     </div>
     -->
-
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" required />
+            <input type="text" name = "index" id="search_key" placeholder="Search" required />
         </div>
-
 
     <div class="user">
 
-        <div class="owner">
 
             <div class="user__info">
  
@@ -66,8 +63,8 @@
                     </ul>
                 </div>
 
-            </div>
         </div>
+
 
     </div>
 </section>
@@ -78,6 +75,7 @@
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
         <a class="current-track__name">Charlie Puth</a>
+
     </div>
 
     <div class="current-track__actions">
@@ -96,7 +94,7 @@
 
     <div class="current-track__options">
 
-        <a href="#" class="lyrics">Lyrics</a>
+
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
             <a href="#" class="control volume">
@@ -159,10 +157,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div class="tracks__heading__number">#</div>
-                        <div class="tracks__heading__title">Song</div>
-                        <div class="tracks__heading__artist">ARTIST</div>
-                        <div class="tracks__heading__length">
+                        <div class="tracks__heading__number" id="trackNumSort">#</div>
+                        <div class="tracks__heading__title" id="titleSort">Song</div>
+                        <div class="tracks__heading__artist" id="artistSort">ARTIST</div>
+                        <div class="tracks__heading__length" id="lengthSort">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
