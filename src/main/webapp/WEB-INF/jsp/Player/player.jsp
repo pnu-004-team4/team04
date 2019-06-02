@@ -36,26 +36,14 @@
     -->
 
 
-
     <form:form action="search">
         <div class="search">
             <input type="text" id="search_key" placeholder="검색창"/>
         </div>
-<%--        <div class="Button">--%>
-<%--            <button type="submit"><i class="fa fa-search"></i></button>--%>
-<%--        </div>--%>
+        <%--        <div class="Button">--%>
+        <%--            <button type="submit"><i class="fa fa-search"></i></button>--%>
+        <%--        </div>--%>
     </form:form>
-
-        <button id="titleASC">타이틀오름차순</button>
-        <button id="titleDSC">타이틀내림차순</button>
-        <button id="artistASC">가수오름차순</button>
-        <button id="artistDSC">가수내림차순</button>
-
-
-    </div>
-
-
-
 
 
     <div class="user">
@@ -89,7 +77,7 @@
 
     </div>
 
-        <!--여긴어디-->
+    <!--여긴어디-->
 </section>
 
 <%--Currenct Track & Control Section--%>
@@ -173,15 +161,15 @@
 
 
     </div>
-    <div class = "dropZone" id = "dropZone">
+    <div class="dropZone" id="dropZone">
         <div class="content__middle">
             <div class="album__tracks">
                 <div class="tracks">
                     <div class="tracks__heading">
 
                         <div class="tracks__heading__number">#</div>
-                        <div class="tracks__heading__title">Song</div>
-                        <div class="tracks__heading__artist">ARTIST</div>
+                        <div class="tracks__heading__title" id="titleSort">Song</div>
+                        <div class="tracks__heading__artist" id="artistSort">ARTIST</div>
                         <div class="tracks__heading__length">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
@@ -190,7 +178,7 @@
 
                     <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
                     ${getLibrary}
-                    <div class="track">
+                    <%--<div class="track">
                         <div class="track__number">1</div>
                         <div class="track__play"><i class="ion-ios-play"></i></div>
                         <div class="track__delete"><i class="ion-android-delete"></i></div>
@@ -340,15 +328,14 @@
                         <div class="track__length">@TODO: TIME</div>
                         <div class="track__owner" hidden>admin@admin.com</div>
                         <div class="track__id" hidden>5ce4deb5a4975f3c5072fbda</div>
-                    </div>
-                </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
 </section>
-
 
 
 <div type="hidden" id="userEmailDiv" value="${useremail}"></div>
@@ -360,7 +347,6 @@
 <script src="/js/listControl.js"></script>
 
 ${streaming}
-
 
 
 </body>

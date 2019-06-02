@@ -64,41 +64,44 @@ $(document).ready(function () {
     };
 
     //정렬 기능
-        var tracks = document.querySelectorAll(".track"); // tracks nodelist
-        var trackArray = Array.prototype.slice.call(tracks, 0); // node list to array
-        var result;
+    var tracks = document.querySelectorAll(".track"); // tracks nodelist
+    var trackArray = Array.prototype.slice.call(tracks, 0); // node list to array
+    var result;
+    var sortMode = {"targ": "", "isAsc": true};
 
-
-    $("#titleASC").on("click", function(){
-        result = sortTitleASC(trackArray);
-        console.log("==========sortTitleASC==========");
-        for(var i =0; i < trackArray.length; i++){
-            console.log(result[i].textContent);
-        }
+    $("#titleSort").on("click", function () {
+        updateSortMode("title");
+        updateList(sortTitleASC, sortTitleDSC);
     });
 
-    $("#titleDSC").on("click", function(){
-        result = sortTitleDSC(trackArray);
-        console.log("==========sortTitleDSC==========");
-        for(var i =0; i < trackArray.length; i++){
-            console.log(result[i].textContent);
-        }
+    $("#artistSort").on("click", function () {
+        updateSortMode("artist");
+        updateList(sortArtistASC, sortArtistDSC);
     });
 
-    $("#artistASC").on("click", function(){
-        result = sortArtistASC(trackArray);
-        console.log("==========sortArtistASC==========");
-        for(var i =0; i < trackArray.length; i++){
-            console.log(result[i].textContent);
-        }
-    });
+    // decided the sort mode according to current state
+    function updateSortMode(targ) {
+        sortMode["isAsc"] = (sortMode["targ"] === targ) ? !sortMode["isAsc"]
+            : true;
+        sortMode["targ"] = targ;
+    }
 
-    $("#artistDSC").on("click", function(){
-        console.log("==========sortArtistDSC==========");
-        result = sortArtistDSC(trackArray);
-        for(var i =0; i < trackArray.length; i++){
-            console.log(result[i].textContent);
-        }
-    });
+    // sort the list (both in the back and front)
+    function updateList(ascFn, dscFn) {
+        sortList(ascFn, dscFn);
+        applyList();
+    }
 
+    // sorts the list (in the back)
+    function sortList(ascFn, dscFn) {
+        result = (sortMode["isAsc"]) ? ascFn(trackArray) : dscFn(
+            trackArray);
+    }
+
+    // update the list in the front according to one in the back
+    function applyList() {
+        for (var i = 0; i < trackArray.length; i++) {
+            $(".tracks").append(result[i]);
+        }
+    }
 });
