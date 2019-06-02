@@ -17,7 +17,7 @@ public class AccountConverter {
         account.setEmail((String) document.get("_id"));
         account.setPassword((String) document.get("password"));
         account.setName((String) document.get("name"));
-        account.setResolution((Boolean) document.get("resolution"));
+        account.setResolution(Boolean.parseBoolean((String) document.get("resolution")));
 
         return account;
     }
