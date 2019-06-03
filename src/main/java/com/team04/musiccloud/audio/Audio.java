@@ -53,7 +53,7 @@ public class Audio {
   }
 
   private void setAudioMeta(AudioMeta audioMeta) {
-    this.audioMeta = new AudioMeta(audioMeta);
+    this.audioMeta = audioMeta;
   }
 
   public FileMeta getFileMeta() throws ParameterException {
@@ -64,7 +64,7 @@ public class Audio {
   }
 
   private void setFileMeta(FileMeta fileMeta) {
-    this.fileMeta = new FileMeta(fileMeta);
+    this.fileMeta = fileMeta;
   }
 
   public byte[] getBytes() {
