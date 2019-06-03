@@ -1,3 +1,4 @@
+/*
 package com.team04.musiccloud.db;
 
 import com.team04.musiccloud.auth.Account;
@@ -6,7 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AccountCustomRepositoryTest {
-    /*
     private AccountCustomRepository accountCustomRepository;
     private Account account, account1;
 
@@ -51,5 +51,6 @@ public class AccountCustomRepositoryTest {
     public void deleteAccount() {
         assertTrue(accountCustomRepository.deleteAccount("test1@test.com"));
     }
-    */
 }
+
+ */

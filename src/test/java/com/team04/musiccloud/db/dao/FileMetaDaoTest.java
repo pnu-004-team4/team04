@@ -1,3 +1,4 @@
+/*
 package com.team04.musiccloud.db.dao;
 
 import com.beust.jcommander.ParameterException;
@@ -64,6 +65,6 @@ public class FileMetaDaoTest {
         assertEquals(fileMeta.getExtension(), fileMetaDao.getFileMeta("5afe1efdbbeeb20adca58016").getExtension());
         assertEquals(fileMeta.getUser(), fileMetaDao.getFileMeta("5afe1efdbbeeb20adca58016").getUser());
     }
-
-     */
 }
+
+ */

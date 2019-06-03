@@ -1,3 +1,4 @@
+/*
 package com.team04.musiccloud.db;
 
 import com.team04.musiccloud.audio.AudioMeta;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class MetadataCustomRepositoryTest {
-    /*
     MetadataCustomRepository metadataCustomRepository;
     private AudioMeta audioMeta, audioMeta1;
     private FileMeta fileMeta, fileMeta1;
@@ -96,5 +96,7 @@ public class MetadataCustomRepositoryTest {
     public void testGetAveragePlayCount() {
         //assertEquals(0, metadataCustomRepository.getAveragePlayCount());
     }
-    */
+
 }
+
+ */
