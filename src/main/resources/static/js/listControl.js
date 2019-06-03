@@ -27,7 +27,6 @@ $(document).ready(function () {
     $(".track").hide();
     var temp = $(".track__title:contains('" + key + "')");
     var art = $(".track__artist:contains('" + key + "')");
-    // console.log(temp);
     $(temp).parent().show();
     $(art).parent().show();
   });

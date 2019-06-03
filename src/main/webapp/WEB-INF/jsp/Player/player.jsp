@@ -34,17 +34,9 @@
       <i class="ion-record green"></i>
     </div>
     -->
-    <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" required />
-
+            <input type="text" name = "index" id="search_key" placeholder="Search" required />
         </div>
-    </form:form>
-
-
-    <button type="submit">
-        <i class="fa fa-search"></i>
-    </button>
 
     <div class="user">
 
@@ -190,6 +182,8 @@
 <script src="/js/libraryControl.js"></script>
 <script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
+<script src="/js/listControl.js"></script>
+
 ${streaming}
 
 
