@@ -261,6 +261,12 @@ body {
   background: #FFFFFF !important;
   color: #4285F4 !important;
 }
+
+
+
+
+
+
 #myElement {
   padding:4px;
   margin:2px;
@@ -283,3 +289,30 @@ body {
 }
 
 
+
+div{
+  margin-top: 10px;
+}
+div.progress{
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  width: 240px;
+  height: 5px;
+  display: inline-block;
+  text-align: left;
+  padding: 2px;
+  display: none;
+}
+div div.progressBar{
+  width: 50px;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition-timing-function: ease-out;
+  transition: 3s;
+}
+span#percent{
+  width: 0;
+  height: 0;
+  color: transparent;
+}

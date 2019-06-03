@@ -27,9 +27,6 @@
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
-//    String strength = request.getParameter("strengthPercentage");
-
-//    System.out.println("strength : " + strength);
 
     if(password.equals(cpassword)) {
         account.setName(name);

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+
 <!doctype html>
 <html lang="kr">
 <head>
@@ -9,213 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
     <link rel="stylesheet" href="/css/login.css">
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script>
-        /*!
-         * pStrength jQuery Plugin v1.0.6
-         * http://accountspassword.com/pstrength-jquery-plugin
-         *
-         * Created by AccountsPassword.com
-         * Released under the MIT License (Feel free to copy, modify or redistribute this plugin.)
-         *
-         */
-
-        (function($){
-            var numbers_array = new Array(),
-                upper_letters_array = new Array(),
-                lower_letters_array = new Array(),
-                special_chars_array = new Array(),
-                pStrengthElementsDefaultStyle = new Array(),
-                settings,
-                methods = {
-                    init : function( options, callbacks) {
-
-                        settings = $.extend({
-                            'bind': 'keyup change',
-                            'changeBackground': true,
-                            'backgrounds': [
-                                ['#cc0000', '#FFF'], ['#cc3333', '#FFF'], ['#cc6666', '#FFF'], ['#ff9999', '#FFF'],
-                                ['#e0941c', '#FFF'], ['#e8a53a', '#FFF'], ['#eab259', '#FFF'], ['#efd09e', '#FFF'],
-                                ['#ccffcc', '#FFF'], ['#66cc66', '#FFF'], ['#339933', '#FFF'], ['#006600', '#FFF'], ['#105610', '#FFF']
-                            ],
-                            'passwordValidFrom': 60, // 60%
-                            'onValidatePassword': function(percentage) { },
-                            'onPasswordStrengthChanged': function(passwordStrength, percentage) { }
-                        }, options);
-
-                        for(var i = 48; i < 58; i++)
-                            numbers_array.push(i);
-                        for(i = 65; i < 91; i++)
-                            upper_letters_array.push(i);
-                        for(i = 97; i < 123; i++)
-                            lower_letters_array.push(i);
-                        for(i = 32; i < 48; i++)
-                            special_chars_array.push(i);
-                        for(i = 58; i < 65; i++)
-                            special_chars_array.push(i);
-                        for(i = 91; i < 97; i++)
-                            special_chars_array.push(i);
-                        for(i = 123; i < 127; i++)
-                            special_chars_array.push(i);
-
-                        return this.each($.proxy(function (idx, pStrengthElement) {
-
-                            pStrengthElementsDefaultStyle[$(pStrengthElement)] = {
-                                'background': $(pStrengthElement).css('background'),
-                                'color': $(pStrengthElement).css('color')
-                            }
-
-                            calculatePasswordStrength.call(pStrengthElement);
-
-                            $(pStrengthElement).bind(settings.bind, function(){
-                                calculatePasswordStrength.call(pStrengthElement);
-                            });
-
-                        }, this));
-
-                        return this;
-                    },
-
-                    changeBackground: function(pStrengthElement, passwordStrength) {
-                        if (passwordStrength === undefined) {
-                            passwordStrength = pStrengthElement;
-                            pStrengthElement = $(this);
-                        }
-                        passwordStrength = passwordStrength > 12 ? 12 : passwordStrength;
-
-                        $(pStrengthElement).css({
-                            'background-color': settings.backgrounds[passwordStrength][0],
-                            'color': settings.backgrounds[passwordStrength][1]
-                        });
-                    },
-
-                    resetStyle: function(pStrengthElement) {
-                        $(pStrengthElement).css(pStrengthElementsDefaultStyle[$(pStrengthElement)]);
-                    }
-                };
-
-            var ord = function(string) {
-                var str = string + '',
-                    code = str.charCodeAt(0);
-                if (0xD800 <= code && code <= 0xDBFF) {
-                    var hi = code;
-                    if (str.length === 1) {
-                        return code;
-                    }
-                    var low = str.charCodeAt(1);
-                    return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
-                }
-
-                if (0xDC00 <= code && code <= 0xDFFF) {
-                    return code;
-                }
-                return code;
-            }
-
-            var calculatePasswordStrength = function(){
-                var passwordStrength    = 0,
-                    numbers_found       = 0,
-                    upper_letters_found = 0,
-                    lower_letters_found = 0,
-                    special_chars_found = 0,
-                    text = $(this).val().trim();
-
-                passwordStrength += 2 * Math.floor(text.length / 8);
-
-                for(var i = 0; i < text.length; i++) {
-                    if($.inArray(ord(text.charAt(i)), numbers_array) != -1 && numbers_found < 2) {
-                        passwordStrength++;
-                        numbers_found++;
-                        continue;
-                    }
-                    if($.inArray(ord(text.charAt(i)), upper_letters_array) != -1 && upper_letters_found < 2) {
-                        passwordStrength++;
-                        upper_letters_found++;
-                        continue;
-                    }
-                    if($.inArray(ord(text.charAt(i)), lower_letters_array) != -1 && lower_letters_found < 2) {
-                        passwordStrength++;
-                        lower_letters_found++;
-                        continue;
-                    }
-                    if($.inArray(ord(text.charAt(i)), special_chars_array) != -1 && special_chars_found < 2) {
-                        passwordStrength++;
-                        special_chars_found++;
-                        continue;
-                    }
-                }
-
-                behaviour.call($(this), passwordStrength);
-
-                return passwordStrength;
-            }
-
-            var behaviour = function(passwordStrength) {
-                var strengthPercentage = Math.ceil(passwordStrength * 100 / 12);
-                strengthPercentage = strengthPercentage > 100 ? 100 : strengthPercentage;
-
-                settings.onPasswordStrengthChanged.call($(this), passwordStrength, strengthPercentage);
-                if (strengthPercentage >= settings.passwordValidFrom) {
-                    settings.onValidatePassword.call($(this), strengthPercentage);
-                }
-
-                if (settings.changeBackground) {
-                    methods.changeBackground.call($(this), passwordStrength);
-                }
-                var pwcheck = document.getElementById('pwcheck');
-
-                if(strengthPercentage < settings.passwordValidFrom) {
-                    pwcheck.addEventListener('click', function () {
-                        alert('Password security is too low.');
-                        location.href = "register.jsp";
-                    })
-                }
-            }
-
-            $.fn.pStrength = function(method) {
-                if ( methods[method] ) {
-                    return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
-                } else if ( typeof method === 'object' || ! method ) {
-                    return methods.init.apply( this, arguments );
-                } else {
-                    $.error( 'Method ' +  method + ' does not exists on jQuery.pStrength' );
-                }
-            };
-        })(jQuery);
-
-
-        $(document).ready(function(){
-
-            // $('#myForm').submit(function(){
-            //     return false;
-            // });
-
-            $('#password').pStrength({
-                'changeBackground'          : false,
-                'onPasswordStrengthChanged' : function(passwordStrength, strengthPercentage) {
-                    if ($(this).val()) {
-                        $.fn.pStrength('changeBackground', this, passwordStrength);
-                    } else {
-                        $.fn.pStrength('resetStyle', this);
-                    }
-                    $('#' + $(this).data('display')).html('Password safety is ' + strengthPercentage + '%.');
-                },
-                'onValidatePassword': function(strengthPercentage) {
-                    $('#' + $(this).data('display')).html(
-                        $('#' + $(this).data('display')).html() + ' Good!'
-                    );
-
-                    $('#myForm').submit(function(){
-                        return true;
-                    });
-
-                }
-            });
-        });
-
-
-    </script>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 
     <style rel="stylesheet">
         html {
@@ -238,33 +34,41 @@
             <h1>Register</h1>
         </div>
         <div class="form-content">
-            <form:form action="registerCheck" method="POST" id="myForm">
+            <form:form action="registerCheck" method="POST" id="addForm" onsubmit='return check();'>
                 <div class="form-group">
-                    <label for="name">Name - alphabet only</label>
-                    <input type="text" pattern="^[a-zA-Z]*$" id="name" name="name" required="required"/>
+                    <label for="email">Email Address</label>
+                    <input type="email" pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$" id="email" name="email" required="required"/>
                 </div>
-<%--                <input type="password" id="myElement" size="40" class="left" data-display="myDisplayElement" /> <div class="left" id="myDisplayElement"></div>--%>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="left"  data-display="myDisplayElement" required="required"/>  <div class="left" id="myDisplayElement"></div>
+                    <input type="password" id="password" name="password" required="required"/>
+<%--                    pattern="^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[-*()_`~!@#$%^&+=]).*$"--%>
+                    <div class="progress">
+                        <div class="progressBar"></div>
+                    </div>
+                    <div>
+                        <span id="inputLen"></span><br>
+                        <span id="percent"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="cpassword">Confirm Password</label>
                     <input type="password" id="cpassword" name="cpassword" required="required"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required="required"/>
+                    <label for="name">Name - alphabet only</label>
+                    <input type="text" pattern="^[a-zA-Z]*$" id="name" name="name" required="required"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="pwcheck">Create Account</button>
+                    <button type="submit" id="button">Create Account</button>
                 </div>
             </form:form>
         </div>
     </div>
 </div>
 
-<script src="/js/password.js"></script>
+
+<script src="/js/passwordCheck.js"></script>
 
 </body>
 </html>

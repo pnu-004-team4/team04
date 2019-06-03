@@ -108,7 +108,7 @@
 
         <div class="row">
             <section class="user">
-                <form:form action="/login" method="post">
+                <form:form action="/player" method="post">
                     <h2>Name</h2>
                     <p><%= CheckName %></p>
                     <h2>Password</h2>
