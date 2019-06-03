@@ -19,7 +19,7 @@ import org.bson.Document;
 public class MetadataCustomRepository {
   private AudioMetaDao audioMetaDao;
   private FileMetaDao fileMetaDao;
-  private Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();;
+  private Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();
 
   public MetadataCustomRepository(String email) {
     MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
