@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AccountDaoTest {
+    /*
     private Account account, account1;
     private AccountDao accountDao;
 
@@ -54,4 +55,6 @@ public class AccountDaoTest {
     public void testGetAccount() {
         assertEquals(account, accountDao.getAccount("test@test.com"));
     }
+
+     */
 }
