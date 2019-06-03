@@ -2,7 +2,6 @@ package com.team04.musiccloud.db.converter;
 
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.audio.AudioMetaBuilder;
-import com.team04.musiccloud.auth.Account;
 import org.bson.Document;
 import org.junit.Test;
 
