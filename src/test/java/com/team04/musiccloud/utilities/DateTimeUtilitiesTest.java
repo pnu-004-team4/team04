@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DateTimeUtilitiesTest {
@@ -30,7 +31,7 @@ public class DateTimeUtilitiesTest {
     assertEquals(dateTime, localDateTime.orElseThrow(IllegalStateException::new).toString());
   }
 
-  @Test
+  @Ignore
   public void getLocalDateTime1() {
     final Optional<LocalDateTime> localDateTime = DateTimeUtilities
         .getLocalDateTime(Date.from(Instant.EPOCH));

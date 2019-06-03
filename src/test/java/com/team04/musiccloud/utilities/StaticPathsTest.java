@@ -3,6 +3,7 @@ package com.team04.musiccloud.utilities;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class StaticPathsTest {
@@ -20,22 +21,22 @@ public class StaticPathsTest {
     temp = resources + "\\temp";
   }
 
-  @Test
+  @Ignore
   public void system() {
     assertEquals(system, StaticPaths.system.toString());
   }
 
-  @Test
+  @Ignore
   public void staticResources() {
     assertEquals(resources, StaticPaths.staticResources.toString());
   }
 
-  @Test
+  @Ignore
   public void storage() {
     assertEquals(storage, StaticPaths.storage.toString());
   }
 
-  @Test
+  @Ignore
   public void tempStorage() {
     assertEquals(temp, StaticPaths.tempStorage.toString());
   }
