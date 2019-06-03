@@ -184,7 +184,6 @@
 <script src="/js/libraryControl.js"></script>
 <script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
-<script src="/js/listControl.js"></script>
 <script src="/js/loadingBar.js"></script>
 
 ${streaming}
