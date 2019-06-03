@@ -10,8 +10,8 @@ import static com.team04.musiccloud.db.converter.FileMetaConverter.toFileMeta;
 import static org.junit.Assert.*;
 
 public class FileMetaConverterTest {
-    FileMeta fileMeta;
-    Document document;
+    private FileMeta fileMeta;
+    private Document document;
 
     public FileMetaConverterTest() {
         this.fileMeta = FileMetaBuilder.builder()

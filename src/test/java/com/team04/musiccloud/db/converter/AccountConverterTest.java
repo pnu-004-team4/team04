@@ -9,8 +9,8 @@ import static com.team04.musiccloud.db.converter.AccountConverter.toDocument;
 import static org.junit.Assert.*;
 
 public class AccountConverterTest {
-    Account account;
-    Document document;
+    private Account account;
+    private Document document;
 
     public AccountConverterTest() {
         this.account = new Account();

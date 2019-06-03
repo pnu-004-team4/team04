@@ -14,8 +14,8 @@ import static com.team04.musiccloud.db.converter.AudioMetaConverter.toDocument;
 import static org.junit.Assert.*;
 
 public class AudioMetaConverterTest {
-    AudioMeta audioMeta, audioMetaWithNoId;
-    Document document;
+    private AudioMeta audioMeta, audioMetaWithNoId;
+    private Document document;
 
     public AudioMetaConverterTest() {
         LocalDateTime now = LocalDateTime.of(1, 1, 1, 0, 0);
