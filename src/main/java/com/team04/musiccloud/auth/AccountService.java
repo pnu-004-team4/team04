@@ -31,6 +31,7 @@ public class AccountService implements UserDetailsService {
                 showMessageDialog(null, "로그인 실패");
                 throw new InvalidEmailException("Invalid account");
             }
+
             System.out.println("FindAccountbyEmail() has been called" + " email : " + account.getEmail() + " password : " + account.getPassword());
             List<GrantedAuthority> authorities = new ArrayList<>();
             // 유저 권한을 주도록 합니다.

@@ -2,6 +2,7 @@
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
 <%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
+<%@ page import="com.mongodb.MongoTimeoutException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -44,6 +45,9 @@
             accountRepository.registerAccount(account);
         }catch(MongoWriteException e){
             out.println("<script>alert('This email is already registered');" +
+                    "location.href=\"login\"</script>");
+        }catch(MongoTimeoutException e){
+            out.println("<script>alert('Connection Error');" +
                     "location.href=\"login\"</script>");
         }
 
