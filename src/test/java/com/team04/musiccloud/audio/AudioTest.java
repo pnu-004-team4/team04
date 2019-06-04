@@ -1,10 +1,12 @@
 package com.team04.musiccloud.audio;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import com.beust.jcommander.ParameterException;
 import java.time.LocalDateTime;
 import org.junit.Test;
 
@@ -62,6 +64,29 @@ public class AudioTest {
     assertTrue(audio.hasAudioMeta());
     assertTrue(audio.hasFileMeta());
     assertTrue(audio.hasBytes());
+  }
+
+  @Test
+  public void nullContentsTest() {
+    Audio audio = new Audio(null, null, null);
+
+    assertFalse(audio.hasAudioMeta());
+    assertFalse(audio.hasFileMeta());
+    assertFalse(audio.hasBytes());
+  }
+
+  @Test(expected = ParameterException.class)
+  public void getAudioMetaWhenNull() {
+    Audio audio = new Audio(null, null, null);
+
+    audio.getAudioMeta();
+  }
+
+  @Test(expected = ParameterException.class)
+  public void getFileMetaWhenNull() {
+    Audio audio = new Audio(null, null, null);
+
+    audio.getFileMeta();
   }
 
   @Test

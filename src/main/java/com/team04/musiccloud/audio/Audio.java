@@ -22,15 +22,27 @@ public class Audio {
   }
 
   public boolean hasAudioMeta() {
-    return audioMeta != null && !audioMeta.isEmpty();
+    if (audioMeta == null) {
+      return false;
+    }
+
+    return !audioMeta.isEmpty();
   }
 
   public boolean hasFileMeta() {
-    return fileMeta != null && !fileMeta.isEmpty();
+    if (fileMeta == null) {
+      return false;
+    }
+
+    return !fileMeta.isEmpty();
   }
 
   public boolean hasBytes() {
-    return bytes != null && bytes.length != 0;
+    if (bytes == null) {
+      return false;
+    }
+
+    return bytes.length > 0;
   }
 
   public AudioMeta getAudioMeta() throws ParameterException {
@@ -41,7 +53,7 @@ public class Audio {
   }
 
   private void setAudioMeta(AudioMeta audioMeta) {
-    this.audioMeta = new AudioMeta(audioMeta);
+    this.audioMeta = audioMeta;
   }
 
   public FileMeta getFileMeta() throws ParameterException {
@@ -52,7 +64,7 @@ public class Audio {
   }
 
   private void setFileMeta(FileMeta fileMeta) {
-    this.fileMeta = new FileMeta(fileMeta);
+    this.fileMeta = fileMeta;
   }
 
   public byte[] getBytes() {

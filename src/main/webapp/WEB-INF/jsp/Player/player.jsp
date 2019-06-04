@@ -34,35 +34,12 @@
       <i class="ion-record green"></i>
     </div>
     -->
-
-    <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" required />
-
+            <input type="text" name = "index" id="search_key" placeholder="Search" required />
         </div>
-    </form:form>
-
-    <div class="Button">
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
 
     <div class="user">
 
-    <form:form action="search">
-        <div class="search">
-            <input type="text" name="index" placeholder="Search"/>
-        </div>
-        <div class="Button">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form:form>
-
-
-    <div class="user">
-
-        <div class="owner">
 
             <div class="user__info">
  
@@ -86,8 +63,8 @@
                     </ul>
                 </div>
 
-            </div>
         </div>
+
 
     </div>
 </section>
@@ -98,6 +75,7 @@
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
         <a class="current-track__name">Charlie Puth</a>
+
     </div>
 
     <div class="current-track__actions">
@@ -116,7 +94,7 @@
 
     <div class="current-track__options">
 
-        <a href="#" class="lyrics">Lyrics</a>
+
         <span class="controls">
             <a href="#" class="control"><i class="ion-shuffle"></i></a>
             <a href="#" class="control volume">
@@ -179,10 +157,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div class="tracks__heading__number">#</div>
-                        <div class="tracks__heading__title">Song</div>
-                        <div class="tracks__heading__artist">ARTIST</div>
-                        <div class="tracks__heading__length">
+                        <div class="tracks__heading__number" onclick="sortTarget('.track__number')">#</div>
+                        <div class="tracks__heading__title" onclick="sortTarget('.track__title')">Song</div>
+                        <div class="tracks__heading__artist" onclick="sortTarget('.track__artist')">ARTIST</div>
+                        <div class="tracks__heading__length" onclick="sortTarget('.track__length')">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
@@ -202,7 +180,10 @@
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='/js/nouislider.min.js'></script>
 <script src="/js/libraryControl.js"></script>
+<script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
+<script src="/js/listControl.js"></script>
+
 ${streaming}
 
 
