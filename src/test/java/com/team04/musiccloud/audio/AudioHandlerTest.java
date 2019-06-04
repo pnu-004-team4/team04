@@ -3,14 +3,17 @@ package com.team04.musiccloud.audio;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.db.MetadataCustomRepository;
+import com.team04.musiccloud.utilities.StaticKeys;
 import com.team04.musiccloud.utilities.StaticPaths;
 import com.team04.musiccloud.utilities.network.NetStatusManager;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,8 +30,10 @@ public class AudioHandlerTest {
   private final Logger LOGGER = Logger.getGlobal();
   private final String USER_NAME = "admin@admin.com";
 
-  @Ignore // @Before 설정
+  @Before
   public void networkAnalysis() {
+    StaticKeys.setKeys("mongodb://test:test@35.200.2.141/test");
+    StaticKeys.setDbName("test");
     NetStatusManager netStatusManager = NetStatusManager.getInstance();
     netStatusManager.addUserNetDelay(USER_NAME, 10);
     netStatusManager.addUserNetDelay(USER_NAME, 13);
@@ -38,24 +43,28 @@ public class AudioHandlerTest {
     LOGGER.info("Network delay avg: " + netStatusManager.getUserNetDelayAverage(USER_NAME));
   }
 
-  @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
+  @Test // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
   public void requestAUpload() throws IOException, InvalidFileFormat, ExtractorException {
     final MultipartFile mockMultipartFile = getMockMultipartFile();
     new AudioHandler(USER_NAME).requestUpload(mockMultipartFile);
   }
 
-  @Ignore // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
+  @Test// @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
   public void requestBLoad() throws IOException, InterruptedException {
     new AudioHandler(USER_NAME).requestLoad(true, USER_NAME, getFirstDbId());
   }
 
-  @Ignore
+  @Test
   public void requestDelete() throws IOException {
+    Path sourceLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.mp3");
+    Path targetLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.tmp.mp3");
+    Files.copy(sourceLocation, targetLocation);
     new AudioHandler(USER_NAME).requestDelete(getFirstDbId());
+    Files.move(targetLocation, sourceLocation);
   }
 
   private MultipartFile getMockMultipartFile() throws IOException {
-    final String fileName = "sample3.mp3";
+    final String fileName = "sample.mp3";
     final Path filePath = StaticPaths.storage
         .resolve(USER_NAME)
         .resolve(fileName)

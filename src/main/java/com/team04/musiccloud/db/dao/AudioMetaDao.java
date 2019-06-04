@@ -29,6 +29,19 @@ public class AudioMetaDao {
     this.mongoCollection = mongoCollection;
   }
 
+  static public boolean deleteDataInDatabase(String dbId,
+      MongoCollection<Document> mongoCollection) {
+    Bson filter;
+    try {
+      filter = new Document("_id", new ObjectId(dbId));
+      mongoCollection.deleteOne(filter);
+    } catch (MongoException e) {
+      return false;
+    }
+
+    return true;
+  }
+
   public String create(AudioMeta audioMeta) {
     Document document = AudioMetaConverter.toDocument(audioMeta);
     this.mongoCollection.insertOne(document);
@@ -54,8 +67,7 @@ public class AudioMetaDao {
   }
 
   public boolean delete(String dbId) {
-    this.mongoCollection.deleteOne(new Document("_id", new ObjectId(dbId)));
-    return true;
+    return deleteDataInDatabase(dbId, this.mongoCollection);
   }
 
   public boolean exists(String dbId) {
