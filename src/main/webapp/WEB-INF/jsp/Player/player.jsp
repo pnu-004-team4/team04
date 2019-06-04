@@ -159,10 +159,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div id="trackNumSort" class="tracks__heading__number">#</div>
-                        <div id="titleSort" class="tracks__heading__title">Song</div>
-                        <div id="artistSort" class="tracks__heading__artist">ARTIST</div>
-                        <div id="lengthSort" class="tracks__heading__length">
+                        <div class="tracks__heading__number" onclick="sortTarget('.track__number')">#</div>
+                        <div class="tracks__heading__title" onclick="sortTarget('.track__title')">Song</div>
+                        <div class="tracks__heading__artist" onclick="sortTarget('.track__artist')">ARTIST</div>
+                        <div class="tracks__heading__length" onclick="sortTarget('.track__length')">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
