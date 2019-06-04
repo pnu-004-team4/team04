@@ -48,9 +48,7 @@ public class FileMetaDao {
   }
 
   public boolean delete(String dbId) {
-    this.mongoCollection.deleteOne(new Document("_id", new ObjectId(dbId)));
-
-    return true;
+    return AudioMetaDao.deleteDataInDatabase(dbId, this.mongoCollection);
   }
 
   public boolean exists(String dbId) {
