@@ -72,6 +72,24 @@ public class FileMetaTest {
     assertEquals(USER, fileMeta.getUser());
   }
 
+  @Test(expected = IllegalStateException.class)
+  public void getFullPathDirectoryException() {
+    FileMeta fileMeta = new FileMeta(null, null, null, null, null);
+    fileMeta.getFullPath();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void getFullPathNameException() {
+    FileMeta fileMeta = new FileMeta(null, "1", null, null, null);
+    fileMeta.getFullPath();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void getFullPathExtensionException() {
+    FileMeta fileMeta = new FileMeta(null, "1", "2", null, null);
+    fileMeta.getFullPath();
+  }
+
   @Test
   public void additionalGetterTest() {
     FileMeta fileMeta = new FileMeta(ID, DIRECTORY, NAME, EXTENSION, USER);

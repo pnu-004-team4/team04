@@ -2,6 +2,7 @@ package com.team04.musiccloud.audio;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import org.junit.Test;
@@ -21,6 +22,15 @@ public class AudioMetaBuilderTest {
     AudioMetaBuilder audioMetaBuilder = AudioMetaBuilder.builder();
 
     assertNotNull(audioMetaBuilder);
+  }
+
+  @Test
+  public void builderConstructorTest2() {
+    AudioMeta audioMeta1 = new AudioMeta(null, null, null, null, null, 0, -1);
+    AudioMeta audioMeta2 = AudioMetaBuilder.builder(audioMeta1).build();
+
+    assertTrue(audioMeta1.isEmpty());
+    assertTrue(audioMeta2.isEmpty());
   }
 
   @Test
