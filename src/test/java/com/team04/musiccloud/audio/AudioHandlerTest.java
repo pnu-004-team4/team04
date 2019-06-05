@@ -63,7 +63,7 @@ public class AudioHandlerTest {
     Files.move(targetLocation, sourceLocation);
   }
 
-  private MultipartFile getMockMultipartFile() throws IOException {
+  public MultipartFile getMockMultipartFile() throws IOException {
     final String fileName = "sample.mp3";
     final Path filePath = StaticPaths.storage
         .resolve(USER_NAME)
@@ -78,7 +78,7 @@ public class AudioHandlerTest {
     );
   }
 
-  private String getFirstDbId() {
+  public String getFirstDbId() {
     return new MetadataCustomRepository(USER_NAME)
         .getPlaylist().get(0)
         .getDbId();
