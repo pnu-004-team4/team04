@@ -23,9 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class SenderAndUploadControllerTest {
 
   @Mock
-  HttpServletResponse httpServletResponse;
+  private HttpServletResponse httpServletResponse;
   @Mock
-  ModelMap model;
+  private ModelMap model;
   private SenderController senderController;
   private UploadController uploadController;
   private AudioHandlerTest audioHandlerTest;
