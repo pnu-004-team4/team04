@@ -34,17 +34,9 @@
       <i class="ion-record green"></i>
     </div>
     -->
-    <form:form action="search" method="get">
         <div class="search">
-            <input type="text" name = "index" placeholder="Search" required />
-
+            <input type="text" name = "index" id="search_key" placeholder="Search" required />
         </div>
-    </form:form>
-
-
-    <button type="submit">
-        <i class="fa fa-search"></i>
-    </button>
 
     <div class="user">
 
@@ -165,10 +157,10 @@
                 <div class="tracks">
                     <div class="tracks__heading">
 
-                        <div id="trackNumSort" class="tracks__heading__number">#</div>
-                        <div id="titleSort" class="tracks__heading__title">Song</div>
-                        <div id="artistSort" class="tracks__heading__artist">ARTIST</div>
-                        <div id="lengthSort" class="tracks__heading__length">
+                        <div class="tracks__heading__number" onclick="sortTarget('.track__number')">#</div>
+                        <div class="tracks__heading__title" onclick="sortTarget('.track__title')">Song</div>
+                        <div class="tracks__heading__artist" onclick="sortTarget('.track__artist')">ARTIST</div>
+                        <div class="tracks__heading__length" onclick="sortTarget('.track__length')">
                             <i class="ion-ios-stopwatch-outline"></i>
                         </div>
 
@@ -190,6 +182,8 @@
 <script src="/js/libraryControl.js"></script>
 <script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
+<script src="/js/listControl.js"></script>
+
 ${streaming}
 
 

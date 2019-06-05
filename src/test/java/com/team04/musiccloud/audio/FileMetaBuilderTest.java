@@ -2,6 +2,7 @@ package com.team04.musiccloud.audio;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -18,6 +19,15 @@ public class FileMetaBuilderTest {
     FileMetaBuilder fileMetaBuilder = FileMetaBuilder.builder();
 
     assertNotNull(fileMetaBuilder);
+  }
+
+  @Test
+  public void builderNullContents() {
+    FileMeta fileMeta1 = new FileMeta(null, null, null, null);
+    FileMeta fileMeta2 = FileMetaBuilder.builder(fileMeta1).build();
+
+    assertTrue(fileMeta1.isEmpty());
+    assertTrue(fileMeta2.isEmpty());
   }
 
   @Test
