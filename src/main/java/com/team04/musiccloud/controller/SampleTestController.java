@@ -6,41 +6,36 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SampleTestController {
-    
-    @RequestMapping("/test") // 변경됨: 2019년 4월 9일, 변경자: 이경찬
-    public ModelAndView main() {
-        return new ModelAndView("index");
-    }
-    
-    @RequestMapping("/logout")
 
-    public ModelAndView logout() {
-        return new ModelAndView("/Login/logout");
-    }
+  @RequestMapping("/test") // 변경됨: 2019년 4월 9일, 변경자: 이경찬
+  public ModelAndView main() {
+    return new ModelAndView("index");
+  }
 
-    //문광수
-    @RequestMapping("/set")
-    public ModelAndView userSetting() {
-        return new ModelAndView("/UserSettings/usersetting");
-    }
+  @RequestMapping("/logout")
 
-    @RequestMapping("/setcheck")
-    public ModelAndView userSetCheck() {
-        return new ModelAndView("/Setting/usersetcheck");
-    }
+  public ModelAndView logout() {
+    return new ModelAndView("/Login/logout");
+  }
 
-    @RequestMapping("/search")
-    public ModelAndView sortTest() {
-        return new ModelAndView("/SearchSort/search");
-    }
+  //문광수
+  @RequestMapping("/set")
+  public ModelAndView userSetting() {
+    return new ModelAndView("/UserSettings/usersetting");
+  }
 
-    @RequestMapping("/sorttest")
-    public ModelAndView search() {
-        return new ModelAndView("/SearchSort/testpage");
-    }
+  @RequestMapping("/search")
+  public ModelAndView sortTest() {
+    return new ModelAndView("/SearchSort/search");
+  }
 
-    @RequestMapping("/sort")
-    public ModelAndView testPage() {
-        return new ModelAndView("/SearchSort/sortpage");
-    }
+  @RequestMapping("/sorttest")
+  public ModelAndView search() {
+    return new ModelAndView("/SearchSort/testpage");
+  }
+
+  @RequestMapping("/sort")
+  public ModelAndView testPage() {
+    return new ModelAndView("/SearchSort/sortpage");
+  }
 }

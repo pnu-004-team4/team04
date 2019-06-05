@@ -8,12 +8,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import ="com.team04.musiccloud.auth.Account" language= "java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page import="com.team04.musiccloud.auth.Account" language="java"
+         contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
-<%@ page import="org.springframework.security.core.userdetails.User" %>
-<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
 <!doctype html>
 <html lang="kr">
@@ -35,7 +33,6 @@
 <%
     request.setCharacterEncoding("UTF-8");
 
-
     Account acc;
     Account EncodeAcc = new Account();
     AccountCustomRepository repository = new AccountCustomRepository();
@@ -46,8 +43,9 @@
     String Name = request.getParameter("name");
     String Resolution = request.getParameter("resolution");
 
-    String  CurPass, CurName;
-    String  CheckPass, CheckEmail, CheckName;
+    String CurPass, CurName;
+    String CheckEmail, CheckName;
+    boolean isTranscode = false;
 
     Boolean ResolutionUse, CheckResolution;
 
@@ -57,45 +55,23 @@
     CurPass = acc.getPassword();
     CurName = acc.getName();
 
-    System.out.println("바꾸기 전 password : " + CurPass);
-    System.out.println("바꾸기 전 name : " + CurName);
-
-
     //빈칸인지 아닌지 확인한 후 빈칸이 아니면 업데이트.
-    if(!Name.equals("")) CurName = Name;
-    if(!Password.equals("")) CurPass = Password;
-
-    System.out.println("1차 변경 password : " + CurPass);
-    System.out.println("1차 변경 name : " + CurName);
+    if (!Name.equals("")) {
+        CurName = Name;
+    }
+    if (!Password.equals("")) {
+        CurPass = Password;
+    }
+    if (request.getParameter("radio-btn").equals("yes")) {
+        isTranscode = true;
+    }
 
     EncodeAcc.setPassword(CurPass);
     EncodeAcc.encodePassword();
     CurPass = EncodeAcc.getPassword();
 
-    System.out.println("인코딩 후 password : " + CurPass);
-
-    //resolution 업데이트.
-    if(Resolution.equals("Use")) ResolutionUse = true;
-    else ResolutionUse = false;
-
-    //updateAccount
-    repository.updateAccount(Email, CurPass, CurName, ResolutionUse);
-
-//    Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-    //update된 내용 불러오기.
-    acc = repository.findAccountByEmail(Email);
-
-    CheckName = acc.getName();
-    CheckPass = acc.getPassword();
-    CheckEmail = acc.getEmail();
-    CheckResolution = acc.getResolution();
-
-    System.out.println("업데이트된 password : " + CheckPass);
-    System.out.println("업데이트된 name : " + CheckName);
-    System.out.println("업데이트된 resolution: " + CheckResolution);
-
-
+    CheckName = CurName;
+    CheckEmail = Email;
 %>
 <!-- Form-->
 <div class="container">
@@ -108,15 +84,21 @@
 
         <div class="row">
             <section class="user">
-                <form:form action="/player" method="post">
-                    <h2>Name</h2>
-                    <p><%= CheckName %></p>
-                    <h2>Password</h2>
-                    <p><%= Password %></p>
-                    <h2>Email</h2>
-                    <p><%= CheckEmail %></p>
-                    <h2>Resolution Use</h2>
-                    <p><%= Resolution%></p>
+                <form:form action="/setcheck" method="get">
+                <input type="hidden" name="email" value="<%=Email%>">
+                <input type="hidden" name="password" value="<%=CurPass%>">
+                <input type="hidden" name="name" value="<%=CurName%>">
+                <input type="hidden" name="isTranscode" value="<%=isTranscode%>">
+                <h2>Name</h2>
+                <p><%= CheckName %>
+                </p>
+                <h2>Password</h2>
+                <p><%= Password %>
+                </p>
+                <h2>Email</h2>
+                <p><%= CheckEmail %>
+                </p>
+                <p></p>
             </section>
             <section class="music">
                 <p></p>
@@ -127,7 +109,7 @@
                     <button type="submit">Confirm</button>
                 </div>
             </section>
-                </form:form>
+            </form:form>
         </div>
     </div>
 </div>

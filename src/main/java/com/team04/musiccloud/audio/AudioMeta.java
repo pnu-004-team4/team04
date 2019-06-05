@@ -63,7 +63,7 @@ public class AudioMeta {
   }
 
   public boolean hasDurationMs() {
-    return durationMs != 0;
+    return durationMs > 0;
   }
 
   public boolean hasPlayCount() {

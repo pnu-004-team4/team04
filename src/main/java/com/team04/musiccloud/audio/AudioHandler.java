@@ -74,13 +74,17 @@ public class AudioHandler {
           audio = doTranscodeAudio(user, audio);
           isMakeTheFile = true;
         }
+        if (!isDoTranscode || !cacheManager.isDoCreated()) {
+          isMakeTheFile = true;
+        }
       } catch (Exception e) {
         logger.warning("file doesn't exist");
         isMakeTheFile = false;
       }
 
-      if (isMakeTheFile)
+      if (isMakeTheFile) {
         break;
+      }
       Thread.sleep(1000);
     }
 

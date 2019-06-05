@@ -1,7 +1,7 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
-<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,16 +34,14 @@
     AccountCustomRepository repository = new AccountCustomRepository();
     Account SavedAccount;
 
-
     //session에 등록된 account 정보.
     Object account = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     //여기서 세션에 저장된 username, 로그인에 쓰인 username을 받는다.
     //따라서 email을 받는 것임.
-    if(account instanceof UserDetails){
-        email = ((UserDetails)account).getUsername();
-    }
-    else{
+    if (account instanceof UserDetails) {
+        email = ((UserDetails) account).getUsername();
+    } else {
         email = account.toString();
     }
 
@@ -56,13 +54,13 @@
 %>
 
 
-
 <body>
 
 <!-- flexbox container -->
 <div class="container">
     <div class="settings dark">
         <form:form action="usersetcheck" method="POST" id="addForm" onsubmit='return check();'>
+
             <div class="row">
                 <header>
                     <h1>settings</h1>
@@ -72,7 +70,8 @@
             <div class="row">
                 <section class="user">
                     <h2>User Account</h2>
-                    <input type="email" name="email" readonly value=<%= email%>  required="required">
+                    <input type="email" name="email" readonly
+                           value=<%= email%>  required="required">
                     <h2>Password</h2>
                     <input type="password" id="password" name="password" required="required">
                     <div class="progress">
@@ -83,7 +82,8 @@
                         <span id="percent"></span>
                     </div>
                     <h2>Name - alphabet only</h2>
-                    <input type="text" pattern="^[a-zA-Z]*$" name="name" value=<%= name%> required="required">
+                    <input type="text" pattern="^[a-zA-Z]*$" name="name"
+                           value=<%= name%> required="required">
                 </section>
             </div>
 
@@ -91,8 +91,8 @@
                 <section class="music">
                     <h2>Resolution use</h2>
                     <p>
-                        <input type="radio" id="radio1" name="resolution" value="Use"/>Use
-                        <input type="radio" id="radio2" name="resolution" value="No" checked = "checked"/>No
+                        <input type="radio" id="radio1" name="radio-btn" value="yes"/>Use
+                        <input type="radio" id="radio2" name="radio-btn" value="no" checked/>No
                     </p>
                     <p></p>
                     <div class="button">
