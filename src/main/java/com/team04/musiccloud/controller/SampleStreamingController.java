@@ -60,10 +60,6 @@ public class SampleStreamingController {
   }
 
   /**
-   * 2019년 5월 13일 player 관련은 PlayerController로 옮김 - 오기준
-   */
-
-  /**
    * 2019년 4월 29일 추가됨. - 이경찬
    */
   @RequestMapping("/registerCheck")

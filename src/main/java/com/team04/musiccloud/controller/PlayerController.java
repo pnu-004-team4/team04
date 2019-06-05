@@ -207,11 +207,16 @@ public class PlayerController {
    */
   @RequestMapping(value = "/", method = RequestMethod.POST)
   public ModelAndView updatePlayer(HttpServletRequest httpServletRequest) {
-    //@TODO: 양식 다시 보내기가 실행되는 것을 방지하도록 합니다.
-    //@TODO: 백 스페이스를 하게 되면 약간의 문제가 있다...
+    if (stream == null) {
+      try {
+        setUp();
+      } catch (Exception e) {
+        logger.severe("Setup failed ==>" + e.toString());
+      }
+    }
 
     String item = httpServletRequest.getParameter("songs");
-    System.out.println("Currently clicked value => " + item);
+    logger.info("Currently clicked value => " + item);
 
     Account account = accountRepositoryUtil.getCurrentAccount();
     String userName = account.getEmail();
