@@ -3,6 +3,7 @@ package com.team04.musiccloud.db.converter;
 import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.audio.FileMetaBuilder;
 import org.bson.Document;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.team04.musiccloud.db.converter.FileMetaConverter.toDocument;
@@ -13,7 +14,8 @@ public class FileMetaConverterTest {
     private FileMeta fileMeta;
     private Document document;
 
-    public FileMetaConverterTest() {
+    @Before
+    public void setUp() {
         this.fileMeta = FileMetaBuilder.builder()
                 .setDbId("5afe1efdbbeeb20adca58016")
                 .setName("name")

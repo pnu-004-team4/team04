@@ -19,7 +19,7 @@ import org.bson.Document;
 public class MetadataCustomRepository {
   private AudioMetaDao audioMetaDao;
   private FileMetaDao fileMetaDao;
-  private Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();
+  private static Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();
 
   public MetadataCustomRepository(String email) {
     MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
@@ -32,7 +32,7 @@ public class MetadataCustomRepository {
     this.fileMetaDao = new FileMetaDao(fileMetaCollection);
   }
 
-  public MetadataCustomRepository getInstance(String email) {
+  public static MetadataCustomRepository getInstance(String email) {
     MetadataCustomRepository instance;
 
     if (repositoryMap.containsKey(email)) {

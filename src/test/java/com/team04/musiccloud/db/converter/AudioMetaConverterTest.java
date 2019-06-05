@@ -3,6 +3,7 @@ package com.team04.musiccloud.db.converter;
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.audio.AudioMetaBuilder;
 import org.bson.Document;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,8 @@ public class AudioMetaConverterTest {
     private AudioMeta audioMeta, audioMetaWithNoId;
     private Document document;
 
-    public AudioMetaConverterTest() {
+    @Before
+    public void setUp() {
         LocalDateTime now = LocalDateTime.of(1, 1, 1, 0, 0);
         this.audioMeta = AudioMetaBuilder.builder()
                 .setDbId("test")

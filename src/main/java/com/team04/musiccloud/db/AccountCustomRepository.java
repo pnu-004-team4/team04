@@ -11,18 +11,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AccountCustomRepository {
 
-    private AccountCustomRepository instance;
+    private static AccountCustomRepository instance;
     private AccountDao accountDao;
 
     public AccountCustomRepository() {
         MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
         MongoClient mongoClient = new MongoClient(mongoClientURI);
-        MongoCollection<Document> mongoCollection = mongoClient.getDatabase("MusicCloud")
+        MongoCollection<Document> mongoCollection = mongoClient.getDatabase(StaticKeys.getDbName())
                 .getCollection("account");
         this.accountDao = new AccountDao(mongoCollection);
     }
 
-    public AccountCustomRepository getInstance() {
+    public static AccountCustomRepository getInstance() {
         if (instance == null) {
             instance = new AccountCustomRepository();
         }
@@ -48,18 +48,23 @@ public class AccountCustomRepository {
     이 예시에선 password는 1234로 바꾸고, name은 바꾸지 않고, username은 Kim으로 바꿈, .
     */
     public boolean updateAccount(String email, String password, String name, Boolean resolution) {
+        boolean completed = false;
+
         Account found = accountDao.getAccount(email);
-        if ( password != null ) {
-            found.setPassword(password);
-        }
-        if ( name != null ) {
-            found.setName(name);
-        }
-        if ( resolution != null ) {
-            found.setResolution(resolution);
+        if (found != null) {
+            if ( password != null ) {
+                found.setPassword(password);
+            }
+            if ( name != null ) {
+                found.setName(name);
+            }
+            if ( resolution != null ) {
+                found.setResolution(resolution);
+            }
+            completed = accountDao.update(found);
         }
 
-        return accountDao.update(found);
+        return completed;
     }
 
     /*

@@ -2,6 +2,7 @@ package com.team04.musiccloud.db.converter;
 
 import com.team04.musiccloud.auth.Account;
 import org.bson.Document;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.team04.musiccloud.db.converter.AccountConverter.toAccount;
@@ -12,7 +13,8 @@ public class AccountConverterTest {
     private Account account;
     private Document document;
 
-    public AccountConverterTest() {
+    @Before
+    public void setUp() {
         this.account = new Account();
         account.setEmail("test@test.com");
         account.setPassword("test");

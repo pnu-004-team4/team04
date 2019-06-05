@@ -10,6 +10,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.BsonField;
+import com.mongodb.client.model.Filters;
 import com.team04.musiccloud.audio.AudioMeta;
 import com.team04.musiccloud.db.converter.AudioMetaConverter;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class AudioMetaDao {
   public AudioMetaDao(MongoCollection<Document> mongoCollection) {
     this.mongoCollection = mongoCollection;
   }
-
+  /*
   static public boolean deleteDataInDatabase(String dbId,
       MongoCollection<Document> mongoCollection) {
     Bson filter;
@@ -41,6 +42,8 @@ public class AudioMetaDao {
 
     return true;
   }
+
+   */
 
   public String create(AudioMeta audioMeta) {
     Document document = AudioMetaConverter.toDocument(audioMeta);
@@ -67,11 +70,18 @@ public class AudioMetaDao {
   }
 
   public boolean delete(String dbId) {
-    return deleteDataInDatabase(dbId, this.mongoCollection);
+    Bson filter = Filters.eq("_id", new ObjectId(dbId));
+    try {
+      this.mongoCollection.deleteOne(filter);
+    } catch (MongoException e) {
+      return false;
+    }
+
+    return true;
   }
 
   public boolean exists(String dbId) {
-    FindIterable<Document> document = this.mongoCollection.find(eq("_id", dbId)).limit(1);
+    FindIterable<Document> document = this.mongoCollection.find(eq("_id", new ObjectId(dbId))).limit(1);
 
     return document != null;
   }
@@ -97,7 +107,7 @@ public class AudioMetaDao {
     Document document = this.mongoCollection.find(eq("_id", new ObjectId(dbId))).first();
 
     if (document == null) {
-      throw new ParameterException("Incorrect dbId ==>" + dbId);
+      throw new ParameterException("Incorrect dbId ==> " + dbId);
     }
 
     return AudioMetaConverter.toAudioMeta(document);

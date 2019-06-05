@@ -20,7 +20,7 @@ public class AudioMetaConverter {
     if (audioMeta.getDbId() == null) {
       document.append("_id", new ObjectId());
     } else {
-      document.append("_id", audioMeta.getDbId());
+      document.append("_id", new ObjectId(audioMeta.getDbId()));
     }
 
     return document;

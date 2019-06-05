@@ -1,56 +1,55 @@
-/*
 package com.team04.musiccloud.db;
 
 import com.team04.musiccloud.auth.Account;
+import com.team04.musiccloud.utilities.StaticKeys;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class AccountCustomRepositoryTest {
     private AccountCustomRepository accountCustomRepository;
-    private Account account, account1;
+    private Account account;
 
-    @Test
-    public void getInstance() {
+    @Before
+    public void setUp() {
+        StaticKeys.setKeys("mongodb://test:test@35.200.2.141/test");
+        StaticKeys.setDbName("test");
+
+        accountCustomRepository = AccountCustomRepository.getInstance();
+
         this.account = new Account();
         account.setEmail("test@test.com");
         account.setPassword("test");
         account.setName("test");
         account.setResolution(false);
+    }
 
-        this.account1 = new Account();
-        account1.setEmail("test1@test.com");
-        account1.setPassword("test");
-        account1.setName("test");
-        account1.setResolution(false);
-
-        //AccountCustomRepository accountCustomRepository = AccountCustomRepository.getInstance();
+    @Test
+    public void getInstance() {
+        assertEquals(accountCustomRepository, AccountCustomRepository.getInstance());
     }
 
     @Test
     public void registerAccount() {
+        if (accountCustomRepository.findAccountByEmail("test@test.com") != null) {
+            accountCustomRepository.deleteAccount("test@test.com");
+        }
         assertTrue(accountCustomRepository.registerAccount(account));
     }
 
     @Test
     public void updateAccount() {
-        assertTrue(accountCustomRepository.updateAccount("test@test.com", "test", "test", false));
+        accountCustomRepository.updateAccount("test@test.com", "test", "test", false);
     }
 
     @Test
     public void findAccountByEmail() {
-        assertEquals(account, accountCustomRepository.findAccountByEmail("test@test.com"));
-    }
-
-    @Test
-    public void getCurrentAccount() {
-        //accountCustomRepository.getCurrentAccount()
+        accountCustomRepository.findAccountByEmail("test@test.com");
     }
 
     @Test
     public void deleteAccount() {
-        assertTrue(accountCustomRepository.deleteAccount("test1@test.com"));
+        assertTrue(accountCustomRepository.deleteAccount("test@test.com"));
     }
 }
-
- */
