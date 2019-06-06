@@ -20,9 +20,9 @@ public class MetadataCustomRepository {
   public MetadataCustomRepository(String email) {
     MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
     MongoClient mongoClient = new MongoClient(mongoClientURI);
-    MongoCollection<Document> audioMetaCollection = mongoClient.getDatabase("MusicCloud")
+    MongoCollection<Document> audioMetaCollection = mongoClient.getDatabase(StaticKeys.getDbName())
         .getCollection("audiometa." + email);
-    MongoCollection<Document> fileMetaCollection = mongoClient.getDatabase("MusicCloud")
+    MongoCollection<Document> fileMetaCollection = mongoClient.getDatabase(StaticKeys.getDbName())
         .getCollection("filemeta." + email);
     this.audioMetaDao = new AudioMetaDao(audioMetaCollection);
     this.fileMetaDao = new FileMetaDao(fileMetaCollection);

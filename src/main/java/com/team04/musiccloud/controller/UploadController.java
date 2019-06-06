@@ -3,6 +3,8 @@ package com.team04.musiccloud.controller;
 import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
+import com.team04.musiccloud.auth.Account;
+import com.team04.musiccloud.utilities.AccountRepositoryUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,4 +36,24 @@ public class UploadController {
         return new ResponseEntity("Successfully uploaded - " +
                 uploadFile.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
     }
+
+    @PostMapping("/delete/{deletedbID}")
+    @ResponseBody
+    public ResponseEntity<?> uploadFile(
+            @PathVariable String deletedbID) {
+
+        AccountRepositoryUtil accountRepositoryUtil = AccountRepositoryUtil.getInstance();
+        Account account = accountRepositoryUtil.getCurrentAccount();
+
+        try {
+            AudioHandler audioHandler = new AudioHandler(account.getEmail());
+            audioHandler.requestDelete(deletedbID);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity("Successfully Deleted", new HttpHeaders(), HttpStatus.OK);
+    }
+
+
 }

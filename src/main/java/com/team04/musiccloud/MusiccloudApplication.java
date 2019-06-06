@@ -29,5 +29,6 @@ public class MusiccloudApplication {
       throw new ParameterException("You must have the Mongo DB API Keys");
     }
     StaticKeys.setKeys(args[0]);
+    StaticKeys.setDbName("MusicCloud");
   }
 }
