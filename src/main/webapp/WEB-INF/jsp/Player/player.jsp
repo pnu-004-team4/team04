@@ -96,7 +96,7 @@
 
 
         <span class="controls">
-            <a href="#" class="control"><i class="ion-shuffle"></i></a>
+
             <a href="#" class="control volume">
                 <i class="ion-volume-high"></i>
                 <div id="song-volume"></div>
@@ -114,7 +114,7 @@
             <!-- Main -->
             <div class="navigation__list">
                 <!-- Your Music -->
-                <div class="navigation__list__header">
+
 
                     <div class="navigation__list__header"
                          role="button"
@@ -144,7 +144,7 @@
                         </div>
                     </form:form>
 
-                </div>
+
 
             </div>
         </section>

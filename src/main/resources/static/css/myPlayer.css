@@ -250,12 +250,13 @@ html{
   width: 20%;
   padding: 5px 15px;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: space-around;
   align-items: center;
 }
 .current-track__actions {
   width: 5%;
+  margin-right: 10px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -430,7 +431,7 @@ html{
   margin-bottom: 15px;}
 .content__middle {
   height: 617px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 .tracks__heading {
   color: #aaaaaa;
@@ -439,24 +440,29 @@ html{
   flex-flow: row wrap;
   align-items: center;
 }
+.tracks__heading :hover{
+    color: darkred;
+    text-decoration: underline;
+}
 .tracks__heading__number {
   margin-left: 10px;
+  margin-right: 10px;
   font-style: italic;
 }
 .tracks__heading__title {
-  margin-left: 70px;
+  margin-left: auto;
+  margin-right: auto;
   width: 45%;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .tracks__heading__artist {
-  margin-right: 20px;
   margin-left: auto;
+  margin-right:auto;
   font-size: 15px;
 }
 .tracks__heading__length {
-  margin-right: 110px;
   margin-left: auto;
   font-size: 20px;
 }
@@ -467,6 +473,7 @@ html{
   flex-flow: row nowrap;
   align-items: center;
 }
+
 .tracks .track:hover {
   background: #282828;
 }
@@ -475,6 +482,7 @@ html{
 }
 .tracks .track__number {
   margin-left: 10px;
+  margin-right: 10px;
   color: #aaaaaa;
   width: 12px;
 }
@@ -495,7 +503,7 @@ html{
 }
 .tracks .track__title {
   width: 45%;
-  margin-left: 30px;
+  margin-right: auto;
   color: white;
 }
 .tracks .track__title.featured .title:after {
@@ -520,21 +528,21 @@ html{
 }
 .tracks .track__plays {
   color: #aaaaaa;
-  margin-left: auto;
   padding-right: 10px;
 }
 
 .tracks .track__artist {
   margin-left: auto;
+  margin-right: auto;
   color: #aaaaaa;
 }
 .tracks .track__length {
-  margin-right: 80px;
   margin-left: auto;
   color: #aaaaaa;
 }
 
 .tracks .track__delete {
+  margin-left: 10px;
   margin-right: 10px;
   color: #aaaaaa;
   width: 12px;
@@ -545,9 +553,6 @@ html{
   }
   .tracks .track__title {
     width: auto !important;
-  }
-  .tracks .track__explicit {
-    display: none;
   }
 }
 ::-webkit-scrollbar {
