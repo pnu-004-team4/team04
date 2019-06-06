@@ -94,9 +94,15 @@ function playtimeUpdate(my_audio){
       }
 
       if(my_audio.currentTime === my_audio.duration){
-        nextMusic();
+        try{
+          nextMusic();
+        }
+        catch (e){
+          console.log("playtimeUpdate : " + e);
+          songProgressSlider.noUiSlider.set(0);
+          pause();
+        }
       }
-
     }, 150);
   } else {
     clearInterval(showPlayTime);
@@ -115,21 +121,48 @@ function getPlayingNode(){
 
   var children = $('.track').find(".track__id[value=" + dbID +"]")[0];
 
-  return children.parentNode;
+  if(typeof children !== "undefined" && typeof children.parentNode !== "undefined"){
+    return children.parentNode;
+  }
+  else{
+    throw "NoMatchingSong";
+  }
 }
 
 function nextMusic(){
-  var playingNode = getPlayingNode();
+  var playingNode;
 
-  var nextSibling = $(playingNode.nextSibling);
-  nextSibling.click();
+  try{
+    playingNode = getPlayingNode();
+  } catch(e){
+    console.log(e);
+  }
+
+  var nextSibling = playingNode.nextSibling;
+  if(nextSibling !== null || nextSibling !== undefined){
+    nextSibling.click();
+  }
+  else{
+    throw "There is No Next Song";
+  }
 }
 
 function prevMusic(){
-  var playingNode = getPlayingNode();
+  var playingNode;
 
-  var prevSibling = $(playingNode.previousSibling);
-  prevSibling.click();
+  try{
+    playingNode = getPlayingNode();
+  } catch(e){
+    console.log(e);
+  }
+
+  var prevSibling = playingNode.prevSibling;
+  if(prevSibling !== null || prevSibling !== undefined){
+    prevSibling.click();
+  }
+  else{
+    console.log("There is No Prev Song");
+  }
 }
 
 
