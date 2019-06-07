@@ -52,7 +52,7 @@ var loop = function(){
     blue = cMax + cMax*Math.sin(i*Math.PI/100);
     green = cMax + cMax*Math.sin( i*Math.PI/150);
     i += 1;
-//stroke 투명도
+
     context.strokeStyle = "rgba("+red+","+green+","+blue+",1)";
     context.beginPath();
     context.arc(x, y, radius, 0 * Math.PI, 2 * Math.PI, counterClockwise);
