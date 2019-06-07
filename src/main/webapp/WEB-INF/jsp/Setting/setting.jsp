@@ -8,7 +8,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<%--광수꺼--%>
 
 <!doctype html>
 <html lang="kr">
