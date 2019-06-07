@@ -41,8 +41,8 @@ var green = 0;
 var loop = function(){
 
     // 밝아지는 속도와 느려지는 속도
-    startAngle = startAngle + 0.025 * Math.PI;
-    endAngle = endAngle + 0.025 * Math.PI;
+    startAngle = (startAngle + 0.025 * Math.PI)%(2*Math.PI);
+    endAngle = (endAngle + 0.025 * Math.PI)%(2*Math.PI);
 
     if(red >= 255) {
         if(green > 0){
@@ -52,6 +52,7 @@ var loop = function(){
             blue += 5;
         }
     }
+
     if(blue >= 255) {
         if(red > 0){
             red -= 5;
@@ -71,14 +72,6 @@ var loop = function(){
 
 //stroke 투명도
     context.strokeStyle = "rgba("+red+","+green+","+blue+",1)";
-
-    if(endAngle > (2*Math.PI)){
-        endAngle = 0*Math.PI;
-    }
-    if(startAngle > (2*Math.PI)){
-        startAngle = 0*Math.PI;
-    }
-
     context.beginPath();
     context.arc(x, y, radius, 0 * Math.PI, 2 * Math.PI, counterClockwise);
     context.stroke();
