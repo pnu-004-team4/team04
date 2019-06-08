@@ -41,11 +41,9 @@ html {
           <input type="password" id="password" name="password" required="required"/>
         </div>
         <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-          <font color="red">
-            <p>Your login attempt was not successful. Please check your email or password.<br/>
+            <p style='color: red;'>Your login attempt was not successful. Please check your email or password.<br/>
             </p>
             <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-          </font>
         </c:if>
         <div class="form-group">
           <button type="submit">Log In</button>
