@@ -41,7 +41,7 @@ html {
           <input type="password" id="password" name="password" required="required"/>
         </div>
         <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-            <p style='color: red;'>Your login attempt was not successful. Please check your email or password.<br/>
+            <p id='errorMsg'>Your login attempt was not successful. Please check your email or password.<br/>
             </p>
             <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
         </c:if>
