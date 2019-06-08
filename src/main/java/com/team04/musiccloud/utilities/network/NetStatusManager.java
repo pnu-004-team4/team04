@@ -50,23 +50,23 @@ public class NetStatusManager {
   }
 
   public UserNetStatus createUserNetState(String user) {
-    final UserNetStatus userNetStatus = new UserNetStatus(MAX_STATUS_PER_USER);
+    final UserNetStatus userNetStatus = new UserNetStatus(user, MAX_STATUS_PER_USER);
     userStatusMap.put(user, userNetStatus);
     return userNetStatus;
   }
 
   public void addUserNetDelay(String user, int delay) {
-    UserNetStatus userNetStatus = getUserNetState(user);
+    final UserNetStatus userNetStatus = getUserNetState(user);
     userNetStatus.addNetDelay(delay);
   }
 
   public double getUserNetDelayAverage(String user) {
-    UserNetStatus userNetStatus = getUserNetState(user);
+    final UserNetStatus userNetStatus = getUserNetState(user);
     return userNetStatus.getAverageNetDelay();
   }
 
   public double getUserNetDelayAverage(String user, IntPredicate intPredicate) {
-    UserNetStatus userNetStatus = getUserNetState(user);
+    final UserNetStatus userNetStatus = getUserNetState(user);
     return userNetStatus.getAverageNetDelay(intPredicate);
   }
 }

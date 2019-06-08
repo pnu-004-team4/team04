@@ -662,3 +662,12 @@ button:hover {
   display : none;
 
 }
+
+#loading_bar{
+  /* background-color: rgba(24, 24, 24, 0.05); */
+  width:100px;
+  height:100px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
