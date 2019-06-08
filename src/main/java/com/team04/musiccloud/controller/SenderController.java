@@ -1,6 +1,5 @@
 package com.team04.musiccloud.controller;
 
-import com.beust.jcommander.ParameterException;
 import com.team04.musiccloud.audio.Audio;
 import com.team04.musiccloud.audio.AudioHandler;
 import com.team04.musiccloud.auth.Account;
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SenderController {
 
-  private Logger logger;
+  private Logger logger = Logger.getGlobal();
 
   @RequestMapping(value = "/download", method = RequestMethod.GET,
       produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})
@@ -37,10 +36,6 @@ public class SenderController {
     AccountRepositoryUtil accountRepositoryUtil = AccountRepositoryUtil.getInstance();
     Account account = accountRepositoryUtil.getCurrentAccount();
 
-    System.out.println("[CURRENT ACCOUNT CHECK]");
-    System.out.println("User\t\tID\tResolution");
-    System.out
-        .println(account.getEmail() + "\t" + account.getId() + "\t" + account.getResolution());
     String userName = account.getEmail();
 
     AudioHandler audioHandler;
@@ -49,13 +44,11 @@ public class SenderController {
       audioHandler = new AudioHandler(userName);
       audio = audioHandler.requestLoad(account.getResolution(), userName, id);
     } catch (Exception e) {
-      logger.warning("Unexpected request detected ==> "+e.toString());
+      logger.warning("Unexpected request detected ==> " + e.toString());
       return null;
     }
     System.out.println("[USER CHECK]");
     System.out.println(audio.getFileMeta().getUser() + "\t" + userName);
-
-
 
     HttpHeaders header = new HttpHeaders();
     String mimeType = MusicFileUtilities.getMimeType(audio.getFileMeta().getExtension());
@@ -63,6 +56,7 @@ public class SenderController {
     if (mimeType != null) {
       header.setContentType(new MediaType("audio", mimeType));
       header.setContentLength(audio.getBytes().length);
+      header.add("Accept-Ranges","bytes");
     }
 
     return new HttpEntity<>(audio.getBytes(), header);

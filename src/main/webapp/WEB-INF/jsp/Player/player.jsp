@@ -25,6 +25,8 @@
 
 <body>
 
+<canvas id='loading_bar'></canvas>
+
 <%--Header Section--%>
 <section class="header">
     <!--
@@ -79,9 +81,9 @@
     </div>
 
     <div class="current-track__actions">
-        <a class="ion-ios-skipbackward"></a>
+        <a class="ion-ios-skipbackward" onclick="prevMusic()"></a>
         <a class="ion-ios-play play" id="play" onclick="play()"></a>
-        <a class="ion-ios-skipforward"></a>
+        <a class="ion-ios-skipforward" onclick="nextMusic()"></a>
     </div>
 
     <div class="current-track__progress">
@@ -182,7 +184,7 @@
 <script src="/js/libraryControl.js"></script>
 <script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
-<script src="/js/listControl.js"></script>
+<script src="/js/loadingBar.js"></script>
 
 ${streaming}
 

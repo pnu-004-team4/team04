@@ -1,15 +1,18 @@
 package com.team04.musiccloud.utilities.network;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
 public class UserNetStatusTest {
 
+  private static final String USER = "testCase@testing.com";
+
   @Test
   public void equalityTest() {
-    UserNetStatus netStatus1 = new UserNetStatus();
-    UserNetStatus netStatus2 = new UserNetStatus();
+    UserNetStatus netStatus1 = new UserNetStatus(USER);
+    UserNetStatus netStatus2 = new UserNetStatus(USER);
     FakeNetStatus fakeNetStatus = new FakeNetStatus();
 
     assertEquals(netStatus1, netStatus1);
@@ -22,7 +25,7 @@ public class UserNetStatusTest {
 
   @Test
   public void clearAllNetDelays() {
-    UserNetStatus netStatus = new UserNetStatus();
+    UserNetStatus netStatus = new UserNetStatus(USER);
     netStatus.addNetDelay(12);
     netStatus.clearAllNetDelays();
 

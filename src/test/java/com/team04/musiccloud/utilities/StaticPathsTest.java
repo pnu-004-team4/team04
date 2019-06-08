@@ -2,41 +2,44 @@ package com.team04.musiccloud.utilities;
 
 import static org.junit.Assert.assertEquals;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 
 public class StaticPathsTest {
 
-  private String system;
-  private String resources;
-  private String storage;
-  private String temp;
+  private Path system;
+  private Path resources;
+  private Path storage;
+  private Path temp;
 
   @Before
   public void setUp() {
-    system = System.getProperty("user.dir");
-    resources = system + "\\src\\main\\resources\\static\\server";
-    storage = resources + "\\storage";
-    temp = resources + "\\temp";
+    system = Paths.get(System.getProperty("user.dir"));
+    resources = Paths.get(system.toString(),"src", "main", "resources", "static", "server");
+    storage = Paths.get(resources.toString(), "storage");
+    temp = Paths.get(resources.toString(), "temp");
   }
 
-  @Ignore
+  @Test
   public void system() {
-    assertEquals(system, StaticPaths.system.toString());
+    assertEquals(system.toString(), StaticPaths.system.toString());
   }
 
-  @Ignore
+  @Test
   public void staticResources() {
-    assertEquals(resources, StaticPaths.staticResources.toString());
+    assertEquals(resources.toString(), StaticPaths.staticResources.toString());
   }
 
-  @Ignore
+  @Test
   public void storage() {
-    assertEquals(storage, StaticPaths.storage.toString());
+    assertEquals(storage.toString(), StaticPaths.storage.toString());
   }
 
-  @Ignore
+  @Test
   public void tempStorage() {
-    assertEquals(temp, StaticPaths.tempStorage.toString());
+    assertEquals(temp.toString(), StaticPaths.tempStorage.toString());
   }
 }

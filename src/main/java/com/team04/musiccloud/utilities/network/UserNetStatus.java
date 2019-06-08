@@ -12,12 +12,13 @@ public class UserNetStatus {
   private String user;
   private Queue<Integer> netDelays;
 
-  public UserNetStatus(int capacity) {
+  public UserNetStatus(String user, int capacity) {
+    this.user = user;
     netDelays = new UpdateDeque<>(capacity);
   }
 
-  public UserNetStatus() {
-    this(DEFAULT_CAPACITY);
+  public UserNetStatus(String user) {
+    this(user, DEFAULT_CAPACITY);
   }
 
   public void addNetDelay(Integer delayTime) {

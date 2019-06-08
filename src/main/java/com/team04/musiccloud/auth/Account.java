@@ -17,11 +17,11 @@ public class Account {
     private Boolean resolution;
     private Boolean apporoval;
     private Integer id;
-
+  
     public Integer getId() {
         return id;
     }
-
+  
     public void setId(Integer id) {
         this.id = id;
     }
@@ -65,4 +65,16 @@ public class Account {
     public Boolean getApporoval() { return apporoval; }
 
     public void setApporoval(Boolean apporoval) { this.apporoval = apporoval; }
+
+    public Boolean getResolution() {
+      if (resolution == null) {
+        return false;
+      }
+      return resolution;
+    }
+  
+    public void setResolution(Boolean resolution) {
+      this.resolution = resolution;
+    }
+
 }
