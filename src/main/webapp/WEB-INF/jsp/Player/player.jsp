@@ -36,37 +36,31 @@
       <i class="ion-record green"></i>
     </div>
     -->
-        <div class="search">
-            <input type="text" name = "index" id="search_key" placeholder="Search" required />
-        </div>
+    <div class="search">
+        <input type="text" name="index" id="search_key" placeholder="Search" required/>
+    </div>
 
     <div class="user">
 
-
-            <div class="user__info">
- 
+        <div class="user__info">
             <span class="user__info__name">
                <span class="first">Welcome!</span>
                <span class="last">${username}</span>
              </span>
-
-            </div>
-
-            <div class="user__actions">
-
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="ion-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                        <li><a href="setting">Settings</a></li>
-                        <li><a href="logout">Log Out</a></li>
-                    </ul>
-                </div>
-
         </div>
 
+        <div class="user__actions">
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="ion-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li><a href="setting">Settings</a></li>
+                    <li><a href="logout">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
 
     </div>
 </section>
@@ -74,12 +68,14 @@
 <%--Currenct Track & Control Section--%>
 <section class="current-track">
 
+    <%--    <div>--%>
     <div class="current-track__song">
-        <a class="current-track__name">Some Type of Love</a>
-        <a class="current-track__name">Charlie Puth</a>
-
+        <a class="current-track__title">Some Type of Love</a>
+        <a class="current-track__author">Charlie Puth</a>
     </div>
+    <%--    </div>--%>
 
+    <%--    <div>--%>
     <div class="current-track__actions">
         <a class="ion-ios-skipbackward" onclick="prevMusic()"></a>
         <a class="ion-ios-play play" id="play" onclick="play()"></a>
@@ -93,18 +89,20 @@
         </div>
         <div class="current-track__progress__finish" id="music_totaltime">END</div>
     </div>
+    <%--    </div>--%>
 
+    <%--    <div>--%>
     <div class="current-track__options">
-
-
-        <span class="controls">
-            <a href="#" class="control"><i class="ion-shuffle"></i></a>
-            <a href="#" class="control volume">
-                <i class="ion-volume-high"></i>
-                <div id="song-volume"></div>
-            </a>
-        </span>
+            <span class="controls">
+                <a href="#" class="control"><i class="ion-shuffle"></i></a>
+                <a href="#" class="control volume">
+                    <i class="ion-volume-high"></i>
+                    <div id="song-volume"></div>
+                </a>
+            </span>
     </div>
+    <%--    </div>--%>
+
 </section>
 
 <%--Content Section--%>
@@ -116,61 +114,65 @@
             <!-- Main -->
             <div class="navigation__list">
                 <!-- Your Music -->
-                <div class="navigation__list__header">
 
-                    <div class="navigation__list__header"
-                         role="button"
-                         data-toggle="collapse"
-                         href="#yourMusic"
-                         aria-expanded="true"
-                         aria-controls="yourMusic">
-                        Your Music
-                    </div>
-
-                    <form:form action="/" id="libraryForm">
-                        <div class="collapse in" id="yourMusic">
-
-                            <!-- 만약 추가적인 라이브러리는 a tag를 추가하여 더 만들 수 있습니다. -->
-                            <a href="#" class="navigation__list__item">
-                                <i class="ion-headphone"></i>
-                                <span>All Songs</span>
-                            </a>
-
-                            <a href="#" class="navigation__list__item">
-                                <i class="ion-headphone"></i>
-                                <span>Favorite Songs</span>
-                            </a>
-
-                            <!-- 아래 내용이 실제 POST의 parameter로 들어가는 부분입니다. -->
-                            <input type="text" name="songs" value="" id="selectedLibrary" hidden>
-                        </div>
-                    </form:form>
-
+                <div class="navigation__list__header"
+                     role="button"
+                     data-toggle="collapse"
+                     href="#yourMusic"
+                     aria-expanded="true"
+                     aria-controls="yourMusic">
+                    Your Music
                 </div>
 
+                <form:form action="/" id="libraryForm">
+                    <div class="collapse in" id="yourMusic">
+
+                        <!-- 만약 추가적인 라이브러리는 a tag를 추가하여 더 만들 수 있습니다. -->
+                        <a href="#" class="navigation__list__item">
+                            <i class="ion-headphone"></i>
+                            <span>All Songs</span>
+                        </a>
+
+                        <a href="#" class="navigation__list__item">
+                            <i class="ion-headphone"></i>
+                            <span>Favorite Songs</span>
+                        </a>
+
+                        <!-- 아래 내용이 실제 POST의 parameter로 들어가는 부분입니다. -->
+                        <input type="text" name="songs" value="" id="selectedLibrary" hidden>
+                    </div>
+                </form:form>
+
             </div>
+
         </section>
 
 
     </div>
-    <div class = "dropZone" id = "dropZone">
-        <div class="content__middle">
-            <div class="album__tracks">
-                <div class="tracks">
-                    <div class="tracks__heading">
+    <div class="dropZone" id="dropZone">
+        <div class="album__tracks">
+            <div class="tracks">
+                <div class="tracks__heading">
 
-                        <div class="tracks__heading__number" onclick="sortTarget('.track__number')">#</div>
-                        <div class="tracks__heading__title" onclick="sortTarget('.track__title')">Song</div>
-                        <div class="tracks__heading__artist" onclick="sortTarget('.track__artist')">ARTIST</div>
-                        <div class="tracks__heading__length" onclick="sortTarget('.track__length')">
-                            <i class="ion-ios-stopwatch-outline"></i>
-                        </div>
-
+                    <div class="tracks__heading__number" onclick="sortTarget('.track__number')">
+                        #
+                    </div>
+                    <div class="tracks__heading__gap"></div>
+                    <div class="tracks__heading__gap"></div>
+                    <div class="tracks__heading__title" onclick="sortTarget('.track__title')">
+                        Song
+                    </div>
+                    <div class="tracks__heading__artist" onclick="sortTarget('.track__artist')">
+                        Artist
+                    </div>
+                    <div class="tracks__heading__length" onclick="sortTarget('.track__length')">
+                        <i class="ion-ios-stopwatch-outline"></i>
                     </div>
 
-                    <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
-                    ${getLibrary}
                 </div>
+
+                <!-- DB에서 가져온 메타 값들을 넣어주는 부분입니다. -->
+                ${getLibrary}
             </div>
         </div>
     </div>

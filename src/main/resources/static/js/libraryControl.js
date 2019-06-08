@@ -15,8 +15,9 @@ function trackListClickerUpdate(){
       var trackArtist = $(this).find(".track__artist")[0].innerText;
 
       var currentTrackSong = $(".current-track__song").first();
-      var currentTrackName = currentTrackSong.find(".current-track__name")[0];
-      var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
+      var currentTrackName = currentTrackSong.find(".current-track__title")[0];
+      var currentTrackArtist = currentTrackSong.find(
+          ".current-track__author")[0];
 
       var musicPath = "download?id=" + trackId;
 
@@ -48,8 +49,8 @@ $(document).ready(function () {
 
 
   var currentTrackSong = $(".current-track__song").first();
-  var currentTrackName = currentTrackSong.find(".current-track__name")[0];
-  var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
+  var currentTrackName = currentTrackSong.find(".current-track__title")[0];
+  var currentTrackArtist = currentTrackSong.find(".current-track__author")[0];
 
   var hasFirstTrackTitle = (firstTrack.find(".track__title")).firstChild;
   var hasFirstTrackArtist = firstTrack.find(".track__artist").firstChild;
