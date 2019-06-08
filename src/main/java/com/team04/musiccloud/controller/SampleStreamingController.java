@@ -1,7 +1,5 @@
 package com.team04.musiccloud.controller;
 
-import com.team04.musiccloud.auth.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,12 +38,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SampleStreamingController {
 
-  @Autowired
-  public AccountService accountService;
-
   @RequestMapping("/login")
   public ModelAndView login() {
     System.out.println("login called");
+    return new ModelAndView("Login/login");
+  }
+  @RequestMapping("/login?error")
+  public ModelAndView loginError(){
+    System.out.println("loginError called");
     return new ModelAndView("Login/login");
   }
 
@@ -59,10 +59,6 @@ public class SampleStreamingController {
     System.out.println("User setting");
     return new ModelAndView("Setting/setting");
   }
-
-  /**
-   * 2019년 5월 13일 player 관련은 PlayerController로 옮김 - 오기준
-   */
 
   @RequestMapping("/registerCheck")
   public ModelAndView registerCheck() {

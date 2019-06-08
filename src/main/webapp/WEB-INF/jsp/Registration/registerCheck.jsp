@@ -33,12 +33,9 @@
 
     if(password.equals(cpassword)) {
         account.setName(name);
-        System.out.println("password input : " + password);
         account.setPassword(password);
         account.encodePassword();
-        System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
-        System.out.println("email input : " + account.getEmail());
 
         //중복 가입 방지
         try{
@@ -53,14 +50,10 @@
 
         out.println("<script>alert('Registration Complete!');</script>");
         sendEmail.sendSimpleMessage(account.getEmail());
-        System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
-
     }
     else{
         out.println("<script>alert('Password does not match. Please check your password again');" +
                 "location.href=\"register\"</script>");
-        System.out.println("password not identical");
-        System.out.println("password : " + password + ", confirm password : " + cpassword);
     }
 
 %>
