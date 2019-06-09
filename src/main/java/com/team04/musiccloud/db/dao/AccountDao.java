@@ -68,8 +68,12 @@ public class AccountDao {
   }
 
   public Account getAccount(String email) {
-    Document document = this.mongoCollection.find(eq("_id", email)).first();
+    Account account = null;
 
-    return AccountConverter.toAccount(document);
+    Document document = this.mongoCollection.find(eq("_id", email)).first();
+    if (document != null) {
+      account = AccountConverter.toAccount(document);
+    }
+    return account;
   }
 }

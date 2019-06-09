@@ -30,7 +30,7 @@ public class AudioMetaDao {
   }
 
   static public boolean deleteDataInDatabase(String dbId,
-      MongoCollection<Document> mongoCollection) {
+                                             MongoCollection<Document> mongoCollection) {
     Bson filter;
     try {
       filter = new Document("_id", new ObjectId(dbId));
@@ -110,7 +110,7 @@ public class AudioMetaDao {
     List<Bson> averageCollection = Collections.singletonList(Aggregates.group("_id", averageField));
 
     AggregateIterable<Document> aggregateIterable = this.mongoCollection
-        .aggregate(averageCollection);
+            .aggregate(averageCollection);
     Document averageResult = aggregateIterable.first();
 
     if (averageResult != null) {
