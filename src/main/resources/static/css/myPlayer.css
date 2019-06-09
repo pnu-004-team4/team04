@@ -117,41 +117,42 @@ html {
   color: #c8c8c8;
   transition: all 0.2s ease;
 }
-
 .content {
   display: flex;
   flex-flow: row nowrap;
   height: 80%;
 }
-
 .content__left {
-  width: 200px;
+  width: 15%;
 }
-
-.content__middle {
+.dropZone {
+  height: 100%;
   width: 85%;
 }
 
-/*@media (max-width: 1400px) {
+
+*@media (max-width: 1400px) {
   .content__left {
     width: 15%;
   }
-  .content__middle {
+  .dropZone {
     width: 85%;
   }
 
 }
 @media (max-width: 768px) {
-  .content__left {
+  .content{
+    flex-direction: column;
+  }
+  .content__left{
     width: 100%;
   }
-  .content__middle {
+  .dropZone{
     width: 100%;
   }
-}*/
+}
 
 .navigation {
-  width: 200px;
   padding: 15px;
   background: #282828;
   color: #aaaaaa;
@@ -161,7 +162,7 @@ html {
 .navigation__list {
   display: flex;
   flex-flow: column wrap;
-  margin-bottom: 15px;
+  text-align: center;
 }
 
 .navigation__list__header:after {
@@ -193,7 +194,7 @@ html {
   display: block;
 }
 
-/*@media (max-width: 768px) {
+*@media (max-width: 768px) {
   .navigation {
     display: flex;
     flex-flow: row wrap;
@@ -217,7 +218,7 @@ html {
   .navigation__list__item:hover {
     border: none;
   }
-}*/
+}
 .playlist {
   padding: 15px;
   background: #282828;
@@ -511,7 +512,10 @@ html {
   /*flex-flow: row wrap;*/
   align-items: center;
 }
-
+.tracks__heading :hover{
+  color: darkred;
+  text-decoration: underline;
+}
 .tracks__heading__number {
   min-width: 20px;
   margin: 0 5px;
@@ -765,12 +769,6 @@ button:hover {
   letter-spacing: 1.25px;
   font-size: 13.2px;
   margin-bottom: 10px;
-}
-
-
-.dropZone {
-  height: 100%;
-  width: 100%;
 }
 
 #username {
