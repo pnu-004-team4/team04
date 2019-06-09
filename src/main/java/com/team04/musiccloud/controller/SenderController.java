@@ -56,6 +56,7 @@ public class SenderController {
     if (mimeType != null) {
       header.setContentType(new MediaType("audio", mimeType));
       header.setContentLength(audio.getBytes().length);
+      header.add("Accept-Ranges","bytes");
     }
 
     return new HttpEntity<>(audio.getBytes(), header);
