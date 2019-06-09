@@ -47,68 +47,124 @@ $(document).ready(function(){
 // Player Control
 function play() {
   var my_audio = document.getElementById('bgAudio');
-  if(my_audio.paused == true){
-    togglePlayPauseButton(my_audio);
-    my_audio.play();
-    playtimeUpdate(my_audio);
-  }
+  $("#play").replaceWith('<a class="ion-ios-pause play" id = "pause" onclick="pause()"></a>');
+  my_audio.play();
+  playtimeUpdate(my_audio);
 }
 
 function pause() {
   var my_audio = document.getElementById('bgAudio');
-  if(my_audio.paused == false){
-    togglePlayPauseButton(my_audio);
-    my_audio.pause();
-    playtimeUpdate(my_audio);
-  }
-}
-
-function togglePlayPauseButton(my_audio){
-  // Changing attributes of button
-  if(my_audio.paused == true){
-    // Change 'pause button' to 'play button'
-    $("#play").replaceWith('<a class="ion-ios-pause play" id = "pause" onclick="pause()"></a>');
-  } else{
-    // Change 'play button' to 'pause button'
-    $("#pause").replaceWith('<a class="ion-ios-play play" id = "play" onclick="play()"></a>');
-  }
+  $("#pause").replaceWith('<a class="ion-ios-play play" id = "play" onclick="play()"></a>');
+  my_audio.pause();
+  playtimeUpdate(my_audio);
 }
 
 function secondToText(duration){
-  var minuteText = parseInt(duration / 60);
-  var second = parseInt(duration % 60);
-  var secondText = (second>=10)? second : "0"+second;
-  var music_playtime = minuteText + ":" + secondText;
+  if(isNaN(duration)){
+    return "Loading...";
+  }
+  else{
+    var minuteText = parseInt(duration / 60);
+    var second = parseInt(duration % 60);
+    var secondText = (second>=10)? second : "0"+second;
+    var music_playtime = minuteText + ":" + secondText;
 
-  return music_playtime;
+    return music_playtime;
+  }
 }
 
 function playtimeUpdate(my_audio){
 
-  // Set Music Total Time
-  var musicTotalTime = secondToText(my_audio.duration);
-  document.getElementById("music_totaltime").innerHTML = musicTotalTime;
-
   var music_progress_percent;
 
+  // Set Music Total Time
   // Set Music Play Time
   if (my_audio.paused == false) {
     showPlayTime = setInterval(function () {
 
+      var musicTotalTime = secondToText(my_audio.duration);
       var musicPlayTime = secondToText(my_audio.currentTime);
 
       document.getElementById("music_playtime").innerHTML = musicPlayTime;
+      document.getElementById("music_totaltime").innerHTML = musicTotalTime;
 
       if(isSongProgressSliderUsable){
-        progress_percent = my_audio.currentTime / my_audio.duration * 100;
+        var progress_percent = my_audio.currentTime / my_audio.duration * 100;
         music_progress_percent = songProgressSlider.noUiSlider.set(progress_percent);
       }
-    }, 150);
 
+      if(my_audio.currentTime === my_audio.duration){
+        try{
+          nextMusic();
+        }
+        catch (e){
+          console.log("playtimeUpdate : " + e);
+          songProgressSlider.noUiSlider.set(0);
+          pause();
+        }
+      }
+    }, 150);
   } else {
     clearInterval(showPlayTime);
   }
 }
+
+
+// Request Next, Prev
+
+function getPlayingNode(){
+  var my_audio = document.getElementById("nowPlaying");
+  var current_audio_src = my_audio.getAttribute("src");
+
+  var middle = current_audio_src.lastIndexOf('=');
+  var dbID = current_audio_src.substring(middle+1,current_audio_src.length);
+
+  var children = $('.track').find(".track__id[value=" + dbID +"]")[0];
+
+  if(typeof children !== "undefined" && typeof children.parentNode !== "undefined"){
+    return children.parentNode;
+  }
+  else{
+    throw "NoMatchingSong";
+  }
+}
+
+function nextMusic(){
+  var playingNode;
+
+  try{
+    playingNode = getPlayingNode();
+  } catch(e){
+    console.log(e);
+  }
+
+  var nextSibling = playingNode.nextSibling;
+  if(nextSibling !== null || nextSibling !== undefined){
+    nextSibling.click();
+  }
+  else{
+    throw "There is No Next Song";
+  }
+}
+
+function prevMusic(){
+  var playingNode;
+
+  try{
+    playingNode = getPlayingNode();
+  } catch(e){
+    console.log(e);
+  }
+
+  var prevSibling = playingNode.prevSibling;
+  if(prevSibling !== null || prevSibling !== undefined){
+    prevSibling.click();
+  }
+  else{
+    console.log("There is No Prev Song");
+  }
+}
+
 
 // Dropdown upload
 
@@ -190,6 +246,35 @@ function uploadFile(files) {
       });
     }
   }
+}
+
+// Deletion
+
+$(document).ready(function(){
+  $(".track__delete").on("click",function(e){
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+function deleteMusic(dbId){
+  console.log("delete Music called");
+
+  $.ajax({
+    url: "/delete/" + dbId,
+    type: 'POST',
+    enctype: 'multipart/form-data',
+    processData: false,
+    contentType: false,
+    cache: false,
+    success: [function (result) {
+      $('#dropZone').load(document.URL +  ' #dropZone', function(){
+        alert(result);
+        trackListClickerUpdate();
+      });
+    }]
+  });
+
 }
 
 // Tooltips

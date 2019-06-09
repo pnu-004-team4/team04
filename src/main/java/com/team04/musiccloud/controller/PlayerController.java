@@ -61,10 +61,10 @@ public class PlayerController {
    */
   // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
   private String audioTagGenerator(String audioLocation, String fileExtension) {
-    return "<audio id=\"bgAudio\" controls style=\"display:none;\"><source src=\""
-        + audioLocation
-        + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
-        + "\" id=\"nowPlaying\"></audio>";
+    return "<audio id=\"bgAudio\" controls style=\"display:none;\" preload=\"metadata\"><source src=\""
+            + audioLocation
+            + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
+            + "\" id=\"nowPlaying\" type=\"audio/mp3\"></audio>";
   }
 
   /**
@@ -177,7 +177,9 @@ public class PlayerController {
           .append("<div class=\"track__play\">")
           .append("<i class=\"ion-ios-play\"></i>")
           .append("</div>")
-          .append("<div class=\"track__delete\">")
+          .append("<div class=\"track__delete\" onclick=\"deleteMusic('")
+          .append(meta.getDbId())
+          .append("')\">")
           .append("<i class=\"ion-android-delete\"></i>")
           .append("</div>")
           .append("<div class=\"track__title\">")
@@ -192,7 +194,9 @@ public class PlayerController {
           .append("<div class=\"track__owner\" hidden>")
           .append(userName)
           .append("</div>")
-          .append("<div class=\"track__id\" hidden>")
+          .append("<div class=\"track__id\" value ='")
+          .append(meta.getDbId())
+          .append("' hidden>")
           .append(meta.getDbId())
           .append("</div>")
           .append("</div>");
