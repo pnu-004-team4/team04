@@ -76,34 +76,35 @@
 
     <div class="current-track__song">
         <a class="current-track__name">Some Type of Love</a>
-        <a class="current-track__name">Charlie Puth</a>
+        <a class="current-track__artist">Charlie Puth</a>
 
     </div>
-
-    <div class="current-track__actions">
-        <a class="ion-ios-skipbackward" onclick="prevMusic()"></a>
-        <a class="ion-ios-play play" id="play" onclick="play()"></a>
-        <a class="ion-ios-skipforward" onclick="nextMusic()"></a>
-    </div>
-
-    <div class="current-track__progress">
-        <div class="current-track__progress__start" id="music_playtime">START</div>
-        <div class="current-track__progress__bar">
-            <div id="song-progress"></div>
+    <div class="current-track__streaming">
+        <div class="current-track__actions">
+            <a class="ion-ios-skipbackward" onclick="prevMusic()"></a>
+            <a class="ion-ios-play play" id="play" onclick="play()"></a>
+            <a class="ion-ios-skipforward" onclick="nextMusic()"></a>
         </div>
-        <div class="current-track__progress__finish" id="music_totaltime">END</div>
-    </div>
 
-    <div class="current-track__options">
+        <div class="current-track__progress">
+            <div class="current-track__progress__start" id="music_playtime">START</div>
+            <div class="current-track__progress__bar">
+                <div id="song-progress"></div>
+            </div>
+            <div class="current-track__progress__finish" id="music_totaltime">END</div>
+        </div>
+
+        <div class="current-track__options">
 
 
-        <span class="controls">
+            <span class="controls">
 
-            <a href="#" class="control volume">
-                <i class="ion-volume-high"></i>
-                <div id="song-volume"></div>
-            </a>
-        </span>
+                <a href="#" class="control volume">
+                    <i class="ion-volume-high"></i>
+                    <div id="song-volume"></div>
+                </a>
+            </span>
+        </div>
     </div>
 </section>
 

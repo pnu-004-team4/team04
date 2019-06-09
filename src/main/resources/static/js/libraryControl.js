@@ -16,7 +16,7 @@ function trackListClickerUpdate(){
 
       var currentTrackSong = $(".current-track__song").first();
       var currentTrackName = currentTrackSong.find(".current-track__name")[0];
-      var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
+      var currentTrackArtist = currentTrackSong.find(".current-track__artist")[1];
 
       var musicPath = "download?id=" + trackId;
 
