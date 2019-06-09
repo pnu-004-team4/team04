@@ -260,3 +260,7 @@ body {
   background: #FFFFFF !important;
   color: #4285F4 !important;
 }
+
+#errorMsg {
+  color: red;
+}

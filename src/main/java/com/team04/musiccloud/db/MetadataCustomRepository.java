@@ -9,13 +9,17 @@ import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.db.dao.AudioMetaDao;
 import com.team04.musiccloud.db.dao.FileMetaDao;
 import com.team04.musiccloud.utilities.StaticKeys;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.bson.Document;
 
 public class MetadataCustomRepository {
-
   private AudioMetaDao audioMetaDao;
   private FileMetaDao fileMetaDao;
+  private static Map<String, MetadataCustomRepository> repositoryMap = new HashMap<>();
 
   public MetadataCustomRepository(String email) {
     MongoClientURI mongoClientURI = new MongoClientURI(StaticKeys.getKeys());
@@ -26,6 +30,18 @@ public class MetadataCustomRepository {
         .getCollection("filemeta." + email);
     this.audioMetaDao = new AudioMetaDao(audioMetaCollection);
     this.fileMetaDao = new FileMetaDao(fileMetaCollection);
+  }
+
+  public static MetadataCustomRepository getInstance(String email) {
+    MetadataCustomRepository instance;
+
+    if (repositoryMap.containsKey(email)) {
+      instance = repositoryMap.get(email);
+    } else {
+      instance = new MetadataCustomRepository(email);
+      repositoryMap.put(email, instance);
+    }
+    return instance;
   }
 
   /*
@@ -48,9 +64,9 @@ public class MetadataCustomRepository {
     DB에 저장된 AudioMeta와 FileMeta를 삭제하는 함수.
     여기서 전달된 dbId는 AudioMeta와 FileMeta의 _id값.
     */
-  public void deleteMetadata(String dbId) {
+  public boolean deleteMetadata(String dbId) {
     audioMetaDao.delete(dbId);
-    fileMetaDao.delete(dbId);
+    return fileMetaDao.delete(dbId);
   }
 
   /*

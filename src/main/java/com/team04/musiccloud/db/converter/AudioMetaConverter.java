@@ -20,7 +20,7 @@ public class AudioMetaConverter {
     if (audioMeta.getDbId() == null) {
       document.append("_id", new ObjectId());
     } else {
-      document.append("_id", audioMeta.getDbId());
+      document.append("_id", new ObjectId(audioMeta.getDbId()));
     }
 
     return document;
@@ -29,7 +29,7 @@ public class AudioMetaConverter {
   public static AudioMeta toAudioMeta(Document document) {
     LocalDateTime dateTime;
     try {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+      DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
       dateTime = LocalDateTime
           .parse(document.get("releaseDate").toString(), formatter);
     } catch (DateTimeException e) {
@@ -42,8 +42,8 @@ public class AudioMetaConverter {
         .setAuthor((String) document.get("author"))
         .setAlbum((String) document.get("album"))
         .setReleaseDate(dateTime)
-        .setDurationMs((int) document.get("durationMs"))
-        .setPlayCount((int) document.get("count"))
+        .setDurationMs(Integer.parseInt(document.get("durationMs").toString()))
+        .setPlayCount(Integer.parseInt(document.get("count").toString()))
         .setReleaseDate(dateTime).build();
   }
 }
