@@ -36,7 +36,7 @@ const passwordLength = () => {
     const lower = /[a-z]/.test(inputVal);
     const upper = /[A-Z]/.test(inputVal);
     const digit = /[0-9]/.test(inputVal);
-    const specialChar = /[$@#&!]/.test(inputVal);
+    const specialChar = /[$@#&!`~%^*()=+_-]/.test(inputVal);
     let passStrength = 0;
     if (lower){
         passStrength += 25;
@@ -86,7 +86,12 @@ function check() {
         alert('Password Security is too low.')
         $('#password').focus();
         return false;
-    }else if(strength >= 75) {
+    }else if(strength >= 75){
+        if($('#password').val() != $('#cpassword').val()) {
+            alert('Password does not match. Please check your password again')
+            $('#cpassword').focus();
+            return false;
+        }
         return true;
     }
 }

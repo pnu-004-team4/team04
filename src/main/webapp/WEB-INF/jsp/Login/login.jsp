@@ -32,7 +32,7 @@ html {
       <form:form action="login" method="POST">
         <div class="form-group">
           <label for="username">Email</label>
-          <input type="email" id="username" name="username" required="required"/>
+          <input type="email" pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$" id="username" name="username" required="required"/>
         </div>
         <div class="form-group">
           <label for="password">Password</label>

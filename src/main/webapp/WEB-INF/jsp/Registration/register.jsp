@@ -42,7 +42,6 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required="required"/>
-<%--                    pattern="^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[-*()_`~!@#$%^&+=]).*$"--%>
                     <div class="progress">
                         <div class="progressBar"></div>
                     </div>

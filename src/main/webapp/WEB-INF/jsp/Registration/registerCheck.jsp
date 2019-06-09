@@ -28,33 +28,22 @@
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
 
-    if(password.equals(cpassword)) {
-        account.setName(name);
-        System.out.println("password input : " + password);
-        account.setPassword(password);
-        account.encodePassword();
-        System.out.println("password encoded : " + account.getPassword());
-        account.setEmail(email);
-        System.out.println("email input : " + account.getEmail());
 
-        //중복 가입 방지
-        try{
-            accountRepository.registerAccount(account);
-        }catch(MongoWriteException e){
-            out.println("<script>alert('This email is already registered');" +
-                    "location.href=\"login\"</script>");
-        }
+    account.setName(name);
+    account.setPassword(password);
+    account.encodePassword();
+    account.setEmail(email);
 
-        out.println("<script>alert('Registration Complete!');</script>");
-        System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
-
+    //중복 가입 방지
+    try{
+        accountRepository.registerAccount(account);
+    }catch(MongoWriteException e){
+        out.println("<script>alert('This email is already registered');" +
+                "location.href=\"login\"</script>");
     }
-    else{
-        out.println("<script>alert('Password does not match. Please check your password again');" +
-                "location.href=\"register\"</script>");
-        System.out.println("password not identical");
-        System.out.println("password : " + password + ", confirm password : " + cpassword);
-    }
+
+    out.println("<script>alert('Registration Complete!');</script>");
+    System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
 
 %>
 
