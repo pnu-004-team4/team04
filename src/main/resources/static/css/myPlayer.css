@@ -450,7 +450,7 @@ html {
   display: block;
 }
 
-*@media (max-width: 1400px) {
+@media (max-width: 1400px) {
   .current-track__song{
     width: 40%
   }
