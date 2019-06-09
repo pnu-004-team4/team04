@@ -69,7 +69,7 @@ public class FileMetaDaoTest {
 
     @Test
     public void testGetList() {
-        fileMetaDao.getList();
+        assertNotNull(fileMetaDao.getList());
     }
 
     @Test

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class MetadataCustomRepositoryTest {
-    MetadataCustomRepository metadataCustomRepository;
+    private MetadataCustomRepository metadataCustomRepository;
     private AudioMeta audioMeta;
     private FileMeta fileMeta;
 
@@ -50,31 +50,31 @@ public class MetadataCustomRepositoryTest {
                 && metadataCustomRepository.getFileMeta(fileMeta.getDbId()) != null) {
             metadataCustomRepository.deleteMetadata(audioMeta.getDbId());
         }
-        metadataCustomRepository.storeMetadata(audioMeta, fileMeta);
+        assertTrue(metadataCustomRepository.storeMetadata(audioMeta, fileMeta));
     }
 
     @Test
     public void testUpdateMetadata() {
-        metadataCustomRepository.updateMetadata(audioMeta, fileMeta);
+        assertTrue(metadataCustomRepository.updateMetadata(audioMeta, fileMeta));
     }
 
     @Test
     public void testDeleteMetadata() {
-        metadataCustomRepository.deleteMetadata("5afe1efdbbeeb20adca58017");
+        assertTrue(metadataCustomRepository.deleteMetadata("5afe1efdbbeeb20adca58017"));
     }
 
     @Test
     public void testGetAudioMeta() {
-        metadataCustomRepository.getAudioMeta(audioMeta.getDbId());
+        assertNotNull(metadataCustomRepository.getAudioMeta(audioMeta.getDbId()));
     }
 
     @Test
     public void testGetFileMeta() {
-        metadataCustomRepository.getFileMeta(fileMeta.getDbId());
+        assertNotNull(metadataCustomRepository.getFileMeta(fileMeta.getDbId()));
     }
 
     @Test
     public void testGetPlaylist() {
-        metadataCustomRepository.getPlaylist();
+        assertNotNull(metadataCustomRepository.getPlaylist());
     }
 }

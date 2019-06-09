@@ -7,7 +7,6 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
 import com.team04.musiccloud.audio.FileMeta;
 import com.team04.musiccloud.db.converter.FileMetaConverter;
 import java.util.ArrayList;
@@ -49,18 +48,11 @@ public class FileMetaDao {
   }
 
   public boolean delete(String dbId) {
-    Bson filter = Filters.eq("_id", new ObjectId(dbId));
-    try {
-      this.mongoCollection.deleteOne(filter);
-    } catch (MongoException e) {
-      return false;
-    }
-
-    return true;
+    return AudioMetaDao.deleteDataInDatabase(dbId, this.mongoCollection);
   }
 
   public boolean exists(String dbId) {
-    FindIterable<Document> document = this.mongoCollection.find(eq("_id", new ObjectId(dbId))).limit(1);
+    FindIterable<Document> document = this.mongoCollection.find(eq("_id", dbId)).limit(1);
 
     return document != null;
   }

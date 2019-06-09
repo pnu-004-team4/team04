@@ -75,7 +75,7 @@ public class AudioMetaDaoTest {
 
     @Test
     public void testGetList() {
-        audioMetaDao.getList();
+        assertNotNull(audioMetaDao.getList());
     }
 
     @Test
@@ -91,10 +91,5 @@ public class AudioMetaDaoTest {
         assertEquals(audioMeta.getReleaseDate(), audioMetaDao.getAudioMeta(audioMeta.getDbId()).getReleaseDate());
         assertEquals(audioMeta.getDurationMs(), audioMetaDao.getAudioMeta(audioMeta.getDbId()).getDurationMs());
         assertEquals(audioMeta.getPlayCount(), audioMetaDao.getAudioMeta(audioMeta.getDbId()).getPlayCount());
-    }
-
-    @Test
-    public void testGetAveragePlayCount() {
-        //assertEquals();
     }
 }

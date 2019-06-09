@@ -64,9 +64,9 @@ public class MetadataCustomRepository {
     DB에 저장된 AudioMeta와 FileMeta를 삭제하는 함수.
     여기서 전달된 dbId는 AudioMeta와 FileMeta의 _id값.
     */
-  public void deleteMetadata(String dbId) {
+  public boolean deleteMetadata(String dbId) {
     audioMetaDao.delete(dbId);
-    fileMetaDao.delete(dbId);
+    return fileMetaDao.delete(dbId);
   }
 
   /*

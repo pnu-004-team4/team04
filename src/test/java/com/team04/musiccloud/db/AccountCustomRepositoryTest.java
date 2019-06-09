@@ -40,12 +40,12 @@ public class AccountCustomRepositoryTest {
 
     @Test
     public void updateAccount() {
-        accountCustomRepository.updateAccount("test@test.com", "test", "test", false);
+        assertTrue(accountCustomRepository.updateAccount("test@test.com", "test", "test", false));
     }
 
     @Test
     public void findAccountByEmail() {
-        accountCustomRepository.findAccountByEmail("test@test.com");
+        assertNotNull(accountCustomRepository.findAccountByEmail("test@test.com"));
     }
 
     @Test

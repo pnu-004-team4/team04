@@ -66,7 +66,7 @@ public class AccountDaoTest {
 
     @Test
     public void testGetList() {
-        accountDao.getList();
+        assertNotNull(accountDao.getList());
     }
 
     @Test
