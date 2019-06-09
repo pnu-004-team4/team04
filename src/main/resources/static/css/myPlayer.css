@@ -274,12 +274,11 @@ html {
   background: #26273a;
   padding: 5px 15px;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
 }
 
 .current-track__song {
-  min-width: 250px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -297,11 +296,18 @@ html {
   margin: 0 5px;
   text-align: center;
 }
+.current-track__streaming {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .current-track__actions {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -444,40 +450,47 @@ html {
   display: block;
 }
 
-/*@media (max-width: 1400px) {
-  .current-track__actions {
-    width: 1%;
+*@media (max-width: 1400px) {
+  .current-track__song{
+    width: 40%
   }
-  .current-track__progress {
-    width: 1%;
+  .current-track__streaming{
+    width: 60%
   }
-  .current-track__options {
-    width: 1%;
+  .current-track__action{
+    width: 10%
   }
-}
-@media (max-width: 980px) {
-  .current-track__actions {
-    width: 10%;
+  .current-track__progress{
+    width: 60%
   }
-  .current-track__progress {
-    width: 50%;
-  }
-  .current-track__options {
-    width: 40%;
+  .current-track__option{
+    width: 30%
   }
 }
 @media (max-width: 768px) {
-  .current-track__actions {
-    width: 10%;
+  .current-track__song{
+    width: 100%
   }
-  .current-track__progress {
-    width: 50%;
+  .current-track__streaming{
+    width: 100%
   }
-  .current-track__options {
-    width: 40%;
+  .current-track__action{
+    width: 10%
+  }
+  .current-track__progress{
+    width: 60%
+  }
+  .current-track__option{
+    width: 30%
   }
 }
 @media (max-width: 480px) {
+  .current-track{
+    flex-direction: column;
+  }
+  .current-track__song{
+    width: 100%
+  }
   .current-track__actions {
     width: 100%;
     justify-content: space-around;
@@ -497,7 +510,7 @@ html {
   .current-track__action {
     padding-top: 15px;
   }
-}*/
+}
 .tracks {
   width: 100%;
   display: flex;
