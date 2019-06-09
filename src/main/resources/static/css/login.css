@@ -313,3 +313,8 @@ span#percent{
   height: 0;
   color: transparent;
 }
+
+#errorMsg {
+  color: red;
+}
+

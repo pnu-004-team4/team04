@@ -1,6 +1,8 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
+<%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
+<%@ page import="com.mongodb.MongoTimeoutException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -22,6 +24,7 @@
 <%
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
+    EmailServiceImpl sendEmail = new EmailServiceImpl();
 
     String name = request.getParameter("name");
     String password = request.getParameter("password");
@@ -43,8 +46,6 @@
     }
 
     out.println("<script>alert('Registration Complete!');</script>");
-    System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
-
 %>
 
 <body>
