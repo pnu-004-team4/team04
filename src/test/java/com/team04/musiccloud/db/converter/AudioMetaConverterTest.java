@@ -20,7 +20,7 @@ public class AudioMetaConverterTest {
     public void setUp() {
         LocalDateTime now = LocalDateTime.of(1, 1, 1, 0, 0);
         this.audioMeta = AudioMetaBuilder.builder()
-                .setDbId("test")
+                .setDbId("5afe1efdbbeeb20adca58016")
                 .setTitle("title")
                 .setAuthor("author")
                 .setAlbum("album")
@@ -43,7 +43,7 @@ public class AudioMetaConverterTest {
                 .append("releaseDate", now.toString())
                 .append("durationMs", "0")
                 .append("count", "0")
-                .append("_id", "test");
+                .append("_id", "5afe1efdbbeeb20adca58016");
     }
 
     @Test
