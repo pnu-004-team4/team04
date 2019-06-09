@@ -6,6 +6,7 @@ var volumeSlider = document.getElementById('song-volume');
 var isSongProgressSliderUsable = true;
 
 $(document).ready(function(){
+  $('#loading_bar').hide();
   noUiSlider.create(songProgressSlider, {
     start: [0],
     connect : [false,true],
@@ -226,7 +227,7 @@ function uploadFile(files) {
     else{
       var formData = new FormData();
       formData.append('file', files[i]);
-
+      $('#loading_bar').show();
       $.ajax({
         url: "/upload/" + userEmail,
         data: formData,
@@ -237,7 +238,7 @@ function uploadFile(files) {
         cache: false,
         success: [function (result) {
           $('#dropZone').load(document.URL +  ' #dropZone', function(){
-            alert(result);
+            $('#loading_bar').hide();
             /*global trackListClickerUpdate*/
             /*eslint no-undef: "error"*/
             trackListClickerUpdate();
