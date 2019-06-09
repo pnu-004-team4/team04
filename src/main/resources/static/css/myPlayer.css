@@ -131,7 +131,7 @@ html {
 }
 
 
-*@media (max-width: 1400px) {
+@media (max-width: 1400px) {
   .content__left {
     width: 15%;
   }
@@ -194,7 +194,7 @@ html {
   display: block;
 }
 
-*@media (max-width: 768px) {
+@media (max-width: 768px) {
   .navigation {
     display: flex;
     flex-flow: row wrap;
