@@ -24,4 +24,5 @@ public class SampleTestControllerTest {
   public void main() {
     assertNotNull(sampleTestController.main());
   }
+
 }
