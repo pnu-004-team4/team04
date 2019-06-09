@@ -25,6 +25,8 @@
 
 <body>
 
+<canvas id='loading_bar'></canvas>
+
 <%--Header Section--%>
 <section class="header">
     <!--
@@ -182,7 +184,7 @@
 <script src="/js/libraryControl.js"></script>
 <script src="/js/listControl.js"></script>
 <script src="/js/myPlayer.js"></script>
-<script src="/js/listControl.js"></script>
+<script src="/js/loadingBar.js"></script>
 
 ${streaming}
 
