@@ -1,5 +1,5 @@
-var MAX_TRACK_NAME_SIZE = 10;
-var MAX_TRACK_ARTIST_SIZE = 10;
+var MAX_TRACK_NAME_SIZE = 30;
+var MAX_TRACK_ARTIST_SIZE = 30;
 
 /**
  * @description track을 누르면 해당 track으로 갱신되도록 합니다.
