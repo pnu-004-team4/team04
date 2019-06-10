@@ -157,7 +157,7 @@ function prevMusic(){
     console.log(e);
   }
 
-  var prevSibling = playingNode.prevSibling;
+  var prevSibling = playingNode.previousSibling;
   if(prevSibling !== null || prevSibling !== undefined){
     prevSibling.click();
   }
