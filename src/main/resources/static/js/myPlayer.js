@@ -251,13 +251,6 @@ function uploadFile(files) {
 
 // Deletion
 
-$(document).ready(function(){
-  $(".track__delete").on("click",function(e){
-    e.preventDefault();
-    e.stopPropagation();
-  });
-});
-
 function deleteMusic(dbId){
   console.log("delete Music called");
 

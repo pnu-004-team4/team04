@@ -9,7 +9,7 @@ function trackListClickerUpdate(){
   var trackList = $(".track");
 
   trackList.each(function () {
-    $(this).click(function () {
+    $(this).on("click",function(){
       var trackId = $(this).find(".track__id")[0].innerText;
       var trackName = $(this).find(".track__title")[0].innerText;
       var trackArtist = $(this).find(".track__artist")[0].innerText;
@@ -30,7 +30,13 @@ function trackListClickerUpdate(){
       /*global play*/
       /*eslint no-undef: "error"*/
       play();
+      });
     });
+
+  var deleteDiv = $(".track__delete");
+  deleteDiv.on("click",function(e){
+    e.stopPropagation();
+    e.preventDefault();
   });
 }
 
@@ -46,7 +52,6 @@ $(document).ready(function () {
 
   var trackList = $(".track");
   var firstTrack = trackList.first();
-
 
   var currentTrackSong = $(".current-track__song").first();
   var currentTrackName = currentTrackSong.find(".current-track__title")[0];
@@ -76,6 +81,7 @@ $(document).ready(function () {
   }); // end of for each
 
   trackListClickerUpdate();
+
 }); // end of main
 
 
