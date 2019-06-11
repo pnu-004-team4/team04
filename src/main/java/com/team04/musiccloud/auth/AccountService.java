@@ -1,7 +1,5 @@
 package com.team04.musiccloud.auth;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import com.team04.musiccloud.db.AccountCustomRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +27,15 @@ public class AccountService implements UserDetailsService {
       account = accountRepository.findAccountByEmail(email);
     } catch (NullPointerException e) {
       logger.warning("Null pointer exception detected. invalid email");
-      showMessageDialog(null, "로그인 실패");
       throw new LoginException("Invalid account");
     }
 
+    if(account.getApproval().equals(null))
+      account.setApproval(false);
+
     if(!account.getApproval()){
-      logger.info("Account is not approved. Please check your email");
-      throw new LoginException("Disapproved account");
+      logger.warning("Account is not approved. Please check your email");
+      throw new LoginException("Not approved account");
     }
 
     logger.info(

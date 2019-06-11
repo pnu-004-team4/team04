@@ -48,7 +48,6 @@
             out.println("<script>alert('Connection Error');" +
                     "location.href=\"login\"</script>");
         }
-
         out.println("<script>alert('Registration Complete!');</script>");
     }
     else{

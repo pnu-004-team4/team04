@@ -74,4 +74,10 @@ public class AccountCustomRepository {
   public boolean deleteAccount(String email) {
     return accountDao.delete(email);
   }
+  public boolean approveAccount(String email, boolean approved) {
+    Account found = accountDao.getAccount(email);
+    found.setApproval(approved);
+
+    return accountDao.update(found);
+  }
 }

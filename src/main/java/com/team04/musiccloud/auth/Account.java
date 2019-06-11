@@ -18,7 +18,7 @@ public class Account {
     private Boolean resolution;
     private Boolean approval;
 
-    /*private Integer id;
+    private Integer id;
   
     public Integer getId() {
         return id;
@@ -26,7 +26,7 @@ public class Account {
   
     public void setId(Integer id) {
         this.id = id;
-    }*/
+    }
 
     public String getEmail() {
         return email;
