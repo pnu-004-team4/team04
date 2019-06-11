@@ -43,11 +43,6 @@ public class SampleStreamingController {
     System.out.println("login called");
     return new ModelAndView("Login/login");
   }
-  @RequestMapping("/login?error")
-  public ModelAndView loginError(){
-    System.out.println("loginError called");
-    return new ModelAndView("Login/login");
-  }
 
   @RequestMapping("/register")
   public ModelAndView registration() {

@@ -31,6 +31,8 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
     //mail
     compile("org.springframework.boot:spring-boot-starter-mail")
+    compile("org.springframework:spring-context-support")
+    compile("com.sun.mail:javax.mail")
     //messages
     //compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 }

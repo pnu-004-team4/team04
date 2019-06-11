@@ -1,7 +1,7 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
-<%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
+<%@ page import="com.team04.musiccloud.auth.EmailServiceImplement" %>
 <%@ page import="com.mongodb.MongoTimeoutException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,8 +24,7 @@
 <%
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
-    EmailServiceImpl sendEmail = new EmailServiceImpl();
-
+    EmailServiceImplement service = new EmailServiceImplement();
     String name = request.getParameter("name");
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
@@ -36,6 +35,8 @@
         account.setPassword(password);
         account.encodePassword();
         account.setEmail(email);
+        account.setApproval(false);
+        service.sendAuthMail(account);
 
         //중복 가입 방지
         try{
@@ -49,7 +50,6 @@
         }
 
         out.println("<script>alert('Registration Complete!');</script>");
-        sendEmail.sendSimpleMessage(account.getEmail());
     }
     else{
         out.println("<script>alert('Password does not match. Please check your password again');" +

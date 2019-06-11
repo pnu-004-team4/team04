@@ -9,7 +9,9 @@ public class AccountConverter {
         return new Document("_id", account.getEmail())
                 .append("password", account.getPassword())
                 .append("name", account.getName())
-                .append("resolution", account.getResolution());
+                .append("resolution", account.getResolution())
+                .append("approval", account.getApproval())
+                .append("authkey", account.getAuthKey());
     }
 
     public static Account toAccount(Document document) {
@@ -18,6 +20,8 @@ public class AccountConverter {
         account.setPassword((String) document.get("password"));
         account.setName((String) document.get("name"));
         account.setResolution((Boolean) document.get("resolution"));
+        account.setApproval((Boolean) document.get("approval"));
+        account.setAuthKey((String) document.get("authKey"));
 
         return account;
     }

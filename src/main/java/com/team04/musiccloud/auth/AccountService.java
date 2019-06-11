@@ -21,7 +21,7 @@ public class AccountService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException, InvalidEmailException {
+      throws UsernameNotFoundException, LoginException {
     logger.info("loaduserbyusername() has been called");
     AccountCustomRepository accountRepository = new AccountCustomRepository();
     Account account;
@@ -30,8 +30,14 @@ public class AccountService implements UserDetailsService {
     } catch (NullPointerException e) {
       logger.warning("Null pointer exception detected. invalid email");
       showMessageDialog(null, "로그인 실패");
-      throw new InvalidEmailException("Invalid account");
+      throw new LoginException("Invalid account");
     }
+
+    if(!account.getApproval()){
+      logger.info("Account is not approved. Please check your email");
+      throw new LoginException("Disapproved account");
+    }
+
     logger.info(
         "FindAccountbyEmail() has been called" + " email : " + account.getEmail() + " password : "
             + account.getPassword());
