@@ -623,7 +623,7 @@ html {
 .tracks .track__title {
   width: 60%;
   margin: 0 5px;
-  text-align: center;
+  text-align: left;
   color: white;
 }
 
