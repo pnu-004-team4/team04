@@ -58,7 +58,8 @@ public class AudioHandler {
 
   public Audio requestLoad(Boolean isDoTranscode, String user, String dbId)
       throws IOException, ParameterException, InterruptedException {
-    final MetadataCustomRepository customRepository = new MetadataCustomRepository(this.user);
+      final MetadataCustomRepository customRepository = MetadataCustomRepository
+          .getInstance(this.user);
     AudioMeta audioMeta = customRepository.getAudioMeta(dbId);
     final CacheManager cacheManager = new CacheManager(user);
     FileMeta fileMeta = customRepository.getFileMeta(dbId);
@@ -127,18 +128,18 @@ public class AudioHandler {
   }
 
   private void saveMetaToDb(Audio audio) {
-    new MetadataCustomRepository(user)
+      MetadataCustomRepository.getInstance(user)
         .storeMetadata(audio.getAudioMeta(), audio.getFileMeta());
   }
 
   private void deleteAudioFromStorage(String dbId) throws IOException {
-    final MetadataCustomRepository customRepository = new MetadataCustomRepository(user);
+      final MetadataCustomRepository customRepository = MetadataCustomRepository.getInstance(user);
     final FileMeta audio = customRepository.getFileMeta(dbId);
     Files.deleteIfExists(audio.getFullPath());
   }
 
   private void deleteMetaFromDb(String dbId) {
-    new MetadataCustomRepository(user)
+      MetadataCustomRepository.getInstance(user)
         .deleteMetadata(dbId);
   }
 
