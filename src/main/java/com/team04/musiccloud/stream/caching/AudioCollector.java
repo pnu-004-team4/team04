@@ -85,7 +85,7 @@ public class AudioCollector implements Runnable {
         throw new IOException();
       }
     } else {
-      System.out.println("Deletion target ==> " + file.getPath());
+      logger.info("Deletion target ==> " + file.getPath());
     }
   }
 

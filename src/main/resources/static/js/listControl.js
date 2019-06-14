@@ -1,11 +1,22 @@
 var sortMode = {"target": "", "isAsc": true};
 
+function getTrackByStatus(track, target) {
+  var processedTrack = null;
+  if (target.search("number") === -1) {
+    processedTrack = track.querySelector(target).textContent.toLowerCase();
+  } else {
+    processedTrack = parseInt(track.querySelector(target).textContent.toLowerCase());
+  }
+  return processedTrack;
+}
+
 // sort asc
 function sortAsc(trackArray, target) {
   trackArray.sort(function (track1, track2) {
     var result = 0;
-    var track1Lower = track1.querySelector(target).textContent.toLowerCase();
-    var track2Lower = track2.querySelector(target).textContent.toLowerCase();
+
+    var track1Lower = getTrackByStatus(track1, target);
+    var track2Lower = getTrackByStatus(track2, target);
 
     if (track1Lower < track2Lower) {
       result = -1;
@@ -22,8 +33,9 @@ function sortAsc(trackArray, target) {
 function sortDesc(trackArray, target) {
   trackArray.sort(function (track1, track2) {
     var result = 0;
-    var track1Lower = track1.querySelector(target).textContent.toLowerCase();
-    var track2Lower = track2.querySelector(target).textContent.toLowerCase();
+
+    var track1Lower = getTrackByStatus(track1, target);
+    var track2Lower = getTrackByStatus(track2, target);
 
     if (track1Lower < track2Lower) {
       result = 1;

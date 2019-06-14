@@ -243,6 +243,10 @@ function uploadFile(files) {
             /*eslint no-undef: "error"*/
             trackListClickerUpdate();
           });
+        }],
+        error: [function (request, status, error) {
+          alert("Error Code:"+request.status+"\n"+"Error Message:"+request.responseText+"\n"+"Error:"+error);
+          $('#loading_bar').hide();
         }]
       });
     }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService implements UserDetailsService {
 
-  private Logger logger = Logger.getGlobal();
+  private static final Logger logger = Logger.getGlobal();
 
   @Override
   public UserDetails loadUserByUsername(String email)

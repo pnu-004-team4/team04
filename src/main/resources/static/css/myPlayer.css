@@ -14,6 +14,7 @@ body a:hover {
 
 html {
   height: 100%;
+  background: #282828;
 }
 
 .header {
@@ -154,6 +155,7 @@ html {
 
 .navigation {
   padding: 15px;
+  height:100%;
   background: #282828;
   color: #aaaaaa;
   overflow-y: hidden;
@@ -516,7 +518,9 @@ html {
   width: 100%;
   display: flex;
   flex-flow: column wrap;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  background: #070707;
 }
 
 .tracks__heading {
@@ -526,10 +530,17 @@ html {
   /*flex-flow: row wrap;*/
   align-items: center;
 }
+
 .tracks__heading :hover{
-  color: darkred;
+  color: yellow;
   text-decoration: underline;
 }
+
+.tracks__heading :active{
+  color: purple;
+  text-decoration: underline;
+}
+
 .tracks__heading__number {
   min-width: 20px;
   margin: 0 5px;
@@ -580,6 +591,10 @@ html {
 
 .tracks .track:hover {
   background: #282828;
+}
+
+.tracks .track:active {
+  background: #606060;
 }
 
 .tracks .track:last-child {
@@ -783,6 +798,22 @@ button:hover {
   letter-spacing: 1.25px;
   font-size: 13.2px;
   margin-bottom: 10px;
+}
+
+i.ion-ios-play:hover {
+  color:yellow;
+}
+
+i.ion-ios-play:active {
+  color:purple;
+}
+
+i.ion-android-delete:hover {
+  color:yellow;
+}
+
+i.ion-android-delete:active {
+  color:purple;
 }
 
 #username {

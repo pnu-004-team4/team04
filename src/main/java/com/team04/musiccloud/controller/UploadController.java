@@ -5,6 +5,7 @@ import com.team04.musiccloud.audio.extractor.ExtractorException;
 import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
 import com.team04.musiccloud.auth.Account;
 import com.team04.musiccloud.utilities.AccountRepositoryUtil;
+import java.util.logging.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,14 @@ import java.io.IOException;
 
 @RestController
 public class UploadController {
+    private final static Logger logger = Logger.getGlobal();
 
     @PostMapping("/upload/{useremail:.+}")
     @ResponseBody
     public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile uploadFile, @PathVariable String useremail) throws ExtractorException, InvalidFileFormat {
 
-        System.out.println(useremail + "is successfully called!");
+        logger.info(useremail + "is successfully called!");
         if (uploadFile.isEmpty()) {
             return new ResponseEntity("Please select a File!", HttpStatus.OK);
         }
