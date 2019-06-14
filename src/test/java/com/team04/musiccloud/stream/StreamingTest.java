@@ -9,6 +9,7 @@ import com.team04.musiccloud.utilities.StaticPaths;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class StreamingTest {
   private static Path storageDirectory = StaticPaths.storage;
   private Streaming stream;
   private Audio testAudio;
+  private final static Logger logger = Logger.getGlobal();
 
   @Before
   public void setUp() throws Exception {
@@ -33,8 +35,8 @@ public class StreamingTest {
         "sample.mp3", null, new FileInputStream(currentLocation.toFile()));
     extractor.setBaseDirectory(storageDirectory);
     testAudio = extractor.getAudio(myFile, user);
-    System.out.println(testAudio.getFileMeta().getDirectory());
-    System.out.println(testAudio.getFileMeta().getFullPath());
+    logger.info(testAudio.getFileMeta().getDirectory());
+    logger.info(testAudio.getFileMeta().getFullPath().toString());
     assertEquals(currentLocation.toString(), testAudio.getFileMeta().getFullPath().toString());
   }
 

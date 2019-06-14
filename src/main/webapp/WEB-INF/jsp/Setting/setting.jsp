@@ -47,8 +47,6 @@
 
     name = SavedAccount.getName();
 
-    System.out.println("name : " + name);
-
 %>
 
 

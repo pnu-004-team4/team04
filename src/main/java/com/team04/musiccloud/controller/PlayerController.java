@@ -45,13 +45,12 @@ public class PlayerController {
     accountRepositoryUtil = AccountRepositoryUtil.getInstance();
   }
 
-  // @TODO: Singleton으로 변경하도록 할 것
-  private MetadataCustomRepository getMetadataCustomRepository(String userName) {
-    return new MetadataCustomRepository(userName);
+  private MetadataCustomRepository getMetadataCustomRepository(String email) {
+    return MetadataCustomRepository.getInstance(email);
   }
 
-  private List<AudioMeta> getAudioMetaList(String userName) {
-    return getMetadataCustomRepository(userName).getPlaylist();
+  private List<AudioMeta> getAudioMetaList(String email) {
+    return getMetadataCustomRepository(email).getPlaylist();
   }
 
   /**
@@ -83,22 +82,21 @@ public class PlayerController {
     }
 
     Account account = accountRepositoryUtil.getCurrentAccount();
-    String userName = account.getEmail();
+    String email = account.getEmail();
 
-    List<AudioMeta> audioMetaArrayList = getAudioMetaList(userName);
+    List<AudioMeta> audioMetaArrayList = getAudioMetaList(email);
 
-    AudioHandler audioHandler = new AudioHandler(userName);
+    AudioHandler audioHandler = new AudioHandler(email);
 
     String firstFileId = "";
     try {
-      firstFileId = audioMetaArrayList.get(0).getDbId();
     } catch (IndexOutOfBoundsException e) {
       logger.info(e.toString());
     }
 
-    String trackList = trackTagGenerator(false, userName, audioMetaArrayList);
+    String trackList = trackTagGenerator(false, email, audioMetaArrayList);
 
-    String sampleMusic = "https://www.bensound.org/bensound-music/bensound-summer.mp3";
+    String sampleMusic = "그런 것 없다";
     if (firstFileId.isEmpty()) {
       base.addObject("streaming", audioTagGenerator(sampleMusic, "mp3"));
       jspDefaultContentsGenerator(account, trackList);
@@ -109,7 +107,7 @@ public class PlayerController {
 
     Audio firstAudio = null;
     try {
-      firstAudio = audioHandler.requestLoad(isDoTranscode, userName, firstFileId);
+      firstAudio = audioHandler.requestLoad(isDoTranscode, email, firstFileId);
     } catch (Exception e) {
       logger.warning(e.toString());
     }
@@ -148,17 +146,15 @@ public class PlayerController {
    *
    * @return HTML track list codes
    */
-  private String trackTagGenerator(boolean isFavorite, String userName, List<AudioMeta> metaArray) {
+  private String trackTagGenerator(boolean isFavorite, String email, List<AudioMeta> metaArray) {
     StringBuilder trackTagContents = new StringBuilder();
     int counter = 1;
     if (metaArray.isEmpty()) {
       return "";
     }
-    // @TODO 나중에 Strategy pattern을 통해서 함수를 개선하도록 할 것
-    MetadataCustomRepository metadataCustomRepository = getMetadataCustomRepository(userName);
+    MetadataCustomRepository metadataCustomRepository = getMetadataCustomRepository(email);
     int average = metadataCustomRepository.getAveragePlayCount();
     for (AudioMeta meta : metaArray) {
-      logger.info(meta.getDbId() + " count: " + meta.getPlayCount() + " avg: " + average);
       if (isFavorite && (meta.getPlayCount() < average)) {
         continue;
       }
@@ -192,7 +188,7 @@ public class PlayerController {
           .append(formatTime(meta.getDurationMs()))
           .append("</div>")
           .append("<div class=\"track__owner\" hidden>")
-          .append(userName)
+          .append(email)
           .append("</div>")
           .append("<div class=\"track__id\" value ='")
           .append(meta.getDbId())
@@ -223,14 +219,14 @@ public class PlayerController {
     logger.info("Currently clicked value => " + item);
 
     Account account = accountRepositoryUtil.getCurrentAccount();
-    String userName = account.getEmail();
+    String email = account.getEmail();
 
     String trackList = "";
 
     if ("All Songs".equalsIgnoreCase(item)) {
-      trackList = trackTagGenerator(false, userName, getAudioMetaList(userName));
+      trackList = trackTagGenerator(false, email, getAudioMetaList(email));
     } else if ("Favorite Songs".equalsIgnoreCase(item)) {
-      trackList = trackTagGenerator(true, userName, getAudioMetaList(userName));
+      trackList = trackTagGenerator(true, email, getAudioMetaList(email));
     }
 
     base.addObject("getLibrary", trackList);

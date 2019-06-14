@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SenderController {
 
-  private Logger logger = Logger.getGlobal();
+  private static final Logger logger = Logger.getGlobal();
 
   @RequestMapping(value = "/download", method = RequestMethod.GET,
       produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE})
@@ -47,8 +47,7 @@ public class SenderController {
       logger.warning("Unexpected request detected ==> " + e.toString());
       return null;
     }
-    System.out.println("[USER CHECK]");
-    System.out.println(audio.getFileMeta().getUser() + "\t" + userName);
+    logger.info("User check" + audio.getFileMeta().getUser() + "\t" + userName);
 
     HttpHeaders header = new HttpHeaders();
     String mimeType = MusicFileUtilities.getMimeType(audio.getFileMeta().getExtension());

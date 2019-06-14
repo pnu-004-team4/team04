@@ -92,7 +92,7 @@ public class AudioHandler {
     audio.setBytes(getAudioFromStorage(audio));
 
     audioMeta.setPlayCount(audioMeta.getPlayCount() + 1);
-    System.out.println(audioMeta.getPlayCount());
+    logger.info(Integer.toString(audioMeta.getPlayCount()));
     customRepository.updateMetadata(audioMeta, audio.getFileMeta());
 
     return audio;
