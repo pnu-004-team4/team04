@@ -55,7 +55,7 @@ const passwordLength = () => {
         document.querySelector("#percent").innerHTML = passStrength;
     }
     strength = passStrength;
-    document.querySelector('#percent').innerHTML += "%";
+    document.querySelector("#percent").innerHTML += "%";
 
 
     let percentage = document.querySelector("#percent").innerHTML;
