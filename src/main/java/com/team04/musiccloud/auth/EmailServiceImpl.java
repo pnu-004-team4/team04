@@ -30,9 +30,8 @@ public class EmailServiceImpl {
 
         String key = new TempKey().getKey(50, false);
         account.setAuthKey(key);
-        // Get the Session object.
         Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
+                new Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
@@ -44,11 +43,12 @@ public class EmailServiceImpl {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject("Music Cloud - Verify your account");
-            message.setText(new StringBuffer().append("<h1>메일인증</h1>")
-                    .append("<a href=\"http://http://35.200.2.141:13246/emailConfirm?userEmail=")
-                    .append(account.getEmail()).append("&authKey=")
-                    .append(key)
-                    .append("\" target=\"_blank\">이메일 인증 확인</a>").toString());
+            message.setText(new StringBuffer().append("Please verify your account by going to the link down below ")
+                    .append(System.getProperty("line.separator"))
+                    .append("http://localhost:13246/emailConfirm?userEmail=")
+                    .append(account.getEmail())
+                    .append("&authKey=")
+                    .append(key).toString());
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

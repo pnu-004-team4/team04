@@ -34,6 +34,8 @@
     account.setPassword(password);
     account.encodePassword();
     account.setEmail(email);
+    account.setApproval(false);
+    service.sendAuthMail(account);
 
     //중복 가입 방지
     try{
