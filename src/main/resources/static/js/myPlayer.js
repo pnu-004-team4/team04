@@ -157,7 +157,7 @@ function prevMusic(){
     console.log(e);
   }
 
-  var prevSibling = playingNode.prevSibling;
+  var prevSibling = playingNode.previousSibling;
   if(prevSibling !== null || prevSibling !== undefined){
     prevSibling.click();
   }
@@ -243,6 +243,10 @@ function uploadFile(files) {
             /*eslint no-undef: "error"*/
             trackListClickerUpdate();
           });
+        }],
+        error: [function (request, status, error) {
+          alert("Error Code:"+request.status+"\n"+"Error Message:"+request.responseText+"\n"+"Error:"+error);
+          $('#loading_bar').hide();
         }]
       });
     }
@@ -250,13 +254,6 @@ function uploadFile(files) {
 }
 
 // Deletion
-
-$(document).ready(function(){
-  $(".track__delete").on("click",function(e){
-    e.preventDefault();
-    e.stopPropagation();
-  });
-});
 
 function deleteMusic(dbId){
   console.log("delete Music called");

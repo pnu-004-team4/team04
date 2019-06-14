@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SettingController {
 
-  private Logger logger = Logger.getGlobal();
+  private static final Logger logger = Logger.getGlobal();
 
 
   @RequestMapping(value = "/setcheck", method = RequestMethod.POST)

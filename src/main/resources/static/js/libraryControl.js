@@ -1,5 +1,5 @@
-var MAX_TRACK_NAME_SIZE = 10;
-var MAX_TRACK_ARTIST_SIZE = 10;
+var MAX_TRACK_NAME_SIZE = 30;
+var MAX_TRACK_ARTIST_SIZE = 30;
 
 /**
  * @description track을 누르면 해당 track으로 갱신되도록 합니다.
@@ -9,14 +9,15 @@ function trackListClickerUpdate(){
   var trackList = $(".track");
 
   trackList.each(function () {
-    $(this).click(function () {
+    $(this).on("click",function(){
       var trackId = $(this).find(".track__id")[0].innerText;
       var trackName = $(this).find(".track__title")[0].innerText;
       var trackArtist = $(this).find(".track__artist")[0].innerText;
 
       var currentTrackSong = $(".current-track__song").first();
-      var currentTrackName = currentTrackSong.find(".current-track__name")[0];
-      var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
+      var currentTrackName = currentTrackSong.find(".current-track__title")[0];
+      var currentTrackArtist = currentTrackSong.find(
+          ".current-track__author")[0];
 
       var musicPath = "download?id=" + trackId;
 
@@ -29,7 +30,13 @@ function trackListClickerUpdate(){
       /*global play*/
       /*eslint no-undef: "error"*/
       play();
+      });
     });
+
+  var deleteDiv = $(".track__delete");
+  deleteDiv.on("click",function(e){
+    e.stopPropagation();
+    e.preventDefault();
   });
 }
 
@@ -46,10 +53,9 @@ $(document).ready(function () {
   var trackList = $(".track");
   var firstTrack = trackList.first();
 
-
   var currentTrackSong = $(".current-track__song").first();
-  var currentTrackName = currentTrackSong.find(".current-track__name")[0];
-  var currentTrackArtist = currentTrackSong.find(".current-track__name")[1];
+  var currentTrackName = currentTrackSong.find(".current-track__title")[0];
+  var currentTrackArtist = currentTrackSong.find(".current-track__author")[0];
 
   var hasFirstTrackTitle = (firstTrack.find(".track__title")).firstChild;
   var hasFirstTrackArtist = firstTrack.find(".track__artist").firstChild;
@@ -75,6 +81,7 @@ $(document).ready(function () {
   }); // end of for each
 
   trackListClickerUpdate();
+
 }); // end of main
 
 

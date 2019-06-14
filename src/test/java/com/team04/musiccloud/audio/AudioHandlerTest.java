@@ -79,7 +79,7 @@ public class AudioHandlerTest {
   }
 
   public String getFirstDbId() {
-    return new MetadataCustomRepository(USER_NAME)
+    return MetadataCustomRepository.getInstance(USER_NAME)
         .getPlaylist().get(0)
         .getDbId();
   }

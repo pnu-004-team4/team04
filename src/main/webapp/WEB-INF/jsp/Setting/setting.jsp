@@ -42,7 +42,8 @@
     }
     SavedAccount = repository.findAccountByEmail(email);
     name = SavedAccount.getName();
-    System.out.println("name : " + name);
+
+    
 %>
 
 
