@@ -20,11 +20,15 @@ public class AccountConverterTest {
         account.setPassword("test");
         account.setName("test");
         account.setResolution(false);
+        account.setApproval(false);
+        account.setAuthKey("test");
 
         this.document = new Document("_id", "test@test.com")
         .append("password", "test")
         .append("name", "test")
-        .append("resolution", "false");
+        .append("resolution", "false")
+        .append("approval", "false")
+        .append("authKey", "test");
     }
 
     @Test

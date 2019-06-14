@@ -23,6 +23,8 @@ public class AccountCustomRepositoryTest {
         account.setPassword("test");
         account.setName("test");
         account.setResolution(false);
+        account.setApproval(false);
+        account.setAuthKey("test");
     }
 
     @Test
