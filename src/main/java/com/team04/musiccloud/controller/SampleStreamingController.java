@@ -40,7 +40,6 @@ public class SampleStreamingController {
 
   @RequestMapping("/login")
   public ModelAndView login() {
-    System.out.println("login called");
     return new ModelAndView("Login/login");
   }
 

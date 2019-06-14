@@ -9,7 +9,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class EmailServiceImplement {
+public class EmailServiceImpl {
 
     @Autowired
     public JavaMailSenderImpl javaMailSender;
@@ -44,10 +44,12 @@ public class EmailServiceImplement {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject("Music Cloud - Verify your account");
-            message.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href=\"http://localhost:13246/emailConfirm?userEmail=")
-                    .append(account.getEmail()).append("&authKey=").append(key).append("\" target=\"_blank\">이메일 인증 확인</a>").toString());
+            message.setText(new StringBuffer().append("<h1>메일인증</h1>")
+                    .append("<a href=\"http://http://35.200.2.141:13246/emailConfirm?userEmail=")
+                    .append(account.getEmail()).append("&authKey=")
+                    .append(key)
+                    .append("\" target=\"_blank\">이메일 인증 확인</a>").toString());
             Transport.send(message);
-            System.out.println("Sent message successfully....");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

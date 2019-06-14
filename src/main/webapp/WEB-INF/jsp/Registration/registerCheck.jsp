@@ -1,7 +1,7 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
-<%@ page import="com.team04.musiccloud.auth.EmailServiceImplement" %>
+<%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
 <%@ page import="com.mongodb.MongoTimeoutException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,7 +24,7 @@
 <%
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
-    EmailServiceImplement service = new EmailServiceImplement();
+    EmailServiceImpl service = new EmailServiceImpl();
     String name = request.getParameter("name");
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
