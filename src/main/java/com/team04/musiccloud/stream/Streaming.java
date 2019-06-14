@@ -55,7 +55,7 @@ public class Streaming implements IBackStreaming, IFrontStreaming {
       // Transcode를 진행하는 부분에 해당합니다.
       Transcode transcode = new Transcode(audio);
       transcode.setWeight(userDelayAverage);
-      audio = transcode.getAudio();
+      transcode.start();
     }
     return formedServerStyle(audio);
   }
