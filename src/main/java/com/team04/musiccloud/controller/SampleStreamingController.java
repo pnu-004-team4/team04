@@ -42,12 +42,6 @@ public class SampleStreamingController {
 
   @RequestMapping("/login")
   public ModelAndView login() {
-    logger.info("login called");
-    return new ModelAndView("Login/login");
-  }
-  @RequestMapping("/login?error")
-  public ModelAndView loginError(){
-    logger.info("loginError called");
     return new ModelAndView("Login/login");
   }
 

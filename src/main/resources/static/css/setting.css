@@ -113,7 +113,7 @@ section span  {
 .user input{
     border: none;
     font-size: 20px;
-    height: 40px;
+    height: 25px;
     width: 100%;
     margin-top: 7px;
     padding-left: 8px;
@@ -410,3 +410,53 @@ button {
 
 }
 
+
+#myElement {
+    padding:4px;
+    margin:2px;
+    border:solid 1px #999;
+}
+
+/*#myElement2 {*/
+/*    background-color: azure;*/
+/*}*/
+
+/*div {*/
+/*  margin-left:20px;*/
+/*  margin-top:6px;*/
+/*}*/
+.left {
+    float:left;
+}
+.clear {
+    clear:both;
+}
+
+
+
+div{
+    margin-top: 10px;
+}
+div.progress{
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    width: 240px;
+    height: 10px;
+    display: inline-block;
+    text-align: left;
+    padding: 2px;
+    display: none;
+}
+div div.progressBar{
+    width: 50px;
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    transition-timing-function: ease-out;
+    transition: 3s;
+}
+span#percent{
+    width: 0;
+    height: 0;
+    color: transparent;
+}

@@ -76,16 +76,19 @@ public class AccountCustomRepository {
         return accountDao.getAccount(email);
     }
 
-    public Account getCurrentAccount() {
-        return findAccountByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-    }
+  /*
+  전달 받은 email을 사용하는 사용자 정보를 삭제하는 함수.
+  Account.java에선 email이 @Id로 인해 primary key와 같은 역할을 함.
+  같은 email을 가진 사용자 정보를 찾아 삭제하면 true를, 없으면 false을 반환.
+   */
+  public boolean deleteAccount(String email) {
+    return accountDao.delete(email);
+  }
 
-    /*
-    전달 받은 email을 사용하는 사용자 정보를 삭제하는 함수.
-    Account.java에선 email이 @Id로 인해 primary key와 같은 역할을 함.
-    같은 email을 가진 사용자 정보를 찾아 삭제하면 true를, 없으면 false을 반환.
-     */
-    public boolean deleteAccount(String email) {
-        return accountDao.delete(email);
-    }
+  public boolean approveAccount(String email, boolean approved) {
+    Account found = accountDao.getAccount(email);
+    found.setApproval(approved);
+
+    return accountDao.update(found);
+  }
 }

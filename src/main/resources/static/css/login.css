@@ -31,6 +31,7 @@ body {
   overflow: hidden;
 }
 
+
 @media (max-width: 1400px) {
   .form {
     width: 80%;
@@ -52,15 +53,15 @@ body {
   height: 60px;
   border-radius: 100%;
   -webkit-transform-origin: center;
-      -ms-transform-origin: center;
-          transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
   -webkit-transform: translate(0, -25%) scale(0);
-      -ms-transform: translate(0, -25%) scale(0);
-          transform: translate(0, -25%) scale(0);
+  -ms-transform: translate(0, -25%) scale(0);
+  transform: translate(0, -25%) scale(0);
   opacity: 0;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .form-toggle:before, .form-toggle:after {
   content: '';
@@ -72,23 +73,23 @@ body {
   height: 4px;
   background: #4285F4;
   -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .form-toggle:before {
   -webkit-transform: translate(-50%, -50%) rotate(45deg);
-      -ms-transform: translate(-50%, -50%) rotate(45deg);
-          transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 .form-toggle:after {
   -webkit-transform: translate(-50%, -50%) rotate(-45deg);
-      -ms-transform: translate(-50%, -50%) rotate(-45deg);
-          transform: translate(-50%, -50%) rotate(-45deg);
+  -ms-transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 .form-toggle.visible {
   -webkit-transform: translate(0, -25%) scale(1);
-      -ms-transform: translate(0, -25%) scale(1);
-          transform: translate(0, -25%) scale(1);
+  -ms-transform: translate(0, -25%) scale(1);
+  transform: translate(0, -25%) scale(1);
   opacity: 1;
 }
 .form-group {
@@ -97,12 +98,12 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin: 0 0 20px;
 }
 .form-group:last-child {
@@ -136,7 +137,7 @@ body {
   font-weight: 500;
   line-height: inherit;
   -webkit-transition: 0.3s ease;
-          transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 .form-group input:focus {
   color: rgba(0, 0, 0, 0.8);
@@ -203,7 +204,7 @@ body {
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.3s ease;
-          transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 .form-panel.one.hidden:before {
   display: block;
@@ -234,12 +235,12 @@ body {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 600px;
   margin: 20px auto 100px;
 }
@@ -261,6 +262,59 @@ body {
   color: #4285F4 !important;
 }
 
+
+
+#myElement {
+  padding:4px;
+  margin:2px;
+  border:solid 1px #999;
+}
+
+/*#myElement2 {*/
+/*    background-color: azure;*/
+/*}*/
+
+/*div {*/
+/*  margin-left:20px;*/
+/*  margin-top:6px;*/
+/*}*/
+.left {
+  float:left;
+}
+.clear {
+  clear:both;
+}
+
+
+
+div{
+  margin-top: 10px;
+}
+div.progress{
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  width: 240px;
+  height: 5px;
+  display: inline-block;
+  text-align: left;
+  padding: 2px;
+  display: none;
+}
+div div.progressBar{
+  width: 50px;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition-timing-function: ease-out;
+  transition: 3s;
+}
+span#percent{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
 #errorMsg {
   color: red;
 }
+

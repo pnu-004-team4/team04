@@ -14,8 +14,10 @@ public class Account {
     private String email;
     private String password;
     private String name;
+    private String authKey;
     private Boolean resolution;
-    private Boolean apporoval;
+    private Boolean approval;
+
     private Integer id;
   
     public Integer getId() {
@@ -54,9 +56,9 @@ public class Account {
         this.name = name;
     }
 
-    public Boolean getApporoval() { return apporoval; }
+    public Boolean getApproval() { return approval; }
 
-    public void setApporoval(Boolean apporoval) { this.apporoval = apporoval; }
+    public void setApproval(Boolean apporoval) { this.approval = apporoval; }
 
     public Boolean getResolution() {
       if (resolution == null) {
@@ -69,4 +71,11 @@ public class Account {
       this.resolution = resolution;
     }
 
+    public String getAuthKey() {
+        return authKey;
+    }
+
+    public void setAuthKey(String authKey) {
+        this.authKey = authKey;
+    }
 }
