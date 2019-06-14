@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.function.Sigmoid;
 
-public class Transcode {
+public class Transcode extends Thread {
 
+  private final static Logger logger = Logger.getGlobal();
   private Audio audio;
   private double weight;
   private UnivariateFunction calculator;
-  private final static Logger logger = Logger.getGlobal();
 
   public Transcode(Audio audio) {
     this.audio = audio;
@@ -33,15 +33,15 @@ public class Transcode {
    */
   private double preProcessWeight(double weight) {
     //@TODO: weight에 대한 전처리를 해주도록 합니다. 이 부분은 담당자와 협의가 요구됩니다.
-    return calculator.value(weight/10000);
-  }
-
-  public void setWeight(double weight) {
-    this.weight = preProcessWeight(weight);
+    return calculator.value(weight / 10000);
   }
 
   protected double getWeight() {
     return weight;
+  }
+
+  public void setWeight(double weight) {
+    this.weight = preProcessWeight(weight);
   }
 
   protected DefaultAttributes getAudioSetting(double weight) {
@@ -70,11 +70,9 @@ public class Transcode {
   }
 
   /**
-   * 여기서 audio는 수정이 되지 않음에도 반환을 하도록 합니다.
-   * 그 이유는 향후에 혹시 모를 확장성을 위해서 가지고 있는 것입니다.
+   * 여기서 audio는 수정이 되지 않음에도 반환을 하도록 합니다. 그 이유는 향후에 혹시 모를 확장성을 위해서 가지고 있는 것입니다.
    *
    * @return Audio
-   * @throws IOException
    */
   public Audio getAudio() throws IOException {
     if (weight < 25) // weight가 25 이하인 경우 transcode가 불필요하다고 판단.
@@ -96,5 +94,14 @@ public class Transcode {
     }
     overwriteSourceToTarget(sourceLocation, targetLocation);
     return audio;
+  }
+
+  @Override
+  public void run() {
+    try {
+      getAudio();
+    } catch (IOException e) {
+      logger.warning(e.toString());
+    }
   }
 }
