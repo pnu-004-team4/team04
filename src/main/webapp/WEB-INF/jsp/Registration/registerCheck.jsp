@@ -30,31 +30,20 @@
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
 
-    if(password.equals(cpassword)) {
-        account.setName(name);
-        account.setPassword(password);
-        account.encodePassword();
-        account.setEmail(email);
-        account.setApproval(false);
-        service.sendAuthMail(account);
+    account.setName(name);
+    account.setPassword(password);
+    account.encodePassword();
+    account.setEmail(email);
 
-        //중복 가입 방지
-        try{
-            accountRepository.registerAccount(account);
-        }catch(MongoWriteException e){
-            out.println("<script>alert('This email is already registered');" +
-                    "location.href=\"login\"</script>");
-        }catch(MongoTimeoutException e){
-            out.println("<script>alert('Connection Error');" +
-                    "location.href=\"login\"</script>");
-        }
-        out.println("<script>alert('Registration Complete!');</script>");
-    }
-    else{
-        out.println("<script>alert('Password does not match. Please check your password again');" +
-                "location.href=\"register\"</script>");
+    //중복 가입 방지
+    try{
+        accountRepository.registerAccount(account);
+    }catch(MongoWriteException e){
+        out.println("<script>alert('This email is already registered');" +
+                "location.href=\"login\"</script>");
     }
 
+    out.println("<script>alert('Registration Complete!');</script>");
 %>
 
 <body>

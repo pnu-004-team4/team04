@@ -1,5 +1,6 @@
 package com.team04.musiccloud.controller;
 
+import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class SampleStreamingController {
+  private final static Logger logger = Logger.getGlobal();
 
   @RequestMapping("/login")
   public ModelAndView login() {
@@ -50,7 +52,7 @@ public class SampleStreamingController {
 
   @RequestMapping("/setting")
   public ModelAndView setting() {
-    System.out.println("User setting");
+    logger.info("User setting");
     return new ModelAndView("Setting/setting");
   }
 

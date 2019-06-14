@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,11 +27,12 @@ public class TranscodeTest {
   private static Path cacheDirectory = StaticPaths.tempStorage;
   private static Path storageDirectory = StaticPaths.storage;
   private Transcode transcode;
+  private static final Logger logger = Logger.getGlobal();
 
   @Before
   public void setUp() throws Exception {
     final String user = "admin@admin.com";
-    System.out.println(cacheDirectory.resolve(user).toString());
+    logger.info(cacheDirectory.resolve(user).toString());
     File directory = new File(cacheDirectory.resolve(user).toString());
 
     if (!directory.exists()) {
