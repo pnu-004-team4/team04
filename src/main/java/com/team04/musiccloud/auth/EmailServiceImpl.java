@@ -45,7 +45,7 @@ public class EmailServiceImpl {
             message.setSubject("Music Cloud - Verify your account");
             message.setText(new StringBuffer().append("Please verify your account by going to the link down below ")
                     .append(System.getProperty("line.separator"))
-                    .append("http://localhost:13246/emailConfirm?userEmail=")
+                    .append("http://35.200.2.141:13246/emailConfirm?userEmail=")
                     .append(account.getEmail())
                     .append("&authKey=")
                     .append(key).toString());
