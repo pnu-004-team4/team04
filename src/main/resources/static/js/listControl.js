@@ -5,7 +5,7 @@ function getTrackByStatus(track, target) {
   if (target.search("number") === -1) {
     processedTrack = track.querySelector(target).textContent.toLowerCase();
   } else {
-    processedTrack = parseInt(track.querySelector(target).textContent.toLowerCase());
+    processedTrack = parseInt(track.querySelector(target).textContent.toLowerCase(), 10);
   }
   return processedTrack;
 }
