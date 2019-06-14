@@ -32,26 +32,20 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
-
     Account acc;
     Account EncodeAcc = new Account();
     AccountCustomRepository repository = new AccountCustomRepository();
-
     //입력값
     String Password = request.getParameter("password");
     String Email = request.getParameter("email");
     String Name = request.getParameter("name");
-
     String CurPass, CurName;
     String CheckEmail, CheckName;
     boolean isTranscode = false;
-
     //기존의 내용 불러오기.
     acc = repository.findAccountByEmail(Email);
-
     CurPass = acc.getPassword();
     CurName = acc.getName();
-
     //빈칸인지 아닌지 확인한 후 빈칸이 아니면 업데이트.
     if (!Name.equals("")) {
         CurName = Name;
@@ -62,11 +56,9 @@
     if (request.getParameter("radio-btn").equals("yes")) {
         isTranscode = true;
     }
-
     EncodeAcc.setPassword(CurPass);
     EncodeAcc.encodePassword();
     CurPass = EncodeAcc.getPassword();
-
     CheckName = CurName;
     CheckEmail = Email;
 %>
@@ -95,6 +87,9 @@
                 <h2>Email</h2>
                 <p><%= CheckEmail %>
                 </p>
+                <h2>Resolution Use</h2>
+                <p><%= isTranscode %>
+                </p>
                 <p></p>
             </section>
             <section class="music">
@@ -113,5 +108,3 @@
 
 </body>
 </html>
-
-
