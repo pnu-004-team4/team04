@@ -24,18 +24,18 @@
 <%
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
-    EmailServiceImpl sendEmail = new EmailServiceImpl();
-
+    EmailServiceImpl service = new EmailServiceImpl();
     String name = request.getParameter("name");
     String password = request.getParameter("password");
     String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
 
-
     account.setName(name);
     account.setPassword(password);
     account.encodePassword();
     account.setEmail(email);
+    account.setApproval(false);
+    service.sendAuthMail(account);
 
     //중복 가입 방지
     try{

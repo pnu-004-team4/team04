@@ -1,7 +1,5 @@
 package com.team04.musiccloud.auth;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import com.team04.musiccloud.db.AccountCustomRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ public class AccountService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException, InvalidEmailException {
+      throws UsernameNotFoundException, LoginException {
     logger.info("loaduserbyusername() has been called");
     AccountCustomRepository accountRepository = new AccountCustomRepository();
     Account account;
@@ -29,9 +27,17 @@ public class AccountService implements UserDetailsService {
       account = accountRepository.findAccountByEmail(email);
     } catch (NullPointerException e) {
       logger.warning("Null pointer exception detected. invalid email");
-      showMessageDialog(null, "로그인 실패");
-      throw new InvalidEmailException("Invalid account");
+      throw new LoginException("Invalid account");
     }
+
+    if(account.getApproval().equals(null))
+      account.setApproval(false);
+
+    if(!account.getApproval()){
+      logger.warning("Account is not approved. Please check your email");
+      throw new LoginException("Not approved account");
+    }
+
     logger.info(
         "FindAccountbyEmail() has been called" + " email : " + account.getEmail() + " password : "
             + account.getPassword());
