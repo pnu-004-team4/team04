@@ -1,6 +1,8 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
+<%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
+<%@ page import="com.mongodb.MongoTimeoutException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -22,6 +24,7 @@
 <%
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
+    EmailServiceImpl sendEmail = new EmailServiceImpl();
 
     String name = request.getParameter("name");
     String password = request.getParameter("password");
@@ -30,12 +33,9 @@
 
     if(password.equals(cpassword)) {
         account.setName(name);
-        System.out.println("password input : " + password);
         account.setPassword(password);
         account.encodePassword();
-        System.out.println("password encoded : " + account.getPassword());
         account.setEmail(email);
-        System.out.println("email input : " + account.getEmail());
 
         //중복 가입 방지
         try{
@@ -43,17 +43,17 @@
         }catch(MongoWriteException e){
             out.println("<script>alert('This email is already registered');" +
                     "location.href=\"login\"</script>");
+        }catch(MongoTimeoutException e){
+            out.println("<script>alert('Connection Error');" +
+                    "location.href=\"login\"</script>");
         }
 
         out.println("<script>alert('Registration Complete!');</script>");
-        System.out.println("email : " + account.getEmail() + ", password : " + account.getPassword());
-
+        sendEmail.sendSimpleMessage(account.getEmail());
     }
     else{
         out.println("<script>alert('Password does not match. Please check your password again');" +
                 "location.href=\"register\"</script>");
-        System.out.println("password not identical");
-        System.out.println("password : " + password + ", confirm password : " + cpassword);
     }
 
 %>
