@@ -20,7 +20,7 @@ before_install:
 after_success:
   - export CODACY_PROJECT_TOKEN="cee8d134eaed4564adfc5b0cfa0fdc65"
   - ./gradlew jacocoTestReport
-  - java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+  - ./codacy-coverage-reporter report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
   
 # clean 후 Build (Build시 자동으로 test 수행)
 script: "./gradlew clean build test"
