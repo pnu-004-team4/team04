@@ -45,7 +45,7 @@
                 "location.href=\"login\"</script>");
     }
 
-    out.println("<script>alert('Registration Complete!');</script>");
+    out.println("<script>alert('Registration Complete! Please check your email to verify your account.');</script>");
 %>
 
 <body>
@@ -57,11 +57,9 @@
             <h1>Registration Complete!</h1>
         </div>
         <div class="form-content">
-            <form:form action="login" method="post">
-                <div class="form-group">
-                    <button type="submit">Go back to Login page</button>
-                </div>
-            </form:form>
+            <<div class="form-group">
+            <button type="button" onclick="location.href='http://35.200.2.141:13246/login'">Go back to Login page</button>
+        </div>
         </div>
     </div>
 </div>
