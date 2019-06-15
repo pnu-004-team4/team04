@@ -47,10 +47,28 @@ $(document).ready(function () {
 
   volumeSlider.noUiSlider.on("update", function (values, handle) {
     var myAudio = document.getElementById("bgAudio");
-    var audioValue = values[handle];
+    var audioValue = values[parseInt(handle,10)];
     myAudio.volume = audioValue / 100;
   });
 });
+
+// Request Next, Prev
+function getPlayingNode() {
+  var myAudio = document.getElementById("nowPlaying");
+  var currentAudioSrc = myAudio.getAttribute("src");
+
+  var middle = currentAudioSrc.lastIndexOf("=");
+  var dbID = currentAudioSrc.substring(middle + 1, currentAudioSrc.length);
+
+  var children = $(".track").find(".track__id[value=" + dbID + "]")[0];
+
+  if (typeof children !== "undefined" && typeof children.parentNode
+      !== "undefined") {
+    return children.parentNode;
+  } else {
+    throw "NoMatchingSong";
+  }
+}
 
 function nextMusic() {
   var playingNode;
@@ -62,10 +80,21 @@ function nextMusic() {
   }
 
   var nextSibling = playingNode.nextSibling;
-  if (nextSibling !== null || nextSibling !== undefined) {
+  if (nextSibling !== null || typeof nextSibling !== "undefined") {
     nextSibling.click();
   } else {
     throw "There is No Next Song";
+  }
+}
+
+function secondToText(duration) {
+  if (isNaN(duration)) {
+    return "Loading...";
+  } else {
+    var minuteText = parseInt(duration / 60, 10);
+    var second = parseInt(duration % 60, 10);
+    var secondText = (second >= 10) ? second : "0" + second;
+    return minuteText + ":" + secondText;
   }
 }
 
@@ -120,34 +149,9 @@ function pause() {
   playtimeUpdate(myAudio);
 }
 
-function secondToText(duration) {
-  if (isNaN(duration)) {
-    return "Loading...";
-  } else {
-    var minuteText = parseInt(duration / 60, 10);
-    var second = parseInt(duration % 60, 10);
-    var secondText = (second >= 10) ? second : "0" + second;
-    return minuteText + ":" + secondText;
-  }
-}
 
-// Request Next, Prev
-function getPlayingNode() {
-  var myAudio = document.getElementById("nowPlaying");
-  var currentAudioSrc = myAudio.getAttribute("src");
 
-  var middle = currentAudioSrc.lastIndexOf("=");
-  var dbID = currentAudioSrc.substring(middle + 1, currentAudioSrc.length);
 
-  var children = $(".track").find(".track__id[value=" + dbID + "]")[0];
-
-  if (typeof children !== "undefined" && typeof children.parentNode
-      !== "undefined") {
-    return children.parentNode;
-  } else {
-    throw "NoMatchingSong";
-  }
-}
 
 
 function prevMusic() {
@@ -160,7 +164,7 @@ function prevMusic() {
   }
 
   var prevSibling = playingNode.previousSibling;
-  if (prevSibling !== null || prevSibling !== undefined) {
+  if (prevSibling !== null || typeof prevSibling !== "undefined") {
     prevSibling.click();
   } else {
     console.log("There is No Prev Song");
@@ -225,7 +229,7 @@ function uploadFile(files) {
       alert("Wrong File Format : " + lowerCaseMusicFileType);
     } else {
       var formData = new FormData();
-      formData.append("file", files[i]);
+      formData.append("file", files[parseInt(i, 10)]);
       $("#loading_bar").show();
       $.ajax({
         url: "/upload/" + userEmail,
