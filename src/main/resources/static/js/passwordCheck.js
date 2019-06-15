@@ -37,7 +37,7 @@ $(document).ready(function () {
         var lower = /[a-z]/.test(inputVal);
         var upper = /[A-Z]/.test(inputVal);
         var digit = /[0-9]/.test(inputVal);
-        var specialChar = /[$@#&!`~%^*()=+_-]/.test(inputVal);
+        var specialChar = /[$@#&!`~%^*()=+_,.<>/?-]/.test(inputVal);
         var passStrength = 0;
         if (lower) {
             passStrength += 25;
@@ -80,20 +80,20 @@ $(document).ready(function () {
     };
     document.querySelector("#password").addEventListener("keyup",
         passwordLength);
-
-    function check() {
-        if ($("#password").val() !== "" && strength < 75) {
-            alert("Password Security is too low.");
-            $("#password").focus();
-            return false;
-        } else if (strength >= 75) {
-            if ($("#password").val() !== $("#cpassword").val()) {
-                alert(
-                    "Password does not match. Please check your password again");
-                $("#cpassword").focus();
-                return false;
-            }
-            return true;
-        }
-    }
 });
+
+function check() {
+    if ($("#password").val() !== "" && strength < 75) {
+        alert("Password Security is too low.");
+        $("#password").focus();
+        return false;
+    } else if (strength >= 75) {
+        if ($("#password").val() !== $("#cpassword").val()) {
+            alert(
+                "Password does not match. Please check your password again");
+            $("#cpassword").focus();
+            return false;
+        }
+        return true;
+    }
+}
