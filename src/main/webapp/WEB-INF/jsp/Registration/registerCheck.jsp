@@ -2,6 +2,7 @@
 <%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
 <%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
+<%@ page import="com.team04.musiccloud.utilities.StaticKeys" %>
 <%@ page import="javax.mail.MessagingException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,11 +36,16 @@
     account.setPassword(password);
     account.encodePassword();
     account.setEmail(email);
-    account.setApproval(false);
-    try {
-        service.sendAuthMail(account, currentUrl);
-    } catch (MessagingException e) {
-        out.println(e.toString());
+    account.setApproval(!StaticKeys.getUseEmailAuthentication());
+
+    String message = "<script>alert('Registration Complete!');</script>";
+    if (StaticKeys.getUseEmailAuthentication()) {
+        message = "<script>alert('Registration Complete! Please check your email to verify your account.');</script>";
+        try {
+            service.sendAuthMail(account, currentUrl);
+        } catch (MessagingException e) {
+            out.println(e.toString());
+        }
     }
 
     //중복 가입 방지
@@ -50,8 +56,7 @@
                 "location.href=\"login\"</script>");
     }
 
-    out.println(
-            "<script>alert('Registration Complete! Please check your email to verify your account.');</script>");
+    out.println(message);
 %>
 
 <body>

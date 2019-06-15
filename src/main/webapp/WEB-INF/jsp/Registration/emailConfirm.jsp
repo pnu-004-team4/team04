@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-content">
             <div class="form-group">
-                <button type="button" onclick="location.href='http://35.200.2.141:13246/login'">Go to Login page</button>
+                <button type="button" onclick="location.href='login'">Go to Login page</button>
             </div>
         </div>
     </div>

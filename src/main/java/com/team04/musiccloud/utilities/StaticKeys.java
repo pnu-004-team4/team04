@@ -2,10 +2,11 @@ package com.team04.musiccloud.utilities;
 
 public class StaticKeys {
 
-  private static String keys;
-  private static String dbName;
   private static final String emailUser = "musiccloudtest@gmail.com";
   private static final String emailAccessCode = "music123!@#";
+  private static final Boolean useEmailAuthentication = false;
+  private static String keys;
+  private static String dbName;
 
   public static String getKeys() {
     return keys;
@@ -29,5 +30,9 @@ public class StaticKeys {
 
   public static String getEmailAccessCode() {
     return emailAccessCode;
+  }
+
+  public static Boolean getUseEmailAuthentication() {
+    return useEmailAuthentication;
   }
 }
