@@ -58,7 +58,7 @@
         </div>
         <div class="form-content">
             <<div class="form-group">
-            <button type="button" onclick="location.href='http://35.200.2.141:13246/login'">Go back to Login page</button>
+            <button type="button" onclick="location.href='login'">Go back to Login page</button>
         </div>
         </div>
     </div>
