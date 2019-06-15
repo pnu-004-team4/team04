@@ -1,6 +1,7 @@
 package com.team04.musiccloud.auth;
 
 import com.team04.musiccloud.db.AccountCustomRepository;
+import com.team04.musiccloud.utilities.StaticKeys;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -22,8 +23,8 @@ public class EmailServiceImpl {
   public void sendAuthMail(Account account, String currentUrl) throws MessagingException {
     String to = account.getEmail();
     String from = "musiccloudtest@gmail.com";
-    final String username = "musiccloudtest@gmail.com";
-    final String password = "music123!@#";
+    final String accessUser = StaticKeys.getEmailUser();
+    final String accessCode = StaticKeys.getEmailAccessCode();
     String host = "smtp.gmail.com";
 
     Properties props = new Properties();
@@ -37,7 +38,7 @@ public class EmailServiceImpl {
     Session session = Session.getInstance(props,
         new Authenticator() {
           protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(username, password);
+            return new PasswordAuthentication(accessUser, accessCode);
           }
         });
 

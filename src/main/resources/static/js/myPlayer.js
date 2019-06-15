@@ -214,8 +214,7 @@ function uploadFile(files) {
 
   for (var i = 0; i < files.length; i++) {
 
-    // Type Checking part, @TODO - Extract Methods
-    var fileName = files[i].name;
+    var fileName = files[parseInt(i, 10)].name;
     var musicMiddle = fileName.lastIndexOf(".");
     var musicFileType = fileName.substring(musicMiddle + 1, fileName.length);
     var lowerCaseMusicFileType = musicFileType.toLowerCase();

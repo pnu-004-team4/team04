@@ -32,7 +32,6 @@ public class Transcode extends Thread {
    * 예를 들어, 0 ~ 100까지의 값이 들어온다고하면 10으로 나누어주고, -10을 진행하도록 합니다.
    */
   private double preProcessWeight(double weight) {
-    //@TODO: weight에 대한 전처리를 해주도록 합니다. 이 부분은 담당자와 협의가 요구됩니다.
     return calculator.value(weight / 10000);
   }
 

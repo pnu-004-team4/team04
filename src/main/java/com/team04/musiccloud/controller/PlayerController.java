@@ -58,7 +58,6 @@ public class PlayerController {
    *
    * @return HTML's audio Tag
    */
-  // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
   private String audioTagGenerator(String audioLocation, String fileExtension) {
     final String audioTagOpen = "<audio id=\"bgAudio\" controls style=\"display:none;\" preload=\"metadata\">";
     final String audioTagClose = "</audio>";
