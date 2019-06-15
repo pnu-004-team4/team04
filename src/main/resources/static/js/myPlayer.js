@@ -33,7 +33,7 @@ $(document).ready(function () {
 
   songProgressSlider.noUiSlider.on("change", function (values, handle) {
     var myAudio = document.getElementById("bgAudio");
-    var audioValue = values[handle];
+    var audioValue = values[parseInt(handle, 10)];
     myAudio.currentTime = myAudio.duration * (audioValue / 100);
   });
 
