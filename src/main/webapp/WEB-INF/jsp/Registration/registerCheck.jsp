@@ -49,7 +49,8 @@
                 "location.href=\"login\"</script>");
     }
 
-    out.println("<script>alert('Registration Complete! Please check your email to verify your account.');</script>");
+    out.println(
+            "<script>alert('Registration Complete! Please check your email to verify your account.');</script>");
 %>
 
 <body>
@@ -62,8 +63,8 @@
         </div>
         <div class="form-content">
             <div class="form-group">
-            <button type="button" onclick="location.href='login'">Go back to Login page</button>
-        </div>
+                <button type="button" onclick="location.href='login'">Go back to Login page</button>
+            </div>
         </div>
     </div>
 </div>
