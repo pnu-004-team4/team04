@@ -1,7 +1,7 @@
 package com.team04.musiccloud.audio;
 
-import com.team04.musiccloud.audio.extractor.ExtractorException;
-import com.team04.musiccloud.audio.extractor.InvalidFileFormat;
+import static org.junit.Assert.fail;
+
 import com.team04.musiccloud.db.MetadataCustomRepository;
 import com.team04.musiccloud.utilities.StaticKeys;
 import com.team04.musiccloud.utilities.StaticPaths;
@@ -44,23 +44,35 @@ public class AudioHandlerTest {
   }
 
   @Test // @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
-  public void requestAUpload() throws IOException, InvalidFileFormat, ExtractorException {
-    final MultipartFile mockMultipartFile = getMockMultipartFile();
-    new AudioHandler(USER_NAME).requestUpload(mockMultipartFile);
+  public void requestAUpload() {
+    try {
+      final MultipartFile mockMultipartFile = getMockMultipartFile();
+      new AudioHandler(USER_NAME).requestUpload(mockMultipartFile);
+    } catch (Exception e) {
+      fail(e.toString());
+    }
   }
 
   @Test// @Test 설정 ==> 정상 작동 확인 (2019년 5월 19일, 검토: 오기준)
-  public void requestBLoad() throws IOException, InterruptedException {
-    new AudioHandler(USER_NAME).requestLoad(true, USER_NAME, getFirstDbId());
+  public void requestBLoad() {
+    try {
+      new AudioHandler(USER_NAME).requestLoad(true, USER_NAME, getFirstDbId());
+    } catch (Exception e) {
+      fail(e.toString());
+    }
   }
 
   @Test
-  public void requestDelete() throws IOException {
-    Path sourceLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.mp3");
-    Path targetLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.tmp.mp3");
-    Files.copy(sourceLocation, targetLocation);
-    new AudioHandler(USER_NAME).requestDelete(getFirstDbId());
-    Files.move(targetLocation, sourceLocation);
+  public void requestDelete() {
+    try {
+      Path sourceLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.mp3");
+      Path targetLocation = StaticPaths.storage.resolve(USER_NAME).resolve("sample.tmp.mp3");
+      Files.copy(sourceLocation, targetLocation);
+      new AudioHandler(USER_NAME).requestDelete(getFirstDbId());
+      Files.move(targetLocation, sourceLocation);
+    } catch (Exception e) {
+      fail(e.toString());
+    }
   }
 
   public MultipartFile getMockMultipartFile() throws IOException {

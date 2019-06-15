@@ -30,10 +30,11 @@ public class AccountService implements UserDetailsService {
       throw new LoginException("Invalid account");
     }
 
-    if(account.getApproval().equals(null))
+    if (account.getApproval() == null) {
       account.setApproval(false);
+    }
 
-    if(!account.getApproval()){
+    if (!account.getApproval()) {
       logger.warning("Account is not approved. Please check your email");
       throw new LoginException("Not approved account");
     }

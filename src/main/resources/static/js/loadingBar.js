@@ -21,8 +21,8 @@ var y = canvas.height / 2;
 var radius = 35;
 
 // 색의 시작과 끝의 각도. 도는거
-var startAngle = 0 * Math.PI;
-var endAngle = 1 * Math.PI;
+var startAngle = 0;
+var endAngle = Math.PI;
 var counterClockwise = false;
 
 //원 둘레의 반지름?
@@ -55,7 +55,7 @@ var loop = function(){
 
     context.strokeStyle = "rgba("+red+","+green+","+blue+",1)";
     context.beginPath();
-    context.arc(x, y, radius, 0 * Math.PI, 2 * Math.PI, counterClockwise);
+    context.arc(x, y, radius, 0, 2 * Math.PI, counterClockwise);
     context.stroke();
     context.closePath();
 

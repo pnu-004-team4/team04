@@ -1,8 +1,8 @@
-<%@ page import="com.team04.musiccloud.auth.Account" %>
-<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
 <%@ page import="com.mongodb.MongoWriteException" %>
+<%@ page import="com.team04.musiccloud.auth.Account" %>
 <%@ page import="com.team04.musiccloud.auth.EmailServiceImpl" %>
-<%@ page import="com.mongodb.MongoTimeoutException" %>
+<%@ page import="com.team04.musiccloud.db.AccountCustomRepository" %>
+<%@ page import="javax.mail.MessagingException" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -22,12 +22,12 @@
 </head>
 
 <%
+    String currentUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
     Account account = new Account();
     AccountCustomRepository accountRepository = new AccountCustomRepository();
     EmailServiceImpl service = new EmailServiceImpl();
     String name = request.getParameter("name");
     String password = request.getParameter("password");
-    String cpassword = request.getParameter("cpassword");
     String email = request.getParameter("email");
 
     account.setName(name);
@@ -35,12 +35,16 @@
     account.encodePassword();
     account.setEmail(email);
     account.setApproval(false);
-    service.sendAuthMail(account);
+    try {
+        service.sendAuthMail(account, currentUrl);
+    } catch (MessagingException e) {
+        out.println(e.toString());
+    }
 
     //중복 가입 방지
-    try{
+    try {
         accountRepository.registerAccount(account);
-    }catch(MongoWriteException e){
+    } catch (MongoWriteException e) {
         out.println("<script>alert('This email is already registered');" +
                 "location.href=\"login\"</script>");
     }

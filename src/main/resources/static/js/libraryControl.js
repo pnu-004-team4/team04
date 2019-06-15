@@ -59,7 +59,6 @@ $(document).ready(function () {
 
   var hasFirstTrackTitle = (firstTrack.find(".track__title")).firstChild;
   var hasFirstTrackArtist = firstTrack.find(".track__artist").firstChild;
-  console.log(hasFirstTrackArtist+" "+hasFirstTrackTitle);
 
   if(hasFirstTrackTitle && hasFirstTrackArtist) {
     var initialTrackName = firstTrack.find(".track__title")[0].innerText;

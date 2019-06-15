@@ -60,10 +60,18 @@ public class PlayerController {
    */
   // @TODO (2019년 5월 19일 추가) Player.jsp에서 시간 관련해서 문제가 있는 것 같다.
   private String audioTagGenerator(String audioLocation, String fileExtension) {
-    return "<audio id=\"bgAudio\" controls style=\"display:none;\" preload=\"metadata\"><source src=\""
+    final String audioTagOpen = "<audio id=\"bgAudio\" controls style=\"display:none;\" preload=\"metadata\">";
+    final String audioTagClose = "</audio>";
+    final String sourceTag =  "<source src=\""
             + audioLocation
             + "\" type=\"audio/" + MusicFileUtilities.getMimeType(fileExtension)
-            + "\" id=\"nowPlaying\" type=\"audio/mp3\"></audio>";
+            + "\" id=\"nowPlaying\" type=\"audio/mp3\">";
+
+    String audioTag = audioTagOpen + sourceTag + audioTagClose;
+    if(audioLocation.isEmpty() || fileExtension.isEmpty()) {
+      audioTag = audioTagOpen + audioTagClose;
+    }
+    return audioTag;
   }
 
   /**
@@ -90,15 +98,15 @@ public class PlayerController {
 
     String firstFileId = "";
     try {
+      firstFileId = audioMetaArrayList.get(0).getDbId();
     } catch (IndexOutOfBoundsException e) {
       logger.info(e.toString());
     }
 
     String trackList = trackTagGenerator(false, email, audioMetaArrayList);
 
-    String sampleMusic = "그런 것 없다";
     if (firstFileId.isEmpty()) {
-      base.addObject("streaming", audioTagGenerator(sampleMusic, "mp3"));
+      base.addObject("streaming", audioTagGenerator("", ""));
       jspDefaultContentsGenerator(account, trackList);
       return base;
     }

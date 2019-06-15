@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class CacheManagerTest {
 
-  private static final String USER = "testCase@testing.com";
+  private static final String USER = "admin@admin.com";
   public static final String SAMPLE = "sample.mp3";
 
   private CacheManager cacheManager;
@@ -38,22 +38,10 @@ public class CacheManagerTest {
   }
 
   @Test
-  public void createCacheOf() {
-  }
-
-  @Test
-  public void createUserTemp() {
-  }
-
-  @Test
   public void updateOrLoad() throws IOException {
     final Path path = Paths.get(StaticPaths.storage.toString(), USER);
     cacheManager.updateOrLoad(path, SAMPLE);
 
     assertTrue(cacheManager.exists(SAMPLE));
-  }
-
-  @Test
-  public void isDoCreated() {
   }
 }
