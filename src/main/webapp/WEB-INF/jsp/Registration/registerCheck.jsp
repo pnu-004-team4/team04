@@ -61,7 +61,7 @@
             <h1>Registration Complete!</h1>
         </div>
         <div class="form-content">
-            <<div class="form-group">
+            <div class="form-group">
             <button type="button" onclick="location.href='login'">Go back to Login page</button>
         </div>
         </div>
