@@ -77,7 +77,7 @@ html {
 
 .header .user__actions .dropdown-menu {
   background: #282828;
-  margin-top: 25px;
+  margin-top: 0px;
   border-radius: 2px;
   padding: 0;
   border: none;
@@ -118,44 +118,27 @@ html {
   color: #c8c8c8;
   transition: all 0.2s ease;
 }
+
 .content {
   display: flex;
   flex-flow: row nowrap;
   height: 80%;
 }
+
 .content__left {
-  width: 15%;
+  width: 200px;
 }
+
 .dropZone {
   height: 100%;
   width: 85%;
 }
 
 
-@media (max-width: 2400px) {
-  .content__left {
-    width: 15%;
-  }
-  .dropZone {
-    width: 99%;
-  }
-
-}
-@media (max-width: 768px) {
-  .content{
-    flex-direction: column;
-  }
-  .content__left{
-    width: 100%;
-  }
-  .dropZone{
-    width: 100%;
-  }
-}
 
 .navigation {
   padding: 15px;
-  height:100%;
+  height: 100%;
   background: #282828;
   color: #aaaaaa;
   overflow-y: hidden;
@@ -195,32 +178,6 @@ html {
   width: 25px;
   display: block;
 }
-
-@media (max-width: 768px) {
-  .navigation {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-  }
-  .navigation__list {
-    margin-bottom: 0;
-    width: calc( 100% / 3 );
-    text-align: center;
-  }
-  .navigation__list__item {
-    width: 100%;
-    text-align: center;
-  }
-  .navigation__list__item i {
-    display: none;
-  }
-  .navigation__list__item span {
-    margin: 0 auto;
-  }
-  .navigation__list__item:hover {
-    border: none;
-  }
-}
 .playlist {
   padding: 15px;
   background: #282828;
@@ -253,7 +210,7 @@ html {
   margin-right: 15px;
 }
 
-/*@media (max-width: 768px) {
+/*@media (max-device-width: 768px) {
   .playlist {
     display: none;
   }
@@ -267,7 +224,7 @@ html {
 }
 
 
-/*@media (max-width: 768px) {
+/*@media (max-device-width: 768px) {
   .playing {
     border-top: 1px solid #181818;
   }
@@ -298,6 +255,7 @@ html {
   margin: 0 5px;
   text-align: center;
 }
+
 .current-track__streaming {
   display: flex;
   flex-flow: row nowrap;
@@ -453,67 +411,6 @@ html {
   display: block;
 }
 
-@media (max-width: 2400px) {
-  .current-track__song{
-    width: 30%
-  }
-  .current-track__streaming{
-    width: 70%
-  }
-  .current-track__action{
-    width: 10%
-  }
-  .current-track__progress{
-    width: 60%
-  }
-  .current-track__option{
-    width: 30%
-  }
-}
-@media (max-width: 768px) {
-  .current-track__song{
-    width: 100%
-  }
-  .current-track__streaming{
-    width: 100%
-  }
-  .current-track__action{
-    width: 10%
-  }
-  .current-track__progress{
-    width: 60%
-  }
-  .current-track__option{
-    width: 30%
-  }
-}
-@media (max-width: 480px) {
-  .current-track{
-    flex-direction: column;
-  }
-  .current-track__song{
-    width: 100%
-  }
-  .current-track__actions {
-    width: 100%;
-    justify-content: space-around;
-    padding: 5px 0;
-  }
-  .current-track__progress {
-    width: 100%;
-    padding: 5px 0;
-  }
-  .current-track__options {
-    width: 100%;
-    padding: 5px 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .current-track__action {
-    padding-top: 15px;
-  }
-}
 .tracks {
   width: 100%;
   display: flex;
@@ -531,12 +428,12 @@ html {
   align-items: center;
 }
 
-.tracks__heading :hover{
+.tracks__heading :hover {
   color: yellow;
   text-decoration: underline;
 }
 
-.tracks__heading :active{
+.tracks__heading :active {
   color: purple;
   text-decoration: underline;
 }
@@ -681,7 +578,7 @@ html {
   color: #aaaaaa;
 }
 
-/*@media (max-width: 1200px) {
+/*@media (max-device-width: 1200px) {
   .tracks__heading__title {
     width: auto;
   }
@@ -701,7 +598,7 @@ html {
   background: #373737;
 }
 
-/*@media (max-width: 650px) {
+/*@media (max-device-width: 650px) {
   .header .window__actions {
     width: 15%;
   }
@@ -801,19 +698,19 @@ button:hover {
 }
 
 i.ion-ios-play:hover {
-  color:yellow;
+  color: yellow;
 }
 
 i.ion-ios-play:active {
-  color:purple;
+  color: purple;
 }
 
 i.ion-android-delete:hover {
-  color:yellow;
+  color: yellow;
 }
 
 i.ion-android-delete:active {
-  color:purple;
+  color: purple;
 }
 
 #username {
@@ -829,3 +726,159 @@ i.ion-android-delete:active {
   left: 50%;
   position: absolute;
 }
+
+@media only screen and (max-device-width: 2400px), only screen and (max-width: 2400px) {
+  .current-track__song {
+    width: 30%
+  }
+
+  .current-track__streaming {
+    width: 70%
+  }
+
+  .current-track__action {
+    width: 10%
+  }
+
+  .current-track__progress {
+    width: 60%
+  }
+
+  .current-track__option {
+    width: 30%
+  }
+}
+
+@media only screen and (max-device-width: 768px), only screen and (max-width: 768px) {
+  .current-track__song {
+    display: none;
+  }
+
+  .current-track__progress {
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  .current-track__streaming {
+    width: 100%
+  }
+
+  .current-track__action {
+    width: 10%
+  }
+
+  .current-track__progress {
+    width: 60%
+  }
+
+  .current-track__option {
+    width: 30%
+  }
+
+  .tracks__heading {
+    display: none;
+  }
+
+  .track__artist {
+    display: none;
+  }
+
+  .track__number {
+    display: none;
+  }
+
+  .track__length {
+    display: none;
+  }
+
+  .search input {
+    width: 125px;
+  }
+}
+
+@media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+  .current-track {
+    flex-direction: column;
+  }
+
+  .current-track__song {
+    width: 100%
+  }
+
+  .current-track__actions {
+    width: 100%;
+    justify-content: space-around;
+    padding: 5px 0;
+  }
+
+  .current-track__progress {
+    display: none;
+  }
+
+  .current-track__options {
+    width: 100%;
+    padding: 5px 0;
+  }
+}
+
+@media only screen and (max-device-width: 768px), only screen and (max-width: 768px) {
+  .current-track__action {
+    padding-top: 15px;
+  }
+}
+
+@media  only screen and (max-device-width: 2400px), only screen and (max-width: 2400px) {
+  .dropZone {
+    width: 99%;
+  }
+
+}
+
+@media  only screen and (max-device-width: 768px), only screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .content__left {
+    width: 100%;
+  }
+
+  .dropZone {
+    width: 100%;
+  }
+}
+
+
+
+@media only screen and (max-device-width: 768px), only screen and (max-width: 768px) {
+  .navigation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    max-height: fit-content;
+  }
+
+  .navigation__list {
+    margin-bottom: 0;
+    width: calc(100% / 3);
+    text-align: center;
+  }
+
+  .navigation__list__item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navigation__list__item i {
+    display: none;
+  }
+
+  .navigation__list__item span {
+    margin: 0 auto;
+  }
+
+  .navigation__list__item:hover {
+    border: none;
+  }
+}
+

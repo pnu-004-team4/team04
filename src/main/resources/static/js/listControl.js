@@ -52,7 +52,8 @@ function sortDesc(trackArray, target) {
 function applyList(trackArray) {
   var length = trackArray.length;
   for (var i = 0; i < length; i++) {
-    $(".tracks").append(trackArray[i]);
+    var track = String(trackArray[i]);
+    $(".tracks").append(track);
   }
 }
 
