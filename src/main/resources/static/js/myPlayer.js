@@ -47,7 +47,7 @@ $(document).ready(function () {
 
   volumeSlider.noUiSlider.on("update", function (values, handle) {
     var myAudio = document.getElementById("bgAudio");
-    var audioValue = values[parseInt(handle,10)];
+    var audioValue = values[parseInt(handle, 10)];
     myAudio.volume = audioValue / 100;
   });
 });
@@ -105,7 +105,7 @@ function playtimeUpdate(myAudio) {
   // Set Music Total Time
   // Set Music Play Time
   if (myAudio.paused === false) {
-      showPlayTime = setInterval(function () {
+    showPlayTime = setInterval(function () {
 
       var musicTotalTime = secondToText(myAudio.duration);
       document.getElementById("music_playtime").innerText = secondToText(
@@ -148,11 +148,6 @@ function pause() {
   myAudio.pause();
   playtimeUpdate(myAudio);
 }
-
-
-
-
-
 
 function prevMusic() {
   var playingNode;
@@ -260,7 +255,7 @@ function uploadFile(files) {
 // Deletion
 function deleteMusic(dbId) {
   var isDelete = confirm("You really want to delete?");
-  if(isDelete === true) {
+  if (isDelete === true) {
     $.ajax({
       url: "/delete/" + dbId,
       type: "POST",
